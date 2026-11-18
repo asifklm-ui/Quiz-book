@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" role="img" aria-label="The Quiz Book: an open book with a lightning bolt">
+  <title>The Quiz Book</title>
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe9a8"/>
+      <stop offset="0.4" stop-color="#ffd071"/>
+      <stop offset="1" stop-color="#ffab84"/>
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="30" fill="url(#tile)"/>
+  <rect x="2" y="2" width="124" height="124" rx="28" fill="none" stroke="#ffffff" stroke-opacity="0.45" stroke-width="2"/>
+  <g transform="translate(16 22) scale(2)">
+<defs>
+<radialGradient id="qbGround" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0%" stop-color="#5a2f00" stop-opacity="0.38"/>
+<stop offset="100%" stop-color="#5a2f00" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="qbPageL" x1="0" y1="0" x2="0.85" y2="1">
+<stop offset="0%" stop-color="#fffef9"/>
+<stop offset="55%" stop-color="#f8eed9"/>
+<stop offset="100%" stop-color="#e6d0a8"/>
+</linearGradient>
+<linearGradient id="qbPageR" x1="1" y1="0" x2="0.15" y2="1">
+<stop offset="0%" stop-color="#fffef9"/>
+<stop offset="55%" stop-color="#f4e6cd"/>
+<stop offset="100%" stop-color="#dfc59b"/>
+</linearGradient>
+<linearGradient id="qbGutter" x1="0" y1="0" x2="1" y2="0">
+<stop offset="0%" stop-color="#5a2f00" stop-opacity="0"/>
+<stop offset="50%" stop-color="#5a2f00" stop-opacity="0.32"/>
+<stop offset="100%" stop-color="#5a2f00" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="qbBolt" x1="0.1" y1="0" x2="0.9" y2="1">
+<stop offset="0%" stop-color="#fff7b8"/>
+<stop offset="45%" stop-color="#ffd166"/>
+<stop offset="100%" stop-color="#f08c00"/>
+</linearGradient>
+</defs>
+<ellipse cx="24" cy="38.8" rx="16.2" ry="3.1" fill="url(#qbGround)"/>
+<g transform="translate(0 1.7)">
+<path d="M6.6 14.6c4.8-2.8 10-2.5 17.4 1v22.3c-7.4-3.5-12.6-3.8-17.4-1z" fill="#b06c1a"/>
+<path d="M41.4 14.6c-4.8-2.8-10-2.5-17.4 1v22.3c7.4-3.5 12.6-3.8 17.4-1z" fill="#93540f"/>
+</g>
+<path d="M6.6 14.6c4.8-2.8 10-2.5 17.4 1v22.3c-7.4-3.5-12.6-3.8-17.4-1z" fill="url(#qbPageL)" stroke="#7a4200" stroke-width="1.5" stroke-linejoin="round"/>
+<path d="M41.4 14.6c-4.8-2.8-10-2.5-17.4 1v22.3c7.4-3.5 12.6-3.8 17.4-1z" fill="url(#qbPageR)" stroke="#7a4200" stroke-width="1.5" stroke-linejoin="round"/>
+<rect x="21.9" y="15.4" width="4.2" height="22.3" fill="url(#qbGutter)"/>
+<path d="M24 16.2v21.2" stroke="#5a2f00" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/>
+<path d="M27.6 10.2h-7.5l-3.8 11.5h5.4l-2.2 10.5 11.2-12.3h-5.7z" fill="#5a2f00" opacity="0.2" transform="translate(0.7 0.9)"/>
+<path d="M26.5 8.5h-7.5l-3.8 11.5h5.4l-2.2 10.5 11.2-12.3h-5.7z" fill="url(#qbBolt)" stroke="#8a4b00" stroke-width="1.4" stroke-linejoin="round"/>
+  </g>
+</svg>
