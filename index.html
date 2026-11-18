@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>The Quiz Book &ndash; Free K-12 Math, Reading, Science &amp; Social Studies Quizzes</title>
-<meta name="description" content="Free educational practice quizzes for grades 1-12 in math, reading, science and social studies. Thousands of auto-generated questions for classrooms and home practice. No ads, no accounts, no tracking.">
-<meta name="keywords" content="free quizzes for kids, K-12 practice quizzes, math practice, reading comprehension quiz, science quiz, social studies quiz, classroom quiz, educational website, grade 1 to grade 12">
+<meta name="description" content="Free educational practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Thousands of auto-generated questions for classrooms and home practice. No ads, no accounts, no tracking.">
+<meta name="keywords" content="free quizzes for kids, kindergarten quiz, K-12 practice quizzes, math practice, reading comprehension quiz, science quiz, social studies quiz, classroom quiz, educational website, kindergarten to grade 12">
 <meta name="author" content="The Quiz Book">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="googlebot" content="index, follow">
@@ -19,12 +19,12 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Quiz Book">
 <meta property="og:title" content="The Quiz Book - Free K-12 Practice Quizzes">
-<meta property="og:description" content="Free practice quizzes for grades 1-12 in math, reading, science and social studies. Brand new questions every time. No ads, no accounts, no tracking.">
+<meta property="og:description" content="Free practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Brand new questions every time. No ads, no accounts, no tracking.">
 <meta property="og:url" content="https://quizbookcentral.com/">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Quiz Book - Free K-12 Practice Quizzes">
-<meta name="twitter:description" content="Free practice quizzes for grades 1-12 in math, reading, science and social studies. No ads, no accounts, no tracking.">
+<meta name="twitter:description" content="Free practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. No ads, no accounts, no tracking.">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -34,7 +34,7 @@
       "@id": "https://quizbookcentral.com/#website",
       "url": "https://quizbookcentral.com/",
       "name": "The Quiz Book",
-      "description": "Free educational practice quizzes for grades 1-12 in math, reading, science and social studies.",
+      "description": "Free educational practice quizzes for kindergarten through grade 12 in math, reading, science and social studies.",
       "inLanguage": "en",
       "publisher": { "@id": "https://quizbookcentral.com/#organization" }
     },
@@ -54,13 +54,13 @@
       "operatingSystem": "Any web browser",
       "browserRequirements": "Requires JavaScript",
       "isAccessibleForFree": true,
-      "educationalLevel": "Grade 1 to Grade 12",
+      "educationalLevel": "Kindergarten to Grade 12",
       "educationalUse": ["Practice", "Self assessment", "Classroom activity"],
       "learningResourceType": ["Quiz", "Practice problem set"],
       "audience": {
         "@type": "EducationalAudience",
         "educationalRole": "student",
-        "audienceType": "Students in grades 1-12, teachers and parents"
+        "audienceType": "Kindergarten through grade 12 students, teachers and parents"
       },
       "about": ["Mathematics", "Reading", "Science", "Social studies"],
       "inLanguage": "en",
@@ -472,7 +472,7 @@ body::after {
 
 .grade-grid {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(13, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -1449,7 +1449,7 @@ kbd {
 /* ---- Responsive ---- */
 @media (max-width: 760px) {
   .subject-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grade-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grade-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); }
   .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .deco-item:nth-child(n+5) { display: none; }
 }
@@ -1721,7 +1721,7 @@ html[data-grade-theme="senior"] .feedback.good { color: #0a7a48; }
 <noscript>
   <div class="noscript-note">
     <h1>The Quiz Book</h1>
-    <p>Free practice quizzes for grades 1&ndash;12 in math, reading, science and social studies at <strong>quizbookcentral.com</strong> &mdash; thousands of auto-generated questions for classrooms, homework and home practice.</p>
+    <p>Free practice quizzes for kindergarten through grade 12 in math, reading, science and social studies at <strong>quizbookcentral.com</strong> &mdash; thousands of auto-generated questions for classrooms, homework and home practice.</p>
     <p>This activity needs JavaScript enabled in your browser to play.</p>
   </div>
 </noscript>
@@ -2499,7 +2499,67 @@ function g12_vector_magnitude() {
 const GRADE12 = [g12_unit_circle, g12_statistics, g12_probability_dice, g12_log_properties,
   g12_arithmetic_series, g12_geometric_series, g12_vector_magnitude];
 
+// ---- Kindergarten -----------------------------------------------------------
+
+const KINDER_EMOJI = ["\ud83c\udf4e", "\ud83d\udc1f", "\u2b50", "\ud83c\udf88", "\ud83d\udc31", "\ud83c\udf3b"];
+
+function k_count_items() {
+  const emoji = choice(KINDER_EMOJI);
+  const n = randInt(3, 9);
+  const dots = Array(n).fill(emoji).join(" ");
+  return [`How many ${emoji} do you see? ${dots}`, String(n), intWrongs(n, 3)];
+}
+
+function k_next_number() {
+  const n = randInt(1, 9);
+  const correct = n + 1;
+  return [`What number comes right after ${n}?`, String(correct), intWrongs(correct, 3)];
+}
+
+function k_missing_number() {
+  const start = randInt(1, 6);
+  const correct = start + 2;
+  return [`Which number is missing? ${start}, ${start + 1}, ___, ${start + 3}`, String(correct), intWrongs(correct, 3)];
+}
+
+function k_bigger_number() {
+  const a = randInt(1, 10);
+  let b = randInt(1, 10);
+  while (b === a) b = randInt(1, 10);
+  const bigger = Math.max(a, b), smaller = Math.min(a, b);
+  return [`Which number is bigger: ${a} or ${b}?`, String(bigger),
+    [String(smaller), String(bigger + 1), String(bigger + 2)]];
+}
+
+function k_add_small() {
+  const a = randInt(1, 5), b = randInt(1, 5);
+  const correct = a + b;
+  return [`${a} + ${b} = ?`, String(correct), intWrongs(correct, 3)];
+}
+
+function k_subtract_small() {
+  const total = randInt(3, 10), take = randInt(1, total - 1);
+  const correct = total - take;
+  return [`${total} - ${take} = ?`, String(correct), intWrongs(correct, 3)];
+}
+
+function k_shape_sides() {
+  return ["Which shape has 3 sides?", "Triangle", ["Square", "Circle", "Star"]];
+}
+
+function k_shape_round() {
+  return ["Which shape is round and has no corners?", "Circle", ["Square", "Triangle", "Rectangle"]];
+}
+
+function k_shape_equal_sides() {
+  return ["Which shape has 4 sides that are all the same length?", "Square", ["Triangle", "Circle", "Star"]];
+}
+
+const KINDER = [k_count_items, k_next_number, k_missing_number, k_bigger_number,
+  k_add_small, k_subtract_small, k_shape_sides, k_shape_round, k_shape_equal_sides];
+
 const GRADE_GENERATORS = {
+  0: KINDER,
   1: GRADE1, 2: GRADE2, 3: GRADE3, 4: GRADE4, 5: GRADE5, 6: GRADE6,
   7: GRADE7, 8: GRADE8, 9: GRADE9, 10: GRADE10, 11: GRADE11, 12: GRADE12,
 };
@@ -3206,7 +3266,7 @@ function generateQuiz(subject, grade, count) {
 // App state & screen rendering
 // ===========================================================================
 
-const GRADE_LABELS = {};
+const GRADE_LABELS = { 0: "Kindergarten" };
 for (let g = 1; g <= 12; g++) GRADE_LABELS[g] = `Grade ${g}`;
 
 const ICONS = {
@@ -3304,9 +3364,9 @@ function showSplashScreen() {
     </div>
     <div class="brand-mark">${ICONS.bolt}</div>
     <h1 class="display-title">The Quiz Book</h1>
-    <p class="tagline">Fun quizzes for grades 1&ndash;12 &mdash; from first sums to big ideas.</p>
+    <p class="tagline">Fun quizzes for kindergarten through grade 12 &mdash; from first sums to big ideas.</p>
     <div class="splash-badges">
-      <span class="badge">Grades 1&ndash;12</span>
+      <span class="badge">K&ndash;Grade 12</span>
       <span class="badge">4 subjects</span>
       <span class="badge">Fresh questions every time</span>
     </div>
@@ -3383,7 +3443,7 @@ function showSetupScreen() {
     </div>
 
     <p class="site-foot">
-      Free educational practice for grades 1&ndash;12 &middot; No ads &middot; No accounts &middot; No tracking
+      Free educational practice for kindergarten through grade 12 &middot; No ads &middot; No accounts &middot; No tracking
       <span class="site-url">quizbookcentral.com</span>
     </p>
   `;
@@ -3411,13 +3471,13 @@ function showSetupScreen() {
     subjectGrid.appendChild(card);
   });
 
-  for (let g = 1; g <= 12; g++) {
+  for (let g = 0; g <= 12; g++) {
     const pill = document.createElement("button");
     pill.type = "button";
     pill.className = "grade-pill" + (state.grade === g ? " active" : "");
     pill.dataset.grade = String(g);
-    pill.textContent = String(g);
-    pill.setAttribute("aria-label", `Grade ${g}`);
+    pill.textContent = g === 0 ? "K" : String(g);
+    pill.setAttribute("aria-label", g === 0 ? "Kindergarten" : `Grade ${g}`);
     pill.addEventListener("click", () => {
       state.grade = g;
       applyGradeTheme(g);
