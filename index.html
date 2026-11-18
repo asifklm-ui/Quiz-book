@@ -3,225 +3,1728 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>The Quiz Book - Learn to achieve</title>
+<title>The Quiz Book &ndash; Free K-12 Math, Reading, Science &amp; Social Studies Quizzes</title>
+<meta name="description" content="Free educational practice quizzes for grades 1-12 in math, reading, science and social studies. Thousands of auto-generated questions for classrooms and home practice. No ads, no accounts, no tracking.">
+<meta name="keywords" content="free quizzes for kids, K-12 practice quizzes, math practice, reading comprehension quiz, science quiz, social studies quiz, classroom quiz, educational website, grade 1 to grade 12">
+<meta name="author" content="The Quiz Book">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="googlebot" content="index, follow">
+<meta name="rating" content="general">
+<meta name="theme-color" content="#2f6ad6">
+<meta name="application-name" content="The Quiz Book">
+<meta name="apple-mobile-web-app-title" content="The Quiz Book">
+<link rel="canonical" href="https://quizbookcentral.com/">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://quizbookcentral.com/sitemap.xml">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%232f6ad6'/%3E%3Cpath d='M36 10 18 35h11l-3 19 20-27H34z' fill='%23ffffff'/%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Quiz Book">
+<meta property="og:title" content="The Quiz Book - Free K-12 Practice Quizzes">
+<meta property="og:description" content="Free practice quizzes for grades 1-12 in math, reading, science and social studies. Brand new questions every time. No ads, no accounts, no tracking.">
+<meta property="og:url" content="https://quizbookcentral.com/">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Quiz Book - Free K-12 Practice Quizzes">
+<meta name="twitter:description" content="Free practice quizzes for grades 1-12 in math, reading, science and social studies. No ads, no accounts, no tracking.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://quizbookcentral.com/#website",
+      "url": "https://quizbookcentral.com/",
+      "name": "The Quiz Book",
+      "description": "Free educational practice quizzes for grades 1-12 in math, reading, science and social studies.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://quizbookcentral.com/#organization" }
+    },
+    {
+      "@type": "EducationalOrganization",
+      "@id": "https://quizbookcentral.com/#organization",
+      "name": "The Quiz Book",
+      "url": "https://quizbookcentral.com/",
+      "description": "A free, ad-free practice quiz site for K-12 students, teachers and families."
+    },
+    {
+      "@type": "WebApplication",
+      "name": "The Quiz Book",
+      "url": "https://quizbookcentral.com/",
+      "applicationCategory": "EducationalApplication",
+      "applicationSubCategory": "K-12 practice quizzes",
+      "operatingSystem": "Any web browser",
+      "browserRequirements": "Requires JavaScript",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Grade 1 to Grade 12",
+      "educationalUse": ["Practice", "Self assessment", "Classroom activity"],
+      "learningResourceType": ["Quiz", "Practice problem set"],
+      "audience": {
+        "@type": "EducationalAudience",
+        "educationalRole": "student",
+        "audienceType": "Students in grades 1-12, teachers and parents"
+      },
+      "about": ["Mathematics", "Reading", "Science", "Social studies"],
+      "inLanguage": "en",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
+  ]
+}
+</script>
 <style>
-  :root {
-    --bg: #1e1e2f;
-    --card-bg: #2a2a40;
-    --accent: #5865f2;
-    --accent-hover: #4752c4;
-    --correct: #3ba55d;
-    --wrong: #ed4245;
-    --text: #f2f2f2;
-    --subtext: #a0a0b0;
-  }
-  * { box-sizing: border-box; }
-  html, body {
-    margin: 0; padding: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    height: 100%;
-    overscroll-behavior: none;
-  }
-  body {
-    min-height: 100vh;
-    min-height: 100dvh;
-  }
-  #app {
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    padding: clamp(16px, 4vw, 48px);
-  }
-  .screen {
-    flex: 1;
-    width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-  }
+:root {
+  --bg: #eff7ff;
+  --bg-2: #fff7ee;
+  --ink: #151d33;
+  --muted: #3c4763;
+  --muted-2: #566180;
+  --card: #ffffff;
+  --card-hover: #fdfdff;
+  --panel: #ffffff;
+  --stroke: #c6d5ec;
+  --stroke-strong: #9db4d8;
+  --accent: #4f8cff;
+  --accent-2: #8b6cf6;
+  --accent-3: #0c8f95;
+  --correct: #0e9355;
+  --correct-soft: #dcf7e9;
+  --wrong: #e83b5b;
+  --wrong-soft: #ffe3e9;
+  --gold: #ffb020;
+  --sun: #ffd166;
+  --mint: #8de3c6;
+  --peach: #ffb59e;
+  --lilac: #c9b6ff;
+  --radius: 22px;
+  --shadow-lg: 0 28px 60px -32px rgba(46, 78, 145, 0.55);
+  --shadow-sm: 0 14px 30px -20px rgba(46, 78, 145, 0.6);
+  --pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --font-ui: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-head: var(--font-ui);
+  --head-ink: #18213a;
+  --btn-a: #2f6ad6;
+  --btn-b: #5a49d6;
+  --btn-edge: var(--btn-edge);
+  --btn-ink: #ffffff;
+  --page-bg: radial-gradient(120% 80% at 50% 0%, #f4fbff 0%, #eef6ff 45%, #fff7ef 100%);
+  --blob-a: rgba(255, 209, 102, 0.55);
+  --blob-b: rgba(139, 227, 198, 0.55);
+  --blob-c: rgba(201, 182, 255, 0.6);
+  --blob-d: rgba(255, 181, 158, 0.5);
+  --dots: radial-gradient(rgba(88, 126, 190, 0.34) 1.6px, transparent 1.6px);
+}
 
-  /* ---- Splash screen: centered, big, fills the frame ---- */
-  .screen.splash {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .title {
-    font-size: clamp(32px, 8vw, 72px);
-    font-weight: 800;
-    margin: 0 0 clamp(4px, 1vw, 10px);
-    line-height: 1.05;
-  }
-  .title.small { font-size: clamp(24px, 5vw, 40px); }
-  .subtitle {
-    font-size: clamp(14px, 2.4vw, 20px);
-    color: var(--subtext);
-    margin: 0 0 clamp(32px, 8vh, 80px);
-  }
-  .subtitle.tight { margin-bottom: clamp(20px, 4vh, 40px); }
+* { box-sizing: border-box; }
 
-  .loading-bar-outline {
-    width: min(80vw, 480px);
-    height: clamp(16px, 3vh, 26px);
-    background: var(--card-bg);
-    border: 1px solid var(--accent);
-    border-radius: 999px;
-    overflow: hidden;
-  }
-  .loading-bar-fill {
-    height: 100%; width: 0%;
-    background: var(--accent);
-    transition: width 0.08s linear;
-  }
-  .loading-label { font-size: clamp(12px, 1.6vw, 16px); color: var(--subtext); margin-top: 14px; }
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #eff7ff;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
 
-  /* ---- Setup screen: fills height, form spread across available space ---- */
-  .screen.setup {
-    justify-content: space-between;
-    align-items: stretch;
-  }
-  .setup-header { text-align: center; }
-  .setup-form {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: clamp(16px, 3vh, 32px);
-    max-width: 640px;
-    width: 100%;
-    margin: 0 auto;
-  }
-  .form-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    width: 100%;
-    flex-wrap: wrap;
-  }
-  .form-row label { font-size: clamp(14px, 1.8vw, 20px); }
-  select, input[type=number] {
-    background: var(--card-bg); color: var(--text);
-    border: 1px solid #40405a; border-radius: 8px;
-    padding: clamp(10px, 1.6vh, 16px) clamp(12px, 1.6vw, 18px);
-    font-size: clamp(14px, 1.8vw, 18px);
-    flex: 1 1 220px;
-    min-width: 0;
-  }
-  select:focus, input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+body {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  background: var(--page-bg);
+}
 
-  .preset-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-  .preset-btn {
-    background: var(--card-bg); color: var(--subtext);
-    border: none; border-radius: 8px;
-    padding: clamp(8px, 1.2vh, 12px) clamp(14px, 2vw, 20px);
-    font-size: clamp(13px, 1.6vw, 16px); cursor: pointer;
-  }
-  .preset-btn:hover { background: #33334a; color: var(--text); }
+/* ---- Playful background ---- */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background:
+    radial-gradient(closest-side at 16% 14%, var(--blob-a), transparent 72%),
+    radial-gradient(closest-side at 84% 10%, var(--blob-b), transparent 72%),
+    radial-gradient(closest-side at 78% 86%, var(--blob-c), transparent 74%),
+    radial-gradient(closest-side at 14% 82%, var(--blob-d), transparent 74%);
+  filter: blur(34px);
+  animation: drift 26s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
 
-  .setup-footer { display: flex; justify-content: center; padding-top: clamp(16px, 3vh, 32px); }
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: var(--dots);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(closest-side at 50% 45%, #000 25%, transparent 85%);
+  -webkit-mask-image: radial-gradient(closest-side at 50% 45%, #000 25%, transparent 85%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-  .btn-primary {
-    background: var(--accent); color: white; border: none;
-    border-radius: 10px;
-    padding: clamp(14px, 2vh, 20px) clamp(28px, 5vw, 48px);
-    font-size: clamp(15px, 2vw, 20px); font-weight: 700;
-    cursor: pointer;
-    width: 100%;
-    max-width: 420px;
-  }
-  .btn-primary:hover { background: var(--accent-hover); }
-  .btn-secondary {
-    background: var(--card-bg); color: var(--text); border: none;
-    border-radius: 10px; padding: 12px 24px; font-size: 16px; font-weight: 700;
-    cursor: pointer;
-  }
-  .btn-secondary:hover { background: #33334a; }
+@keyframes drift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to   { transform: translate3d(3%, 2%, 0) scale(1.06); }
+}
 
-  /* ---- Question screen: header / growing card / options / footer ---- */
-  .screen.quiz {
-    justify-content: flex-start;
-  }
-  .quiz-header {
-    display: flex; justify-content: space-between;
-    font-size: clamp(14px, 1.8vw, 20px); font-weight: 700; color: var(--subtext);
-    margin-bottom: clamp(12px, 2vh, 24px);
-  }
-  .quiz-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .question-card {
-    background: var(--card-bg); border-radius: 14px;
-    padding: clamp(24px, 5vh, 64px) clamp(20px, 4vw, 40px);
-    font-size: clamp(18px, 3vw, 32px); font-weight: 700;
-    line-height: 1.4;
-    margin-bottom: clamp(16px, 3vh, 32px);
-    min-height: clamp(100px, 22vh, 260px);
-    display: flex;
-    align-items: center;
-  }
-  #optionsContainer {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(12px, 2.2vh, 22px);
-  }
-  .option-btn {
-    display: block; width: 100%; text-align: left;
-    background: var(--card-bg); color: var(--text);
-    border: none; border-radius: 10px;
-    padding: clamp(16px, 3vh, 30px) clamp(16px, 2.4vw, 26px);
-    font-size: clamp(14px, 2vw, 19px);
-    cursor: pointer; transition: background 0.15s;
-  }
-  .option-btn:hover:not(:disabled) { background: #33334a; }
-  .option-btn:disabled { cursor: default; }
-  .option-btn.correct { background: var(--correct) !important; color: white; }
-  .option-btn.wrong { background: var(--wrong) !important; color: white; }
+/* ---- Layout ---- */
+#app {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(18px, 4vw, 44px);
+}
 
-  .feedback {
-    font-size: clamp(14px, 2vw, 18px); font-weight: 700;
-    margin-top: clamp(14px, 2.4vh, 24px);
-    min-height: 1.4em;
-  }
-  .feedback.correct { color: var(--correct); }
-  .feedback.wrong { color: var(--wrong); }
+.screen {
+  flex: 1;
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  animation: screenIn 0.45s var(--pop) both;
+}
 
-  #nextBtnContainer { display: flex; justify-content: center; margin-top: clamp(12px, 2vh, 24px); }
+@keyframes screenIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
 
-  /* ---- Results screen ---- */
-  .screen.results {
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  .results-score { font-size: clamp(20px, 3.6vw, 36px); font-weight: 700; color: var(--accent); margin: clamp(8px,1.6vh,16px) 0; }
-  .results-pct { font-size: clamp(13px, 1.8vw, 18px); color: var(--subtext); margin-bottom: clamp(16px, 3vh, 28px); }
-  .results-msg { font-size: clamp(15px, 2.2vw, 22px); margin-bottom: clamp(24px, 5vh, 48px); }
-  .btn-row { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+/* ---- Floating decorations ---- */
+.deco {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
 
-  @media (max-width: 520px) {
-    .form-row { flex-direction: column; align-items: stretch; gap: 8px; }
-    select, input[type=number] { width: 100%; flex: none; }
-    .quiz-header { font-size: 13px; }
-  }
+.deco-item {
+  position: absolute;
+  left: var(--x, 8%);
+  top: var(--y, 20%);
+  font-size: calc(clamp(24px, 3.4vw, 40px) * var(--s, 1));
+  line-height: 1;
+  filter: drop-shadow(0 10px 16px rgba(60, 90, 150, 0.18));
+  animation: bob 5.5s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+  opacity: 0.9;
+}
 
-  @media (orientation: landscape) and (max-height: 480px) {
-    .subtitle { margin-bottom: 16px; }
-    .question-card { min-height: 60px; padding: 16px 20px; }
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50% { transform: translateY(-16px) rotate(8deg); }
+}
+
+/* ---- Brand ---- */
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(15px, 1.8vw, 18px);
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(150deg, #ffd166, #ffb59e);
+  box-shadow: 0 6px 0 #f0a04b, 0 16px 26px -14px rgba(240, 160, 75, 0.9);
+  color: #5a2f00;
+  flex: 0 0 auto;
+}
+
+.brand-mark svg { width: 24px; height: 24px; }
+
+/* ---- Splash ---- */
+.screen.splash {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0;
+}
+
+.splash .brand-mark {
+  width: 88px;
+  height: 88px;
+  border-radius: 30px;
+  margin-bottom: 26px;
+  box-shadow: 0 10px 0 #f0a04b, 0 34px 50px -26px rgba(240, 160, 75, 0.95);
+  animation: floaty 4.5s ease-in-out infinite;
+}
+
+.splash .brand-mark svg { width: 46px; height: 46px; }
+
+@keyframes floaty {
+  0%, 100% { transform: translateY(0) rotate(-4deg); }
+  50% { transform: translateY(-10px) rotate(4deg); }
+}
+
+.display-title {
+  margin: 0;
+  font-size: clamp(38px, 8.4vw, 80px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #18213a;
+  text-shadow: 0 4px 0 #ffffff, 0 12px 22px rgba(70, 106, 175, 0.22);
+}
+
+.tagline {
+  margin: 16px 0 0;
+  font-size: clamp(14px, 2.2vw, 19px);
+  color: var(--muted);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  max-width: 34ch;
+}
+
+.splash-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 28px;
+}
+
+.badge {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 2px solid #cfe0f5;
+  background: #ffffff;
+  box-shadow: 0 4px 0 #c2d4ee, 0 12px 20px -14px rgba(46, 78, 145, 0.55);
+  font-size: clamp(11px, 1.5vw, 13px);
+  font-weight: 700;
+  color: var(--muted);
+}
+
+.loader {
+  width: min(78vw, 420px);
+  margin-top: clamp(30px, 7vh, 56px);
+}
+
+.loader-track {
+  height: 14px;
+  border-radius: 999px;
+  background: #e8f0fb;
+  box-shadow: inset 0 2px 6px rgba(52, 88, 158, 0.28);
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1fbf93, #2f74e8, #6a4ce0, #ff7a45);
+  transition: width 0.09s linear;
+}
+
+.loader-label {
+  margin-top: 14px;
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+  font-weight: 800;
+}
+
+/* ---- Setup ---- */
+.screen.setup {
+  gap: clamp(20px, 4vh, 32px);
+  justify-content: center;
+}
+
+.setup-header { text-align: center; }
+
+.setup-header .brand { justify-content: center; margin-bottom: 20px; }
+
+.headline {
+  margin: 0;
+  font-size: clamp(28px, 5.4vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #18213a;
+  text-shadow: 0 3px 0 #ffffff;
+}
+
+.sub {
+  margin: 12px auto 0;
+  max-width: 560px;
+  color: var(--muted);
+  font-size: clamp(13px, 1.9vw, 16px);
+  line-height: 1.55;
+  font-weight: 600;
+}
+
+.panel {
+  border: 2px solid #d5e3f5;
+  background: var(--panel);
+  border-radius: calc(var(--radius) + 8px);
+  padding: clamp(18px, 3vw, 30px);
+  box-shadow: 0 8px 0 #c9d9f2, 0 30px 54px -30px rgba(46, 78, 145, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 2.6vh, 24px);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.field-label {
+  font-size: 11.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #2456c4;
+}
+
+.field-hint {
+  font-size: clamp(11px, 1.5vw, 12.5px);
+  color: var(--muted-2);
+  font-weight: 600;
+}
+
+.subject-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.subject-card {
+  appearance: none;
+  text-align: left;
+  cursor: pointer;
+  border-radius: 20px;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--ink);
+  padding: 14px 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  transition: transform 0.16s var(--pop), border-color 0.16s ease, background 0.16s ease, box-shadow 0.16s ease;
+  font-family: inherit;
+  box-shadow: 0 3px 0 #d8e5f7;
+}
+
+.subject-card svg {
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  border-radius: 13px;
+  color: #2456c4;
+  background: #dbe8ff;
+  transition: transform 0.16s var(--pop);
+}
+
+.subject-card:nth-child(2) svg { color: #a85410; background: #ffe6cc; }
+.subject-card:nth-child(3) svg { color: #086f66; background: #d6f5ee; }
+.subject-card:nth-child(4) svg { color: #5433bd; background: #e7ddff; }
+
+.subject-card .name {
+  font-size: clamp(13px, 1.7vw, 15px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.subject-card .blurb {
+  font-size: 11.5px;
+  line-height: 1.35;
+  color: var(--muted-2);
+}
+
+.subject-card:hover {
+  background: #ffffff;
+  border-color: #cfe0f8;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 0 #d8e5f7;
+}
+
+.subject-card:hover svg { transform: scale(1.08) rotate(-4deg); }
+
+.subject-card.active {
+  border-color: var(--accent);
+  background: linear-gradient(160deg, #eef5ff, #ffffff);
+  box-shadow: 0 5px 0 #c3daf9, 0 20px 30px -22px rgba(79, 140, 255, 0.95);
+}
+
+.subject-card.active .name { color: #2f5fd0; }
+
+.grade-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.grade-pill {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: clamp(12px, 1.6vw, 14px);
+  color: var(--muted);
+  background: #ffffff;
+  border: 2px solid var(--stroke);
+  border-radius: 14px;
+  padding: 11px 0;
+  box-shadow: 0 3px 0 #d8e5f7;
+  transition: transform 0.14s var(--pop), color 0.14s ease, border-color 0.14s ease, background 0.14s ease;
+}
+
+.grade-pill:hover {
+  color: var(--ink);
+  border-color: var(--stroke-strong);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 0 #d8e5f7;
+}
+
+.grade-pill.active {
+  color: var(--btn-ink);
+  border-color: var(--btn-edge);
+  background: linear-gradient(160deg, var(--btn-a), var(--btn-b));
+  box-shadow: 0 4px 0 var(--btn-edge), 0 16px 24px -16px rgba(79, 110, 220, 0.95);
+}
+
+.count-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.count-btn {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 13px;
+  color: var(--muted);
+  background: #ffffff;
+  border: 2px solid var(--stroke);
+  border-radius: 13px;
+  padding: 9px 16px;
+  box-shadow: 0 3px 0 #d8e5f7;
+  transition: transform 0.14s var(--pop), color 0.14s ease, border-color 0.14s ease, background 0.14s ease;
+  min-width: 56px;
+}
+
+.count-btn:hover { color: var(--ink); border-color: var(--stroke-strong); transform: translateY(-2px); }
+
+.count-btn.active {
+  color: #8a5200;
+  background: linear-gradient(160deg, #fff2cf, #ffe6ad);
+  border-color: #f7c15c;
+  box-shadow: 0 3px 0 #f0c881;
+}
+
+.count-custom {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted-2);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.count-input {
+  width: 82px;
+  background: #ffffff;
+  border: 2px solid var(--stroke);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  border-radius: 12px;
+  padding: 9px 12px;
+  text-align: center;
+  box-shadow: inset 0 2px 4px rgba(70, 106, 175, 0.08);
+}
+
+.count-input:focus,
+.subject-card:focus-visible,
+.grade-pill:focus-visible,
+.count-btn:focus-visible,
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible,
+.exit-btn:focus-visible,
+.option-btn:focus-visible {
+  outline: 3px solid rgba(24, 68, 176, 0.9);
+  outline-offset: 3px;
+}
+
+.setup-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.site-foot {
+  margin: 0 auto;
+  max-width: 640px;
+  text-align: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--muted-2);
+}
+
+.site-foot .site-url {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.noscript-note {
+  max-width: 620px;
+  margin: clamp(40px, 12vh, 110px) auto;
+  padding: clamp(22px, 4vw, 34px);
+  border: 2px solid var(--stroke);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.noscript-note h1 { margin: 0 0 10px; font-size: clamp(22px, 4vw, 30px); color: var(--head-ink); }
+.noscript-note p { margin: 0 0 8px; font-size: 15px; line-height: 1.6; color: var(--muted); }
+
+/* ---- Buttons ---- */
+.btn-primary {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  border-radius: 18px;
+  padding: clamp(15px, 2.2vh, 19px) clamp(30px, 5vw, 46px);
+  font-size: clamp(15px, 1.9vw, 17px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--btn-ink);
+  background: linear-gradient(160deg, var(--btn-a), var(--btn-b));
+  box-shadow: 0 6px 0 var(--btn-edge), 0 22px 34px -22px rgba(65, 95, 192, 0.95);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.14s var(--pop), box-shadow 0.14s ease, filter 0.14s ease;
+}
+
+.btn-primary svg { width: 17px; height: 17px; }
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+  box-shadow: 0 8px 0 var(--btn-edge), 0 26px 38px -22px rgba(65, 95, 192, 1);
+}
+
+.btn-primary:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 var(--btn-edge), 0 10px 18px -14px rgba(65, 95, 192, 0.9);
+}
+
+.btn-primary.wide { width: 100%; max-width: 380px; justify-content: center; }
+
+.btn-primary:disabled,
+.btn-primary:disabled:hover {
+  cursor: not-allowed;
+  opacity: 0.55;
+  filter: none;
+  transform: none;
+  box-shadow: 0 6px 0 #7f90b8;
+}
+
+.btn-ghost {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--ink);
+  border-radius: 18px;
+  padding: clamp(14px, 2vh, 18px) clamp(22px, 4vw, 32px);
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: 800;
+  box-shadow: 0 4px 0 #c9d9f2;
+  transition: background 0.16s ease, transform 0.16s var(--pop), box-shadow 0.16s ease;
+}
+
+.btn-ghost:hover {
+  background: #f7fbff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #c9d9f2;
+}
+
+.btn-ghost:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #c9d9f2;
+}
+
+/* ---- Quiz ---- */
+.screen.quiz { gap: 14px; }
+
+.quiz-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.quiz-meta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.exit-btn {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px 8px 11px;
+  border-radius: 999px;
+  font-size: clamp(11px, 1.6vw, 13px);
+  font-weight: 800;
+  color: #ad1f3d;
+  background: #ffffff;
+  border: 2px solid #ffb6c5;
+  box-shadow: 0 3px 0 #ffcbda;
+  transition: transform 0.14s var(--pop), background 0.14s ease, border-color 0.14s ease;
+}
+
+.exit-btn svg { width: 13px; height: 13px; }
+
+.exit-btn:hover {
+  background: #fff5f7;
+  border-color: #ffb3c2;
+  transform: translateY(-2px);
+}
+
+.exit-btn:active { transform: translateY(2px); }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  font-size: clamp(11px, 1.6vw, 13px);
+  font-weight: 800;
+  letter-spacing: 0.01em;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: 0 3px 0 #d8e5f7;
+  white-space: nowrap;
+}
+
+.chip.muted { color: var(--muted); font-weight: 700; }
+
+.chip.streak {
+  color: #8a5200;
+  border-color: #ffd88a;
+  background: linear-gradient(160deg, #fff6da, #ffeab5);
+  box-shadow: 0 3px 0 #f6d894;
+}
+
+.chip.streak svg { width: 14px; height: 14px; }
+
+.chip.streak.pulse { animation: pop 0.4s var(--pop); }
+
+.chip.timer { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.16); }
+  100% { transform: scale(1); }
+}
+
+.progress-track {
+  height: 14px;
+  width: 100%;
+  border-radius: 999px;
+  background: #e8f0fb;
+  box-shadow: inset 0 2px 6px rgba(52, 88, 158, 0.26);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #1fbf93, #2f74e8, #6a4ce0, #ff7a45);
+  transition: width 0.4s var(--pop);
+}
+
+.quiz-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(14px, 2.4vh, 20px);
+  padding: clamp(4px, 2vh, 16px) 0;
+}
+
+.question-card {
+  position: relative;
+  border: 2px solid #d5e3f5;
+  border-radius: calc(var(--radius) + 6px);
+  background: #ffffff;
+  padding: clamp(26px, 4.4vh, 46px) clamp(20px, 3.4vw, 40px) clamp(22px, 3.6vh, 36px);
+  box-shadow: 0 8px 0 #c9d9f2, 0 30px 50px -32px rgba(46, 78, 145, 0.55);
+  overflow: hidden;
+  animation: cardIn 0.4s var(--pop) both;
+}
+
+.question-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 10px;
+  background: linear-gradient(90deg, #1fbf93, #2f74e8, #6a4ce0, #ff7a45);
+}
+
+.question-card::after {
+  content: "";
+  position: absolute;
+  right: -26px;
+  bottom: -26px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 209, 102, 0.35), transparent 70%);
+  pointer-events: none;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px) scale(0.99); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.q-tag {
+  display: inline-block;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #086b66;
+  background: #d3f6f0;
+  padding: 5px 11px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.question-text {
+  font-size: clamp(19px, 3vw, 29px);
+  font-weight: 800;
+  line-height: 1.42;
+  letter-spacing: -0.015em;
+  margin: 0;
+  color: #18213a;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.option-btn {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: left;
+  border-radius: 18px;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--ink);
+  padding: clamp(13px, 2.1vh, 18px) clamp(14px, 2vw, 20px);
+  font-size: clamp(14px, 1.9vw, 17px);
+  font-weight: 700;
+  line-height: 1.35;
+  box-shadow: 0 4px 0 #e9f0fb;
+  transition: transform 0.14s var(--pop), border-color 0.14s ease, background 0.14s ease, box-shadow 0.14s ease;
+  animation: optIn 0.35s var(--pop) both;
+}
+
+.option-btn:nth-child(2) { animation-delay: 0.04s; }
+.option-btn:nth-child(3) { animation-delay: 0.08s; }
+.option-btn:nth-child(4) { animation-delay: 0.12s; }
+
+@keyframes optIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.option-btn:hover:not(:disabled) {
+  background: #f9fcff;
+  border-color: #7ba5df;
+  transform: translateY(-3px);
+  box-shadow: 0 7px 0 #e9f0fb;
+}
+
+.option-btn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #e9f0fb;
+}
+
+.opt-key {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 800;
+  color: #2354c4;
+  background: #dbe8ff;
+  border: none;
+  transition: all 0.16s ease;
+}
+
+.option-btn:nth-child(2) .opt-key { color: #5433bd; background: #e7ddff; }
+.option-btn:nth-child(3) .opt-key { color: #086f66; background: #d6f5ee; }
+.option-btn:nth-child(4) .opt-key { color: #7d4f00; background: #ffe9b8; }
+
+.option-btn:hover:not(:disabled) .opt-key { transform: scale(1.06); }
+
+.opt-text { flex: 1 1 auto; word-break: break-word; }
+
+.opt-mark {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.opt-mark svg { width: 22px; height: 22px; }
+
+.option-btn.is-correct {
+  background: var(--correct-soft);
+  border-color: #6fdcae;
+  color: #08402c;
+  box-shadow: 0 4px 0 #bfeeda;
+}
+
+.option-btn.is-correct .opt-key {
+  background: var(--correct);
+  color: #ffffff;
+}
+
+.option-btn.is-correct .opt-mark { opacity: 1; color: var(--correct); }
+
+.option-btn.is-wrong {
+  background: var(--wrong-soft);
+  border-color: #ffb0be;
+  color: #661325;
+  box-shadow: 0 4px 0 #ffd6dd;
+}
+
+.option-btn.is-wrong .opt-key {
+  background: var(--wrong);
+  color: #ffffff;
+}
+
+.option-btn.is-wrong .opt-mark { opacity: 1; color: var(--wrong); }
+
+.option-btn.is-dim { opacity: 0.66; }
+
+.option-btn:disabled { cursor: default; }
+
+.feedback {
+  min-height: 26px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: clamp(13px, 1.8vw, 15.5px);
+  font-weight: 800;
+  color: var(--muted);
+  animation: optIn 0.3s var(--pop) both;
+}
+
+.feedback .fb-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+}
+
+.feedback .fb-icon svg { width: 14px; height: 14px; }
+
+.feedback.good { color: #0a7a48; }
+.feedback.good .fb-icon { background: var(--correct-soft); color: var(--correct); }
+
+.feedback.bad { color: #b81f3b; }
+.feedback.bad .fb-icon { background: var(--wrong-soft); color: var(--wrong); }
+
+.next-row { display: flex; justify-content: flex-end; }
+
+.next-row .btn-primary { padding: 13px 26px; font-size: 14.5px; border-radius: 15px; }
+
+.kbd-hint {
+  text-align: center;
+  font-size: 11.5px;
+  color: var(--muted-2);
+  letter-spacing: 0.04em;
+  font-weight: 700;
+}
+
+kbd {
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 7px;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--muted);
+  box-shadow: 0 2px 0 #c9d9f2;
+}
+
+/* ---- Results ---- */
+.screen.results {
+  justify-content: center;
+  align-items: center;
+  gap: clamp(18px, 3vh, 26px);
+  text-align: center;
+}
+
+.score-ring {
+  position: relative;
+  width: clamp(150px, 30vw, 190px);
+  height: clamp(150px, 30vw, 190px);
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 8px 0 #c9d9f2, 0 26px 40px -28px rgba(46, 78, 145, 0.6);
+}
+
+.score-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+
+.ring-bg { fill: none; stroke: #dbe6f8; stroke-width: 11; }
+
+.ring-fill {
+  fill: none;
+  stroke: url(#ringGrad);
+  stroke-width: 11;
+  stroke-linecap: round;
+  stroke-dasharray: 283;
+  stroke-dashoffset: 283;
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.ring-pct {
+  font-size: clamp(30px, 6vw, 42px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: #18213a;
+}
+
+.ring-sub {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--muted-2);
+}
+
+.results-title {
+  margin: 0;
+  font-size: clamp(24px, 4.4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #18213a;
+  text-shadow: 0 3px 0 #ffffff;
+}
+
+.results-msg {
+  margin: 8px auto 0;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: clamp(13px, 1.9vw, 16px);
+  max-width: 520px;
+  line-height: 1.5;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  max-width: 620px;
+}
+
+.stat {
+  border: 2px solid #dbe7f8;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 14px 10px;
+  box-shadow: 0 4px 0 #c9d9f2;
+}
+
+.stat:nth-child(1) { background: #eefbf4; box-shadow: 0 4px 0 #ccefdd; }
+.stat:nth-child(2) { background: #fff0f3; box-shadow: 0 4px 0 #ffd7de; }
+.stat:nth-child(3) { background: #fff8e6; box-shadow: 0 4px 0 #f7e3b4; }
+.stat:nth-child(4) { background: #eff3ff; box-shadow: 0 4px 0 #d7e0fb; }
+
+.stat-value {
+  font-size: clamp(16px, 2.6vw, 21px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: #18213a;
+}
+
+.stat-label {
+  margin-top: 4px;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--muted-2);
+}
+
+.review {
+  width: 100%;
+  max-width: 620px;
+  text-align: left;
+  border: 2px solid #dbe7f8;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 16px 18px;
+  max-height: 32vh;
+  overflow-y: auto;
+  box-shadow: 0 6px 0 #c9d9f2;
+}
+
+.review-title {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: var(--muted-2);
+  margin-bottom: 10px;
+}
+
+.review-item {
+  padding: 10px 0;
+  border-top: 2px solid #e2ebf9;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.review-item:first-of-type { border-top: none; }
+
+.review-q { color: var(--ink); font-weight: 700; margin-bottom: 5px; }
+
+.review-answers { color: var(--muted); font-size: 12.5px; font-weight: 600; }
+
+.review-answers .bad { color: #b81f3b; font-weight: 800; }
+.review-answers .good { color: #0a7a48; font-weight: 800; }
+
+.review-perfect {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ---- Exit dialog ---- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(38, 58, 96, 0.34);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  animation: fadeIn 0.18s ease both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.modal {
+  width: min(400px, 100%);
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 26px 24px 24px;
+  text-align: center;
+  box-shadow: 0 12px 0 #c9d9f2, 0 40px 70px -30px rgba(38, 58, 96, 0.7);
+  animation: modalIn 0.3s var(--pop) both;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.94); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-emoji {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.modal-title {
+  margin: 0;
+  font-size: clamp(20px, 3.4vw, 25px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #18213a;
+}
+
+.modal-text {
+  margin: 10px 0 22px;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-actions .btn-primary,
+.modal-actions .btn-ghost {
+  width: 100%;
+  justify-content: center;
+  padding: 14px 20px;
+  font-size: 15px;
+}
+
+/* ---- Confetti ---- */
+.confetti {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.confetti span {
+  position: absolute;
+  top: -14px;
+  width: 9px;
+  height: 14px;
+  border-radius: 3px;
+  opacity: 0.95;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate3d(var(--dx, 0px), 110vh, 0) rotate(720deg); opacity: 0.15; }
+}
+
+/* ---- Saved quizzes (bottom-right arrow) ---- */
+.saved-fab {
+  position: fixed;
+  right: clamp(14px, 3vw, 26px);
+  bottom: clamp(14px, 3vw, 26px);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 17px;
+  border: 2px solid var(--btn-edge);
+  border-radius: 999px;
+  background: linear-gradient(160deg, var(--btn-a), var(--btn-b));
+  color: var(--btn-ink);
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--btn-edge), 0 20px 30px -18px rgba(65, 95, 192, 0.95);
+  transition: transform 0.16s var(--pop), opacity 0.2s ease, box-shadow 0.16s ease;
+}
+
+.saved-fab svg { width: 16px; height: 16px; }
+
+.saved-fab:hover { transform: translateY(-3px); box-shadow: 0 8px 0 var(--btn-edge), 0 24px 34px -18px rgba(65, 95, 192, 1); }
+.saved-fab:active { transform: translateY(3px); box-shadow: 0 2px 0 var(--btn-edge); }
+.saved-fab.is-hidden { opacity: 0; pointer-events: none; transform: translateY(24px) scale(0.9); }
+.saved-fab:focus-visible { outline: 3px solid rgba(24, 68, 176, 0.9); outline-offset: 3px; }
+
+.saved-count {
+  min-width: 21px;
+  height: 21px;
+  padding: 0 6px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #ffd166;
+  color: #5a2f00;
+  font-size: 11.5px;
+  font-weight: 800;
+}
+
+.saved-count[hidden] { display: none; }
+
+.saved-scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 24;
+  background: rgba(38, 58, 96, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.24s ease;
+}
+
+.saved-scrim.is-open { opacity: 1; pointer-events: auto; }
+
+.saved-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 25;
+  width: min(370px, 92vw);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+  background: #ffffff;
+  border-radius: 28px 0 0 28px;
+  box-shadow: -34px 0 60px -34px rgba(38, 58, 96, 0.6);
+  transform: translateX(104%);
+  transition: transform 0.34s var(--pop);
+  overscroll-behavior: contain;
+}
+
+.saved-drawer.is-open { transform: translateX(0); }
+
+.saved-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.saved-title { margin: 0; font-size: 18px; font-weight: 800; letter-spacing: -0.02em; color: #18213a; }
+.saved-sub { margin: 5px 0 0; font-size: 12px; line-height: 1.4; font-weight: 600; color: var(--muted); }
+
+.saved-close {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  border-radius: 12px;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--muted);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 3px 0 #d8e5f7;
+  transition: transform 0.14s var(--pop), background 0.14s ease;
+}
+
+.saved-close svg { width: 13px; height: 13px; }
+.saved-close:hover { background: #f2f8ff; transform: translateY(-2px); }
+.saved-close:focus-visible { outline: 3px solid rgba(24, 68, 176, 0.9); outline-offset: 2px; }
+
+.saved-list { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+
+.saved-item {
+  border: 2px solid var(--stroke);
+  border-radius: 18px;
+  background: #ffffff;
+  padding: 12px 13px 13px;
+  box-shadow: 0 3px 0 #d8e5f7;
+  animation: optIn 0.3s var(--pop) both;
+}
+
+.saved-item-title { font-size: 13.5px; font-weight: 800; color: #18213a; }
+.saved-item-meta { margin-top: 4px; font-size: 11.5px; font-weight: 600; color: var(--muted); }
+.saved-mini-track { height: 8px; border-radius: 999px; background: #d8e5f7; overflow: hidden; margin: 9px 0 8px; }
+.saved-mini-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #8de3c6, #4f8cff, #8b6cf6); }
+
+.saved-actions { display: flex; gap: 8px; margin-top: 10px; }
+
+.saved-resume {
+  flex: 1;
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 13px;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--btn-ink);
+  background: linear-gradient(160deg, var(--btn-a), var(--btn-b));
+  box-shadow: 0 4px 0 var(--btn-edge);
+  transition: transform 0.14s var(--pop), box-shadow 0.14s ease;
+}
+
+.saved-resume svg { width: 14px; height: 14px; }
+.saved-resume:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--btn-edge); }
+.saved-resume:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--btn-edge); }
+.saved-resume:focus-visible { outline: 3px solid rgba(24, 68, 176, 0.9); outline-offset: 2px; }
+
+.saved-remove {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  width: 42px;
+  border-radius: 13px;
+  border: 2px solid #ffb6c5;
+  background: #ffffff;
+  color: #ad1f3d;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 0 #ffcbda;
+  transition: transform 0.14s var(--pop), background 0.14s ease;
+}
+
+.saved-remove svg { width: 13px; height: 13px; }
+.saved-remove:hover { background: #fff5f7; transform: translateY(-2px); }
+.saved-remove:focus-visible { outline: 3px solid rgba(184, 31, 59, 0.75); outline-offset: 2px; }
+
+.saved-empty { text-align: center; padding: 34px 16px; color: var(--muted); font-size: 13px; font-weight: 600; line-height: 1.55; }
+.saved-empty .emoji { display: block; font-size: 40px; margin-bottom: 12px; }
+
+@media (max-width: 420px) {
+  .saved-fab-label { display: none; }
+  .saved-fab { padding: 12px 14px; }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 760px) {
+  .subject-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grade-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .deco-item:nth-child(n+5) { display: none; }
+}
+
+@media (max-width: 480px) {
+  .count-custom { margin-left: 0; width: 100%; justify-content: flex-start; }
+  .quiz-top { gap: 8px; }
+  .chip { padding: 8px 12px; }
+  .exit-btn { padding: 8px 12px 8px 10px; }
+  .next-row { justify-content: stretch; }
+  .next-row .btn-primary { width: 100%; justify-content: center; }
+  .review { max-height: 36vh; }
+  .deco-item:nth-child(n+3) { display: none; }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .quiz-body { gap: 10px; padding: 0; }
+  .question-card { padding: 20px 20px 18px; }
+  .option-btn { padding: 10px 14px; }
+  .feedback { min-height: 18px; }
+  .kbd-hint { display: none; }
+  .question-card::before { height: 6px; }
+}
+
+
+/* ---- Grade-band themes ---------------------------------------------------- */
+.display-title,
+.headline,
+.results-title,
+.question-text,
+.modal-title,
+.saved-title {
+  font-family: var(--font-head);
+}
+
+/* Grades 1-2: chunky, sunny, very playful */
+html[data-grade-theme="kids"] {
+  --ink: #1c2340;
+  --muted: #414d70;
+  --muted-2: #566180;
+  --accent: #ff7f9e;
+  --accent-2: #ffb020;
+  --accent-3: #129c9c;
+  --stroke: #f8ccd8;
+  --stroke-strong: #f0a8bd;
+  --page-bg: radial-gradient(120% 80% at 50% 0%, #fff9ef 0%, #fff2f6 45%, #eefaff 100%);
+  --blob-a: rgba(255, 214, 102, 0.8);
+  --blob-b: rgba(255, 159, 190, 0.65);
+  --blob-c: rgba(150, 226, 255, 0.65);
+  --blob-d: rgba(163, 240, 200, 0.6);
+  --dots: radial-gradient(rgba(232, 128, 164, 0.32) 2px, transparent 2px);
+  --btn-a: #ffb020;
+  --btn-b: #ff8a3d;
+  --btn-edge: #c97410;
+  --btn-ink: #46260a;
+  --radius: 26px;
+}
+
+html[data-grade-theme="kids"] body::after { background-size: 26px 26px; }
+html[data-grade-theme="kids"] .q-tag { background: #ffe9b8; color: #7d4f00; font-size: 12px; }
+html[data-grade-theme="kids"] .q-tag::before { content: "\2b50  "; }
+html[data-grade-theme="kids"] .question-text { font-size: clamp(21px, 3.2vw, 32px); }
+html[data-grade-theme="kids"] .question-card {
+  border-width: 3px;
+  border-color: #ffd3e0;
+  box-shadow: 0 10px 0 #ffe0ea, 0 26px 44px -30px rgba(190, 100, 130, 0.45);
+}
+html[data-grade-theme="kids"] .question-card::before {
+  height: 14px;
+  background: linear-gradient(90deg, #ffd166, #ff9fbe, #9fe4ff, #a3f0c8);
+}
+html[data-grade-theme="kids"] .question-card::after {
+  content: "\1f388";
+  right: 16px;
+  bottom: 12px;
+  width: auto;
+  height: auto;
+  font-size: 26px;
+  background: none;
+  opacity: 0.55;
+}
+html[data-grade-theme="kids"] .panel {
+  border-width: 3px;
+  border-color: #ffe0ea;
+  box-shadow: 0 10px 0 #ffe0ea, 0 30px 54px -30px rgba(190, 100, 130, 0.4);
+}
+html[data-grade-theme="kids"] .option-btn {
+  border-width: 3px;
+  border-radius: 22px;
+  box-shadow: 0 6px 0 #ffe3ee;
+}
+html[data-grade-theme="kids"] .option-btn:hover:not(:disabled) { box-shadow: 0 9px 0 #ffe3ee; }
+html[data-grade-theme="kids"] .opt-key { width: 40px; height: 40px; border-radius: 14px; font-size: 15px; }
+html[data-grade-theme="kids"] .chip,
+html[data-grade-theme="kids"] .badge,
+html[data-grade-theme="kids"] .subject-card,
+html[data-grade-theme="kids"] .grade-pill,
+html[data-grade-theme="kids"] .count-btn { border-width: 3px; }
+html[data-grade-theme="kids"] .btn-primary { border-radius: 24px; }
+html[data-grade-theme="kids"] .saved-fab,
+html[data-grade-theme="kids"] .saved-resume { border-radius: 22px; }
+
+/* Grades 3-5: the bright default, slightly calmer */
+html[data-grade-theme="junior"] {
+  --radius: 20px;
+}
+html[data-grade-theme="junior"] .question-text { font-size: clamp(19px, 2.9vw, 28px); }
+
+/* Grades 6-8: cooler, flatter, no doodles */
+html[data-grade-theme="middle"] {
+  --ink: #1a2436;
+  --muted: #43506a;
+  --muted-2: #5d6a85;
+  --head-ink: #16202f;
+  --accent: #3f57a8;
+  --accent-2: #4a5fa8;
+  --accent-3: #2b7f8f;
+  --stroke: #cfd9e8;
+  --stroke-strong: #a9b8ce;
+  --page-bg: radial-gradient(120% 80% at 50% 0%, #f8fbfe 0%, #f1f6fb 50%, #edf2f8 100%);
+  --blob-a: rgba(186, 204, 230, 0.5);
+  --blob-b: rgba(198, 216, 228, 0.5);
+  --blob-c: rgba(208, 208, 230, 0.5);
+  --blob-d: rgba(218, 208, 202, 0.4);
+  --dots: radial-gradient(rgba(120, 143, 176, 0.2) 1.4px, transparent 1.4px);
+  --btn-a: #35558f;
+  --btn-b: #4a4f8c;
+  --btn-edge: #223a61;
+  --radius: 16px;
+}
+html[data-grade-theme="middle"] .deco { display: none; }
+html[data-grade-theme="middle"] .display-title,
+html[data-grade-theme="middle"] .headline,
+html[data-grade-theme="middle"] .results-title { text-shadow: none; }
+html[data-grade-theme="middle"] .question-card,
+html[data-grade-theme="middle"] .panel,
+html[data-grade-theme="middle"] .review,
+html[data-grade-theme="middle"] .stat {
+  box-shadow: 0 4px 0 #dbe4f0, 0 22px 40px -32px rgba(30, 50, 80, 0.35);
+}
+html[data-grade-theme="middle"] .option-btn { border-radius: 13px; box-shadow: 0 3px 0 #dfe7f2; }
+html[data-grade-theme="middle"] .opt-key { border-radius: 9px; }
+html[data-grade-theme="middle"] .chip.streak { background: #fff8e6; border-color: #efd59a; box-shadow: 0 3px 0 #efdfae; }
+
+/* Grades 9-12: formal, academic, restrained */
+html[data-grade-theme="senior"] {
+  --ink: #1b2233;
+  --muted: #46506a;
+  --muted-2: #5f6a83;
+  --head-ink: #131a29;
+  --accent: #31507d;
+  --accent-2: #3d557d;
+  --accent-3: #2f6b73;
+  --stroke: #d2dae6;
+  --stroke-strong: #a8b6c9;
+  --page-bg: linear-gradient(180deg, #f8fafc 0%, #f2f5f9 100%);
+  --blob-a: rgba(206, 216, 230, 0.35);
+  --blob-b: rgba(206, 220, 224, 0.3);
+  --blob-c: rgba(214, 214, 228, 0.3);
+  --blob-d: rgba(222, 214, 208, 0.25);
+  --dots: none;
+  --btn-a: #22314d;
+  --btn-b: #334765;
+  --btn-edge: #131e33;
+  --radius: 10px;
+  --font-head: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+}
+html[data-grade-theme="senior"] body::before { opacity: 0.55; }
+html[data-grade-theme="senior"] .deco { display: none; }
+html[data-grade-theme="senior"] .display-title,
+html[data-grade-theme="senior"] .headline,
+html[data-grade-theme="senior"] .results-title { text-shadow: none; letter-spacing: -0.01em; }
+html[data-grade-theme="senior"] .question-text { font-weight: 600; letter-spacing: 0; font-size: clamp(18px, 2.7vw, 26px); }
+html[data-grade-theme="senior"] .question-card,
+html[data-grade-theme="senior"] .panel {
+  border-width: 1px;
+  border-color: #d2dae6;
+  border-radius: 10px;
+  box-shadow: 0 10px 28px -22px rgba(24, 36, 56, 0.55);
+}
+html[data-grade-theme="senior"] .question-card::before { height: 4px; background: #31507d; }
+html[data-grade-theme="senior"] .question-card::after { display: none; }
+html[data-grade-theme="senior"] .q-tag { background: #eef2f7; color: #3f5a7a; letter-spacing: 0.16em; }
+html[data-grade-theme="senior"] .option-btn {
+  border-width: 1px;
+  border-radius: 8px;
+  box-shadow: none;
+  font-weight: 600;
+}
+html[data-grade-theme="senior"] .option-btn:hover:not(:disabled) {
+  transform: none;
+  box-shadow: none;
+  background: #f6f8fb;
+  border-color: var(--stroke-strong);
+}
+html[data-grade-theme="senior"] .option-btn:active:not(:disabled) { transform: none; box-shadow: none; }
+html[data-grade-theme="senior"] .option-btn .opt-key {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: #f1f4f9;
+  color: #42526b;
+  font-size: 12px;
+  border: 1px solid #dbe3ee;
+}
+html[data-grade-theme="senior"] .chip {
+  border-width: 1px;
+  border-radius: 8px;
+  box-shadow: none;
+  font-weight: 700;
+}
+html[data-grade-theme="senior"] .chip.streak { background: #fffaf0; border-color: #e6d6b4; box-shadow: none; }
+html[data-grade-theme="senior"] .grade-pill,
+html[data-grade-theme="senior"] .count-btn,
+html[data-grade-theme="senior"] .subject-card {
+  border-width: 1px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+html[data-grade-theme="senior"] .subject-card svg { border-radius: 8px; }
+html[data-grade-theme="senior"] .subject-card:hover { transform: none; box-shadow: none; background: #f7fafd; }
+html[data-grade-theme="senior"] .btn-primary,
+html[data-grade-theme="senior"] .btn-ghost,
+html[data-grade-theme="senior"] .saved-fab,
+html[data-grade-theme="senior"] .saved-resume,
+html[data-grade-theme="senior"] .exit-btn,
+html[data-grade-theme="senior"] .saved-close,
+html[data-grade-theme="senior"] .saved-remove { border-radius: 8px; box-shadow: none; }
+html[data-grade-theme="senior"] .btn-primary:hover { transform: none; box-shadow: none; filter: brightness(1.15); }
+html[data-grade-theme="senior"] .btn-primary:active { transform: none; box-shadow: none; }
+html[data-grade-theme="senior"] .btn-ghost:hover,
+html[data-grade-theme="senior"] .saved-fab:hover,
+html[data-grade-theme="senior"] .saved-resume:hover,
+html[data-grade-theme="senior"] .exit-btn:hover,
+html[data-grade-theme="senior"] .saved-close:hover,
+html[data-grade-theme="senior"] .saved-remove:hover { transform: none; box-shadow: none; }
+html[data-grade-theme="senior"] .stat,
+html[data-grade-theme="senior"] .review {
+  background: #ffffff;
+  border-width: 1px;
+  border-color: #dbe3ee;
+  border-radius: 8px;
+  box-shadow: none;
+}
+html[data-grade-theme="senior"] .review-item { border-top-color: #eef2f7; }
+html[data-grade-theme="senior"] .progress-track { height: 6px; border-radius: 4px; }
+html[data-grade-theme="senior"] .progress-fill { background: #31507d; border-radius: 4px; }
+html[data-grade-theme="senior"] .score-ring { box-shadow: none; border: 1px solid #dbe3ee; }
+html[data-grade-theme="senior"] .ring-fill { stroke: #31507d; }
+html[data-grade-theme="senior"] .saved-drawer { border-radius: 12px 0 0 12px; }
+html[data-grade-theme="senior"] .modal { border-radius: 12px; box-shadow: 0 20px 50px -30px rgba(24, 36, 56, 0.6); }
+html[data-grade-theme="senior"] .badge { border-width: 1px; box-shadow: none; border-color: #d5deea; }
+html[data-grade-theme="senior"] .saved-item { border-width: 1px; border-radius: 10px; box-shadow: none; }
+html[data-grade-theme="senior"] .feedback.good { color: #0a7a48; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001s !important;
   }
+}
+
 </style>
 </head>
 <body>
 <div id="app"></div>
+
+<noscript>
+  <div class="noscript-note">
+    <h1>The Quiz Book</h1>
+    <p>Free practice quizzes for grades 1&ndash;12 in math, reading, science and social studies at <strong>quizbookcentral.com</strong> &mdash; thousands of auto-generated questions for classrooms, homework and home practice.</p>
+    <p>This activity needs JavaScript enabled in your browser to play.</p>
+  </div>
+</noscript>
 
 <script>
 // ===========================================================================
@@ -1001,18 +2504,41 @@ const GRADE_GENERATORS = {
   7: GRADE7, 8: GRADE8, 9: GRADE9, 10: GRADE10, 11: GRADE11, 12: GRADE12,
 };
 
+function numericVariants(text) {
+  const match = String(text).match(/-?\d+(?:\.\d+)?/);
+  if (!match) return null;
+  const raw = match[0];
+  const value = parseFloat(raw);
+  if (!isFinite(value)) return null;
+  const decimals = (raw.split(".")[1] || "").length;
+  const prefix = text.slice(0, match.index);
+  const suffix = text.slice(match.index + raw.length);
+  const fmtV = (v) => prefix + v.toFixed(decimals) + suffix;
+  return [fmtV(value + 1), fmtV(value - 1), fmtV(value + 2), fmtV(value - 2)];
+}
+
 function generateMathQuiz(grade, count) {
   const generators = GRADE_GENERATORS[grade];
   const questions = [];
   for (let i = 0; i < count; i++) {
-    const gen = choice(generators);
-    let [qText, correct, wrongs] = gen();
-    wrongs = Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3);
-    let pad = 1;
-    while (wrongs.length < 3) { wrongs.push(`${correct}_${pad}`); pad++; }
-    const options = wrongs.concat([correct]);
-    for (let j = options.length - 1; j > 0; j--) { const k = randInt(0, j); [options[j], options[k]] = [options[k], options[j]]; }
-    questions.push({ question: qText, options: options, correct_text: correct });
+    let built = null;
+    // Regenerate instead of padding: every question keeps four plausible options.
+    for (let attempt = 0; attempt < 120 && !built; attempt++) {
+      const [qText, correctRaw, wrongsRaw] = choice(generators)();
+      const correct = String(correctRaw);
+      const wrongs = Array.from(new Set(wrongsRaw.map(String))).filter(w => w !== correct);
+      if (wrongs.length < 3) continue;
+      const options = wrongs.slice(0, 3).concat([correct]);
+      for (let j = options.length - 1; j > 0; j--) { const k = randInt(0, j); [options[j], options[k]] = [options[k], options[j]]; }
+      built = { question: qText, options: options, correct_text: correct };
+    }
+    if (!built) {
+      const [qText, correctRaw] = generators[0]();
+      const correct = String(correctRaw);
+      const variants = numericVariants(correct) || ["None of these", "Not enough information", "Cannot be determined"];
+      built = { question: qText, options: variants.slice(0, 3).concat([correct]), correct_text: correct };
+    }
+    questions.push(built);
   }
   return questions;
 }
@@ -1021,6 +2547,599 @@ if (typeof module !== 'undefined') {
   module.exports = { generateMathQuiz, GRADE_GENERATORS };
 }
 
+</script>
+
+<script>
+// ===========================================================================
+// Harder problems - multi-step reasoning, error-prone distractors
+// ===========================================================================
+
+function hMoney(x) {
+  const v = Math.round(x * 100) / 100;
+  return "$" + (Number.isInteger(v) ? String(v) : v.toFixed(2));
+}
+
+function hSample(arr, n) {
+  const copy = arr.slice();
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy.slice(0, n);
+}
+
+// ---- Grade 1 ---------------------------------------------------------------
+
+function h1_missing_addend() {
+  const total = randInt(8, 20), a = randInt(2, total - 2);
+  const correct = total - a;
+  return [`${a} + ___ = ${total}. What number goes in the blank?`, String(correct), intWrongs(correct, 3)];
+}
+
+function h1_two_step_story() {
+  const start = randInt(6, 15), more = randInt(3, 9), away = randInt(2, start + more - 2);
+  const correct = start + more - away;
+  return [`Mia has ${start} stickers. She gets ${more} more, then gives ${away} away. How many stickers does she have now?`,
+    String(correct), intWrongs(correct, 3)];
+}
+
+function h1_number_pattern() {
+  const step = choice([2, 3, 5, 10]), start = randInt(1, 6) * step;
+  const correct = start + 4 * step;
+  return [`What number comes next: ${start}, ${start + step}, ${start + 2 * step}, ${start + 3 * step}, ___?`,
+    String(correct), intWrongs(correct, step + 1)];
+}
+
+// ---- Grade 2 ---------------------------------------------------------------
+
+function h2_multi_step_money() {
+  const price = randInt(15, 45), qty = randInt(2, 4), paid = 200;
+  const spent = price * qty;
+  const correct = paid - spent;
+  const q = `A pencil costs ${price} cents. You buy ${qty} of them and pay with $2. How much change do you get, in cents?`;
+  return [q, String(correct), intWrongs(correct, 15)];
+}
+
+function h2_missing_number() {
+  const b = randInt(20, 60), total = b + randInt(10, 40);
+  const correct = total - b;
+  return [`___ + ${b} = ${total}. What number goes in the blank?`, String(correct), intWrongs(correct, 8)];
+}
+
+function h2_compare_word() {
+  let a = randInt(110, 480), b = randInt(110, 480);
+  while (b === a) b = randInt(110, 480);
+  const bigger = Math.max(a, b), smaller = Math.min(a, b);
+  const correct = bigger - smaller;
+  const q = `Sam has ${smaller} stickers. Ana has ${bigger} stickers. How many more stickers does Ana have?`;
+  return [q, String(correct), intWrongs(correct, 12)];
+}
+
+// ---- Grade 3 ---------------------------------------------------------------
+
+function h3_two_digit_times_one() {
+  const a = randInt(12, 49), b = randInt(3, 9);
+  const correct = a * b;
+  return [`What is ${a} x ${b}?`, String(correct), intWrongs(correct, 12)];
+}
+
+function h3_elapsed_time() {
+  const startHour = randInt(1, 9), startMin = choice([0, 15, 30, 45]);
+  const durationMin = choice([45, 75, 90, 105]);
+  const totalMin = startHour * 60 + startMin + durationMin;
+  const endHour = Math.floor(totalMin / 60), endMin = totalMin % 60;
+  const pad = (m) => String(m).padStart(2, "0");
+  const correct = `${endHour}:${pad(endMin)}`;
+  const wrongs = [
+    `${endHour}:${pad((endMin + 30) % 60)}`,
+    `${endHour + 1}:${pad(endMin)}`,
+    `${endHour + 2}:${pad(endMin)}`,
+  ];
+  const q = `A film starts at ${startHour}:${pad(startMin)} and lasts ${Math.floor(durationMin / 60)} hour${durationMin >= 120 ? "s" : ""}${durationMin % 60 ? ` ${durationMin % 60} minutes` : ""}. What time does it end?`;
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h3_multi_step_shopping() {
+  const itemPrice = randInt(3, 9), qty = randInt(2, 5), extra = randInt(2, 8);
+  const correct = itemPrice * qty + extra;
+  const q = `You buy ${qty} notebooks at $${itemPrice} each and a pen for $${extra}. What is the total cost?`;
+  return [q, hMoney(correct), intWrongs(correct, 6).map(hMoney)];
+}
+
+function h3_largest_fraction() {
+  const pool = ["1/2", "2/3", "3/4", "3/5", "5/8", "4/7", "5/6", "7/10", "2/5", "4/9"];
+  const picks = hSample(pool, 4);
+  const value = (f) => { const [n, d] = f.split("/").map(Number); return n / d; };
+  let correct = picks[0];
+  for (const f of picks) if (value(f) > value(correct)) correct = f;
+  const wrongs = picks.filter(f => f !== correct);
+  return [`Which fraction is the greatest: ${picks.join(", ")}?`, correct, wrongs];
+}
+
+// ---- Grade 4 ---------------------------------------------------------------
+
+function h4_two_step_word() {
+  const boxes = randInt(12, 30), perBox = randInt(8, 14), giveAway = randInt(20, 60);
+  const correct = boxes * perBox - giveAway;
+  const q = `A school buys ${boxes} boxes with ${perBox} pencils in each box. They give away ${giveAway} pencils. How many pencils are left?`;
+  return [q, String(correct), intWrongs(correct, 24)];
+}
+
+function h4_two_by_two() {
+  const a = randInt(12, 39), b = randInt(12, 29);
+  const correct = a * b;
+  const wrongs = [a * (b % 10) + a * Math.floor(b / 10) * 10 + 10, a * b + a, a * b - b, (a + b) * 2];
+  return [`What is ${a} x ${b}?`, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h4_remainder() {
+  const divisor = randInt(3, 9), quotient = randInt(8, 30), remainder = randInt(1, divisor - 1);
+  const dividend = divisor * quotient + remainder;
+  const q = `What is the remainder when ${dividend} is divided by ${divisor}?`;
+  const wrongs = [String(quotient), String(divisor - remainder || 1), String(remainder + 1), String(Math.max(0, remainder - 1))];
+  return [q, String(remainder), Array.from(new Set(wrongs)).filter(w => w !== String(remainder)).slice(0, 3)];
+}
+
+function h4_area_cutout() {
+  const w = randInt(8, 14), h = randInt(5, 10), cw = randInt(2, 4), ch = randInt(2, 4);
+  const correct = w * h - cw * ch;
+  const q = `A rectangle is ${w} by ${h}. A ${cw} by ${ch} rectangle is cut out of one corner. What is the area of the remaining shape?`;
+  const wrongs = [w * h, w * h + cw * ch, (w - cw) * (h - ch), 2 * (w + h)];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h4_decimal_money() {
+  const price = randInt(125, 475) / 100, qty = randInt(2, 5);
+  const correct = Math.round(price * qty * 100) / 100;
+  const q = `One notebook costs ${hMoney(price)}. How much do ${qty} notebooks cost?`;
+  const wrongs = [correct + price, correct - price, Math.round(price * (qty + 1) * 100) / 100, Math.round(price * 100) / 100];
+  return [q, hMoney(correct), Array.from(new Set(wrongs.map(hMoney))).filter(w => w !== hMoney(correct)).slice(0, 3)];
+}
+
+// ---- Grade 5 ---------------------------------------------------------------
+
+function h5_discount_then_tax() {
+  const price = choice([40, 60, 80, 120, 200]);
+  const off = choice([10, 20, 25, 50]);
+  const tax = 10;
+  const sale = price * (1 - off / 100);
+  const total = Math.round(sale * (1 + tax / 100) * 100) / 100;
+  const q = `A ${hMoney(price)} jacket is ${off}% off. Then ${tax}% sales tax is added to the sale price. What is the final cost?`;
+  const wrongs = [
+    Math.round(price * (1 - off / 100) * 100) / 100,
+    Math.round(price * (1 + tax / 100) * 100) / 100,
+    Math.round(price * (1 - off / 100 - tax / 100) * 100) / 100,
+  ];
+  return [q, hMoney(total), Array.from(new Set(wrongs.map(hMoney))).filter(w => w !== hMoney(total)).slice(0, 3)];
+}
+
+function h5_fraction_of_number() {
+  const den = choice([3, 4, 5, 6, 8]), mult = randInt(3, 12), num = randInt(1, den - 1);
+  const whole = den * mult, correct = num * mult;
+  const wrongs = [whole / den, num * whole, whole - correct, whole];
+  return [`What is ${num}/${den} of ${whole}?`, String(correct),
+    Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h5_mean_missing_value() {
+  const target = randInt(8, 20), count = 5;
+  const known = Array.from({ length: count - 1 }, () => randInt(2, 26));
+  const correct = target * count - known.reduce((s, x) => s + x, 0);
+  const q = `The mean of ${count} numbers is ${target}. Four of them are ${known.join(", ")}. What is the fifth number?`;
+  return [q, String(correct), intWrongs(correct, 6, true)];
+}
+
+function h5_expression_puzzle() {
+  const a = randInt(2, 5), b = randInt(2, 5), c = randInt(2, 6), d = randInt(3, 8);
+  const correct = (a + b) * (a + b) - c * d;
+  const wrongs = [a + b * b - c * d, (a + b) * 2 - c * d, (a + b) * (a + b) + c * d, a * a + b * b - c * d];
+  return [`What is (${a} + ${b})^2 - ${c} x ${d}?`, String(correct),
+    Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+// ---- Grade 6 ---------------------------------------------------------------
+
+function h6_ratio_share() {
+  const r1 = randInt(2, 5), r2 = randInt(2, 5), total = (r1 + r2) * randInt(4, 15);
+  const larger = total * Math.max(r1, r2) / (r1 + r2);
+  const q = `$${total} is shared in the ratio ${r1}:${r2}. What is the larger share?`;
+  const wrongs = [total * Math.min(r1, r2) / (r1 + r2), total / 2, total - larger, total];
+  return [q, hMoney(larger), Array.from(new Set(wrongs.map(hMoney))).filter(w => w !== hMoney(larger)).slice(0, 3)];
+}
+
+function h6_percent_change() {
+  const oldV = choice([20, 25, 40, 50, 80, 120, 150, 200]);
+  const pct = choice([10, 20, 25, 50, 75]);
+  const newV = oldV * (1 + pct / 100);
+  const q = `A price rises from ${hMoney(oldV)} to ${hMoney(newV)}. What is the percent increase?`;
+  const correct = `${pct}%`;
+  const wrongs = [`${Math.round((newV / oldV) * 100)}%`, `${Math.round(pct / 2)}%`, `${pct * 2}%`, `${100 - pct}%`];
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h6_better_buy() {
+  const unitA = choice([140, 150, 160, 175, 180]);
+  const unitB = unitA + choice([15, 20, 25, 35]);
+  const qtyA = choice([4, 5, 6]), qtyB = qtyA + choice([2, 4, 6]);
+  const costA = unitA * qtyA, costB = unitB * qtyB;
+  const q = `Which is the better buy: ${qtyA} items for ${hMoney(costA / 100)} or ${qtyB} items for ${hMoney(costB / 100)}?`;
+  const correct = `${qtyB} for ${hMoney(costB / 100)}`;
+  const wrongs = [`${qtyA} for ${hMoney(costA / 100)}`, "They cost the same per item", `${qtyB} for ${hMoney(costA / 100)}`];
+  return [q, correct, wrongs];
+}
+
+function h6_two_step_equation() {
+  const x = randInt(2, 12), m = randInt(2, 6), b = randInt(2, 15);
+  const result = m * x + b;
+  const wrongs = [String(x + b), String(Math.round(result / m)), String(x - b)];
+  return [`Solve for x: ${m}x + ${b} = ${result}`, String(x),
+    Array.from(new Set(wrongs)).filter(w => w !== String(x)).slice(0, 3)];
+}
+
+function h6_ratio_table() {
+  const a = randInt(2, 6), b = randInt(2, 7), mult = randInt(3, 9);
+  const q = `The ratio of boys to girls is ${a}:${b}. If there are ${a * mult} boys, how many girls are there?`;
+  const correct = b * mult;
+  const wrongs = [a * mult, (a + b) * mult, b * mult + a, b * mult - a];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+// ---- Grade 7 ---------------------------------------------------------------
+
+function h7_proportion_word() {
+  const qty1 = randInt(2, 6), price1 = qty1 * randInt(3, 9), qty2 = qty1 + randInt(2, 8);
+  const correct = price1 / qty1 * qty2;
+  const q = `If ${qty1} notebooks cost ${hMoney(price1)}, how much do ${qty2} notebooks cost?`;
+  const wrongs = [price1 * qty2, price1 + qty2, price1 / qty2, price1 + (qty2 - qty1)];
+  return [q, hMoney(correct), Array.from(new Set(wrongs.map(hMoney))).filter(w => w !== hMoney(correct)).slice(0, 3)];
+}
+
+function h7_stacked_discount() {
+  const price = choice([80, 100, 120, 200, 240]);
+  const first = 20, second = 25;
+  const correct = price * 0.8 * 0.75;
+  const q = `A ${hMoney(price)} coat is discounted ${first}%. At the register you get another ${second}% off the reduced price. What do you pay?`;
+  const wrongs = [price * 0.55, price * 0.8, price * 0.75, price * 0.45];
+  return [q, hMoney(correct), Array.from(new Set(wrongs.map(hMoney))).filter(w => w !== hMoney(correct)).slice(0, 3)];
+}
+
+function h7_inequality_flip() {
+  const coeff = -randInt(2, 5), b = randInt(-8, 10), x = randInt(-6, 6);
+  const result = coeff * x + b;
+  const op = choice(["<", ">"]);
+  const bound = result;
+  const q = `Solve for x: ${coeff}x ${b >= 0 ? "+" : "-"} ${Math.abs(b)} ${op} ${bound}`;
+  const flipped = op === "<" ? ">" : "<";
+  const correct = `x ${flipped} ${x}`;
+  const wrongs = [`x ${op} ${x}`, `x ${flipped} ${-x}`, `x ${op} ${x + 1}`];
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h7_area_from_diameter() {
+  const r = randInt(2, 12), d = r * 2;
+  const correct = round1(3.14 * r * r);
+  const wrongs = [round1(3.14 * d * d), round1(2 * 3.14 * r), round1(3.14 * d), round1(3.14 * r)];
+  return [`A circle has a diameter of ${d} cm. What is its area? (use pi = 3.14, round to 1 decimal)`,
+    String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h7_independent_events() {
+  const target = choice([
+    ["rolling an even number twice on a die", "1/4"],
+    ["flipping heads twice in a row", "1/4"],
+    ["rolling a 6 and then a 5 on a die", "1/36"],
+    ["rolling an odd number twice on a die", "1/4"],
+    ["rolling a number greater than 4 twice on a die", "1/9"],
+  ]);
+  const pool = ["1/4", "1/36", "1/9", "1/2", "1/6", "1/12"];
+  const wrongs = hSample(pool.filter(p => p !== target[1]), 3);
+  return [`What is the probability of ${target[0]}? (simplest form)`, target[1], wrongs];
+}
+
+// ---- Grade 8 ---------------------------------------------------------------
+
+function h8_sum_difference() {
+  const sum = randInt(12, 40), diff = randInt(2, 10);
+  if ((sum + diff) % 2 !== 0) return h8_sum_difference();
+  const larger = (sum + diff) / 2, smaller = (sum - diff) / 2;
+  const q = `The sum of two numbers is ${sum} and their difference is ${diff}. What is the larger number?`;
+  const wrongs = [smaller, sum - larger + 1, sum - diff, larger + diff];
+  return [q, String(larger), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(larger)).slice(0, 3)];
+}
+
+function h8_scientific_notation_multiply() {
+  const a = randInt(2, 5), b = randInt(2, 6), e1 = randInt(2, 5), e2 = randInt(1, 4);
+  const coefficient = a * b, exponent = e1 + e2;
+  const correct = `${coefficient} x 10^${exponent}`;
+  const wrongs = [`${coefficient} x 10^${e1 * e2}`, `${coefficient} x 10^${Math.abs(e1 - e2)}`, `${a + b} x 10^${exponent}`, `${coefficient} x 10^${exponent + 1}`];
+  const q = `Multiply and write in scientific notation: (${a} x 10^${e1}) x (${b} x 10^${e2})`;
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h8_distribute_equation() {
+  const x = randInt(2, 10), a = randInt(2, 5), inner = randInt(2, 7);
+  const result = a * (x + inner);
+  const q = `Solve for x: ${a}(x + ${inner}) = ${result}`;
+  const wrongs = [String(x + inner), String(result - inner), String(Math.round(result / a) + inner)];
+  return [q, String(x), Array.from(new Set(wrongs)).filter(w => w !== String(x)).slice(0, 3)];
+}
+
+function h8_distance_points() {
+  const triples = [[3, 4, 5], [6, 8, 10], [5, 12, 13], [9, 12, 15], [8, 15, 17]];
+  const [dx, dy, dist] = choice(triples);
+  const x1 = randInt(-6, 6), y1 = randInt(-6, 6);
+  const x2 = x1 + dx, y2 = y1 + dy;
+  const q = `What is the distance between the points (${x1}, ${y1}) and (${x2}, ${y2})?`;
+  const wrongs = [dx + dy, dist + 1, Math.abs(dx - dy), Math.round(dist * 1.5)];
+  return [q, String(dist), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(dist)).slice(0, 3)];
+}
+
+function h8_percent_change_reverse() {
+  const original = choice([40, 50, 60, 80, 100, 120, 200]);
+  const pct = choice([10, 20, 25, 50]);
+  const finalV = original * (1 - pct / 100);
+  const q = `After a ${pct}% discount, a jacket costs ${hMoney(finalV)}. What was the original price?`;
+  const wrongs = [finalV * (1 + pct / 100), finalV + pct, finalV + original * pct / 100, finalV * 2];
+  return [q, hMoney(original), Array.from(new Set(wrongs.map(hMoney))).filter(w => w !== hMoney(original)).slice(0, 3)];
+}
+
+// ---- Grade 9 ---------------------------------------------------------------
+
+function h9_nonmonic_quadratic() {
+  let r1 = randInt(-4, 5), r2 = randInt(-4, 5);
+  while (r2 === r1) r2 = randInt(-4, 5);
+  const a = 2, sum = r1 + r2, prod = r1 * r2;
+  const b = -a * sum, c = a * prod;
+  const correct = `x = ${Math.min(r1, r2)}, x = ${Math.max(r1, r2)}`;
+  const wrongs = [
+    `x = ${Math.min(r1, r2) * a}, x = ${Math.max(r1, r2) * a}`,
+    `x = ${Math.min(-r1, -r2)}, x = ${Math.max(-r1, -r2)}`,
+    `x = ${Math.min(r1, r2)}, x = ${Math.max(r1, r2) + a}`,
+    `x = ${Math.min(r1, r2) + 1}, x = ${Math.max(r1, r2) - 1}`,
+  ];
+  const bSign = b >= 0 ? "+" : "-", cSign = c >= 0 ? "+" : "-";
+  const q = `Solve: ${a}x^2 ${bSign} ${Math.abs(b)}x ${cSign} ${Math.abs(c)} = 0`;
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h9_solve_for_y() {
+  const a = randInt(2, 6), b = randInt(2, 6), c = randInt(6, 20);
+  const correct = `(${c} - ${a}x)/${b}`;
+  const wrongs = [`(${c} + ${a}x)/${b}`, `${c} - ${a}x`, `(${a}x - ${c})/${b}`, `${c}/${b} - ${a}x`];
+  return [`Solve ${a}x + ${b}y = ${c} for y.`, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h9_slope_standard_form() {
+  const a = randInt(2, 8), b = randInt(2, 8), c = randInt(4, 30);
+  const correct = new Frac(-a, b);
+  const cand = () => new Frac(-a + randInt(-2, 2), b + choice([0, 0, 1, -1]));
+  const wrongs = collectWrongs(cand, correct);
+  return [`What is the slope of the line ${a}x + ${b}y = ${c}?`, fmt(correct), wrongs];
+}
+
+function h9_exponential_colony() {
+  const start = randInt(2, 8), rate = choice([2, 3]), hours = randInt(2, 5);
+  const correct = start * Math.pow(rate, hours);
+  const wrongs = [start * rate * hours, start + rate * hours, Math.pow(rate, hours), start * Math.pow(rate, hours - 1)];
+  return [`A colony starts with ${start} bacteria and ${rate === 2 ? "doubles" : "triples"} every hour. How many bacteria are there after ${hours} hours?`,
+    String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+// ---- Grade 10 --------------------------------------------------------------
+
+function h10_special_right_triangle() {
+  const short = randInt(2, 12), hyp = short * 2;
+  const kind = choice(["short", "long"]);
+  const correct = kind === "short" ? short : Math.round(short * Math.sqrt(3) * 10) / 10;
+  const q = kind === "short"
+    ? `In a 30-60-90 triangle the hypotenuse is ${hyp} cm. What is the length of the shorter leg?`
+    : `In a 30-60-90 triangle the shorter leg is ${short} cm. What is the length of the longer leg? (round to 1 decimal)`;
+  const wrongs = kind === "short"
+    ? [hyp, short * 2, Math.round(hyp * Math.sqrt(3) / 2 * 10) / 10, short + 2]
+    : [short * 2, short, Math.round(hyp * 1.5 * 10) / 10, short * 3];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h10_midpoint() {
+  const x1 = randInt(-9, 9), y1 = randInt(-9, 9), x2 = randInt(-9, 9), y2 = randInt(-9, 9);
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  const fmtP = (a, b) => `(${a}, ${b})`;
+  const correct = fmtP(mx, my);
+  const wrongs = [fmtP(x1 + x2, y1 + y2), fmtP(mx, -my), fmtP(-mx, my), fmtP(Math.round((x1 + x2) / 2) + 1, my)];
+  return [`What is the midpoint of the segment from (${x1}, ${y1}) to (${x2}, ${y2})?`, correct,
+    Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h10_interior_angle() {
+  const n = choice([5, 6, 7, 8, 9, 10, 12]);
+  const correct = Math.round((n - 2) * 180 / n * 10) / 10;
+  const exterior = Math.round(360 / n * 10) / 10;
+  const wrongs = [(n - 2) * 180, exterior, 180 - exterior, Math.round(((n - 2) * 180 / n + 10) * 10) / 10];
+  return [`What is each interior angle of a regular ${n}-sided polygon? (round to 1 decimal)`,
+    String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h10_similar_area_ratio() {
+  const a = randInt(2, 6), b = a + randInt(1, 5);
+  const correct = `${a * a}:${b * b}`;
+  const wrongs = [`${a}:${b}`, `${a * 2}:${b * 2}`, `${a * a}:${b * b + a}`, `${a + b}:${a * b}`];
+  const q = `Two similar triangles have side lengths in the ratio ${a}:${b}. What is the ratio of their areas?`;
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h10_complement_equation() {
+  const a = randInt(4, 5) * 5, b = randInt(2, 8);
+  const correct = 90 - a - b;
+  const q = `Two angles are complementary. One angle measures ${a} degrees and another measures ${b} degrees. What is the third angle?`;
+  const wrongs = [180 - a - b, 90 - a + b, Math.abs(a - b), 90 + a - b];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+// ---- Grade 11 --------------------------------------------------------------
+
+function h11_discriminant() {
+  const a = randInt(1, 4), b = randInt(-8, 8), c = randInt(-6, 6);
+  const correct = b * b - 4 * a * c;
+  const q = `For ${a}x^2 ${b >= 0 ? "+" : "-"} ${Math.abs(b)}x ${c >= 0 ? "+" : "-"} ${Math.abs(c)} = 0, what is the discriminant (b^2 - 4ac)?`;
+  const wrongs = [b * b + 4 * a * c, b * b - 2 * a * c, (b - 2 * a * c) * (b - 2 * a * c), 2 * b - 4 * a * c];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h11_log_equation() {
+  const base = choice([2, 3, 5, 10]), exp = randInt(2, 5);
+  const correct = Math.pow(base, exp);
+  const wrongs = [base * exp, Math.pow(exp, base), correct / base, correct + base];
+  return [`Solve for x: log base ${base} of x = ${exp}.`, String(correct),
+    Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h11_combinations() {
+  const from = randInt(4, 9), pick = randInt(2, 3);
+  const fact = (n) => { let r = 1; for (let i = 2; i <= n; i++) r *= i; return r; };
+  const correct = fact(from) / (fact(pick) * fact(from - pick));
+  const wrongs = [
+    fact(from) / fact(from - pick),
+    fact(from),
+    correct * pick,
+    from * pick,
+  ];
+  return [`How many ways can you choose ${pick} students from a group of ${from}? (order does not matter)`,
+    String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h11_compound_interest() {
+  const principal = choice([1000, 1500, 2000, 5000]);
+  const rate = choice([5, 10, 20]), years = 2;
+  const correct = Math.round(principal * Math.pow(1 + rate / 100, years));
+  const q = `$${principal.toLocaleString("en-US")} is invested at ${rate}% interest compounded annually for ${years} years. What is the balance?`;
+  const wrongs = [principal * (1 + rate * years / 100), principal + principal * rate / 100, correct - principal, principal * years];
+  return [q, hMoney(correct), Array.from(new Set(wrongs.map(hMoney))).filter(w => w !== hMoney(correct)).slice(0, 3)];
+}
+
+function h11_permutation() {
+  const n = randInt(3, 6), r = 2;
+  const fact = (k) => { let v = 1; for (let i = 2; i <= k; i++) v *= i; return v; };
+  const correct = fact(n) / fact(n - r);
+  const wrongs = [fact(n) / (fact(r) * fact(n - r)), fact(n), n * n, fact(n) / fact(r)];
+  return [`How many different ways can ${r} of ${n} students line up for a photo? (order matters)`,
+    String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h11_rational_simplify() {
+  const a = randInt(2, 5), b = randInt(2, 6);
+  const q = `Simplify: (${a}x^2 + ${a * b}x) / (${a}x)`;
+  const correct = `x + ${b}`;
+  const wrongs = [`x^2 + ${b}`, `x + ${b * a}`, `x^2 + ${b}x`, `${a}x + ${b}`];
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+// ---- Grade 12 --------------------------------------------------------------
+
+function h12_inverse_function() {
+  const m = choice([2, 3, 4, 5]), b = randInt(-9, 9);
+  const fmtSign = b >= 0 ? `+ ${b}` : `- ${Math.abs(b)}`;
+  const q = `If f(x) = ${m}x ${fmtSign}, what is the inverse function f^-1(x)?`;
+  const correct = b >= 0 ? `(x - ${b}) / ${m}` : `(x + ${Math.abs(b)}) / ${m}`;
+  const wrongs = [
+    b >= 0 ? `(x + ${b}) / ${m}` : `(x - ${Math.abs(b)}) / ${m}`,
+    `x / ${m} ${fmtSign}`,
+    `${m}x ${b >= 0 ? "-" : "+"} ${Math.abs(b)}`,
+    `(x - ${m}) / ${Math.abs(b) || 1}`,
+  ];
+  return [q, correct, Array.from(new Set(wrongs)).filter(w => w !== correct).slice(0, 3)];
+}
+
+function h12_limit_removable() {
+  const a = randInt(2, 7);
+  const correct = 2 * a;
+  const q = `What is the limit as x approaches ${a} of (x^2 - ${a * a}) / (x - ${a})?`;
+  const wrongs = [a, a * a, 0, 2 * a + 1];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h12_infinite_geometric() {
+  const a1 = choice([4, 8, 9, 12, 16]), r = 0.5;
+  const correct = a1 / (1 - r);
+  const q = `Find the sum of the infinite geometric series ${a1} + ${a1 / 2} + ${a1 / 4} + ${a1 / 8} + ...`;
+  const wrongs = [a1, a1 * 2 + a1, a1 / (1 - 0.25), a1 * 1.5];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h12_determinant() {
+  const a = randInt(-6, 6), b = randInt(-6, 6), c = randInt(-6, 6), d = randInt(-6, 6);
+  const correct = a * d - b * c;
+  const q = `What is the determinant of the matrix [[${a}, ${b}], [${c}, ${d}]]?`;
+  const wrongs = [a * d + b * c, a * b - c * d, a * c - b * d, a + d - b - c];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+function h12_trig_identity() {
+  return ["Which expression is equivalent to 1 + tan^2(theta)?", "sec^2(theta)",
+    ["sin^2(theta)", "csc^2(theta)", "cot^2(theta)", "cos^2(theta)"]];
+}
+
+function h12_combination_probability() {
+  const from = randInt(5, 8), pick = 2;
+  const total = from * (from - 1) / 2;
+  const correct = new Frac(1, total);
+  const cand = () => new Frac(randInt(1, total - 1), total);
+  const wrongs = collectWrongs(cand, correct);
+  return [`${pick} students are chosen at random from ${from}. What is the probability a specific pair of students is chosen?`,
+    fmt(correct), wrongs];
+}
+
+function h12_law_of_cosines() {
+  const legs = choice([[3, 4], [6, 8], [5, 12], [8, 15]]);
+  const [a, b] = legs;
+  const correct = Math.round(Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(Math.PI / 3)) * 10) / 10;
+  const q = `A triangle has sides ${a} and ${b} with a 60 degree angle between them. What is the length of the third side? (round to 1 decimal)`;
+  const wrongs = [
+    Math.round(Math.sqrt(a * a + b * b) * 10) / 10,
+    Math.round((a + b) / 2 * 10) / 10,
+    Math.round(Math.sqrt(a * a + b * b + 2 * a * b * Math.cos(Math.PI / 3)) * 10) / 10,
+    a + b,
+  ];
+  return [q, String(correct), Array.from(new Set(wrongs.map(String))).filter(w => w !== String(correct)).slice(0, 3)];
+}
+
+// ---- Register --------------------------------------------------------------
+
+// Guarantee three distinct, non-answer distractors by redrawing when options collide.
+function hSafe(fn) {
+  return function saferGenerator() {
+    for (let attempt = 0; attempt < 60; attempt++) {
+      const [qText, correctRaw, wrongsRaw] = fn();
+      const correct = String(correctRaw);
+      const wrongs = Array.from(new Set(wrongsRaw.map(String))).filter(w => w !== correct);
+      if (wrongs.length >= 3) return [qText, correct, wrongs.slice(0, 3)];
+    }
+    const [qText, correctRaw] = fn();
+    const correct = String(correctRaw);
+    const numeric = typeof correctRaw === "number" ? intWrongs(correctRaw, 5, true) : [];
+    const wrongs = numeric.length >= 3 ? numeric : ["None of these", "Not enough information", "Cannot be determined"];
+    return [qText, correct, wrongs.slice(0, 3)];
+  };
+}
+
+const HARDER_BY_GRADE = {
+  1: [h1_missing_addend, h1_two_step_story, h1_number_pattern],
+  2: [h2_multi_step_money, h2_missing_number, h2_compare_word],
+  3: [h3_two_digit_times_one, h3_elapsed_time, h3_multi_step_shopping, h3_largest_fraction],
+  4: [h4_two_step_word, h4_two_by_two, h4_remainder, h4_area_cutout, h4_decimal_money],
+  5: [h5_discount_then_tax, h5_fraction_of_number, h5_mean_missing_value, h5_expression_puzzle],
+  6: [h6_ratio_share, h6_percent_change, h6_better_buy, h6_two_step_equation, h6_ratio_table],
+  7: [h7_proportion_word, h7_stacked_discount, h7_inequality_flip, h7_area_from_diameter, h7_independent_events],
+  8: [h8_sum_difference, h8_scientific_notation_multiply, h8_distribute_equation, h8_distance_points, h8_percent_change_reverse],
+  9: [h9_nonmonic_quadratic, h9_solve_for_y, h9_slope_standard_form, h9_exponential_colony],
+  10: [h10_special_right_triangle, h10_midpoint, h10_interior_angle, h10_similar_area_ratio, h10_complement_equation],
+  11: [h11_discriminant, h11_log_equation, h11_combinations, h11_compound_interest, h11_permutation, h11_rational_simplify],
+  12: [h12_inverse_function, h12_limit_removable, h12_infinite_geometric, h12_determinant,
+    h12_trig_identity, h12_combination_probability, h12_law_of_cosines],
+};
+
+Object.keys(HARDER_BY_GRADE).forEach(grade => {
+  HARDER_BY_GRADE[grade].forEach(fn => GRADE_GENERATORS[grade].push(hSafe(fn)));
+});
 </script>
 
 <script>
@@ -1080,6 +3199,9 @@ function generateQuiz(subject, grade, count) {
   return generateBankQuiz(subject, grade, count);
 }
 
+</script>
+
+<script>
 // ===========================================================================
 // App state & screen rendering
 // ===========================================================================
@@ -1087,38 +3209,111 @@ function generateQuiz(subject, grade, count) {
 const GRADE_LABELS = {};
 for (let g = 1; g <= 12; g++) GRADE_LABELS[g] = `Grade ${g}`;
 
+const ICONS = {
+  bolt: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 2 4.5 13.4h5.6L8.9 22l9-11.9h-5.8z"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4.5 12.5 5 5L19.5 6.5"/></svg>',
+  cross: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M6.5 6.5 17.5 17.5"/><path d="M17.5 6.5 6.5 17.5"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>',
+  math: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 8h6"/><path d="M7 5v6"/><path d="M14 8h6"/><path d="M14 16h6"/><path d="M4 16h6"/><path d="M7 19v-6"/></svg>',
+  reading: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v18H6.5A2.5 2.5 0 0 1 4 18.5z"/><path d="M8.5 3v18"/></svg>',
+  science: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5"/><path d="M10.5 3v6.2L5.2 17.6A2 2 0 0 0 6.9 20.6h10.2a2 2 0 0 0 1.7-3L13.5 9.2V3"/><path d="M7.6 15.5h8.8"/></svg>',
+  social: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.2 12h17.6"/><path d="M12 3c4.2 4 4.2 14 0 18-4.2-4-4.2-14 0-18z"/></svg>',
+  star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4 6.2 20.4l1.1-6.4L2.6 9.4l6.5-.9z"/></svg>',
+};
+
+const SUBJECTS = [
+  { id: "Math", name: "Math", blurb: "Numbers, algebra & shapes", icon: ICONS.math },
+  { id: "Reading", name: "Reading", blurb: "Words, meaning & stories", icon: ICONS.reading },
+  { id: "Science", name: "Science", blurb: "Living things & matter", icon: ICONS.science },
+  { id: "Social Studies", name: "Social Studies", blurb: "People, places & history", icon: ICONS.social },
+];
+
 const state = {
   subject: "Math",
-  grade: 4,
+  grade: null,
   count: 10,
   questions: [],
   currentIndex: 0,
   score: 0,
+  streak: 0,
+  bestStreak: 0,
   answerLocked: false,
   loadingProgress: 0,
+  missed: [],
+  startedAt: 0,
+  timerId: null,
+  keyHandler: null,
+  quizId: null,
 };
 
 const app = document.getElementById("app");
 
 function clearApp() {
+  if (state.keyHandler) {
+    document.removeEventListener("keydown", state.keyHandler);
+    state.keyHandler = null;
+  }
   app.innerHTML = "";
+}
+
+function bandHint(grade) {
+  if (grade <= 2) return "Starter band";
+  if (grade <= 5) return "Core band";
+  if (grade <= 8) return "Intermediate band";
+  return "Advanced band";
+}
+
+// Visual tone follows the grade level: playful in grade 1, formal by grade 12.
+function gradeTheme(grade) {
+  if (grade == null) return "starter";
+  if (grade <= 2) return "kids";
+  if (grade <= 5) return "junior";
+  if (grade <= 8) return "middle";
+  return "senior";
+}
+
+function applyGradeTheme(grade) {
+  document.documentElement.setAttribute("data-grade-theme", gradeTheme(grade));
+}
+
+function formatTime(ms) {
+  const total = Math.max(0, Math.round(ms / 1000));
+  const m = Math.floor(total / 60);
+  const s = total % 60;
+  return `${m}:${String(s).padStart(2, "0")}`;
 }
 
 // ---- Splash screen -------------------------------------------------------
 
 function showSplashScreen() {
   clearApp();
+  closeSavedDrawer();
+  setSavedUiVisible(false);
+  applyGradeTheme(state.grade);
   state.loadingProgress = 0;
 
   const col = document.createElement("div");
   col.className = "screen splash";
   col.innerHTML = `
-    <h1 class="title">The Quiz Book</h1>
-    <p class="subtitle">Learn to achieve</p>
-    <div class="loading-bar-outline">
-      <div class="loading-bar-fill" id="loadingFill"></div>
+    <div class="deco" aria-hidden="true">
+      <span class="deco-item" style="--x:6%;--y:18%;--d:0s;--s:1">\ud83d\udcda</span>
+      <span class="deco-item" style="--x:87%;--y:13%;--d:-1.2s;--s:0.9">\u270f\ufe0f</span>
+      <span class="deco-item" style="--x:11%;--y:72%;--d:-2.1s;--s:0.85">\ud83d\ude80</span>
+      <span class="deco-item" style="--x:85%;--y:70%;--d:-0.6s;--s:1">\ud83c\udf1f</span>
+      <span class="deco-item" style="--x:50%;--y:7%;--d:-2.8s;--s:0.8">\ud83c\udf88</span>
     </div>
-    <div class="loading-label" id="loadingLabel">Loading... 0%</div>
+    <div class="brand-mark">${ICONS.bolt}</div>
+    <h1 class="display-title">The Quiz Book</h1>
+    <p class="tagline">Fun quizzes for grades 1&ndash;12 &mdash; from first sums to big ideas.</p>
+    <div class="splash-badges">
+      <span class="badge">Grades 1&ndash;12</span>
+      <span class="badge">4 subjects</span>
+      <span class="badge">Fresh questions every time</span>
+    </div>
+    <div class="loader">
+      <div class="loader-track"><div class="loader-fill" id="loadingFill"></div></div>
+      <div class="loader-label" id="loadingLabel">Loading 0%</div>
+    </div>
   `;
   app.appendChild(col);
 
@@ -1126,13 +3321,14 @@ function showSplashScreen() {
   const label = document.getElementById("loadingLabel");
 
   function animate() {
-    state.loadingProgress = Math.min(100, state.loadingProgress + (3 + Math.floor(Math.random() * 7)));
+    if (!document.body.contains(fill)) return; // splash already replaced
+    state.loadingProgress = Math.min(100, state.loadingProgress + (4 + Math.floor(Math.random() * 9)));
     fill.style.width = state.loadingProgress + "%";
-    label.textContent = `Loading... ${state.loadingProgress}%`;
+    label.textContent = `Loading ${state.loadingProgress}%`;
     if (state.loadingProgress < 100) {
-      setTimeout(animate, 70);
+      setTimeout(animate, 60);
     } else {
-      setTimeout(showSetupScreen, 350);
+      setTimeout(showSetupScreen, 320);
     }
   }
   animate();
@@ -1142,104 +3338,210 @@ function showSplashScreen() {
 
 function showSetupScreen() {
   clearApp();
+  stopTimer();
+  closeSavedDrawer();
+  setSavedUiVisible(true);
+  applyGradeTheme(state.grade);
 
   const col = document.createElement("div");
   col.className = "screen setup";
   col.innerHTML = `
     <div class="setup-header">
-      <h1 class="title small">The Quiz Book</h1>
-      <p class="subtitle tight">Math, Reading, Science &amp; Social Studies - Grades 1-12</p>
+      <div class="brand"><span class="brand-mark">${ICONS.bolt}</span> The Quiz Book</div>
+      <h1 class="headline">Let&rsquo;s build your quiz!</h1>
+      <p class="sub">Pick a subject and a grade, then tap start. Every quiz is brand new, so you can play as many times as you like.</p>
     </div>
 
-    <div class="setup-form">
-      <div class="form-row">
-        <label for="subjectSelect">Subject:</label>
-        <select id="subjectSelect">
-          <option value="Math">Math</option>
-          <option value="Reading">Reading</option>
-          <option value="Science">Science</option>
-          <option value="Social Studies">Social Studies</option>
-        </select>
+    <div class="panel">
+      <div class="field">
+        <div class="field-head">
+          <span class="field-label">Subject</span>
+          <span class="field-hint" id="subjectHint"></span>
+        </div>
+        <div class="subject-grid" id="subjectGrid"></div>
       </div>
 
-      <div class="form-row">
-        <label for="gradeSelect">Grade:</label>
-        <select id="gradeSelect"></select>
+      <div class="field">
+        <div class="field-head">
+          <span class="field-label">Grade</span>
+          <span class="field-hint" id="gradeHint"></span>
+        </div>
+        <div class="grade-grid" id="gradeGrid"></div>
       </div>
 
-      <div class="form-row">
-        <label for="countInput">Number of Questions (1-100):</label>
-        <input type="number" id="countInput" min="1" max="100" value="10">
+      <div class="field">
+        <div class="field-head">
+          <span class="field-label">Questions</span>
+          <span class="field-hint">Up to 100 per quiz</span>
+        </div>
+        <div class="count-row" id="countRow"></div>
       </div>
-
-      <div class="preset-row" id="presetRow"></div>
     </div>
 
     <div class="setup-footer">
-      <button class="btn-primary" id="startBtn">Start Quiz</button>
+      <button class="btn-primary wide" id="startBtn">Start quiz ${ICONS.arrow}</button>
     </div>
+
+    <p class="site-foot">
+      Free educational practice for grades 1&ndash;12 &middot; No ads &middot; No accounts &middot; No tracking
+      <span class="site-url">quizbookcentral.com</span>
+    </p>
   `;
   app.appendChild(col);
 
-  const subjectSelect = document.getElementById("subjectSelect");
-  const gradeSelect = document.getElementById("gradeSelect");
-  const countInput = document.getElementById("countInput");
-  const presetRow = document.getElementById("presetRow");
+  const subjectGrid = document.getElementById("subjectGrid");
+  const gradeGrid = document.getElementById("gradeGrid");
+  const countRow = document.getElementById("countRow");
+  const subjectHint = document.getElementById("subjectHint");
+  const gradeHint = document.getElementById("gradeHint");
 
-  subjectSelect.value = state.subject;
-  for (let g = 1; g <= 12; g++) {
-    const opt = document.createElement("option");
-    opt.value = g;
-    opt.textContent = GRADE_LABELS[g];
-    gradeSelect.appendChild(opt);
-  }
-  gradeSelect.value = state.grade;
-  countInput.value = state.count;
-
-  [5, 10, 20, 50, 100].forEach(p => {
-    const btn = document.createElement("button");
-    btn.className = "preset-btn";
-    btn.textContent = String(p);
-    btn.addEventListener("click", () => { countInput.value = p; });
-    presetRow.appendChild(btn);
+  SUBJECTS.forEach(subject => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "subject-card" + (state.subject === subject.id ? " active" : "");
+    card.dataset.subject = subject.id;
+    card.innerHTML = `${subject.icon}<span class="name">${subject.name}</span><span class="blurb">${subject.blurb}</span>`;
+    card.addEventListener("click", () => {
+      state.subject = subject.id;
+      subjectGrid.querySelectorAll(".subject-card").forEach(c => {
+        c.classList.toggle("active", c.dataset.subject === state.subject);
+      });
+      refreshHints();
+    });
+    subjectGrid.appendChild(card);
   });
 
-  document.getElementById("startBtn").addEventListener("click", () => {
-    state.subject = subjectSelect.value;
-    state.grade = parseInt(gradeSelect.value, 10);
+  for (let g = 1; g <= 12; g++) {
+    const pill = document.createElement("button");
+    pill.type = "button";
+    pill.className = "grade-pill" + (state.grade === g ? " active" : "");
+    pill.dataset.grade = String(g);
+    pill.textContent = String(g);
+    pill.setAttribute("aria-label", `Grade ${g}`);
+    pill.addEventListener("click", () => {
+      state.grade = g;
+      applyGradeTheme(g);
+      gradeGrid.querySelectorAll(".grade-pill").forEach(p => {
+        p.classList.toggle("active", Number(p.dataset.grade) === state.grade);
+      });
+      refreshHints();
+    });
+    gradeGrid.appendChild(pill);
+  }
+
+  [5, 10, 20, 50, 100].forEach(preset => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "count-btn" + (state.count === preset ? " active" : "");
+    btn.dataset.count = String(preset);
+    btn.textContent = String(preset);
+    btn.addEventListener("click", () => setCount(preset));
+    countRow.appendChild(btn);
+  });
+
+  const customWrap = document.createElement("label");
+  customWrap.className = "count-custom";
+  customWrap.innerHTML = `Custom <input class="count-input" id="countInput" type="number" inputmode="numeric" min="1" max="100" value="${state.count}" />`;
+  countRow.appendChild(customWrap);
+
+  const countInput = document.getElementById("countInput");
+  countInput.addEventListener("input", () => {
+    let v = parseInt(countInput.value, 10);
+    if (isNaN(v)) return;
+    v = Math.max(1, Math.min(100, v));
+    state.count = v;
+    countRow.querySelectorAll(".count-btn").forEach(b => {
+      b.classList.toggle("active", Number(b.dataset.count) === v);
+    });
+  });
+  countInput.addEventListener("blur", () => {
+    countInput.value = String(state.count);
+  });
+
+  function setCount(value) {
+    state.count = value;
+    countInput.value = String(value);
+    countRow.querySelectorAll(".count-btn").forEach(b => {
+      b.classList.toggle("active", Number(b.dataset.count) === value);
+    });
+  }
+
+  function refreshHints() {
+    const subject = SUBJECTS.find(s => s.id === state.subject);
+    subjectHint.textContent = subject ? subject.blurb : "";
+    gradeHint.textContent = state.grade == null
+      ? "Pick a grade to start"
+      : `${bandHint(state.grade)} \u00b7 ${GRADE_LABELS[state.grade]}`;
+    const startBtn = document.getElementById("startBtn");
+    if (startBtn) startBtn.disabled = state.grade == null;
+  }
+  refreshHints();
+
+  document.getElementById("startBtn").addEventListener("click", startQuiz);
+
+  function startQuiz() {
+    if (state.grade == null) {
+      gradeHint.textContent = "Pick a grade to start";
+      return;
+    }
     let count = parseInt(countInput.value, 10);
     if (isNaN(count)) count = 10;
-    count = Math.max(1, Math.min(100, count));
-    state.count = count;
+    state.count = Math.max(1, Math.min(100, count));
 
-    state.questions = generateQuiz(state.subject, state.grade, count);
+    state.questions = generateQuiz(state.subject, state.grade, state.count);
     state.currentIndex = 0;
     state.score = 0;
+    state.streak = 0;
+    state.bestStreak = 0;
+    state.missed = [];
+    state.startedAt = Date.now();
+    state.quizId = newQuizId();
     showQuestionScreen();
-  });
+  }
 }
 
 // ---- Question screen -------------------------------------------------------
 
 function showQuestionScreen() {
   clearApp();
+  closeSavedDrawer();
+  setSavedUiVisible(true);
+  applyGradeTheme(state.grade);
   state.answerLocked = false;
+  saveCurrentQuiz();
 
   const q = state.questions[state.currentIndex];
+  const total = state.questions.length;
 
   const wrapper = document.createElement("div");
   wrapper.className = "screen quiz";
   wrapper.innerHTML = `
-    <div class="quiz-header">
-      <span>Question ${state.currentIndex + 1} / ${state.questions.length}</span>
-      <span>Score: ${state.score}</span>
+    <div class="quiz-top">
+      <div class="quiz-meta">
+        <button class="exit-btn" id="exitBtn" type="button" aria-label="Leave the quiz and go back to the home screen">
+          ${ICONS.cross}<span>Exit</span>
+        </button>
+        <span class="chip">Question ${state.currentIndex + 1} of ${total}</span>
+        <span class="chip muted">${state.subject} \u00b7 ${GRADE_LABELS[state.grade]}</span>
+      </div>
+      <div class="quiz-meta">
+        <span class="chip streak" id="streakChip">${ICONS.star} <span id="streakValue">${state.streak}</span></span>
+        <span class="chip timer" id="timerChip">0:00</span>
+      </div>
+    </div>
+    <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="${total}" aria-valuenow="${state.currentIndex}">
+      <div class="progress-fill" id="progressFill" style="width:${(state.currentIndex / total) * 100}%"></div>
     </div>
     <div class="quiz-body">
-      <div class="question-card">${escapeHtml(q.question)}</div>
-      <div id="optionsContainer"></div>
+      <div class="question-card">
+        <div class="q-tag">${bandHint(state.grade)}</div>
+        <p class="question-text">${escapeHtml(q.question)}</p>
+      </div>
+      <div class="options" id="optionsContainer"></div>
       <div class="feedback" id="feedback"></div>
-      <div id="nextBtnContainer"></div>
+      <div class="next-row" id="nextBtnContainer"></div>
     </div>
+    <div class="kbd-hint">Press <kbd>1</kbd>&ndash;<kbd>4</kbd> to answer &middot; <kbd>Enter</kbd> for next</div>
   `;
   app.appendChild(wrapper);
 
@@ -1247,12 +3549,104 @@ function showQuestionScreen() {
   const letters = ["A", "B", "C", "D"];
   q.options.forEach((option, i) => {
     const btn = document.createElement("button");
+    btn.type = "button";
     btn.className = "option-btn";
-    btn.textContent = `${letters[i]}.  ${option}`;
     btn.dataset.value = option;
+    btn.dataset.index = String(i);
+    btn.innerHTML = `
+      <span class="opt-key">${letters[i]}</span>
+      <span class="opt-text">${escapeHtml(option)}</span>
+      <span class="opt-mark">${ICONS.check}</span>
+    `;
     btn.addEventListener("click", () => checkAnswer(option));
     optionsContainer.appendChild(btn);
   });
+
+  document.getElementById("exitBtn").addEventListener("click", exitQuiz);
+
+  startTimer();
+  updateTimerLabel();
+
+  state.keyHandler = (event) => {
+    if (document.querySelector(".modal-backdrop, .saved-drawer.is-open")) return;
+    const typed = parseInt(event.key, 10);
+    if (!state.answerLocked && typed >= 1 && typed <= q.options.length) {
+      event.preventDefault();
+      const target = optionsContainer.querySelector(`[data-index="${typed - 1}"]`);
+      if (target) target.click();
+    } else if (state.answerLocked && event.key === "Enter") {
+      event.preventDefault();
+      nextQuestion();
+    }
+  };
+  document.addEventListener("keydown", state.keyHandler);
+}
+
+// ---- Leaving a quiz ---------------------------------------------------------
+
+function exitQuiz() {
+  if (state.currentIndex === 0 && !state.answerLocked) {
+    showSetupScreen();
+    return;
+  }
+  openExitDialog();
+}
+
+function openExitDialog() {
+  const backdrop = document.createElement("div");
+  backdrop.className = "modal-backdrop";
+  backdrop.innerHTML = `
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="exitTitle">
+      <div class="modal-emoji">\ud83e\udd14</div>
+      <h2 class="modal-title" id="exitTitle">Leave the quiz?</h2>
+      <p class="modal-text">Your score won&rsquo;t be saved, but you can always start a fresh quiz from the home screen.</p>
+      <div class="modal-actions">
+        <button class="btn-primary" id="stayBtn" type="button">Keep playing</button>
+        <button class="btn-ghost" id="leaveBtn" type="button">Go to home screen</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(backdrop);
+
+  const close = () => {
+    document.removeEventListener("keydown", onKey);
+    backdrop.remove();
+  };
+  const onKey = (event) => {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      close();
+    }
+  };
+
+  document.getElementById("stayBtn").addEventListener("click", close);
+  document.getElementById("leaveBtn").addEventListener("click", () => {
+    close();
+    showSetupScreen();
+  });
+  backdrop.addEventListener("click", (event) => {
+    if (event.target === backdrop) close();
+  });
+  document.addEventListener("keydown", onKey);
+  document.getElementById("stayBtn").focus({ preventScroll: true });
+}
+
+function startTimer() {
+  if (state.timerId) return;
+  state.timerId = setInterval(updateTimerLabel, 500);
+}
+
+function stopTimer() {
+  if (state.timerId) {
+    clearInterval(state.timerId);
+    state.timerId = null;
+  }
+}
+
+function updateTimerLabel() {
+  const chip = document.getElementById("timerChip");
+  if (!chip || !state.startedAt) return;
+  chip.textContent = formatTime(Date.now() - state.startedAt);
 }
 
 function checkAnswer(selected) {
@@ -1261,31 +3655,58 @@ function checkAnswer(selected) {
 
   const q = state.questions[state.currentIndex];
   const correct = q.correct_text;
+  const isRight = selected === correct;
   const buttons = document.querySelectorAll(".option-btn");
 
   buttons.forEach(btn => {
     btn.disabled = true;
-    if (btn.dataset.value === correct) btn.classList.add("correct");
-    else if (btn.dataset.value === selected) btn.classList.add("wrong");
+    if (btn.dataset.value === correct) {
+      btn.classList.add("is-correct");
+      btn.querySelector(".opt-mark").innerHTML = ICONS.check;
+    } else if (btn.dataset.value === selected) {
+      btn.classList.add("is-wrong");
+      btn.querySelector(".opt-mark").innerHTML = ICONS.cross;
+    } else {
+      btn.classList.add("is-dim");
+    }
   });
 
-  const feedback = document.getElementById("feedback");
-  if (selected === correct) {
+  if (isRight) {
     state.score++;
-    feedback.textContent = "Correct! Well done!";
-    feedback.className = "feedback correct";
+    state.streak++;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    const streakChip = document.getElementById("streakChip");
+    document.getElementById("streakValue").textContent = String(state.streak);
+    streakChip.classList.remove("pulse");
+    void streakChip.offsetWidth;
+    streakChip.classList.add("pulse");
   } else {
-    feedback.textContent = `Wrong! The correct answer was: ${correct}`;
-    feedback.className = "feedback wrong";
+    state.streak = 0;
+    document.getElementById("streakValue").textContent = "0";
+    state.missed.push({ question: q.question, correct: correct, chosen: selected });
   }
+
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback " + (isRight ? "good" : "bad");
+  feedback.innerHTML = isRight
+    ? `<span class="fb-icon">${ICONS.check}</span><span>Correct${state.streak > 2 ? ` \u00b7 ${state.streak} in a row!` : "!"}</span>`
+    : `<span class="fb-icon">${ICONS.cross}</span><span>Not quite \u2014 the answer is <strong>${escapeHtml(correct)}</strong></span>`;
+
+  const progressFill = document.getElementById("progressFill");
+  if (progressFill) progressFill.style.width = `${((state.currentIndex + 1) / state.questions.length) * 100}%`;
+
+  saveCurrentQuiz(state.currentIndex + 1);
 
   const isLast = state.currentIndex === state.questions.length - 1;
   const nextContainer = document.getElementById("nextBtnContainer");
+  nextContainer.innerHTML = "";
   const nextBtn = document.createElement("button");
+  nextBtn.type = "button";
   nextBtn.className = "btn-primary";
-  nextBtn.textContent = isLast ? "Finish" : "Next Question";
+  nextBtn.innerHTML = isLast ? `See results ${ICONS.arrow}` : `Next ${ICONS.arrow}`;
   nextBtn.addEventListener("click", nextQuestion);
   nextContainer.appendChild(nextBtn);
+  nextBtn.focus({ preventScroll: true });
 }
 
 function nextQuestion() {
@@ -1297,47 +3718,375 @@ function nextQuestion() {
   }
 }
 
+// ---- Confetti ---------------------------------------------------------------
+
+function launchConfetti() {
+  const palette = ["#4f8cff", "#8b6cf6", "#8de3c6", "#ffd166", "#ffb59e", "#ff8fa3"];
+  const layer = document.createElement("div");
+  layer.className = "confetti";
+  for (let i = 0; i < 42; i++) {
+    const piece = document.createElement("span");
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = palette[i % palette.length];
+    piece.style.animationDuration = `${2.4 + Math.random() * 2.2}s`;
+    piece.style.animationDelay = `${Math.random() * 0.7}s`;
+    piece.style.setProperty("--dx", `${(Math.random() - 0.5) * 220}px`);
+    piece.style.width = `${5 + Math.random() * 6}px`;
+    piece.style.height = `${9 + Math.random() * 9}px`;
+    layer.appendChild(piece);
+  }
+  document.body.appendChild(layer);
+  setTimeout(() => layer.remove(), 5200);
+}
+
 // ---- Results screen ---------------------------------------------------------
 
 function showResultsScreen() {
   clearApp();
+  stopTimer();
+  closeSavedDrawer();
+  setSavedUiVisible(false);
+  applyGradeTheme(state.grade);
+  if (state.quizId) removeSavedQuiz(state.quizId);
 
   const total = state.questions.length;
-  const percentage = total ? (state.score / total) * 100 : 0;
+  const percentage = total ? Math.round((state.score / total) * 100) : 0;
+  const elapsed = state.startedAt ? Date.now() - state.startedAt : 0;
 
   let message;
-  if (percentage === 100) message = "Perfect score! Outstanding work!";
-  else if (percentage >= 80) message = "Excellent work! You really know this!";
-  else if (percentage >= 60) message = "Good job! Keep practicing!";
-  else if (percentage >= 40) message = "Nice try! A little more practice will help!";
-  else message = "Keep at it! Practice makes progress!";
+  if (percentage === 100) message = "Perfect score \u2014 you got every single one right!";
+  else if (percentage >= 80) message = "Amazing work! You really know this stuff.";
+  else if (percentage >= 60) message = "Nice job! A little more practice and you will ace it.";
+  else if (percentage >= 40) message = "Good try! Take a look at the ones you missed, then play again.";
+  else message = "Great effort! Try a grade or two lower next time, then climb your way up.";
+
+  const reviewHtml = state.missed.length
+    ? `<div class="review-title">Worth another look</div>` + state.missed.map(item => `
+        <div class="review-item">
+          <div class="review-q">${escapeHtml(item.question)}</div>
+          <div class="review-answers">
+            Your answer: <span class="bad">${escapeHtml(item.chosen)}</span> &nbsp;&middot;&nbsp;
+            Correct: <span class="good">${escapeHtml(item.correct)}</span>
+          </div>
+        </div>`).join("")
+    : "";
 
   const col = document.createElement("div");
   col.className = "screen results";
   col.innerHTML = `
-    <h1 class="title small">Quiz Complete!</h1>
-    <div class="results-score">Final Score: ${state.score} / ${total}</div>
-    <div class="results-pct">(${percentage.toFixed(0)}%)</div>
-    <div class="results-msg">${message}</div>
+    <div class="score-ring">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <defs>
+          <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#8de3c6"/>
+            <stop offset="55%" stop-color="#4f8cff"/>
+            <stop offset="100%" stop-color="#8b6cf6"/>
+          </linearGradient>
+        </defs>
+        <circle class="ring-bg" cx="50" cy="50" r="45"/>
+        <circle class="ring-fill" id="ringFill" cx="50" cy="50" r="45"/>
+      </svg>
+      <div class="ring-center">
+        <div class="ring-pct">${percentage}%</div>
+        <div class="ring-sub">${state.score} / ${total} correct</div>
+      </div>
+    </div>
+
+    <div>
+      <h1 class="results-title">${percentage >= 80 ? "You did great!" : percentage >= 50 ? "Quiz complete!" : "Nice try!"}</h1>
+      <p class="results-msg">${message}</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat"><div class="stat-value">${state.score}</div><div class="stat-label">Correct</div></div>
+      <div class="stat"><div class="stat-value">${state.missed.length}</div><div class="stat-label">Missed</div></div>
+      <div class="stat"><div class="stat-value">${state.bestStreak}</div><div class="stat-label">Best streak</div></div>
+      <div class="stat"><div class="stat-value">${formatTime(elapsed)}</div><div class="stat-label">Time</div></div>
+    </div>
+
+    ${reviewHtml ? `<div class="review">${reviewHtml}</div>` : ""}
+
     <div class="btn-row">
-      <button class="btn-primary" id="playAgainBtn">Play Again</button>
+      <button class="btn-primary" id="playAgainBtn">Play again ${ICONS.arrow}</button>
+      <button class="btn-ghost" id="settingsBtn">Change settings</button>
     </div>
   `;
   app.appendChild(col);
 
-  document.getElementById("playAgainBtn").addEventListener("click", showSetupScreen);
+  const ring = document.getElementById("ringFill");
+  const offset = 283 - (283 * percentage) / 100;
+  requestAnimationFrame(() => {
+    setTimeout(() => { ring.style.strokeDashoffset = String(offset); }, 90);
+  });
+
+  if (percentage >= 50 && gradeTheme(state.grade) !== "senior") launchConfetti();
+
+  document.getElementById("playAgainBtn").addEventListener("click", () => {
+    state.questions = generateQuiz(state.subject, state.grade, state.count);
+    state.currentIndex = 0;
+    state.score = 0;
+    state.streak = 0;
+    state.bestStreak = 0;
+    state.missed = [];
+    state.startedAt = Date.now();
+    state.timerId = null;
+    state.quizId = newQuizId();
+    showQuestionScreen();
+  });
+
+  document.getElementById("settingsBtn").addEventListener("click", showSetupScreen);
+}
+
+// ---- Saved (unfinished) quizzes ---------------------------------------------
+
+const SAVED_KEY = "quizbook.saved.v1";
+const SAVED_TTL_MS = 30 * 24 * 60 * 60 * 1000;
+const SAVED_LIMIT = 12;
+let savedUiVisible = false;
+
+function readSavedQuizzes() {
+  try {
+    const raw = window.localStorage.getItem(SAVED_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (err) {
+    return [];
+  }
+}
+
+function writeSavedQuizzes(list) {
+  try { window.localStorage.setItem(SAVED_KEY, JSON.stringify(list)); } catch (err) { /* storage full or blocked */ }
+}
+
+// Returns saved quizzes newer than 30 days, dropping anything stale or finished.
+function loadSavedQuizzes() {
+  const now = Date.now();
+  const raw = readSavedQuizzes();
+  const fresh = raw.filter(item => item
+    && typeof item.savedAt === "number"
+    && now - item.savedAt < SAVED_TTL_MS
+    && Array.isArray(item.questions)
+    && item.questions.length
+    && Number(item.currentIndex) > 0
+    && Number(item.currentIndex) < item.questions.length);
+  if (fresh.length !== raw.length) writeSavedQuizzes(fresh);
+  return fresh;
+}
+
+function removeSavedQuiz(id) {
+  if (!id) return;
+  writeSavedQuizzes(loadSavedQuizzes().filter(item => item.id !== id));
+  refreshSavedBadge();
+}
+
+function newQuizId() {
+  return "q" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+}
+
+// `upToIndex` is how many questions are fully behind the player.
+function saveCurrentQuiz(upToIndex) {
+  if (!state.quizId || !Array.isArray(state.questions) || !state.questions.length) return;
+  const index = typeof upToIndex === "number" ? upToIndex : state.currentIndex;
+  if (index <= 0 || index >= state.questions.length) return;
+
+  const entry = {
+    id: state.quizId,
+    subject: state.subject,
+    grade: state.grade,
+    questions: state.questions,
+    currentIndex: index,
+    score: state.score,
+    streak: state.streak,
+    bestStreak: state.bestStreak,
+    missed: state.missed,
+    elapsedMs: state.startedAt ? Date.now() - state.startedAt : 0,
+    savedAt: Date.now(),
+  };
+  const list = loadSavedQuizzes().filter(item => item.id !== entry.id);
+  list.unshift(entry);
+  writeSavedQuizzes(list.slice(0, SAVED_LIMIT));
+  refreshSavedBadge();
+}
+
+function timeAgo(ms) {
+  const seconds = Math.max(0, Math.round(ms / 1000));
+  if (seconds < 60) return "just now";
+  const minutes = Math.round(seconds / 60);
+  if (minutes < 60) return `${minutes} min ago`;
+  const hours = Math.round(minutes / 60);
+  if (hours < 24) return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
+  const days = Math.round(hours / 24);
+  return `${days} ${days === 1 ? "day" : "days"} ago`;
+}
+
+function mountSavedUi() {
+  if (document.getElementById("savedFab")) return;
+
+  const fab = document.createElement("button");
+  fab.type = "button";
+  fab.id = "savedFab";
+  fab.className = "saved-fab is-hidden";
+  fab.setAttribute("aria-label", "Open your saved quizzes");
+  fab.innerHTML = `<span class="saved-fab-label">Saved</span><span class="saved-count" id="savedCount" hidden>0</span>${ICONS.arrow}`;
+  fab.addEventListener("click", toggleSavedDrawer);
+  document.body.appendChild(fab);
+
+  const scrim = document.createElement("div");
+  scrim.className = "saved-scrim";
+  scrim.id = "savedScrim";
+  scrim.addEventListener("click", closeSavedDrawer);
+  document.body.appendChild(scrim);
+
+  const drawer = document.createElement("aside");
+  drawer.className = "saved-drawer";
+  drawer.id = "savedDrawer";
+  drawer.setAttribute("aria-label", "Saved quizzes");
+  drawer.innerHTML = `
+    <div class="saved-head">
+      <div>
+        <h2 class="saved-title">Saved quizzes</h2>
+        <p class="saved-sub">Unfinished quizzes wait here for 30 days.</p>
+      </div>
+      <button class="saved-close" id="savedClose" type="button" aria-label="Close saved quizzes">${ICONS.cross}</button>
+    </div>
+    <div class="saved-list" id="savedList"></div>
+  `;
+  document.body.appendChild(drawer);
+
+  document.getElementById("savedClose").addEventListener("click", closeSavedDrawer);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && drawer.classList.contains("is-open")) closeSavedDrawer();
+  });
+  refreshSavedBadge();
+}
+
+function setSavedUiVisible(visible) {
+  savedUiVisible = visible;
+  const fab = document.getElementById("savedFab");
+  if (!fab) return;
+  const drawer = document.getElementById("savedDrawer");
+  const drawerOpen = drawer ? drawer.classList.contains("is-open") : false;
+  fab.classList.toggle("is-hidden", !visible || drawerOpen);
+}
+
+function refreshSavedBadge() {
+  const badge = document.getElementById("savedCount");
+  const count = loadSavedQuizzes().length;
+  if (badge) {
+    badge.textContent = String(count);
+    badge.hidden = count === 0;
+  }
+  const drawer = document.getElementById("savedDrawer");
+  if (drawer && drawer.classList.contains("is-open")) renderSavedList();
+}
+
+function renderSavedList() {
+  const listEl = document.getElementById("savedList");
+  if (!listEl) return;
+
+  const saved = loadSavedQuizzes();
+  if (!saved.length) {
+    listEl.innerHTML = `
+      <div class="saved-empty">
+        <span class="emoji">\ud83d\uddd2\ufe0f</span>
+        No saved quizzes yet.<br>Leave a quiz before the last question and it will keep your place here for 30 days.
+      </div>`;
+    return;
+  }
+
+  listEl.innerHTML = saved.map(item => {
+    const total = item.questions.length;
+    const percent = Math.round((item.currentIndex / total) * 100);
+    const gradeLabel = GRADE_LABELS[item.grade] || `Grade ${item.grade}`;
+    return `
+      <div class="saved-item">
+        <div class="saved-item-title">${escapeHtml(item.subject)} &middot; ${gradeLabel}</div>
+        <div class="saved-item-meta">${item.currentIndex} of ${total} answered &middot; ${item.score} correct</div>
+        <div class="saved-mini-track"><div class="saved-mini-fill" style="width:${percent}%"></div></div>
+        <div class="saved-item-meta">Saved ${timeAgo(Date.now() - item.savedAt)}</div>
+        <div class="saved-actions">
+          <button class="saved-resume" type="button" data-resume="${escapeHtml(item.id)}">Resume ${ICONS.arrow}</button>
+          <button class="saved-remove" type="button" data-remove="${escapeHtml(item.id)}" aria-label="Remove this saved quiz">${ICONS.cross}</button>
+        </div>
+      </div>`;
+  }).join("");
+
+  listEl.querySelectorAll("[data-resume]").forEach(btn => {
+    btn.addEventListener("click", () => resumeSavedQuiz(btn.dataset.resume));
+  });
+  listEl.querySelectorAll("[data-remove]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      removeSavedQuiz(btn.dataset.remove);
+      renderSavedList();
+    });
+  });
+}
+
+function openSavedDrawer() {
+  const drawer = document.getElementById("savedDrawer");
+  const scrim = document.getElementById("savedScrim");
+  if (!drawer || !scrim) return;
+  renderSavedList();
+  drawer.classList.add("is-open");
+  scrim.classList.add("is-open");
+  setSavedUiVisible(savedUiVisible);
+  document.getElementById("savedClose").focus({ preventScroll: true });
+}
+
+function closeSavedDrawer() {
+  const drawer = document.getElementById("savedDrawer");
+  const scrim = document.getElementById("savedScrim");
+  if (!drawer) return;
+  drawer.classList.remove("is-open");
+  if (scrim) scrim.classList.remove("is-open");
+  setSavedUiVisible(savedUiVisible);
+}
+
+function toggleSavedDrawer() {
+  const drawer = document.getElementById("savedDrawer");
+  if (!drawer) return;
+  if (drawer.classList.contains("is-open")) closeSavedDrawer();
+  else openSavedDrawer();
+}
+
+function resumeSavedQuiz(id) {
+  const entry = loadSavedQuizzes().find(item => item.id === id);
+  if (!entry) {
+    renderSavedList();
+    return;
+  }
+
+  closeSavedDrawer();
+  stopTimer();
+
+  state.quizId = entry.id;
+  state.subject = entry.subject;
+  state.grade = entry.grade;
+  state.questions = entry.questions;
+  state.count = entry.questions.length;
+  state.currentIndex = entry.currentIndex;
+  state.score = entry.score || 0;
+  state.streak = entry.streak || 0;
+  state.bestStreak = entry.bestStreak || 0;
+  state.missed = Array.isArray(entry.missed) ? entry.missed : [];
+  state.startedAt = Date.now() - (entry.elapsedMs || 0);
+  state.answerLocked = false;
+  state.timerId = null;
+  showQuestionScreen();
 }
 
 // ---- Utility ---------------------------------------------------------------
 
 function escapeHtml(str) {
   const div = document.createElement("div");
-  div.textContent = str;
+  div.textContent = str == null ? "" : String(str);
   return div.innerHTML;
 }
 
-// ---- Boot --------------------------------------------------------------------
+// ---- Boot ------------------------------------------------------------------
 
+mountSavedUi();
 showSplashScreen();
 
 </script>
