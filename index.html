@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://abacus.jasoncameron.dev https://api.open-meteo.com https://api-bdc.io; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>The Quiz Book &ndash; Free K-12 Quizzes for Kindergarten to Grade 12</title>
-<meta name="description" content="The Quiz Book is a free K-12 quiz book with practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Thousands of auto-generated questions for classrooms and home practice. No ads, no accounts, no cookies.">
+<meta name="description" content="The Quiz Book is a free K-12 quiz book with practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Questions get harder or easier as you play. No ads, no accounts, no cookies.">
 <meta name="keywords" content="quiz book, quiz book K-12, quiz book kindergarten to grade 12, quizbook, The Quiz Book, free quiz book, online quiz book, K-12 quiz book, quiz book for kids, kindergarten quiz, K-12 practice quizzes, math practice, reading comprehension quiz, science quiz, social studies quiz, classroom quiz, educational website">
 <meta name="author" content="The Quiz Book">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -24,7 +26,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Quiz Book">
 <meta property="og:title" content="The Quiz Book - Free K-12 Practice Quizzes for Kindergarten to Grade 12">
-<meta property="og:description" content="Free practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Brand new questions every time. No ads, no accounts, no cookies.">
+<meta property="og:description" content="Free K-12 practice quizzes for kindergarten through grade 12 in math, reading, science and social studies, with questions that get harder or easier as you play. No ads, no accounts, no cookies.">
 <meta property="og:url" content="https://quizbookcentral.com/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://quizbookcentral.com/logo-512.png">
@@ -34,7 +36,7 @@
 <meta property="og:image:alt" content="The Quiz Book logo: an open book with a lightning bolt">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Quiz Book - Free K-12 Practice Quizzes for Kindergarten to Grade 12">
-<meta name="twitter:description" content="Free practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. No ads, no accounts, no cookies.">
+<meta name="twitter:description" content="Free K-12 practice quizzes for kindergarten through grade 12, with questions that get harder or easier as you play. No ads, no accounts, no cookies.">
 <meta name="twitter:image" content="https://quizbookcentral.com/logo-512.png">
 <meta name="twitter:image:alt" content="The Quiz Book logo: an open book with a lightning bolt">
 <script type="application/ld+json">
@@ -47,7 +49,7 @@
       "url": "https://quizbookcentral.com/",
       "name": "The Quiz Book",
       "alternateName": ["Quiz Book", "Quiz Book K-12", "Quizbook", "The Quiz Book K-12"],
-      "description": "The Quiz Book is a free K-12 quiz book with practice quizzes for kindergarten through grade 12 in math, reading, science and social studies.",
+      "description": "The Quiz Book is a free K-12 quiz book with practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Questions get harder or easier as the player progresses, including from higher or lower grade levels.",
       "inLanguage": "en",
       "publisher": { "@id": "https://quizbookcentral.com/#organization" }
     },
@@ -73,6 +75,7 @@
       "keywords": "quiz book, quiz book K-12, free quiz book, online quiz book, K-12 quiz book, quiz book for kids, practice quizzes, kindergarten quiz, math quiz, reading quiz, science quiz, social studies quiz",
       "applicationCategory": "EducationalApplication",
       "applicationSubCategory": "K-12 practice quizzes",
+      "description": "Free K-12 practice quizzes whose questions get harder or easier depending on how the player is doing, including from higher or lower grade levels.",
       "operatingSystem": "Any web browser",
       "browserRequirements": "Requires JavaScript",
       "isAccessibleForFree": true,
@@ -879,6 +882,27 @@ body::after {
   margin-bottom: 16px;
 }
 
+.q-figure {
+  margin: 2px 0 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.q-figure svg {
+  width: 100%;
+  max-width: 340px;
+  height: auto;
+  max-height: 180px;
+}
+
+.q-figure svg text {
+  font-family: inherit;
+}
+
+html[data-grade-theme="senior"] .q-figure svg {
+  max-width: 300px;
+}
+
 .question-text {
   font-size: clamp(19px, 3vw, 29px);
   font-weight: 800;
@@ -972,6 +996,17 @@ body::after {
 
 .opt-mark svg { width: 22px; height: 22px; }
 
+.options .option-btn.is-selected {
+  border-color: #4f8cff;
+  background: #eef4ff;
+  box-shadow: 0 4px 0 #cfe0ff;
+}
+
+.options .option-btn.is-selected .opt-key {
+  background: #4f8cff;
+  color: #ffffff;
+}
+
 .option-btn.is-correct {
   background: var(--correct-soft);
   border-color: #6fdcae;
@@ -1032,7 +1067,73 @@ body::after {
 .feedback.bad { color: #b81f3b; }
 .feedback.bad .fb-icon { background: var(--wrong-soft); color: var(--wrong); }
 
-.next-row { display: flex; justify-content: flex-end; }
+.feedback.bad { flex-wrap: wrap; align-items: flex-start; row-gap: 9px; }
+.feedback.bad > .fb-icon { margin-top: 2px; }
+
+.fb-explain {
+  flex: 1 1 100%;
+  color: var(--ink);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.55;
+  text-align: left;
+  background: #f5f9ff;
+  border: 2px solid var(--stroke);
+  border-radius: 15px;
+  padding: 11px 14px;
+  animation: optIn 0.35s var(--pop) both;
+}
+
+.fb-explain-head {
+  font-size: 11px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #1f5fd0;
+  margin-bottom: 5px;
+}
+
+.fb-steps { margin: 0; padding-left: 19px; }
+.fb-steps li { margin: 4px 0; }
+
+.fb-tip { margin: 8px 0 0; font-size: 12.5px; color: var(--muted); font-weight: 600; }
+
+.review-why { margin-top: 7px; }
+.review-why > summary { cursor: pointer; font-size: 12.5px; font-weight: 800; color: #1f5fd0; }
+.review-why > summary:hover { text-decoration: underline; }
+.review-why .fb-explain { margin-top: 8px; font-size: 13px; }
+
+html[data-grade-theme="senior"] .fb-explain { background: #f7f9fc; border-color: #dfe6f0; }
+html[data-grade-theme="senior"] .fb-explain-head,
+html[data-grade-theme="senior"] .review-why > summary { color: #2b5f9e; }
+
+.next-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.next-row.has-back { justify-content: space-between; }
+
+.next-row .btn-ghost {
+  padding: 12px 20px;
+  font-size: 14px;
+  border-radius: 15px;
+}
+
+.prev-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.prev-btn svg {
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
+}
 
 .next-row .btn-primary { padding: 13px 26px; font-size: 14.5px; border-radius: 15px; }
 
@@ -1573,6 +1674,110 @@ html[data-grade-theme="senior"] .live-tile { border-width: 1px; border-radius: 8
   .saved-fab { padding: 12px 14px; }
 }
 
+/* ---- Drawing board (bottom-left) ---- */
+.draw-fab {
+  position: fixed;
+  left: clamp(14px, 3vw, 26px);
+  bottom: clamp(14px, 3vw, 26px);
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 17px;
+  border: 2px solid var(--stroke-strong);
+  border-radius: 999px;
+  background: linear-gradient(160deg, #ffffff, #eef4ff);
+  color: #24407a;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #c3d5f0, 0 18px 28px -20px rgba(65, 95, 192, 0.9);
+  transition: transform 0.16s var(--pop), box-shadow 0.16s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.draw-fab svg { width: 17px; height: 17px; }
+.draw-fab:hover { transform: translateY(-3px); }
+.draw-fab:active { transform: translateY(2px); box-shadow: 0 1px 0 #c3d5f0; }
+.draw-fab.is-open { background: linear-gradient(160deg, var(--btn-a), var(--btn-b)); border-color: var(--btn-edge); color: var(--btn-ink); }
+.draw-fab:focus-visible { outline: 3px solid rgba(24, 68, 176, 0.9); outline-offset: 3px; }
+
+.draw-panel {
+  position: fixed;
+  left: clamp(14px, 3vw, 26px);
+  bottom: calc(clamp(14px, 3vw, 26px) + 56px);
+  z-index: 23;
+  width: min(400px, calc(100vw - 28px));
+  padding: 12px;
+  border: 2px solid var(--stroke);
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  contain: layout paint;
+}
+
+/* Freeze the drifting background while the board is open: repainting it under
+   the canvas is what made drawing feel laggy on slower devices. */
+body.doodle-open::before,
+body.doodle-open .deco-item { animation-play-state: paused; }
+
+.draw-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+
+.draw-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.draw-title svg { width: 15px; height: 15px; }
+.draw-actions { display: flex; align-items: center; gap: 8px; }
+
+.draw-btn {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 7px 12px;
+  border: 2px solid var(--stroke);
+  border-radius: 10px;
+  background: #f5f9ff;
+  color: var(--muted);
+}
+
+.draw-btn:hover { border-color: var(--stroke-strong); color: var(--ink); }
+.draw-btn:focus-visible { outline: 3px solid rgba(24, 68, 176, 0.9); outline-offset: 2px; }
+.draw-close { padding: 6px; display: grid; place-items: center; }
+.draw-close svg { width: 14px; height: 14px; }
+
+.draw-canvas {
+  display: block;
+  width: 100%;
+  height: 220px;
+  border: 2px dashed var(--stroke);
+  border-radius: 12px;
+  background: #fffefb;
+  touch-action: none;
+  cursor: crosshair;
+}
+
+.draw-fab[hidden],
+.draw-panel[hidden] { display: none; }
+
+@media (max-width: 480px) {
+  .draw-fab-label { display: none; }
+  .draw-fab { padding: 12px 14px; }
+  .draw-canvas { height: 170px; }
+}
+
 /* ---- Responsive ---- */
 @media (max-width: 760px) {
   .subject-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1588,8 +1793,22 @@ html[data-grade-theme="senior"] .live-tile { border-width: 1px; border-radius: 8
   .exit-btn { padding: 8px 12px 8px 10px; }
   .next-row { justify-content: stretch; }
   .next-row .btn-primary { width: 100%; justify-content: center; }
+  .next-row.has-back { justify-content: space-between; gap: 8px; }
+  .next-row.has-back .btn-primary { width: auto; flex: 1 1 auto; min-width: 0; padding: 12px 12px; }
+  .next-row.has-back .btn-ghost { flex: 0 0 auto; padding: 12px 12px; }
   .review { max-height: 36vh; }
   .deco-item:nth-child(n+3) { display: none; }
+}
+
+@media (max-width: 560px) {
+  .saved-fab-label,
+  .draw-fab-label { display: none; }
+  .saved-fab,
+  .draw-fab { padding: 12px 14px; }
+  .saved-fab { right: 14px; bottom: 14px; }
+  .draw-fab { left: auto; right: 14px; bottom: 74px; }
+  .screen.quiz { padding-bottom: 140px; }
+  .kbd-hint { display: none; }
 }
 
 @media (orientation: landscape) and (max-height: 520px) {
@@ -2945,14 +3164,17 @@ function h6_percent_change() {
 }
 
 function h6_better_buy() {
-  const unitA = choice([140, 150, 160, 175, 180]);
-  const unitB = unitA + choice([15, 20, 25, 35]);
-  const qtyA = choice([4, 5, 6]), qtyB = qtyA + choice([2, 4, 6]);
-  const costA = unitA * qtyA, costB = unitB * qtyB;
-  const q = `Which is the better buy: ${qtyA} items for ${hMoney(costA / 100)} or ${qtyB} items for ${hMoney(costB / 100)}?`;
-  const correct = `${qtyB} for ${hMoney(costB / 100)}`;
-  const wrongs = [`${qtyA} for ${hMoney(costA / 100)}`, "They cost the same per item", `${qtyB} for ${hMoney(costA / 100)}`];
-  return [q, correct, wrongs];
+  const unitCheap = choice([140, 150, 160, 175, 180]);
+  const unitDear = unitCheap + choice([15, 20, 25, 35]);
+  const qtyCheap = choice([4, 5, 6]), qtyDear = qtyCheap + choice([2, 4, 6]);
+  const costCheap = unitCheap * qtyCheap, costDear = unitDear * qtyDear;
+  const cheapOffer = `${qtyCheap} for ${hMoney(costCheap / 100)}`;
+  const dearOffer = `${qtyDear} for ${hMoney(costDear / 100)}`;
+  const flip = choice([0, 1]) === 1;
+  const first = flip ? dearOffer : cheapOffer, second = flip ? cheapOffer : dearOffer;
+  const q = `Which is the better buy: ${first} or ${second}?`;
+  const wrongs = [dearOffer, "They cost the same per item", "You need to know the weight of each item"];
+  return [q, cheapOffer, wrongs];
 }
 
 function h6_two_step_equation() {
@@ -3407,6 +3629,7 @@ const ICONS = {
   science: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3h5"/><path d="M10.5 3v6.2L5.2 17.6A2 2 0 0 0 6.9 20.6h10.2a2 2 0 0 0 1.7-3L13.5 9.2V3"/><path d="M7.6 15.5h8.8"/></svg>',
   social: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.2 12h17.6"/><path d="M12 3c4.2 4 4.2 14 0 18-4.2-4-4.2-14 0-18z"/></svg>',
   star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.6l2.9 5.9 6.5.9-4.7 4.6 1.1 6.4L12 17.4 6.2 20.4l1.1-6.4L2.6 9.4l6.5-.9z"/></svg>',
+  pencil: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>',
 };
 
 const SUBJECTS = [
@@ -3426,6 +3649,8 @@ const state = {
   streak: 0,
   bestStreak: 0,
   answerLocked: false,
+  pendingAnswer: null,
+  answers: [],
   loadingProgress: 0,
   missed: [],
   startedAt: 0,
@@ -3433,6 +3658,11 @@ const state = {
   keyHandler: null,
   quizId: null,
   liveTimerId: null,
+  startGrade: null,
+  level: null,
+  answerLog: [],
+  promotedTo: null,
+  lastShiftAt: 0,
 };
 
 const app = document.getElementById("app");
@@ -3466,6 +3696,943 @@ function applyGradeTheme(grade) {
   document.documentElement.setAttribute("data-grade-theme", gradeTheme(grade));
 }
 
+// ---- Question illustrations -------------------------------------------------
+// Small inline SVGs drawn from the question text: labelled shapes, number
+// lines, clocks, fraction strips, counters and graphs. Nothing is stored on the
+// question, so saved quizzes and the older question bank get figures too.
+
+const FIG = {
+  ink: "#22304d",
+  muted: "#6f7f9d",
+  line: "#b9c8e0",
+  grid: "#edf2fb",
+  blue: "#4f8cff",
+  blueSoft: "#e2ecff",
+  purple: "#8b6cf6",
+  purpleSoft: "#ece4ff",
+  teal: "#1fa38c",
+  tealSoft: "#d8f6ef",
+  amber: "#e9a13b",
+  amberSoft: "#ffedc9",
+  red: "#e2536d",
+  redSoft: "#ffe1e7",
+  white: "#ffffff"
+};
+
+const FIG_OBJECTS = [
+  [/apple/i, "\ud83c\udf4e"],
+  [/orange/i, "\ud83c\udf4a"],
+  [/cookie|biscuit/i, "\ud83c\udf6a"],
+  [/cand(y|ies)|sweet/i, "\ud83c\udf6c"],
+  [/sticker|star/i, "\u2b50"],
+  [/pencil/i, "\u270f\ufe0f"],
+  [/notebook|book/i, "\ud83d\udcd8"],
+  [/balloon/i, "\ud83c\udf88"],
+  [/egg/i, "\ud83e\udd5a"],
+  [/fish/i, "\ud83d\udc1f"],
+  [/bird/i, "\ud83d\udc26"],
+  [/flower|sunflower/i, "\ud83c\udf3b"],
+  [/ball/i, "\u26bd"],
+  [/marble/i, "\ud83d\udd35"]
+];
+
+function figSvg(label, inner, w, h) {
+  const W = w || 340, H = h || 180;
+  return `<figure class="q-figure"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${escapeHtml(label)}" preserveAspectRatio="xMidYMid meet"><title>${escapeHtml(label)}</title>${inner}</svg></figure>`;
+}
+
+function figText(x, y, str, opts) {
+  const o = opts || {};
+  return `<text x="${Number(x).toFixed(1)}" y="${Number(y).toFixed(1)}" font-size="${o.size || 13}" font-weight="${o.weight || 700}" fill="${o.fill || FIG.ink}" text-anchor="${o.anchor || "middle"}">${escapeHtml(str)}</text>`;
+}
+
+function figPolyPoints(sides, cx, cy, r, startDeg) {
+  const pts = [];
+  for (let i = 0; i < sides; i++) {
+    const a = ((startDeg == null ? -90 : startDeg) + (360 / sides) * i) * Math.PI / 180;
+    pts.push(`${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`);
+  }
+  return pts.join(" ");
+}
+
+function figCharFor(noun) {
+  for (const [re, ch] of FIG_OBJECTS) if (re.test(noun)) return ch;
+  return "\u25cf";
+}
+
+function figShape(name) {
+  if (name === "circle") {
+    return figSvg("A circle", `<circle cx="170" cy="90" r="56" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`);
+  }
+  if (name === "square") {
+    return figSvg("A square", `<rect x="112" y="34" width="116" height="116" rx="5" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`);
+  }
+  if (name === "rectangle") {
+    return figSvg("A rectangle", `<rect x="76" y="46" width="188" height="92" rx="5" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`);
+  }
+  const sides = { triangle: 3, pentagon: 5, hexagon: 6 }[name] || 4;
+  return figSvg(`A ${name}`, `<polygon points="${figPolyPoints(sides, 170, 92, 58)}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`);
+}
+
+function figSideLabel(x1, y1, x2, y2, label, offset) {
+  const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+  const dx = x2 - x1, dy = y2 - y1;
+  const len = Math.hypot(dx, dy) || 1;
+  const off = offset == null ? 15 : offset;
+  return figText(mx + (-dy / len) * off, my + (dx / len) * off + 4, label, { size: 13 });
+}
+
+function figVertexAngle(v, p1, p2, label, r, color) {
+  const a1 = Math.atan2(p1[1] - v[1], p1[0] - v[0]);
+  const a2 = Math.atan2(p2[1] - v[1], p2[0] - v[0]);
+  let d = a2 - a1;
+  while (d > Math.PI) d -= Math.PI * 2;
+  while (d < -Math.PI) d += Math.PI * 2;
+  const mid = a1 + d / 2;
+  const arc = `M ${(v[0] + Math.cos(a1) * r).toFixed(1)} ${(v[1] + Math.sin(a1) * r).toFixed(1)} A ${r} ${r} 0 0 ${d > 0 ? 1 : 0} ${(v[0] + Math.cos(a2) * r).toFixed(1)} ${(v[1] + Math.sin(a2) * r).toFixed(1)}`;
+  return `<path d="${arc}" fill="none" stroke="${color || FIG.teal}" stroke-width="2.2"/>` +
+    figText(v[0] + Math.cos(mid) * (r + 21), v[1] + Math.sin(mid) * (r + 21) + 4, label, { size: 12, fill: FIG.ink });
+}
+
+function figDotCluster(count, cx, cy, color, perRow, crossedFrom) {
+  if (!count || count > 24) return "";
+  const per = perRow || 5;
+  const rows = Math.ceil(count / per);
+  let out = "";
+  for (let i = 0; i < count; i++) {
+    const row = Math.floor(i / per), col = i % per;
+    const inRow = Math.min(per, count - row * per);
+    const x = cx - ((inRow - 1) * 20) / 2 + col * 20;
+    const y = cy - ((rows - 1) * 20) / 2 + row * 20;
+    const hollow = crossedFrom != null && i >= crossedFrom;
+    out += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="7" fill="${hollow ? FIG.white : color}" stroke="${hollow ? FIG.red : color}" stroke-width="2"/>`;
+    if (hollow) {
+      out += `<path d="M${(x - 5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x + 5).toFixed(1)} ${(y + 5).toFixed(1)} M${(x + 5).toFixed(1)} ${(y - 5).toFixed(1)} L${(x - 5).toFixed(1)} ${(y + 5).toFixed(1)}" stroke="${FIG.red}" stroke-width="2" stroke-linecap="round"/>`;
+    }
+  }
+  return out;
+}
+
+function figEmojiRow(char, count, crossedFrom, opts) {
+  if (!count || count > 24) return "";
+  const o = opts || {};
+  const per = o.perRow || 8, cell = o.cell || 26, cy = o.y || 92;
+  const rows = Math.ceil(count / per);
+  let out = "";
+  for (let i = 0; i < count; i++) {
+    const row = Math.floor(i / per), col = i % per;
+    const inRow = Math.min(per, count - row * per);
+    const x = 170 - ((inRow - 1) * cell) / 2 + col * cell;
+    const y = cy - ((rows - 1) * 30) / 2 + row * 30;
+    const dead = crossedFrom != null && i >= crossedFrom;
+    out += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" font-size="22" text-anchor="middle"${dead ? ' opacity="0.3"' : ""}>${char}</text>`;
+    if (dead) {
+      out += `<path d="M${(x - 10).toFixed(1)} ${(y - 11).toFixed(1)} L${(x + 10).toFixed(1)} ${(y + 3).toFixed(1)} M${(x + 10).toFixed(1)} ${(y - 11).toFixed(1)} L${(x - 10).toFixed(1)} ${(y + 3).toFixed(1)}" stroke="${FIG.red}" stroke-width="2.4" stroke-linecap="round"/>`;
+    }
+  }
+  return out;
+}
+
+function figCounters(a, b, op) {
+  if (a > 20 || b > 20) return "";
+  if (op === "+") {
+    const g = figDotCluster(a, 104, 94, FIG.blue, 5) +
+      figText(170, 100, "+", { size: 26, fill: FIG.muted }) +
+      figDotCluster(b, 236, 94, FIG.teal, 5) +
+      figText(104, 34, String(a), { size: 15, fill: FIG.muted }) +
+      figText(236, 34, String(b), { size: 15, fill: FIG.muted });
+    return figSvg(`${a} plus ${b}`, g);
+  }
+  const g = figDotCluster(a, 170, 108, FIG.blue, 6, a - b) +
+    figText(170, 34, `${a} take away ${b}`, { size: 13, fill: FIG.muted }) +
+    figText(170, 160, "?", { size: 18 });
+  return figSvg(`${a} take away ${b}`, g);
+}
+
+function figStickerStory(start, gain, loss) {
+  if (start > 20 || gain > 20 || loss > 20) return "";
+  let g = figDotCluster(start, 76, 78, FIG.blue, 5) + figText(76, 128, String(start), { size: 13 }) + figText(76, 148, "to start", { size: 11, fill: FIG.muted });
+  g += figDotCluster(gain, 170, 78, FIG.teal, 5) + figText(170, 128, "+ " + gain, { size: 13, fill: FIG.teal }) + figText(170, 148, "gets more", { size: 11, fill: FIG.muted });
+  g += figDotCluster(loss, 264, 78, FIG.red, 5, 0) + figText(264, 128, "\u2212 " + loss, { size: 13, fill: FIG.red }) + figText(264, 148, "gives away", { size: 11, fill: FIG.muted });
+  return figSvg(`Start with ${start}, add ${gain}, then give away ${loss}`, g);
+}
+
+function figCompareRows(a, b) {
+  const max = Math.max(a, b, 1);
+  const left = 96, right = 292;
+  const wA = Math.max(16, ((right - left) * a) / max);
+  const wB = Math.max(16, ((right - left) * b) / max);
+  let g = figText(left - 10, 76, "Sam", { size: 12, anchor: "end", fill: FIG.muted });
+  g += `<rect x="${left}" y="54" width="${wA.toFixed(1)}" height="30" rx="8" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2"/>`;
+  g += figText(left + wA + 12, 75, String(a), { size: 13, anchor: "start" });
+  g += figText(left - 10, 122, "Ana", { size: 12, anchor: "end", fill: FIG.muted });
+  g += `<rect x="${left}" y="100" width="${wB.toFixed(1)}" height="30" rx="8" fill="${FIG.tealSoft}" stroke="${FIG.teal}" stroke-width="2"/>`;
+  g += figText(left + wB + 12, 121, String(b), { size: 13, anchor: "start" });
+  g += figText(170, 164, "how many more?", { size: 12, fill: FIG.muted });
+  return figSvg(`Sam has ${a} stickers and Ana has ${b} stickers`, g);
+}
+
+function figNumberLine(min, max, ticks, marks, label) {
+  const left = 40, right = 300, y = 98;
+  const span = max - min || 1;
+  const X = v => left + ((v - min) / span) * (right - left);
+  let g = `<line x1="${left - 14}" y1="${y}" x2="${right + 14}" y2="${y}" stroke="${FIG.line}" stroke-width="2.5" stroke-linecap="round"/>`;
+  for (const v of ticks || []) {
+    if (v < min || v > max) continue;
+    const x = X(v);
+    g += `<line x1="${x.toFixed(1)}" y1="${y - 7}" x2="${x.toFixed(1)}" y2="${y + 7}" stroke="${FIG.line}" stroke-width="2"/>`;
+  }
+  for (const mk of marks || []) {
+    const x = X(mk.v);
+    g += `<circle cx="${x.toFixed(1)}" cy="${y}" r="5.5" fill="${mk.color || FIG.blue}" stroke="${FIG.white}" stroke-width="2"/>`;
+    g += figText(x, mk.below ? y + 28 : y - 16, mk.label, { size: 13, fill: FIG.ink });
+  }
+  return figSvg(label, g);
+}
+
+function figClock(hour, minute) {
+  const cx = 170, cy = 94, r = 64;
+  let g = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${FIG.white}" stroke="${FIG.blue}" stroke-width="3"/>`;
+  for (let i = 0; i < 12; i++) {
+    const a = (i * 30 - 90) * Math.PI / 180;
+    const inner = i % 3 === 0 ? 10 : 6;
+    g += `<line x1="${(cx + Math.cos(a) * (r - inner)).toFixed(1)}" y1="${(cy + Math.sin(a) * (r - inner)).toFixed(1)}" x2="${(cx + Math.cos(a) * (r - 4)).toFixed(1)}" y2="${(cy + Math.sin(a) * (r - 4)).toFixed(1)}" stroke="${FIG.line}" stroke-width="2" stroke-linecap="round"/>`;
+  }
+  g += figText(cx, cy - r + 22, "12", { size: 12, fill: FIG.muted });
+  g += figText(cx + r - 18, cy + 5, "3", { size: 12, fill: FIG.muted });
+  g += figText(cx, cy + r - 10, "6", { size: 12, fill: FIG.muted });
+  g += figText(cx - r + 18, cy + 5, "9", { size: 12, fill: FIG.muted });
+  const ha = (((hour % 12) + minute / 60) * 30 - 90) * Math.PI / 180;
+  const ma = (minute * 6 - 90) * Math.PI / 180;
+  g += `<line x1="${cx}" y1="${cy}" x2="${(cx + Math.cos(ha) * r * 0.48).toFixed(1)}" y2="${(cy + Math.sin(ha) * r * 0.48).toFixed(1)}" stroke="${FIG.ink}" stroke-width="7" stroke-linecap="round"/>`;
+  g += `<line x1="${cx}" y1="${cy}" x2="${(cx + Math.cos(ma) * r * 0.78).toFixed(1)}" y2="${(cy + Math.sin(ma) * r * 0.78).toFixed(1)}" stroke="${FIG.ink}" stroke-width="4.5" stroke-linecap="round"/>`;
+  g += `<circle cx="${cx}" cy="${cy}" r="5" fill="${FIG.ink}"/>`;
+  g += figText(cx, 178, "what time is it?", { size: 11, fill: FIG.muted });
+  return figSvg(`A clock showing ${minute === 30 ? "half past " + hour : hour + " o'clock"}`, g);
+}
+
+function figFractionBar(num, den, x, y, w, h, color) {
+  const pw = w / den;
+  let g = "";
+  for (let i = 0; i < den; i++) {
+    g += `<rect x="${(x + i * pw).toFixed(1)}" y="${y}" width="${pw.toFixed(1)}" height="${h}" fill="${i < num ? (color || FIG.blue) : FIG.white}" stroke="${FIG.blue}" stroke-width="1.5"/>`;
+  }
+  return g;
+}
+
+function figFractionOf(num, den, total) {
+  if (den > 16) return "";
+  const g = figText(170, 40, `${num}/${den} of ${total}`, { size: 15, fill: FIG.muted }) +
+    figFractionBar(num, den, 60, 66, 220, 56) +
+    figText(170, 158, "?", { size: 20 });
+  return figSvg(`${num} of ${den} equal parts of ${total}`, g);
+}
+
+function figShadedParts(num, den) {
+  if (den > 16) return "";
+  const g = figText(170, 40, `${num} out of ${den} parts shaded`, { size: 14, fill: FIG.muted }) +
+    figFractionBar(num, den, 50, 66, 240, 56) +
+    figText(170, 158, "shaded fraction = ?", { size: 13 });
+  return figSvg(`${num} of ${den} equal parts shaded`, g);
+}
+
+function figFractionOps(a, b, op, c, d) {
+  if (b > 16 || d > 16) return "";
+  const w = 128;
+  let g = figText(26 + w / 2, 40, `${a}/${b}`, { size: 14 }) + figText(186 + w / 2, 40, `${c}/${d}`, { size: 14 });
+  g += figFractionBar(a, b, 26, 56, w, 46) + figFractionBar(c, d, 186, 56, w, 46);
+  g += figText(170, 90, op === "x" || op === "*" ? "\u00d7" : op, { size: 22, fill: FIG.muted });
+  g += figText(170, 152, "= ?", { size: 16 });
+  return figSvg(`${a} over ${b} ${op === "x" ? "times" : op} ${c} over ${d}`, g);
+}
+
+function figFractionCompare(list) {
+  if (!list.length || list.some(f => f[1] > 16)) return "";
+  let g = "";
+  list.slice(0, 4).forEach((f, i) => {
+    const y = 26 + i * 38;
+    g += figText(84, y + 15, `${f[0]}/${f[1]}`, { size: 13, anchor: "end" });
+    g += figFractionBar(f[0], f[1], 96, y, 180, 22, i === 0 ? FIG.blue : FIG.purple);
+  });
+  return figSvg("Fraction bars for " + list.slice(0, 4).map(f => `${f[0]}/${f[1]}`).join(", "), g);
+}
+
+function figRectFigure(length, width, mode) {
+  const x = 70, y = 44, w = 200, h = 92;
+  let g = `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="6" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+  g += figText(x + w / 2, y + h + 27, `${length} units`, { size: 13 });
+  g += figText(x + w + 12, y + h / 2 + 5, String(width), { size: 13, anchor: "start" });
+  g += figText(x + w / 2, y + h / 2 + 6, mode === "perimeter" ? "perimeter = ?" : "area = ?", { size: 14, fill: FIG.muted });
+  return figSvg(`A rectangle ${length} units long and ${width} units wide`, g);
+}
+
+function figCutout(length, width, cutW, cutH) {
+  const x0 = 62, y0 = 38, x1 = 288, y1 = 138;
+  const nw = Math.min(104, Math.max(38, 46 + (cutW / Math.max(length, 1)) * 90));
+  const nh = Math.min(62, Math.max(24, 22 + (cutH / Math.max(width, 1)) * 46));
+  const pts = `${x0},${y0} ${x1 - nw},${y0} ${x1 - nw},${y0 + nh} ${x1},${y0 + nh} ${x1},${y1} ${x0},${y1}`;
+  let g = `<polygon points="${pts}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += figText((x0 + x1) / 2, y1 + 26, `${length} units`, { size: 13 });
+  g += figText(x0 - 8, (y0 + y1) / 2 + 4, `${width} units`, { size: 12, anchor: "end" });
+  g += figText(x1 - nw / 2, y0 - 8, `${cutW}`, { size: 12, fill: FIG.red });
+  g += figText(x1 + 8, y0 + nh / 2 + 4, `${cutH}`, { size: 12, anchor: "start", fill: FIG.red });
+  g += figText(150, 90, "area = ?", { size: 14, fill: FIG.muted });
+  return figSvg(`A ${length} by ${width} rectangle with a ${cutW} by ${cutH} corner cut out`, g);
+}
+
+function figTriangleBaseHeight(base, height) {
+  const A = [60, 142], B = [286, 142], C = [158, 44];
+  let g = `<polygon points="${A} ${B} ${C}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += `<line x1="${C[0]}" y1="${C[1]}" x2="${C[0]}" y2="${A[1]}" stroke="${FIG.purple}" stroke-width="2" stroke-dasharray="5 5"/>`;
+  g += `<path d="M${C[0] - 10} ${A[1]} L${C[0] - 10} ${A[1] - 10} L${C[0]} ${A[1] - 10}" fill="none" stroke="${FIG.purple}" stroke-width="2"/>`;
+  g += figText((A[0] + B[0]) / 2, 166, `base = ${base}`, { size: 13 });
+  g += figText(C[0] + 12, (C[1] + A[1]) / 2, `height = ${height}`, { size: 12, anchor: "start", fill: FIG.purple });
+  return figSvg(`A triangle with base ${base} and height ${height}`, g);
+}
+
+function figRightTriangle(mode, legA, legB) {
+  const A = [74, 142], B = [272, 142], C = [74, 54];
+  let g = `<polygon points="${A} ${B} ${C}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += `<path d="M${A[0]} ${A[1] - 14} L${A[0] + 14} ${A[1] - 14} L${A[0] + 14} ${A[1]}" fill="none" stroke="${FIG.purple}" stroke-width="2"/>`;
+  g += figText(A[0] + 95, 164, String(legA), { size: 13 });
+  if (mode === "hyp") {
+    g += figText(A[0] - 12, (A[1] + C[1]) / 2 + 4, String(legB), { size: 13, anchor: "end" });
+    g += figSideLabel(B[0], B[1], C[0], C[1], "?", 18);
+  } else {
+    g += figText(A[0] - 12, (A[1] + C[1]) / 2 + 4, "?", { size: 14, anchor: "end" });
+    g += figSideLabel(B[0], B[1], C[0], C[1], String(legB), 18);
+  }
+  return figSvg(`A right triangle with legs ${legA} and ${legB}`, g);
+}
+
+function figTriangleAngles(a1, a2) {
+  const A = [58, 140], B = [282, 140], C = [140, 46];
+  let g = `<polygon points="${A} ${B} ${C}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += figVertexAngle(A, B, C, `${a1}\u00b0`, 34);
+  g += figVertexAngle(B, A, C, `${a2}\u00b0`, 34);
+  g += figVertexAngle(C, A, B, "?", 26, FIG.red);
+  return figSvg(`A triangle with angles ${a1} degrees and ${a2} degrees`, g);
+}
+
+function figLawCosines(a, b, angle) {
+  const A = [58, 142], B = [282, 142], C = [116, 48];
+  let g = `<polygon points="${A} ${B} ${C}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += figVertexAngle(A, B, C, `${angle}\u00b0`, 34);
+  g += figSideLabel(A[0], A[1], C[0], C[1], String(a), -18);
+  g += figSideLabel(A[0], A[1], B[0], B[1], String(b), -16);
+  g += figSideLabel(B[0], B[1], C[0], C[1], "?", 18);
+  return figSvg(`A triangle with sides ${a} and ${b} and a ${angle} degree angle between them`, g);
+}
+
+function figTwoSides(a, b) {
+  const A = [58, 142], B = [282, 142], C = [116, 48];
+  let g = `<polygon points="${A} ${B} ${C}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += figSideLabel(A[0], A[1], C[0], C[1], String(a), 16);
+  g += figSideLabel(A[0], A[1], B[0], B[1], String(b), -16);
+  g += figSideLabel(B[0], B[1], C[0], C[1], "?", 18);
+  return figSvg(`A triangle with two sides labelled ${a} and ${b} and the third side unknown`, g);
+}
+
+function figTrig(opposite, adjacent, hypotenuse) {
+  const A = [70, 140], B = [270, 140], C = [70, 52];
+  let g = `<polygon points="${A} ${B} ${C}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += `<path d="M${A[0]} ${A[1] - 14} L${A[0] + 14} ${A[1] - 14} L${A[0] + 14} ${A[1]}" fill="none" stroke="${FIG.purple}" stroke-width="2"/>`;
+  g += figVertexAngle(B, A, C, "\u03b8", 36);
+  g += figText(A[0] - 12, (A[1] + C[1]) / 2 + 4, String(opposite), { size: 13, anchor: "end" });
+  g += figText((A[0] + B[0]) / 2, 164, String(adjacent), { size: 13 });
+  g += figSideLabel(B[0], B[1], C[0], C[1], String(hypotenuse), -18);
+  return figSvg(`A right triangle with opposite side ${opposite}, adjacent side ${adjacent} and hypotenuse ${hypotenuse}`, g);
+}
+
+function figSimilar(a, big, c) {
+  const s1 = [[30, 142], [126, 142], [56, 84]];
+  const s2 = [[180, 142], [310, 142], [216, 62]];
+  let g = `<polygon points="${s1.join(" ")}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += `<polygon points="${s2.join(" ")}" fill="${FIG.purpleSoft}" stroke="${FIG.purple}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += figSideLabel(s1[0][0], s1[0][1], s1[1][0], s1[1][1], String(a), -14);
+  g += figSideLabel(s1[0][0], s1[0][1], s1[2][0], s1[2][1], String(c), 12);
+  g += figSideLabel(s2[0][0], s2[0][1], s2[1][0], s2[1][1], String(big), -14);
+  g += figSideLabel(s2[0][0], s2[0][1], s2[2][0], s2[2][1], "?", 12);
+  g += figText(170, 168, "similar triangles", { size: 11, fill: FIG.muted });
+  return figSvg(`Two similar triangles; sides ${a} and ${c} in the small one match ${big} and an unknown side in the large one`, g);
+}
+
+function figSpecialRight(kind, value) {
+  const A = [70, 140], B = [270, 140], C = [270, 68];
+  let g = `<polygon points="${A} ${B} ${C}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += `<path d="M${B[0] - 14} ${B[1]} L${B[0] - 14} ${B[1] - 14} L${B[0]} ${B[1] - 14}" fill="none" stroke="${FIG.purple}" stroke-width="2"/>`;
+  g += figVertexAngle(A, B, C, "30\u00b0", 32);
+  g += figVertexAngle(C, A, B, "60\u00b0", 26);
+  g += figText(B[0] + 26, B[1] - 34, "90\u00b0", { size: 11, fill: FIG.muted });
+  if (kind === "hyp") {
+    g += figSideLabel(A[0], A[1], C[0], C[1], String(value), -16);
+    g += figText(B[0] + 12, (B[1] + C[1]) / 2, "?", { size: 14, anchor: "start" });
+  } else {
+    g += figText(B[0] + 12, (B[1] + C[1]) / 2, String(value), { size: 13, anchor: "start" });
+    g += figText((A[0] + B[0]) / 2, 164, "?", { size: 14 });
+  }
+  return figSvg(`A 30-60-90 right triangle with ${kind === "hyp" ? "hypotenuse " + value : "shorter leg " + value}`, g);
+}
+
+function figCircleFigure(r, isDiameter) {
+  const cx = 170, cy = 90, rad = 58;
+  let g = `<circle cx="${cx}" cy="${cy}" r="${rad}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+  if (isDiameter) {
+    g += `<line x1="${cx - rad}" y1="${cy}" x2="${cx + rad}" y2="${cy}" stroke="${FIG.purple}" stroke-width="2.5"/>`;
+    g += figText(cx, cy - 10, `d = ${r}`, { size: 13, fill: FIG.purple });
+    g += `<circle cx="${cx}" cy="${cy}" r="4" fill="${FIG.purple}"/>`;
+  } else {
+    const a = -35 * Math.PI / 180;
+    g += `<line x1="${cx}" y1="${cy}" x2="${(cx + Math.cos(a) * rad).toFixed(1)}" y2="${(cy + Math.sin(a) * rad).toFixed(1)}" stroke="${FIG.purple}" stroke-width="2.5"/>`;
+    g += figText(cx + 24, cy - 20, `r = ${r}`, { size: 13, fill: FIG.purple });
+    g += `<circle cx="${cx}" cy="${cy}" r="4" fill="${FIG.purple}"/>`;
+  }
+  return figSvg(isDiameter ? `A circle with diameter ${r}` : `A circle with radius ${r}`, g);
+}
+
+function figSolid(kind, a, b, c) {
+  if (kind === "cylinder" || kind === "cone") {
+    const r = 54, cx = 170, top = 52, bottom = 134;
+    let g = "";
+    if (kind === "cylinder") {
+      g += `<ellipse cx="${cx}" cy="${top}" rx="${r}" ry="16" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+      g += `<line x1="${cx - r}" y1="${top}" x2="${cx - r}" y2="${bottom}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+      g += `<line x1="${cx + r}" y1="${top}" x2="${cx + r}" y2="${bottom}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+      g += `<ellipse cx="${cx}" cy="${bottom}" rx="${r}" ry="16" fill="none" stroke="${FIG.blue}" stroke-width="2.5" stroke-dasharray="0" stroke-opacity="0.5"/>`;
+      g += `<line x1="${cx}" y1="${top}" x2="${cx + r}" y2="${top}" stroke="${FIG.purple}" stroke-width="2"/>` + figText(cx + 26, top - 24, `r = ${a}`, { size: 12, fill: FIG.purple });
+      g += figText(cx + r + 22, (top + bottom) / 2, `h = ${b}`, { size: 12, anchor: "start", fill: FIG.ink });
+    } else {
+      g += `<ellipse cx="${cx}" cy="${bottom}" rx="${r}" ry="16" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+      g += `<line x1="${cx}" y1="46" x2="${cx - r}" y2="${bottom}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+      g += `<line x1="${cx}" y1="46" x2="${cx + r}" y2="${bottom}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+      g += `<line x1="${cx}" y1="46" x2="${cx}" y2="${bottom}" stroke="${FIG.purple}" stroke-width="2" stroke-dasharray="5 5"/>`;
+      g += figText(cx + 6, 46, `h = ${b}`, { size: 12, anchor: "start" });
+      g += figText(cx + 30, bottom + 22, `r = ${a}`, { size: 12, fill: FIG.purple });
+    }
+    return figSvg(`A ${kind} with radius ${a} and height ${b}`, g);
+  }
+  if (kind === "sphere") {
+    const cx = 170, cy = 90, r = 56;
+    let g = `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+    g += `<ellipse cx="${cx}" cy="${cy}" rx="${r}" ry="17" fill="none" stroke="${FIG.blue}" stroke-width="2"/>`;
+    g += `<line x1="${cx}" y1="${cy}" x2="${cx + r * 0.77}" y2="${cy - r * 0.64}" stroke="${FIG.purple}" stroke-width="2"/>`;
+    g += figText(cx + 22, cy - 24, `r = ${a}`, { size: 12, anchor: "start", fill: FIG.purple });
+    return figSvg(`A sphere with radius ${a}`, g);
+  }
+  const l = a, w = b, h = c == null ? 3 : c;
+  let g = `<rect x="86" y="68" width="140" height="74" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+  g += `<polygon points="86,68 122,40 262,40 226,68" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+  g += `<polygon points="226,68 262,40 262,114 226,142" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+  g += figText(156, 160, `${l}`, { size: 12 }) + figText(64, 108, `${w}`, { size: 12, anchor: "end" }) + figText(276, 82, `${h}`, { size: 12, anchor: "start" });
+  return figSvg(`A rectangular prism ${l} by ${w} by ${h}`, g);
+}
+
+function figAngleType(deg) {
+  const O = [148, 138];
+  const rad = 148 * Math.PI / 180;
+  const E = [O[0] + Math.cos(-rad) * 156, O[1] + Math.sin(-rad) * 156];
+  let g = `<line x1="${O[0]}" y1="${O[1]}" x2="304" y2="${O[1]}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linecap="round"/>`;
+  g += `<line x1="${O[0]}" y1="${O[1]}" x2="${E[0].toFixed(1)}" y2="${E[1].toFixed(1)}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linecap="round"/>`;
+  g += `<path d="M${O[0] + 46} ${O[1]} A 46 46 0 0 1 ${(O[0] + Math.cos(-rad) * 46).toFixed(1)} ${(O[1] + Math.sin(-rad) * 46).toFixed(1)}" fill="none" stroke="${FIG.teal}" stroke-width="2.5"/>`;
+  g += figText(O[0] + 66, O[1] - 14, `${deg}\u00b0`, { size: 14, anchor: "start", fill: FIG.teal });
+  g += `<circle cx="${O[0]}" cy="${O[1]}" r="4.5" fill="${FIG.ink}"/>`;
+  g += figText(O[0], 172, "what type of angle?", { size: 12, fill: FIG.muted });
+  return figSvg(`An angle of ${deg} degrees`, g);
+}
+
+function figDataBars(values, label) {
+  const nums = values.filter(v => typeof v === "number" && isFinite(v));
+  if (!nums.length || values.length > 8) return "";
+  const max = Math.max.apply(null, nums.concat([1]));
+  const left = 34, right = 306, base = 150, top = 34;
+  const slot = (right - left) / values.length;
+  const barW = Math.min(30, slot * 0.55);
+  let g = `<line x1="${left - 8}" y1="${base}" x2="${right}" y2="${base}" stroke="${FIG.line}" stroke-width="2"/>`;
+  values.forEach((v, i) => {
+    const x = left + slot * i + slot / 2;
+    if (typeof v === "number" && isFinite(v)) {
+      const h = Math.max(6, ((base - top) * v) / max);
+      g += `<rect x="${(x - barW / 2).toFixed(1)}" y="${(base - h).toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="5" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2"/>`;
+      g += figText(x, base - h - 8, String(v), { size: 12 });
+    } else {
+      g += `<rect x="${(x - barW / 2).toFixed(1)}" y="${base - 34}" width="${barW.toFixed(1)}" height="34" rx="5" fill="${FIG.white}" stroke="${FIG.purple}" stroke-width="2" stroke-dasharray="4 4"/>`;
+      g += figText(x, base - 46, "?", { size: 15, fill: FIG.purple });
+    }
+  });
+  return figSvg(label, g);
+}
+
+function figAxes(points, label, connect) {
+  const xs = points.map(p => p.x), ys = points.map(p => p.y);
+  let minX = Math.min(0, Math.min.apply(null, xs)), maxX = Math.max(0, Math.max.apply(null, xs));
+  let minY = Math.min(0, Math.min.apply(null, ys)), maxY = Math.max(0, Math.max.apply(null, ys));
+  if (maxX - minX < 4) { minX -= 1; maxX += 1; }
+  if (maxY - minY < 4) { minY -= 1; maxY += 1; }
+  const padX = Math.max(1, Math.round((maxX - minX) * 0.12));
+  const padY = Math.max(1, Math.round((maxY - minY) * 0.12));
+  minX -= padX; maxX += padX; minY -= padY; maxY += padY;
+  const L = 44, R = 296, T = 22, B = 156;
+  const X = v => L + ((v - minX) / (maxX - minX)) * (R - L);
+  const Y = v => B - ((v - minY) / (maxY - minY)) * (B - T);
+  let g = "";
+  const stepX = (maxX - minX) <= 12 ? 1 : Math.ceil((maxX - minX) / 8);
+  const stepY = (maxY - minY) <= 12 ? 1 : Math.ceil((maxY - minY) / 6);
+  for (let x = Math.ceil(minX / stepX) * stepX; x <= maxX; x += stepX) {
+    g += `<line x1="${X(x).toFixed(1)}" y1="${T}" x2="${X(x).toFixed(1)}" y2="${B}" stroke="${FIG.grid}" stroke-width="1"/>`;
+  }
+  for (let y = Math.ceil(minY / stepY) * stepY; y <= maxY; y += stepY) {
+    g += `<line x1="${L}" y1="${Y(y).toFixed(1)}" x2="${R}" y2="${Y(y).toFixed(1)}" stroke="${FIG.grid}" stroke-width="1"/>`;
+  }
+  g += `<line x1="${L}" y1="${Y(0).toFixed(1)}" x2="${R}" y2="${Y(0).toFixed(1)}" stroke="${FIG.line}" stroke-width="2"/>`;
+  g += `<line x1="${X(0).toFixed(1)}" y1="${B}" x2="${X(0).toFixed(1)}" y2="${T}" stroke="${FIG.line}" stroke-width="2"/>`;
+  g += figText(R - 4, Y(0) - 8, "x", { size: 11, fill: FIG.muted, anchor: "end" });
+  g += figText(X(0) + 8, T + 6, "y", { size: 11, fill: FIG.muted, anchor: "start" });
+  if (connect && points.length > 1) {
+    g += `<line x1="${X(points[0].x).toFixed(1)}" y1="${Y(points[0].y).toFixed(1)}" x2="${X(points[1].x).toFixed(1)}" y2="${Y(points[1].y).toFixed(1)}" stroke="${FIG.purple}" stroke-width="2"/>`;
+  }
+  points.forEach(p => {
+    const px = X(p.x), py = Y(p.y);
+    g += `<circle cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="5" fill="${FIG.red}" stroke="${FIG.white}" stroke-width="2"/>`;
+    const right = px > 258;
+    const tag = p.tag || `(${p.x}, ${p.y})`;
+    g += figText(right ? px - 9 : px + 9, py - 9, tag, { size: 11, anchor: right ? "end" : "start", fill: FIG.ink });
+  });
+  return figSvg(label, g);
+}
+
+const FIG_PIPS = {
+  1: [[0.5, 0.5]],
+  2: [[0.3, 0.3], [0.7, 0.7]],
+  3: [[0.28, 0.28], [0.5, 0.5], [0.72, 0.72]],
+  4: [[0.3, 0.3], [0.7, 0.3], [0.3, 0.7], [0.7, 0.7]],
+  5: [[0.3, 0.3], [0.7, 0.3], [0.5, 0.5], [0.3, 0.7], [0.7, 0.7]],
+  6: [[0.3, 0.24], [0.7, 0.24], [0.3, 0.5], [0.7, 0.5], [0.3, 0.76], [0.7, 0.76]]
+};
+
+function figDie(x, y, size, value) {
+  let g = `<rect x="${x}" y="${y}" width="${size}" height="${size}" rx="${(size * 0.18).toFixed(1)}" fill="${FIG.white}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+  if (!value) {
+    g += figText(x + size / 2, y + size / 2 + size * 0.16, "?", { size: size * 0.46, fill: FIG.muted });
+  } else {
+    for (const pip of FIG_PIPS[value] || []) {
+      g += `<circle cx="${(x + size * pip[0]).toFixed(1)}" cy="${(y + size * pip[1]).toFixed(1)}" r="${(size * 0.075).toFixed(1)}" fill="${FIG.ink}"/>`;
+    }
+  }
+  return g;
+}
+
+function figDice(count, label) {
+  const size = count === 2 ? 66 : 84;
+  const gap = 40;
+  const totalW = count * size + (count - 1) * gap;
+  const startX = 170 - totalW / 2;
+  let g = "";
+  for (let i = 0; i < count; i++) g += figDie(startX + i * (size + gap), 56, size, 0);
+  g += figText(170, 158, "probability = ?", { size: 13, fill: FIG.muted });
+  return figSvg(label, g);
+}
+
+function figCoins(q, d, n, p) {
+  const coins = [];
+  for (let i = 0; i < q; i++) coins.push([25, "25\u00a2", FIG.amberSoft, FIG.amber]);
+  for (let i = 0; i < d; i++) coins.push([10, "10\u00a2", "#e8eef9", "#8fa4c4"]);
+  for (let i = 0; i < n; i++) coins.push([5, "5\u00a2", "#e8eef9", "#8fa4c4"]);
+  for (let i = 0; i < p; i++) coins.push([1, "1\u00a2", "#f3e3cf", "#b98a5a"]);
+  if (!coins.length || coins.length > 16) return "";
+  const per = 8, r = 18, cell = 42;
+  const rows = Math.ceil(coins.length / per);
+  let g = "";
+  coins.forEach((c, i) => {
+    const row = Math.floor(i / per), col = i % per;
+    const inRow = Math.min(per, coins.length - row * per);
+    const x = 170 - ((inRow - 1) * cell) / 2 + col * cell;
+    const y = 62 + row * 46;
+    g += `<circle cx="${x.toFixed(1)}" cy="${y}" r="${r}" fill="${c[2]}" stroke="${c[3]}" stroke-width="2"/>`;
+    g += figText(x, y + 5, c[1], { size: 11, fill: FIG.ink });
+  });
+  g += figText(170, 172, "total = ?", { size: 12, fill: FIG.muted });
+  if (rows > 3) return "";
+  return figSvg(`${q} quarters, ${d} dimes, ${n} nickels and ${p} pennies`, g);
+}
+
+function figBagMarbles(total, red) {
+  if (total > 24) return "";
+  let g = `<path d="M108 40 h124 l22 98 a16 16 0 0 1 -16 17 h-136 a16 16 0 0 1 -16 -17 z" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5"/>`;
+  const per = 6, r = 9, cell = 24;
+  for (let i = 0; i < total; i++) {
+    const row = Math.floor(i / per), col = i % per;
+    const inRow = Math.min(per, total - row * per);
+    const x = 170 - ((inRow - 1) * cell) / 2 + col * cell;
+    const y = 58 + row * 24;
+    g += `<circle cx="${x.toFixed(1)}" cy="${y}" r="${r}" fill="${i < red ? FIG.red : "#9db0cd"}" stroke="${FIG.white}" stroke-width="1.5"/>`;
+  }
+  g += figText(170, 174, "red marbles?", { size: 11, fill: FIG.muted });
+  return figSvg(`A bag of ${total} marbles, ${red} of them red`, g);
+}
+
+function figBoxesPencils(boxes, perBox, given) {
+  if (boxes > 8 || perBox > 40) return "";
+  const w = 28, gap = 8;
+  const totalW = boxes * w + (boxes - 1) * gap;
+  const startX = 170 - totalW / 2;
+  let g = "";
+  for (let i = 0; i < boxes; i++) {
+    const x = startX + i * (w + gap);
+    g += `<rect x="${x}" y="34" width="${w}" height="34" rx="6" fill="${FIG.amberSoft}" stroke="${FIG.amber}" stroke-width="2"/>`;
+    g += figText(x + w / 2, 56, String(perBox), { size: 13 });
+  }
+  g += figText(170, 88, `${boxes} boxes \u00d7 ${perBox} pencils`, { size: 12, fill: FIG.muted });
+  g += figText(170, 114, `\u2212 ${given} given away`, { size: 12, fill: FIG.red });
+  g += figDotCluster(Math.min(given, 12), 170, 136, FIG.red, 6, 0);
+  g += figText(170, 174, "pencils left = ?", { size: 12, fill: FIG.muted });
+  return figSvg(`${boxes} boxes of ${perBox} pencils, ${given} given away`, g);
+}
+
+function figItemPrice(count, each) {
+  if (count > 6) return "";
+  const cell = 46;
+  const startX = 170 - ((count - 1) * cell) / 2;
+  let g = "";
+  for (let i = 0; i < count; i++) {
+    const x = startX + i * cell;
+    g += `<rect x="${(x - 15).toFixed(1)}" y="44" width="30" height="40" rx="5" fill="${FIG.purpleSoft}" stroke="${FIG.purple}" stroke-width="2"/>`;
+    g += figText(x, 40, `$${each}`, { size: 12, fill: FIG.purple });
+  }
+  g += figText(170, 118, `${count} \u00d7 $${each}`, { size: 13, fill: FIG.muted });
+  g += figText(170, 160, "total = ?", { size: 13 });
+  return figSvg(`${count} items at $${each} each`, g);
+}
+
+function figChange(price, paid) {
+  let g = `<rect x="44" y="56" width="104" height="60" rx="10" fill="${FIG.amberSoft}" stroke="${FIG.amber}" stroke-width="2.5"/>`;
+  g += figText(96, 82, "price", { size: 11, fill: FIG.muted }) + figText(96, 102, `$${price}`, { size: 18 });
+  g += `<rect x="192" y="52" width="118" height="68" rx="8" fill="${FIG.tealSoft}" stroke="${FIG.teal}" stroke-width="2.5"/>`;
+  g += figText(251, 78, "you pay", { size: 11, fill: FIG.muted }) + figText(251, 102, `$${paid}`, { size: 18 });
+  g += figText(170, 148, "change = ?", { size: 13, fill: FIG.ink });
+  return figSvg(`An item costs $${price} and you pay $${paid}`, g);
+}
+
+function qbFigureFor(q) {
+  if (!q || typeof q.question !== "string") return "";
+  const t = q.question.replace(/\s+/g, " ").trim();
+  let m;
+
+  // Shapes named in the question.
+  m = t.match(/^How many sides does (?:a|an) (triangle|square|rectangle|pentagon|hexagon) have\?$/i);
+  if (m) return figShape(m[1].toLowerCase());
+
+  // Clocks.
+  m = t.match(/clock shows half past (\d+)/i);
+  if (m) return figClock(Number(m[1]), 30);
+  m = t.match(/clock shows o'clock (\d+)/i);
+  if (m) return figClock(Number(m[1]), 0);
+
+  // Fractions.
+  m = t.match(/^What is (\d+)\/(\d+) of (\d+)\?/i);
+  if (m) return figFractionOf(Number(m[1]), Number(m[2]), Number(m[3]));
+  m = t.match(/^If (\d+) out of (\d+) equal parts/i);
+  if (m) return figShadedParts(Number(m[1]), Number(m[2]));
+  m = t.match(/^What is (\d+)\/(\d+) ([+\-x\u00d7*\/]) (\d+)\/(\d+)\?/i);
+  if (m) return figFractionOps(Number(m[1]), Number(m[2]), m[3], Number(m[4]), Number(m[5]));
+  m = t.match(/^Which fraction is the greatest: (.+)\?$/i);
+  if (m) {
+    const list = [];
+    const re = /(\d+)\s*\/\s*(\d+)/g;
+    let f;
+    while ((f = re.exec(m[1])) && list.length < 4) list.push([Number(f[1]), Number(f[2])]);
+    if (list.length >= 2) return figFractionCompare(list);
+  }
+
+  // Money.
+  m = t.match(/You have (\d+) quarters, (\d+) dimes, (\d+) nickels, and (\d+) pennies/i);
+  if (m) return figCoins(Number(m[1]), Number(m[2]), Number(m[3]), Number(m[4]));
+  m = t.match(/^You buy (\d+) notebooks at \$(\d+) each and a pen for \$(\d+)/i);
+  if (m) return figItemPrice(Number(m[1]), Number(m[2]));
+  m = t.match(/^(?:An? (?:item|pencil)) costs \$?(\d+)[^.]*\. You pay with \$(\d+)/i);
+  if (m) return figChange(Number(m[1]), Number(m[2]));
+
+  // Story problems with counters.
+  m = t.match(/^Mia has (\d+) stickers\. She gets (\d+) more, then gives (\d+) away/i);
+  if (m) return figStickerStory(Number(m[1]), Number(m[2]), Number(m[3]));
+  m = t.match(/^Sam has (\d+) stickers\. Ana has (\d+) stickers\. How many more/i);
+  if (m) return figCompareRows(Number(m[1]), Number(m[2]));
+  m = t.match(/^A school buys (\d+) boxes with (\d+) pencils in each box\. They give away (\d+) pencils/i);
+  if (m) return figBoxesPencils(Number(m[1]), Number(m[2]), Number(m[3]));
+  m = t.match(/^A bag has (\d+) marbles, (\d+) of which are red/i);
+  if (m) return figBagMarbles(Number(m[1]), Number(m[2]));
+  m = t.match(/^There (?:are|were) (\d+) ([a-z]+) and (\d+) (?:was|were) (?:taken|eaten|given|lost) away/i);
+  if (m) return figTakeAway(m[1], m[2], m[3]);
+  m = t.match(/how many ([a-z]+).*?there were (\d+) and (\d+) (?:was|were) (?:taken|eaten|given|lost)/i);
+  if (m) return figTakeAway(m[2], m[1], m[3]);
+
+  // Simple arithmetic with counters.
+  m = t.match(/^(\d+) ([+-]) (\d+) = \?$/);
+  if (m) return figCounters(Number(m[1]), Number(m[3]), m[2]);
+  m = t.match(/^What is (\d+) ([+-]) (\d+)\?$/);
+  if (m) return figCounters(Number(m[1]), Number(m[3]), m[2]);
+
+  // Number lines.
+  m = t.match(/^Round (\d+) to the nearest (ten|hundred|thousand)/i);
+  if (m) {
+    const n = Number(m[1]);
+    const place = m[2].toLowerCase() === "ten" ? 10 : m[2].toLowerCase() === "hundred" ? 100 : 1000;
+    const lower = Math.floor(n / place) * place, upper = lower + place, mid = lower + place / 2;
+    return figNumberLine(lower, upper, [lower, mid, upper], [
+      { v: lower, label: String(lower), below: true },
+      { v: upper, label: String(upper), below: true },
+      { v: n, label: String(n) }
+    ], `A number line from ${lower} to ${upper} with ${n} marked`);
+  }
+  m = t.match(/Which number is (?:bigger|greater): (\d+) or (\d+)/i);
+  if (m) {
+    const a = Number(m[1]), b = Number(m[2]);
+    const lo = Math.min(a, b), hi = Math.max(a, b);
+    const pad = Math.max(1, Math.round((hi - lo) * 0.25));
+    return figNumberLine(lo - pad, hi + pad, [lo, hi], [
+      { v: a, label: String(a) },
+      { v: b, label: String(b), below: true }
+    ], `A number line with ${a} and ${b} marked`);
+  }
+  m = t.match(/What number comes right after (\d+)/i);
+  if (m) {
+    const n = Number(m[1]);
+    return figNumberLine(n - 1, n + 2, [n - 1, n, n + 1, n + 2], [{ v: n, label: String(n) }], `A number line with ${n} marked`);
+  }
+  m = t.match(/(?:Which number is missing\?|Count by (\d+)s:|What number comes next:|What comes next:) (.+)$/i);
+  if (m) return figSequenceLine(m[1], m[2]);
+
+  // Geometry.
+  m = t.match(/^A rectangle is (\d+) units long and (\d+) units wide\. What is its (area|perimeter)/i);
+  if (m) return figRectFigure(Number(m[1]), Number(m[2]), m[3].toLowerCase());
+  m = t.match(/^A rectangle is (\d+) by (\d+)\. A (\d+) by (\d+) rectangle is cut out/i);
+  if (m) return figCutout(Number(m[1]), Number(m[2]), Number(m[3]), Number(m[4]));
+  m = t.match(/area of a triangle with base (\d+) and height (\d+)/i);
+  if (m) return figTriangleBaseHeight(Number(m[1]), Number(m[2]));
+  m = t.match(/area of a parallelogram with base (\d+) and height (\d+)/i);
+  if (m) return figParallelogram(Number(m[1]), Number(m[2]));
+  m = t.match(/right triangle has legs (\d+) and (\d+)/i);
+  if (m) return figRightTriangle("hyp", Number(m[1]), Number(m[2]));
+  m = t.match(/right triangle has a hypotenuse of (\d+) and one leg of (\d+)/i);
+  if (m) return figRightTriangle("leg", Number(m[2]), Number(m[1]));
+  m = t.match(/right triangle with opposite side (\d+), adjacent side (\d+), and hypotenuse (\d+)/i);
+  if (m) return figTrig(Number(m[1]), Number(m[2]), Number(m[3]));
+  m = t.match(/triangle has angles of (\d+) degrees and (\d+) degrees/i);
+  if (m) return figTriangleAngles(Number(m[1]), Number(m[2]));
+  m = t.match(/triangle has sides (\d+) and (\d+) with a (\d+) degree angle between them/i);
+  if (m) return figLawCosines(Number(m[1]), Number(m[2]), Number(m[3]));
+  m = t.match(/Two triangles are similar\. A side of ([\d.]+) in the small triangle corresponds to a side of ([\d.\/]+) in the large triangle\. If another side of the small triangle is (\d+)/i);
+  if (m) return figSimilar(Number(m[1]), m[2], Number(m[3]));
+  m = t.match(/(?:third side|other two sides)[^.]*?(\d+) and (\d+)/i) ||
+    t.match(/triangle[^.]*?(\d+) and (\d+)[^.]*?(?:third side|other two sides)/i);
+  if (m) return figTwoSides(Number(m[1]), Number(m[2]));
+  m = t.match(/In a 30-60-90 triangle the hypotenuse is (\d+)/i);
+  if (m) return figSpecialRight("hyp", Number(m[1]));
+  m = t.match(/In a 30-60-90 triangle the shorter leg is (\d+)/i);
+  if (m) return figSpecialRight("short", Number(m[1]));
+  m = t.match(/circle has a diameter of (\d+) cm/i);
+  if (m) return figCircleFigure(Number(m[1]), true);
+  m = t.match(/circle with radius (\d+)/i);
+  if (m) return figCircleFigure(Number(m[1]), false);
+  m = t.match(/volume of a (cylinder|cone) with radius (\d+) and height (\d+)/i);
+  if (m) return figSolid(m[1].toLowerCase(), Number(m[2]), Number(m[3]));
+  m = t.match(/volume of a sphere with radius (\d+)/i);
+  if (m) return figSolid("sphere", Number(m[1]));
+  m = t.match(/(?:volume|surface area) of a rectangular prism with length (\d+), width (\d+), (?:and )?height (\d+)/i);
+  if (m) return figSolid("prism", Number(m[1]), Number(m[2]), Number(m[3]));
+  m = t.match(/An angle measures (\d+) degrees\. What type of angle/i);
+  if (m) return figAngleType(Number(m[1]));
+
+  // Statistics.
+  m = t.match(/What is the (mean \(average\)|median|range) of: ([\d,\s]+)\?/i);
+  if (m) {
+    const values = m[2].split(",").map(v => Number(v.trim())).filter(v => isFinite(v));
+    if (values.length) return figDataBars(values, `A bar chart of ${values.join(", ")}`);
+  }
+  m = t.match(/The mean of (\d+) numbers is (\d+)\. Four of them are ([\d,\s]+)\. What is the fifth/i);
+  if (m) {
+    const list = m[3].split(",").map(v => Number(v.trim())).filter(v => isFinite(v));
+    if (list.length === 4) return figDataBars(list.concat([null]), "Five numbers, one unknown");
+  }
+
+  // Coordinates.
+  m = t.match(/(?:points?|line through) \((-?\d+), (-?\d+)\) and \((-?\d+), (-?\d+)\)/i);
+  if (m) {
+    const p1 = { x: Number(m[1]), y: Number(m[2]) }, p2 = { x: Number(m[3]), y: Number(m[4]) };
+    return figAxes([p1, p2], `Points (${p1.x}, ${p1.y}) and (${p2.x}, ${p2.y}) on a coordinate plane`, true);
+  }
+  m = t.match(/segment from \((-?\d+), (-?\d+)\) to \((-?\d+), (-?\d+)\)/i);
+  if (m) {
+    const p1 = { x: Number(m[1]), y: Number(m[2]) }, p2 = { x: Number(m[3]), y: Number(m[4]) };
+    return figAxes([p1, p2], `A segment from (${p1.x}, ${p1.y}) to (${p2.x}, ${p2.y})`, true);
+  }
+  m = t.match(/^What is the ([xy])-coordinate of the point \((-?\d+), (-?\d+)\)/i);
+  if (m) {
+    const p = { x: Number(m[2]), y: Number(m[3]) };
+    return figAxes([p], `Point (${p.x}, ${p.y}) on a coordinate plane`, false);
+  }
+
+  // Probability.
+  m = t.match(/Rolling two six-sided dice, what is the probability the sum/i);
+  if (m) return figDice(2, "Two dice");
+  m = t.match(/probability of (?:rolling|flipping) .* (?:on|with) a die/i);
+  if (m) return figDice(/twice/i.test(t) ? 2 : 1, "Rolling a die");
+
+  return "";
+}
+
+function figParallelogram(base, height) {
+  const pts = "50,140 240,140 292,54 102,54";
+  let g = `<polygon points="${pts}" fill="${FIG.blueSoft}" stroke="${FIG.blue}" stroke-width="2.5" stroke-linejoin="round"/>`;
+  g += `<line x1="102" y1="54" x2="102" y2="140" stroke="${FIG.purple}" stroke-width="2" stroke-dasharray="5 5"/>`;
+  g += `<path d="M102 130 L112 130 L112 140" fill="none" stroke="${FIG.purple}" stroke-width="2"/>`;
+  g += figText(145, 164, `base = ${base}`, { size: 13 });
+  g += figText(116, 100, `height = ${height}`, { size: 12, anchor: "start", fill: FIG.purple });
+  return figSvg(`A parallelogram with base ${base} and height ${height}`, g);
+}
+
+function figTakeAway(total, noun, removed) {
+  const n = Number(total), k = Number(removed);
+  if (!isFinite(n) || !isFinite(k) || k > n || n > 24) return "";
+  const ch = figCharFor(noun);
+  const g = figEmojiRow(ch, n, n - k) + figText(170, 164, `how many ${noun} left?`, { size: 12, fill: FIG.muted });
+  return figSvg(`${n} ${noun}, ${k} crossed out`, g);
+}
+
+function figSequenceLine(stepRaw, tail) {
+  const clean = tail.replace(/\?$/, "").trim();
+  const tokens = clean.split(/,\s*/).map(s => s.trim());
+  const values = tokens.map(tok => /^\d+$/.test(tok) ? Number(tok) : null);
+  const blank = values.findIndex(v => v === null);
+  if (blank < 0) return "";
+  const known = values.filter(v => v !== null);
+  if (known.length < 2) return "";
+  let step = stepRaw ? Number(stepRaw) : known[1] - known[0];
+  if (!step) step = 1;
+  const guess = blank === 0
+    ? known[0] - step
+    : (values[blank - 1] != null ? values[blank - 1] + step : known[0] + step * blank);
+  const all = values.map((v, i) => v == null ? guess : v);
+  const ticks = all.slice();
+  const marks = all.map((v, i) => i === blank
+    ? { v, label: "?", color: FIG.red }
+    : { v, label: String(v) });
+  return figNumberLine(Math.min.apply(null, all), Math.max.apply(null, all), ticks, marks, "A number line with a missing number");
+}
+
+// ---- Question pacing -------------------------------------------------------
+// The chosen grade is only the starting point. Steady right answers ramp the
+// questions up a third of a grade at a time, mixing questions from the current
+// grade with the next one, so difficulty climbs over three steps instead of
+// jumping a whole grade at once. A couple of misses eases the pace back down.
+
+const LEVEL_STEP = 1 / 3;
+const MAX_LEVEL = 12;
+
+function roundLevel(value) {
+  return Math.round(value * 3) / 3;
+}
+
+// The whole grade a fractional level sits in: 6.67 is still grade 6.
+function wholeGradeOf(level) {
+  return Math.max(0, Math.min(MAX_LEVEL, Math.floor(roundLevel(level) + 1e-9)));
+}
+
+function adaptiveFloor(grade) {
+  return Math.max(0, grade - 2);
+}
+
+function takeQuestions(subject, grade, count) {
+  const items = generateQuiz(subject, grade, count);
+  return Array.isArray(items) ? items.slice(0, count) : [];
+}
+
+// Generate one batch at a time so a refill never repeats a question.
+function questionSource(subject, grade, batch) {
+  let pool = [];
+  let cursor = 0;
+  return function nextQuestion() {
+    if (cursor >= pool.length) {
+      const more = generateQuiz(subject, grade, batch);
+      if (!Array.isArray(more) || !more.length) return null;
+      pool = pool.concat(more);
+    }
+    return pool[cursor++] || null;
+  };
+}
+
+function freshQuestions(subject, level, count) {
+  const base = wholeGradeOf(level);
+  const frac = Math.max(0, Math.min(1, roundLevel(level) - base));
+  const harder = Math.round(count * frac);
+  if (harder <= 0 || base >= MAX_LEVEL) return takeQuestions(subject, base, count);
+  if (harder >= count) return takeQuestions(subject, base + 1, count);
+
+  const lower = questionSource(subject, base, count);
+  const upper = questionSource(subject, base + 1, count);
+  const seen = new Set();
+  const out = [];
+  const pick = (source, allowRepeat) => {
+    for (let tries = 0; tries < 60; tries++) {
+      const item = source();
+      if (!item) return null;
+      if (!allowRepeat && seen.has(item.question)) continue;
+      seen.add(item.question);
+      return item;
+    }
+    return null;
+  };
+
+  for (let i = 0; i < count; i++) {
+    // Spread the harder questions evenly through the set.
+    const wantHarder = Math.round(((i + 1) * harder) / count) > Math.round((i * harder) / count);
+    const preferred = wantHarder ? upper : lower;
+    const other = wantHarder ? lower : upper;
+    const item = pick(preferred, false) || pick(other, false) || pick(preferred, true) || pick(other, true);
+    if (item) out.push(item);
+  }
+  if (out.length < count) out.push.apply(out, takeQuestions(subject, base, count - out.length));
+  return out;
+}
+
+// Replace the unanswered stretch so the rest of the quiz matches the current pace.
+function scheduleAdaptiveRemainder() {
+  const remaining = state.questions.length - state.currentIndex - 1;
+  if (remaining <= 0) return;
+  const tail = freshQuestions(state.subject, state.level, remaining);
+  if (tail.length) {
+    state.questions = state.questions.slice(0, state.currentIndex + 1).concat(tail);
+  }
+}
+
+function noteAnswer(isRight) {
+  state.answerLog.push(!!isRight);
+  const log = state.answerLog;
+  const lastTwo = log.slice(-2);
+  const sinceShift = log.length - state.lastShiftAt;
+  let level = state.level;
+  let movedUp = false;
+
+  if (lastTwo.length === 2 && sinceShift >= 2 && lastTwo.every(Boolean) && level < MAX_LEVEL) {
+    level = roundLevel(level + LEVEL_STEP);
+    movedUp = true;
+  } else if (lastTwo.length === 2 && sinceShift >= 2 && lastTwo.every(v => !v) && level > adaptiveFloor(state.startGrade)) {
+    level = Math.max(adaptiveFloor(state.startGrade), roundLevel(level - LEVEL_STEP));
+  }
+
+  if (level !== state.level) {
+    const gradeBefore = wholeGradeOf(state.level);
+    state.level = level;
+    state.lastShiftAt = log.length;
+    const gradeNow = wholeGradeOf(level);
+    if (state.startGrade != null && gradeNow > state.startGrade) {
+      const reached = state.promotedTo == null ? state.startGrade : state.promotedTo;
+      state.promotedTo = Math.max(reached, gradeNow);
+    }
+    scheduleAdaptiveRemainder();
+    if (movedUp && gradeNow > gradeBefore) showLevelUpDialog(gradeNow, false);
+  }
+}
+
 function formatTime(ms) {
   const total = Math.max(0, Math.round(ms / 1000));
   const m = Math.floor(total / 60);
@@ -3477,6 +4644,7 @@ function formatTime(ms) {
 
 function showSplashScreen() {
   clearApp();
+  setDoodleAvailable(false);
   closeSavedDrawer();
   setSavedUiVisible(false);
   applyGradeTheme(state.grade);
@@ -3528,6 +4696,7 @@ function showSplashScreen() {
 
 function showSetupScreen() {
   clearApp();
+  setDoodleAvailable(false);
   stopTimer();
   closeSavedDrawer();
   setSavedUiVisible(true);
@@ -3711,12 +4880,18 @@ function showSetupScreen() {
     if (isNaN(count)) count = 10;
     state.count = Math.max(1, Math.min(100, count));
 
-    state.questions = generateQuiz(state.subject, state.grade, state.count);
+    state.startGrade = state.grade;
+    state.level = state.grade;
+    state.answerLog = [];
+    state.promotedTo = null;
+    state.lastShiftAt = 0;
+    state.questions = freshQuestions(state.subject, state.grade, state.count);
     state.currentIndex = 0;
     state.score = 0;
     state.streak = 0;
     state.bestStreak = 0;
     state.missed = [];
+    state.answers = [];
     state.startedAt = Date.now();
     state.quizId = newQuizId();
     showQuestionScreen();
@@ -3733,7 +4908,8 @@ function showQuestionScreen() {
   setSavedUiVisible(true);
   applyGradeTheme(state.grade);
   state.answerLocked = false;
-  saveCurrentQuiz();
+  state.pendingAnswer = null;
+  if (!state.answers[state.currentIndex]) saveCurrentQuiz();
 
   const q = state.questions[state.currentIndex];
   const total = state.questions.length;
@@ -3761,14 +4937,16 @@ function showQuestionScreen() {
       <div class="question-card">
         <div class="q-tag">${bandHint(state.grade)}</div>
         <p class="question-text">${escapeHtml(q.question)}</p>
+        ${qbFigureFor(q)}
       </div>
       <div class="options" id="optionsContainer"></div>
       <div class="feedback" id="feedback"></div>
       <div class="next-row" id="nextBtnContainer"></div>
     </div>
-    <div class="kbd-hint">Press <kbd>1</kbd>&ndash;<kbd>4</kbd> to answer &middot; <kbd>Enter</kbd> for next</div>
+    <div class="kbd-hint" id="kbdHint">Press <kbd>1</kbd>&ndash;<kbd>4</kbd> to choose &middot; <kbd>Enter</kbd> to submit</div>
   `;
   app.appendChild(wrapper);
+  setDoodleAvailable(true);
 
   const optionsContainer = document.getElementById("optionsContainer");
   const letters = ["A", "B", "C", "D"];
@@ -3778,14 +4956,18 @@ function showQuestionScreen() {
     btn.className = "option-btn";
     btn.dataset.value = option;
     btn.dataset.index = String(i);
+    btn.setAttribute("aria-pressed", "false");
     btn.innerHTML = `
       <span class="opt-key">${letters[i]}</span>
       <span class="opt-text">${escapeHtml(option)}</span>
       <span class="opt-mark">${ICONS.check}</span>
     `;
-    btn.addEventListener("click", () => checkAnswer(option));
+    btn.addEventListener("click", () => selectOption(btn));
     optionsContainer.appendChild(btn);
   });
+
+  const answeredRecord = state.answers[state.currentIndex];
+  renderQuestionNav(!!answeredRecord);
 
   document.getElementById("exitBtn").addEventListener("click", exitQuiz);
 
@@ -3799,12 +4981,21 @@ function showQuestionScreen() {
       event.preventDefault();
       const target = optionsContainer.querySelector(`[data-index="${typed - 1}"]`);
       if (target) target.click();
+    } else if (!state.answerLocked && event.key === "Enter") {
+      event.preventDefault();
+      submitPendingAnswer();
     } else if (state.answerLocked && event.key === "Enter") {
       event.preventDefault();
       nextQuestion();
     }
   };
   document.addEventListener("keydown", state.keyHandler);
+
+  if (answeredRecord) {
+    state.answerLocked = true;
+    state.pendingAnswer = answeredRecord.selected;
+    paintAnswer(q, answeredRecord.selected, true);
+  }
 }
 
 // ---- Leaving a quiz ---------------------------------------------------------
@@ -3874,16 +5065,2051 @@ function updateTimerLabel() {
   chip.textContent = formatTime(Date.now() - state.startedAt);
 }
 
-function checkAnswer(selected) {
-  if (state.answerLocked) return;
-  state.answerLocked = true;
+// ---- Explanations for missed questions -------------------------------------
+// Questions are generated, so the working is rebuilt from the question itself:
+// exact sums are recomputed, word problems are re-solved from their numbers, and
+// anything else gets a subject-specific method to follow.
 
-  const q = state.questions[state.currentIndex];
+function qbExplainTidy(value) {
+  if (!isFinite(value)) return "";
+  return String(Math.round(value * 1000) / 1000);
+}
+
+function qbExplainSymbol(raw) {
+  if (raw === "*" || raw === "x" || raw === "X") return "\u00d7";
+  if (raw === "/") return "\u00f7";
+  if (raw === "-" || raw === "\u2013") return "\u2212";
+  return raw;
+}
+
+function qbExplainApply(a, op, b) {
+  if (op === "+") return a + b;
+  if (op === "\u2212") return a - b;
+  if (op === "\u00d7") return a * b;
+  if (op === "\u00f7") return b === 0 ? NaN : a / b;
+  return NaN;
+}
+
+function qbExplainNumber(text) {
+  const raw = String(text == null ? "" : text).replace(/,/g, "");
+  if (raw.indexOf("/") !== -1) return NaN; // a fraction, not one number
+  const match = raw.match(/-?\d+(?:\.\d+)?/);
+  return match ? parseFloat(match[0]) : NaN;
+}
+
+function qbExplainPhrase(a, op, b, result) {
+  const left = qbExplainTidy(a);
+  const right = qbExplainTidy(b);
+  const out = qbExplainTidy(result);
+  if (op === "+") return `Add: ${left} + ${right} = ${out}.`;
+  if (op === "\u2212") return `Subtract: ${left} \u2212 ${right} = ${out}.`;
+  if (op === "\u00d7") return `Multiply: ${left} \u00d7 ${right} = ${out}.`;
+  return `Divide: ${left} \u00f7 ${right} = ${out}.`;
+}
+
+// A sum written out in the question, e.g. "18 + 7 = ?" or "What is 12 \u00d7 4?".
+function qbExplainSum(text, target) {
+  const re = /(-?\d+(?:\.\d+)?)\s*([+\-\u2212\u2013\u00d7xX*\u00f7/])\s*\(?\s*(-?\d+(?:\.\d+)?)/g;
+  let match;
+  while ((match = re.exec(text))) {
+    const a = parseFloat(match[1]);
+    const op = qbExplainSymbol(match[2]);
+    const b = parseFloat(match[3]);
+    const result = qbExplainApply(a, op, b);
+    if (isFinite(result) && Math.abs(result - target) < 0.001) {
+      return [qbExplainPhrase(a, op, b, result)];
+    }
+  }
+  return null;
+}
+
+function qbExplainNums(text) {
+  return (String(text).match(/\d+(?:\.\d+)?/g) || []).map(Number).filter(value => isFinite(value));
+}
+
+// "25% of 80", "20% off $80" and "a 10% tip on $88", worked step by step.
+function qbExplainPercentSteps(text, target) {
+  const match = text.match(/(\d+(?:\.\d+)?)\s*%/);
+  if (!match) return null;
+  const percent = parseFloat(match[1]);
+  if (!isFinite(percent) || percent <= 0) return null;
+  const others = qbExplainNums(text).filter(value => value !== percent);
+  const base = others.length ? others[0] : percent;
+  if (!isFinite(base) || base <= 0) return null;
+  const share = percent / 100;
+  const part = base * share;
+  const steps = [
+    `Percent means "out of 100": ${qbExplainTidy(percent)}% = ${qbExplainTidy(percent)} \u00f7 100 = ${qbExplainTidy(share)}.`,
+    `Multiply the amount by that: ${qbExplainTidy(share)} \u00d7 ${qbExplainTidy(base)} = ${qbExplainTidy(part)}.`,
+  ];
+
+  if (Math.abs(part - target) <= 0.001) return steps;
+  if (Math.abs(base - part - target) <= 0.6) {
+    return steps.concat(`That is the amount taken off, so subtract it from the whole: ${qbExplainTidy(base)} \u2212 ${qbExplainTidy(part)} = ${qbExplainTidy(base - part)}.`);
+  }
+  if (Math.abs(base + part - target) <= 0.6) {
+    return steps.concat(`Add it on for the total: ${qbExplainTidy(base)} + ${qbExplainTidy(part)} = ${qbExplainTidy(base + part)}, which rounds to ${qbExplainTidy(target)}.`);
+  }
+  return null;
+}
+
+// A fraction answer such as "9/11".
+function qbExplainFraction(value) {
+  const match = String(value == null ? "" : value).match(/^(-?\d+)\s*\/\s*(\d+)$/);
+  if (!match) return null;
+  const num = parseInt(match[1], 10);
+  const den = parseInt(match[2], 10);
+  if (!den) return null;
+  return { num: num, den: den };
+}
+
+function qbExplainGcd(a, b) {
+  let x = Math.abs(a);
+  let y = Math.abs(b);
+  while (y) { const t = y; y = x % y; x = t; }
+  return x || 1;
+}
+
+// Adding, multiplying and dividing fractions, equivalent fractions and probability.
+function qbExplainFractionMatches(num, den, correct) {
+  const answer = qbExplainFraction(correct);
+  if (answer) return answer.num * den === answer.den * num;
+  return qbExplainClose(num / den, qbExplainValue(correct));
+}
+
+function qbExplainFractionSteps(text, correct) {
+  const times = text.match(/(\d+)\s*\/\s*(\d+)\s*[x\u00d7*]\s*(\d+)\s*\/\s*(\d+)/i);
+  if (times) {
+    const a = parseInt(times[1], 10), b = parseInt(times[2], 10);
+    const c = parseInt(times[3], 10), d = parseInt(times[4], 10);
+    const num = a * c;
+    const den = b * d;
+    if (!qbExplainFractionMatches(num, den, correct)) return null;
+    const reduced = qbExplainReduced(num, den);
+    return [
+      "Multiply the top numbers together and the bottom numbers together.",
+      `${a} \u00d7 ${c} = ${num} on top, ${b} \u00d7 ${d} = ${den} on the bottom: ${num}/${den}.`,
+      reduced.g > 1 ? `Simplify by ${reduced.g}: ${num}/${den} = ${reduced.num}/${reduced.den}.` : "That is already in simplest form.",
+    ];
+  }
+
+  const divide = text.match(/(\d+)\s*\/\s*(\d+)\s*\/\s*(\d+)\s*\/\s*(\d+)/);
+  if (divide) {
+    const a = parseInt(divide[1], 10), b = parseInt(divide[2], 10);
+    const c = parseInt(divide[3], 10), d = parseInt(divide[4], 10);
+    if (!c) return null;
+    const num = a * d;
+    const den = b * c;
+    if (!qbExplainFractionMatches(num, den, correct)) return null;
+    const reduced = qbExplainReduced(num, den);
+    return [
+      `Dividing by ${c}/${d} is the same as multiplying by its reciprocal, ${d}/${c}.`,
+      `So ${a}/${b} \u00d7 ${d}/${c} = ${num}/${den}${reduced.g > 1 ? `, which simplifies to ${reduced.num}/${reduced.den}` : ""}.`,
+    ];
+  }
+
+  const add = text.match(/(\d+)\s*\/\s*(\d+)\s*\+\s*(\d+)\s*\/\s*(\d+)/);
+  if (add) {
+    const a = parseInt(add[1], 10), b = parseInt(add[2], 10);
+    const c = parseInt(add[3], 10), d = parseInt(add[4], 10);
+    const lcm = (b * d) / qbExplainGcd(b, d);
+    const sum = a * (lcm / b) + c * (lcm / d);
+    if (!qbExplainFractionMatches(sum, lcm, correct)) return null;
+    const reduced = qbExplainReduced(sum, lcm);
+    const simplifyNote = reduced.g > 1 ? `, then simplify by ${reduced.g} to get ${reduced.num}/${reduced.den}` : "";
+    if (b === d) {
+      return [
+        `The bottom numbers match, so add the top numbers: ${a} + ${c} = ${sum}.`,
+        `Keep the bottom number: ${sum}/${b}${simplifyNote}.`,
+      ];
+    }
+    return [
+      `Make the bottom numbers match: ${a}/${b} = ${a * (lcm / b)}/${lcm} and ${c}/${d} = ${c * (lcm / d)}/${lcm}.`,
+      `Add the top numbers: ${a * (lcm / b)} + ${c * (lcm / d)} = ${sum} over ${lcm}${simplifyNote}.`,
+    ];
+  }
+
+  const ofNumber = text.match(/What is (\d+)\s*\/\s*(\d+) of (\d+)/i);
+  if (ofNumber) {
+    const num = parseInt(ofNumber[1], 10), den = parseInt(ofNumber[2], 10), whole = parseInt(ofNumber[3], 10);
+    if (!den) return null;
+    const value = (whole / den) * num;
+    if (!qbExplainClose(value, qbExplainValue(correct))) return null;
+    return [
+      `Divide the whole by the bottom number to find one part: ${whole} \u00f7 ${den} = ${qbExplainTidy(whole / den)}.`,
+      `Then take ${num} of those parts: ${num} \u00d7 ${qbExplainTidy(whole / den)} = ${qbExplainTidy(value)}.`,
+    ];
+  }
+
+  const equivalent = text.match(/equivalent to (\d+)\s*\/\s*(\d+)/i);
+  if (equivalent) {
+    const a = parseInt(equivalent[1], 10);
+    const b = parseInt(equivalent[2], 10);
+    const answer = qbExplainFraction(correct);
+    if (!answer) return null;
+    if (a * answer.den !== b * answer.num || a === answer.num) return null;
+    const factor = answer.num / a;
+    return [
+      "Multiplying the top and bottom by the same number keeps the fraction's value.",
+      `${a} \u00d7 ${factor} = ${answer.num} and ${b} \u00d7 ${factor} = ${answer.den}.`,
+      `So ${a}/${b} = ${answer.num}/${answer.den}.`,
+    ];
+  }
+
+  const bag = text.match(/has (\d+) marbles?, (\d+) of which are red/i);
+  if (bag) {
+    const total = parseInt(bag[1], 10);
+    const red = parseInt(bag[2], 10);
+    if (!qbExplainFractionMatches(red, total, correct)) return null;
+    const reduced = qbExplainReduced(red, total);
+    return [
+      `Probability is favourable outcomes over all outcomes: ${red} red out of ${total} marbles is ${red}/${total}.`,
+      reduced.g > 1 ? `Simplify by ${reduced.g}: ${red}/${total} = ${reduced.num}/${reduced.den}.` : "That is already in simplest form.",
+    ];
+  }
+  return null;
+}
+
+const QB_SHAPE_SIDES = {
+  triangle: 3, quadrilateral: 4, square: 4, rectangle: 4, rhombus: 4,
+  parallelogram: 4, trapezoid: 4, pentagon: 5, hexagon: 6, heptagon: 7,
+  octagon: 8, nonagon: 9, decagon: 10, circle: 0,
+};
+
+function qbExplainShapeSteps(text, target, correct) {
+  const lower = text.toLowerCase();
+  if (!/shape|sides/.test(lower)) return null;
+
+  const named = lower.match(/how many sides does (?:a|an) ([a-z]+) have/);
+  if (named) {
+    const namedSides = QB_SHAPE_SIDES[named[1]];
+    if (namedSides == null || !isFinite(target) || namedSides !== target) return null;
+    return [`A ${named[1]} has ${namedSides} straight sides.`, `Counting around the shape gives ${namedSides}.`];
+  }
+
+  const name = String(correct).toLowerCase();
+  if (!Object.prototype.hasOwnProperty.call(QB_SHAPE_SIDES, name)) return null;
+  const sides = QB_SHAPE_SIDES[name];
+  const wanted = lower.match(/which shape (?:has|is) (.+)/);
+  if (!wanted) return null;
+  if (name === "circle") {
+    if (!/round|no corners|no sides/.test(wanted[1])) return null;
+    return ["A circle is round, with no straight sides and no corners.", "So the shape described is a circle."];
+  }
+  const stated = (wanted[1].match(/\d+/) || [])[0];
+  if (stated == null || Number(stated) !== sides) return null;
+  return [
+    `A ${name} has ${sides} straight sides${/same length|equal/.test(wanted[1]) ? ", all the same length" : ""}.`,
+    `That matches the question, so the shape is a ${name}.`,
+  ];
+}
+
+function qbExplainClockSteps(text, correct) {
+  const lower = text.toLowerCase();
+  const hourMatch = lower.match(/(\d{1,2})/);
+  if (!hourMatch) return null;
+  const hour = parseInt(hourMatch[1], 10);
+  let time = null;
+  let steps = null;
+  if (/half past/.test(lower)) {
+    time = `${hour}:30`;
+    steps = ["Half past means 30 minutes after the hour.", `The hour stays ${hour}, so the time is ${time}.`];
+  } else if (/quarter past/.test(lower)) {
+    time = `${hour}:15`;
+    steps = ["Quarter past means 15 minutes after the hour.", `The hour stays ${hour}, so the time is ${time}.`];
+  } else if (/quarter to/.test(lower)) {
+    time = `${hour}:45`;
+    steps = ["Quarter to means 15 minutes before the next hour, which is 45 minutes past this one.", `The time is ${time}.`];
+  } else if (/o'clock/.test(lower)) {
+    time = `${hour}:00`;
+    steps = ["O'clock means exactly on the hour, with 0 minutes past it.", `So the time is ${time}.`];
+  }
+  if (!time) return null;
+  if (String(correct).replace(/[^0-9:]/g, "") !== time) return null;
+  return steps;
+}
+
+function qbExplainAngleSteps(text, correct) {
+  const lower = text.toLowerCase();
+  if (!/angle/.test(lower)) return null;
+  const size = lower.match(/(\d+(?:\.\d+)?)\s*degrees?/);
+  if (!size) return null;
+  const degrees = parseFloat(size[1]);
+  let kind = null;
+  let why = "";
+  if (degrees > 0 && degrees < 90) { kind = "acute"; why = "less than 90 degrees, so it is smaller than a right angle"; }
+  else if (degrees === 90) { kind = "right"; why = "exactly 90 degrees, which makes a square corner"; }
+  else if (degrees > 90 && degrees < 180) { kind = "obtuse"; why = "more than 90 but less than 180 degrees"; }
+  else if (degrees === 180) { kind = "straight"; why = "exactly 180 degrees, which makes a straight line"; }
+  else if (degrees > 180) { kind = "reflex"; why = "more than 180 degrees"; }
+  if (!kind || String(correct).toLowerCase().indexOf(kind) === -1) return null;
+  const article = kind === "acute" || kind === "obtuse" ? "an" : "a";
+  return [`An angle of ${qbExplainTidy(degrees)} degrees is ${why}.`, `That makes it ${article} ${kind} angle.`];
+}
+
+// "A film starts at 7:45 and lasts 1 hour 45 minutes. What time does it end?"
+function qbExplainElapsedSteps(text, correct) {
+  const match = text.match(/starts at (\d{1,2}):(\d{2}).*?lasts (\d+)\s*hours?\s*(\d+)?\s*minutes?/i);
+  if (!match) return null;
+  const startHour = parseInt(match[1], 10);
+  const startMin = parseInt(match[2], 10);
+  const addHours = parseInt(match[3], 10);
+  const addMin = match[4] ? parseInt(match[4], 10) : 0;
+  const total = ((startHour * 60 + startMin) + addHours * 60 + addMin) % (24 * 60);
+  const time = `${Math.floor(total / 60)}:${String(total % 60).padStart(2, "0")}`;
+  if (String(correct).replace(/[^0-9:]/g, "") !== time) return null;
+  const added = addMin ? `${startMin} + ${addMin} = ${startMin + addMin} minutes, so carry a whole hour once it passes 60` : `${startMin} minutes plus nothing, so the minutes stay the same`;
+  return [
+    `Add the minutes first: ${added}.`,
+    `Then add the full hours: ${startHour} + ${addHours} = ${startHour + addHours}.`,
+    `Starting at ${startHour}:${String(startMin).padStart(2, "0")} and moving forward ${addHours} hour${addHours === 1 ? "" : "s"} ${addMin} minutes ends at ${time}.`,
+  ];
+}
+
+function qbExplainShadedSteps(text, correct) {
+  const match = text.match(/(\d+) out of (\d+) equal parts/i);
+  if (!match) return null;
+  if (String(correct).replace(/\s/g, "") !== `${match[1]}/${match[2]}`) return null;
+  return [
+    `The bottom number of a fraction is how many equal parts there are in all: ${match[2]}.`,
+    `The top number is how many of them are shaded: ${match[1]}.`,
+    `So the shaded fraction is ${match[1]}/${match[2]}.`,
+  ];
+}
+
+function qbExplainFractionCompareSteps(text, correct) {
+  const match = text.match(/which fraction is the (greatest|least|largest|smallest)/i);
+  if (!match) return null;
+  const parts = text.match(/\d+\s*\/\s*\d+/g) || [];
+  if (parts.length < 2) return null;
+  const options = parts.map(item => {
+    const bits = item.split("/");
+    const top = parseInt(bits[0], 10);
+    const bottom = parseInt(bits[1], 10);
+    return { label: `${top}/${bottom}`, value: bottom ? top / bottom : NaN };
+  }).filter(item => isFinite(item.value));
+  if (options.length < 2) return null;
+  const wantsLeast = /least|smallest/i.test(match[1]);
+  const best = options.reduce((winner, item) => {
+    if (wantsLeast) return item.value < winner.value ? item : winner;
+    return item.value > winner.value ? item : winner;
+  });
+  if (String(correct).replace(/\s/g, "") !== best.label) return null;
+  return [
+    `Turn each fraction into a decimal by dividing the top number by the bottom: ${options.map(item => `${item.label} \u2248 ${qbExplainTidy(item.value)}`).join(", ")}.`,
+    `The ${wantsLeast ? "smallest" : "largest"} decimal is ${qbExplainTidy(best.value)}, so ${best.label} is the answer.`,
+  ];
+}
+
+function qbExplainCompareSteps(text, target, correct) {
+  if (!/which (?:number|decimal) is (?:greater|bigger|larger|smaller|less)/i.test(text)) return null;
+  const nums = qbExplainNums(text);
+  if (nums.length < 2) return null;
+  const a = nums[0];
+  const b = nums[1];
+  const wantsSmaller = /smaller|less/i.test(text);
+  const answer = wantsSmaller ? Math.min(a, b) : Math.max(a, b);
+  const other = wantsSmaller ? Math.max(a, b) : Math.min(a, b);
+  if (Math.abs(answer - target) > 0.001) return null;
+  if (String(correct).replace(/,/g, "").indexOf(qbExplainTidy(answer)) === -1) return null;
+  return [
+    `Compare the digits from the left: ${qbExplainTidy(a)} against ${qbExplainTidy(b)}.`,
+    `${qbExplainTidy(answer)} is ${wantsSmaller ? "smaller" : "greater"} than ${qbExplainTidy(other)}, so the answer is ${qbExplainTidy(answer)}.`,
+  ];
+}
+
+// "Which is the better buy: 4 items for $7 or 8 items for $15.20?"
+function qbExplainBetterBuySteps(text, correct) {
+  if (!/better buy/i.test(text)) return null;
+  const offers = [];
+  const pattern = /(\d+)\s*(?:items?)?\s+for\s+\$(\d+(?:\.\d+)?)/gi;
+  let match = pattern.exec(text);
+  while (match) {
+    offers.push({ qty: parseFloat(match[1]), cost: parseFloat(match[2]) });
+    match = pattern.exec(text);
+  }
+  if (offers.length !== 2) return null;
+  offers.forEach(offer => { offer.unit = offer.cost / offer.qty; });
+  const first = offers[0], second = offers[1];
+  if (Math.abs(first.unit - second.unit) < 0.001) return null;
+  const cheap = first.unit < second.unit ? first : second;
+  const dear = cheap === first ? second : first;
+  const correctMatch = String(correct).match(/(\d+)\s*for\s*\$(\d+(?:\.\d+)?)/i);
+  if (!correctMatch) return null;
+  if (parseFloat(correctMatch[1]) !== cheap.qty || Math.abs(parseFloat(correctMatch[2]) - cheap.cost) > 0.001) return null;
+  const money = value => "$" + (Number.isInteger(value) ? String(value) : value.toFixed(2));
+  const label = offer => `${offer.qty} for ${money(offer.cost)}`;
+  return [
+    "Find the price of one item: divide each total price by the number of items in that deal.",
+    `${label(first)}: ${money(first.cost)} \u00f7 ${first.qty} = $${first.unit.toFixed(2)} per item.`,
+    `${label(second)}: ${money(second.cost)} \u00f7 ${second.qty} = $${second.unit.toFixed(2)} per item.`,
+    `$${cheap.unit.toFixed(2)} is the lower price per item, so ${label(cheap)} is the better buy.`,
+  ];
+}
+
+// "A pencil costs 31 cents. You buy 4 of them and pay with $2."
+function qbExplainChangeSteps(text, target) {
+  const match = text.match(/costs (\d+) cents.*?buy (\d+).*?pay with \$(\d+)/i);
+  if (!match) return null;
+  const price = parseFloat(match[1]);
+  const quantity = parseFloat(match[2]);
+  const paid = parseFloat(match[3]) * 100;
+  const spent = price * quantity;
+  const change = paid - spent;
+  if (Math.abs(change - target) > 0.001) return null;
+  return [
+    `Work out the cost first: ${qbExplainTidy(price)} \u00d7 ${qbExplainTidy(quantity)} = ${qbExplainTidy(spent)} cents.`,
+    `Turn what was paid into cents: $${qbExplainTidy(paid / 100)} = ${qbExplainTidy(paid)} cents.`,
+    `Subtract: ${qbExplainTidy(paid)} \u2212 ${qbExplainTidy(spent)} = ${qbExplainTidy(change)} cents of change.`,
+  ];
+}
+
+function qbExplainFactorSteps(text, target) {
+  const match = text.match(/greatest factor of (\d+) other than \1/i);
+  if (!match) return null;
+  const value = parseInt(match[1], 10);
+  let smallest = null;
+  for (let i = 2; i * i <= value; i++) {
+    if (value % i === 0) { smallest = i; break; }
+  }
+  if (!smallest) return null;
+  const factor = value / smallest;
+  if (factor !== target) return null;
+  return [
+    "The biggest factor below a number comes from dividing it by its smallest factor.",
+    `${smallest} is the smallest number that divides ${value} evenly, and ${value} \u00f7 ${smallest} = ${factor}.`,
+    `So the greatest factor other than ${value} itself is ${factor}.`,
+  ];
+}
+
+function qbExplainLcmSteps(text, target) {
+  const match = text.match(/least common multiple.*?of (\d+) and (\d+)/i);
+  if (!match) return null;
+  const a = parseInt(match[1], 10);
+  const b = parseInt(match[2], 10);
+  const gcd = qbExplainGcd(a, b);
+  const value = (a * b) / gcd;
+  if (value !== target) return null;
+  return [
+    `You need the smallest number that both ${a} and ${b} divide into exactly.`,
+    `Multiply them and divide by their greatest common factor: ${a} \u00d7 ${b} = ${a * b}, and ${a * b} \u00f7 ${gcd} = ${value}.`,
+    `So the least common multiple is ${value}.`,
+  ];
+}
+
+const QB_COIN_VALUES = { quarter: 25, dime: 10, nickel: 5, penny: 1 };
+
+function qbExplainCoinSteps(text, target) {
+  if (!/quarter|dime|nickel|penn/i.test(text)) return null;
+  const re = /(\d+)\s*(quarters?|dimes?|nickels?|pennies|pennys?)/gi;
+  const steps = [];
+  let total = 0;
+  let found = false;
+  let match;
+  while ((match = re.exec(text))) {
+    const count = parseInt(match[1], 10);
+    const key = match[2].toLowerCase().replace(/s$/, "").replace("pennie", "penny");
+    const value = QB_COIN_VALUES[key];
+    if (!value) continue;
+    found = true;
+    total += count * value;
+    if (count > 0) steps.push(`${count} \u00d7 ${value} = ${count * value} cents in ${key}${count === 1 ? "" : "s"}.`);
+  }
+  if (!found || Math.abs(total - target) > 0.001) return null;
+  steps.push(`Add them up: ${total} cents.`);
+  return steps;
+}
+
+// Three-term expressions where order of operations matters, e.g. "4 + 5 x 5".
+function qbExplainExpressionSteps(text, target) {
+  const match = text.match(/(-?\d+(?:\.\d+)?)\s*([+\-\u2212\u2013\u00d7xX*\u00f7/])\s*\(?\s*(-?\d+(?:\.\d+)?)\s*([+\-\u2212\u2013\u00d7xX*\u00f7/])\s*\(?\s*(-?\d+(?:\.\d+)?)/);
+  if (!match) return null;
+  const a = parseFloat(match[1]);
+  const op1 = qbExplainSymbol(match[2]);
+  const b = parseFloat(match[3]);
+  const op2 = qbExplainSymbol(match[4]);
+  const c = parseFloat(match[5]);
+  const strong = op => op === "\u00d7" || op === "\u00f7";
+  let mid, out, steps;
+  if (strong(op2) && !strong(op1)) {
+    mid = qbExplainApply(b, op2, c);
+    out = qbExplainApply(a, op1, mid);
+    steps = [
+      `Multiply or divide before adding or subtracting: ${qbExplainTidy(b)} ${op2} ${qbExplainTidy(c)} = ${qbExplainTidy(mid)}.`,
+      `Then add or subtract: ${qbExplainTidy(a)} ${op1} ${qbExplainTidy(mid)} = ${qbExplainTidy(out)}.`,
+    ];
+  } else {
+    mid = qbExplainApply(a, op1, b);
+    out = qbExplainApply(mid, op2, c);
+    steps = [
+      `Work from left to right: ${qbExplainTidy(a)} ${op1} ${qbExplainTidy(b)} = ${qbExplainTidy(mid)}.`,
+      `Then ${qbExplainTidy(mid)} ${op2} ${qbExplainTidy(c)} = ${qbExplainTidy(out)}.`,
+    ];
+  }
+  if (!isFinite(out) || Math.abs(out - target) > 0.001) return null;
+  return steps;
+}
+
+function qbExplainRemainderSteps(text, target) {
+  const match = text.match(/remainder when (\d+) is divided by (\d+)/i);
+  if (!match) return null;
+  const value = parseInt(match[1], 10);
+  const divisor = parseInt(match[2], 10);
+  if (!divisor) return null;
+  const times = Math.floor(value / divisor);
+  const rest = value - times * divisor;
+  if (rest !== target) return null;
+  return [
+    `${divisor} goes into ${value} ${times} ${times === 1 ? "time" : "times"}: ${divisor} \u00d7 ${times} = ${times * divisor}.`,
+    `What is left over is the remainder: ${value} \u2212 ${times * divisor} = ${rest}.`,
+  ];
+}
+
+function qbExplainRoundingSteps(text, target) {
+  const match = text.match(/round ([\d,]+) to the nearest (ten|hundred|thousand)/i);
+  if (!match) return null;
+  const value = Number(match[1].replace(/,/g, ""));
+  const place = match[2].toLowerCase();
+  const scale = place === "ten" ? 10 : place === "hundred" ? 100 : 1000;
+  const rounded = Math.round(value / scale) * scale;
+  if (rounded !== target) return null;
+  const next = Math.floor(value / (scale / 10)) % 10;
+  return [
+    `To round to the nearest ${place}, look at the digit just after it: ${next}.`,
+    next >= 5 ? `That is 5 or more, so round up to ${rounded}.` : `That is less than 5, so round down to ${rounded}.`,
+  ];
+}
+
+function qbExplainSciSteps(text, target) {
+  const match = text.match(/(\d+(?:\.\d+)?)\s*[x\u00d7*]\s*10\^(\d+)/i);
+  if (!match) return null;
+  const base = parseFloat(match[1]);
+  const exponent = parseInt(match[2], 10);
+  const value = base * Math.pow(10, exponent);
+  if (Math.abs(value - target) > 0.001) return null;
+  return [
+    `10^${exponent} is a 1 with ${exponent} zeros after it.`,
+    `Moving the decimal point in ${qbExplainTidy(base)} ${exponent} places to the right gives ${Math.round(value).toLocaleString("en-US")}.`,
+  ];
+}
+
+function qbExplainCoordSteps(text, target) {
+  const lower = text.toLowerCase();
+  if (!/coordinate/.test(lower)) return null;
+  const point = text.match(/\(\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*\)/);
+  if (!point) return null;
+  const x = parseFloat(point[1]);
+  const y = parseFloat(point[2]);
+  const wantsY = /y-coordinate/.test(lower);
+  const value = wantsY ? y : x;
+  if (Math.abs(value - target) > 0.001) return null;
+  return [
+    "A point is written (x, y), so the first number is x and the second is y.",
+    `In (${qbExplainTidy(x)}, ${qbExplainTidy(y)}): x = ${qbExplainTidy(x)} and y = ${qbExplainTidy(y)}.`,
+    `So the ${wantsY ? "y" : "x"}-coordinate is ${qbExplainTidy(value)}.`,
+  ];
+}
+
+function qbExplainGeometrySteps(text, target) {
+  const lower = text.toLowerCase();
+  const radiusMatch = lower.match(/radius(?: of)?\s*(\d+(?:\.\d+)?)/);
+  const diameterMatch = lower.match(/diameter(?: of)?\s*(\d+(?:\.\d+)?)/);
+  const baseMatch = lower.match(/base(?: of)?\s*(\d+(?:\.\d+)?)/);
+  const heightMatch = lower.match(/height(?: of)?\s*(\d+(?:\.\d+)?)/);
+  const lengthMatch = lower.match(/length\s*(\d+(?:\.\d+)?)/);
+  const widthMatch = lower.match(/width\s*(\d+(?:\.\d+)?)/);
+  const pi = 3.14;
+
+  if (/circle/.test(lower) && (radiusMatch || diameterMatch)) {
+    const radius = radiusMatch ? parseFloat(radiusMatch[1]) : parseFloat(diameterMatch[1]) / 2;
+    const lead = radiusMatch
+      ? `The radius is ${qbExplainTidy(radius)}.`
+      : `The diameter is ${qbExplainTidy(radius * 2)}, so the radius is half of it: ${qbExplainTidy(radius)}.`;
+    if (/area/.test(lower)) {
+      const area = pi * radius * radius;
+      if (Math.abs(area - target) > 0.6) return null;
+      return [
+        lead,
+        `Area of a circle is \u03c0 \u00d7 r \u00d7 r: 3.14 \u00d7 ${qbExplainTidy(radius)} \u00d7 ${qbExplainTidy(radius)} = ${qbExplainTidy(area)}, which rounds to ${qbExplainTidy(target)}.`,
+      ];
+    }
+    if (/circumference/.test(lower)) {
+      const around = 2 * pi * radius;
+      if (Math.abs(around - target) > 0.6) return null;
+      return [
+        lead,
+        `Circumference is 2 \u00d7 \u03c0 \u00d7 r: 2 \u00d7 3.14 \u00d7 ${qbExplainTidy(radius)} = ${qbExplainTidy(around)}, which rounds to ${qbExplainTidy(target)}.`,
+      ];
+    }
+  }
+
+  if (/cylinder/.test(lower) && radiusMatch && heightMatch) {
+    const radius = parseFloat(radiusMatch[1]);
+    const height = parseFloat(heightMatch[1]);
+    const volume = Math.PI * radius * radius * height;
+    if (Math.abs(volume - target) > 0.6) return null;
+    return [
+      "Volume of a cylinder is \u03c0 \u00d7 r\u00b2 \u00d7 height.",
+      `r\u00b2 = ${qbExplainTidy(radius * radius)}, so \u03c0 \u00d7 ${qbExplainTidy(radius * radius)} \u00d7 ${qbExplainTidy(height)} = ${qbExplainTidy(volume)}, which rounds to ${qbExplainTidy(target)}.`,
+    ];
+  }
+
+  if (/surface area/.test(lower) && lengthMatch && widthMatch && heightMatch) {
+    const length = parseFloat(lengthMatch[1]);
+    const width = parseFloat(widthMatch[1]);
+    const height = parseFloat(heightMatch[1]);
+    const surface = 2 * (length * width + length * height + width * height);
+    if (Math.abs(surface - target) > 0.001) return null;
+    return [
+      "A rectangular prism has 3 pairs of matching faces.",
+      `length \u00d7 width = ${qbExplainTidy(length * width)}, length \u00d7 height = ${qbExplainTidy(length * height)}, width \u00d7 height = ${qbExplainTidy(width * height)}.`,
+      `Add the three and double it: 2 \u00d7 (${qbExplainTidy(length * width)} + ${qbExplainTidy(length * height)} + ${qbExplainTidy(width * height)}) = ${qbExplainTidy(surface)}.`,
+    ];
+  }
+
+  if (/hypotenuse/.test(lower)) {
+    const legs = lower.match(/legs?\s*(\d+(?:\.\d+)?)\s*and\s*(\d+(?:\.\d+)?)/);
+    if (!legs) return null;
+    const a = parseFloat(legs[1]);
+    const b = parseFloat(legs[2]);
+    const c = Math.sqrt(a * a + b * b);
+    if (Math.abs(c - target) > 0.001) return null;
+    return [
+      "The Pythagorean theorem says a\u00b2 + b\u00b2 = c\u00b2 in a right triangle.",
+      `${qbExplainTidy(a)}\u00b2 + ${qbExplainTidy(b)}\u00b2 = ${qbExplainTidy(a * a)} + ${qbExplainTidy(b * b)} = ${qbExplainTidy(a * a + b * b)}.`,
+      `The hypotenuse is the square root: \u221a${qbExplainTidy(a * a + b * b)} = ${qbExplainTidy(c)}.`,
+    ];
+  }
+
+  if (/triangle/.test(lower) && /area/.test(lower) && baseMatch && heightMatch) {
+    const base = parseFloat(baseMatch[1]);
+    const height = parseFloat(heightMatch[1]);
+    const area = (base * height) / 2;
+    if (Math.abs(area - target) > 0.001) return null;
+    return [
+      "The area of a triangle is half of base \u00d7 height.",
+      `${qbExplainTidy(base)} \u00d7 ${qbExplainTidy(height)} = ${qbExplainTidy(base * height)}.`,
+      `Half of that: ${qbExplainTidy(base * height)} \u00f7 2 = ${qbExplainTidy(area)}.`,
+    ];
+  }
+
+  if (/perimeter/.test(lower)) {
+    const nums = qbExplainNums(lower);
+    if (nums.length < 2) return null;
+    const a = nums[0];
+    const b = nums[1];
+    const perimeter = 2 * (a + b);
+    if (Math.abs(perimeter - target) > 0.001) return null;
+    return [
+      "Perimeter is the distance all the way around the shape.",
+      `Two sides are ${qbExplainTidy(a)} and two are ${qbExplainTidy(b)}: ${qbExplainTidy(a)} + ${qbExplainTidy(b)} = ${qbExplainTidy(a + b)}.`,
+      `Double that pair: 2 \u00d7 ${qbExplainTidy(a + b)} = ${qbExplainTidy(perimeter)}.`,
+    ];
+  }
+
+  return null;
+}
+
+function qbExplainTensSteps(text, target) {
+  const match = text.match(/how many tens (?:are )?(?:there )?in (?:the number )?(\d+)/i);
+  if (!match) return null;
+  const value = parseInt(match[1], 10);
+  const tens = Math.floor(value / 10);
+  if (tens !== target) return null;
+  return [
+    `Split ${value} into tens and ones: ${value} = ${tens} \u00d7 10 + ${value % 10}.`,
+    `So there are ${tens} tens.`,
+  ];
+}
+
+function qbExplainAfterSteps(text, target) {
+  const match = text.match(/comes (?:right )?after (\d+)/i);
+  if (!match) return null;
+  const value = parseInt(match[1], 10);
+  if (value + 1 !== target) return null;
+  return [`Counting on one step from ${value} lands on ${value + 1}.`];
+}
+
+// "How many pictures do you see?" - count the pictures in the question.
+function qbExplainCountSteps(text, target) {
+  if (!/how many/i.test(text)) return null;
+  const symbols = String(text).match(/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B00}-\u{2BFF}]/gu);
+  if (!symbols || !symbols.length) return null;
+  const counts = {};
+  symbols.forEach(symbol => { counts[symbol] = (counts[symbol] || 0) + 1; });
+  const symbol = Object.keys(counts).find(key => counts[key] === target || counts[key] - 1 === target);
+  if (!symbol) return null;
+  const count = counts[symbol] === target ? target : counts[symbol] - 1;
+  const list = [];
+  for (let i = 1; i <= count && i <= 8; i++) list.push(i);
+  return [
+    `Point at each picture and count: ${list.join(", ")}${count > 8 ? ", and so on" : ""}.`,
+    `There ${count === 1 ? "is" : "are"} ${count} of them.`,
+  ];
+}
+
+// Number patterns such as "6, 12, 18, 24, ___?".
+function qbExplainPattern(text, target) {
+  if (!/next|pattern|sequence|continues/i.test(text)) return null;
+  const nums = (text.match(/-?\d+(?:\.\d+)?/g) || []).map(Number).filter(v => isFinite(v));
+  if (nums.length < 3) return null;
+  const step = nums[1] - nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    if (Math.abs(nums[i] - nums[i - 1] - step) > 1e-9) return null;
+  }
+  const last = nums[nums.length - 1];
+  const next = last + step;
+  if (!isFinite(next) || Math.abs(next - target) > 0.001) return null;
+  return [
+    `The same amount is ${step >= 0 ? "added" : "subtracted"} each time: ${qbExplainTidy(Math.abs(step))}.`,
+    `Continue from ${qbExplainTidy(last)}: ${qbExplainTidy(last)} ${step >= 0 ? "+" : "\u2212"} ${qbExplainTidy(Math.abs(step))} = ${qbExplainTidy(next)}.`,
+  ];
+}
+
+// Word problems: find the arithmetic on the numbers in the question that lands
+// exactly on the correct answer, so the working shown is real.
+function qbExplainHunt(text, target) {
+  const nums = [];
+  (text.match(/\d+(?:\.\d+)?/g) || []).forEach(raw => {
+    const value = parseFloat(raw);
+    if (!isFinite(value) || value === 0 || nums.indexOf(value) !== -1 || nums.length >= 4) return;
+    nums.push(value);
+  });
+  if (nums.length < 2) return null;
+  const ops = ["+", "\u2212", "\u00d7", "\u00f7"];
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < nums.length; j++) {
+      if (i === j) continue;
+      for (let k = 0; k < ops.length; k++) {
+        const result = qbExplainApply(nums[i], ops[k], nums[j]);
+        if (isFinite(result) && Math.abs(result - target) < 1e-6) {
+          return [qbExplainPhrase(nums[i], ops[k], nums[j], result)];
+        }
+      }
+    }
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = 0; j < nums.length; j++) {
+      for (let k = 0; k < nums.length; k++) {
+        if (i === j || j === k || i === k) continue;
+        for (let first = 0; first < ops.length; first++) {
+          const mid = qbExplainApply(nums[i], ops[first], nums[j]);
+          if (!isFinite(mid)) continue;
+          for (let second = 0; second < ops.length; second++) {
+            const out = qbExplainApply(mid, ops[second], nums[k]);
+            if (!isFinite(out) || Math.abs(out - target) > 1e-6) continue;
+            return [
+              qbExplainPhrase(nums[i], ops[first], nums[j], mid),
+              qbExplainPhrase(mid, ops[second], nums[k], out),
+            ];
+          }
+        }
+      }
+    }
+  }
+  return null;
+}
+
+// ---- More worked solutions -------------------------------------------------
+// Each helper re-solves the question from its own numbers and returns null
+// unless the working lands exactly on the answer that was marked correct.
+
+function qbExplainValue(raw) {
+  const s = String(raw == null ? "" : raw).replace(/[,$%]/g, "").replace(/\u2212/g, "-").trim();
+  const frac = s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);
+  if (frac) {
+    const den = parseFloat(frac[2]);
+    return den ? parseFloat(frac[1]) / den : NaN;
+  }
+  return parseFloat(s);
+}
+
+function qbExplainClose(a, b, tol) {
+  return isFinite(a) && isFinite(b) && Math.abs(a - b) <= (tol == null ? 0.001 : tol);
+}
+
+function qbExplainMoney(value) {
+  const v = Math.round(value * 100) / 100;
+  return "$" + (Number.isInteger(v) ? String(v) : v.toFixed(2));
+}
+
+function qbExplainReduced(num, den) {
+  const g = qbExplainGcd(num, den);
+  return { num: num / g, den: den / g, g: g };
+}
+
+function qbExplainSignText(value) {
+  return `${value < 0 ? "\u2212" : "+"} ${qbExplainTidy(Math.abs(value))}`;
+}
+
+// Probability: marbles, coins, one die rolled twice, two dice, pairs of students.
+function qbExplainProbabilitySteps(text, correct) {
+  const lower = String(text).toLowerCase();
+  if (lower.indexOf("probability") === -1) return null;
+  const answer = qbExplainFraction(correct);
+  if (!answer) return null;
+
+  const diceSum = lower.match(/rolling two six-sided dice, what is the probability the sum is (\d+)/);
+  if (diceSum) {
+    const want = parseInt(diceSum[1], 10);
+    const ways = [];
+    for (let i = 1; i <= 6; i++) for (let j = 1; j <= 6; j++) if (i + j === want) ways.push(`(${i}, ${j})`);
+    const r = qbExplainReduced(ways.length, 36);
+    if (r.num !== answer.num || r.den !== answer.den) return null;
+    const steps = [
+      "Each die has 6 outcomes, so two dice have 6 \u00d7 6 = 36 equally likely pairs.",
+      ways.length
+        ? `Pairs that add to ${want}: ${ways.join(", ")} \u2014 ${ways.length} of them.`
+        : `No pair of dice adds to ${want}.`,
+    ];
+    steps.push(ways.length
+      ? `Probability = favourable \u00f7 total = ${ways.length}/36${r.g > 1 ? ` = ${r.num}/${r.den}` : ""}.`
+      : "A probability of 0 means it cannot happen.");
+    return steps;
+  }
+
+  const pair = lower.match(/(\d+) students are chosen at random from (\d+)/);
+  if (pair) {
+    const from = parseInt(pair[2], 10);
+    const total = (from * (from - 1)) / 2;
+    if (answer.num !== 1 || answer.den !== total) return null;
+    return [
+      `Count the possible pairs: ${from} choices for the first student and ${from - 1} for the second, then divide by 2 because order does not matter: ${from} \u00d7 ${from - 1} \u00f7 2 = ${total} possible pairs.`,
+      `Only 1 of those ${total} pairs is the specific pair, so the probability is 1/${total}.`,
+    ];
+  }
+
+  if (/flipping heads twice/.test(lower)) {
+    if (answer.num !== 1 || answer.den !== 4) return null;
+    return [
+      "A coin has 2 equally likely sides, so P(heads) = 1/2.",
+      "Both flips must land heads, so multiply: 1/2 \u00d7 1/2 = 1/4.",
+    ];
+  }
+
+  const twoRolls = lower.match(/rolling a (\d) and then a (\d) on a die/);
+  if (twoRolls) {
+    if (answer.num !== 1 || answer.den !== 36) return null;
+    return [
+      `P(first roll is ${twoRolls[1]}) = 1/6 and P(second roll is ${twoRolls[2]}) = 1/6.`,
+      "The rolls are independent, so multiply: 1/6 \u00d7 1/6 = 1/36.",
+    ];
+  }
+
+  const twice = lower.match(/rolling (?:an? )?(.+?) twice on a die/);
+  if (twice) {
+    const phrase = twice[1];
+    let favourable = 0;
+    let which = "";
+    if (/odd/.test(phrase)) { favourable = 3; which = "odd numbers (1, 3, 5)"; }
+    else if (/even/.test(phrase)) { favourable = 3; which = "even numbers (2, 4, 6)"; }
+    else if (/greater than 4/.test(phrase)) { favourable = 2; which = "numbers greater than 4 (5, 6)"; }
+    if (!favourable) return null;
+    const single = qbExplainReduced(favourable, 6);
+    const both = qbExplainReduced(single.num * single.num, single.den * single.den);
+    if (both.num !== answer.num || both.den !== answer.den) return null;
+    return [
+      `A die has 6 equally likely outcomes and ${favourable} of them are ${which}, so P = ${favourable}/6${single.g > 1 ? ` = ${single.num}/${single.den}` : ""}.`,
+      `Both rolls must work, so multiply the probabilities: ${single.num}/${single.den} \u00d7 ${single.num}/${single.den} = ${single.num * single.num}/${single.den * single.den}${both.g > 1 ? ` = ${both.num}/${both.den}` : ""}.`,
+    ];
+  }
+
+  return null;
+}
+
+// Percent stories: stacked discounts, discount then tax, percent change, reverse percent.
+function qbExplainPercentStorySteps(text, correct) {
+  const target = qbExplainNumber(correct);
+  const t = String(text);
+
+  const stacked = t.match(/\$([\d,.]+).*?discounted (\d+)%.*?another (\d+)% off the reduced price/i);
+  if (stacked) {
+    const price = qbExplainValue(stacked[1]);
+    const first = parseFloat(stacked[2]) / 100;
+    const second = parseFloat(stacked[3]) / 100;
+    const afterFirst = price * (1 - first);
+    const final = afterFirst * (1 - second);
+    if (!qbExplainClose(final, target, 0.02)) return null;
+    return [
+      `First discount: ${qbExplainTidy(first * 100)}% off means paying ${qbExplainTidy((1 - first) * 100)}% of the price. ${qbExplainMoney(price)} \u00d7 ${(1 - first).toFixed(2)} = ${qbExplainMoney(afterFirst)}.`,
+      `The second discount applies to that reduced price: ${qbExplainMoney(afterFirst)} \u00d7 ${(1 - second).toFixed(2)} = ${qbExplainMoney(final)}.`,
+    ];
+  }
+
+  const tax = t.match(/\$([\d,.]+).*?(\d+)% off.*?(\d+)% sales tax/i);
+  if (tax) {
+    const price = qbExplainValue(tax[1]);
+    const off = parseFloat(tax[2]) / 100;
+    const rate = parseFloat(tax[3]) / 100;
+    const sale = price * (1 - off);
+    const final = sale * (1 + rate);
+    if (!qbExplainClose(final, target, 0.02)) return null;
+    return [
+      `Sale price first: ${qbExplainMoney(price)} \u00d7 ${(1 - off).toFixed(2)} = ${qbExplainMoney(sale)}.`,
+      `Then add tax: tax is ${qbExplainTidy(rate * 100)}% of the sale price, so pay ${qbExplainTidy((1 + rate) * 100)}% of it: ${qbExplainMoney(sale)} \u00d7 ${(1 + rate).toFixed(2)} = ${qbExplainMoney(final)}.`,
+    ];
+  }
+
+  const rise = t.match(/rises from \$([\d,.]+) to \$([\d,.]+)[^.]*?percent increase/i);
+  if (rise) {
+    const before = qbExplainValue(rise[1]);
+    const after = qbExplainValue(rise[2]);
+    const change = after - before;
+    const percent = (change / before) * 100;
+    if (!qbExplainClose(percent, target, 0.02)) return null;
+    return [
+      `Find the change: ${qbExplainMoney(after)} \u2212 ${qbExplainMoney(before)} = ${qbExplainMoney(change)}.`,
+      `Percent change compares the change to the original price: ${qbExplainMoney(change)} \u00f7 ${qbExplainMoney(before)} = ${qbExplainTidy(change / before)}.`,
+      `Turn that decimal into a percent: ${qbExplainTidy(change / before)} \u00d7 100 = ${qbExplainTidy(percent)}%.`,
+    ];
+  }
+
+  const reverse = t.match(/After a (\d+)% discount, [^.]+ costs \$([\d,.]+)[^.]*?original price/i);
+  if (reverse) {
+    const off = parseFloat(reverse[1]) / 100;
+    const paid = qbExplainValue(reverse[2]);
+    const original = paid / (1 - off);
+    if (!qbExplainClose(original, target, 0.02)) return null;
+    return [
+      `After ${qbExplainTidy(off * 100)}% off, you paid ${qbExplainTidy((1 - off) * 100)}% of the original price.`,
+      `So ${qbExplainMoney(paid)} is ${(1 - off).toFixed(2)} of the original. Divide to undo it: ${qbExplainMoney(paid)} \u00f7 ${(1 - off).toFixed(2)} = ${qbExplainMoney(original)}.`,
+    ];
+  }
+
+  return null;
+}
+
+// Linear equations, inequalities and systems.
+function qbExplainLinearSide(raw) {
+  const s = String(raw).replace(/\s+/g, "").replace(/\u2212/g, "-");
+  if (!s) return null;
+  const paren = s.match(/^(-?\d*(?:\.\d+)?)\((.+)\)$/);
+  if (paren) {
+    const factor = paren[1] === "" || paren[1] === "+" ? 1 : paren[1] === "-" ? -1 : parseFloat(paren[1]);
+    const inner = qbExplainLinearSide(paren[2]);
+    if (!inner || !isFinite(factor)) return null;
+    return { a: factor * inner.a, b: factor * inner.b, factor: factor, inner: inner, distributed: true };
+  }
+  const terms = s.match(/[+-]?[^+-]+/g);
+  if (!terms) return null;
+  let a = 0;
+  let b = 0;
+  terms.forEach(term => {
+    if (/x$/.test(term) && term.indexOf("x^") === -1) {
+      const coeff = term.slice(0, -1);
+      const value = coeff === "" || coeff === "+" ? 1 : coeff === "-" ? -1 : parseFloat(coeff);
+      a += isFinite(value) ? value : NaN;
+    } else {
+      const value = parseFloat(term);
+      b += isFinite(value) ? value : NaN;
+    }
+  });
+  if (!isFinite(a) || !isFinite(b)) return null;
+  return { a: a, b: b, distributed: false };
+}
+
+function qbExplainEquationSteps(text, correct) {
+  const raw = String(text);
+
+  const ySolve = raw.match(/^Solve (\d+)x \+ (\d+)y = (-?\d+) for y\.?$/);
+  if (ySolve) {
+    const a = parseInt(ySolve[1], 10);
+    const b = parseInt(ySolve[2], 10);
+    const c = parseInt(ySolve[3], 10);
+    const expected = `(${c} - ${a}x)/${b}`;
+    if (String(correct).replace(/\s+/g, "") !== expected.replace(/\s+/g, "")) return null;
+    return [
+      `Move the x term to the other side: ${b}y = ${c} \u2212 ${a}x.`,
+      `Divide every term by ${b}: y = (${c} \u2212 ${a}x)/${b}.`,
+    ];
+  }
+
+  const system = raw.match(/^Solve the system: (-?\d+)x \+ (-?\d+)y = (-?\d+) and (-?\d+)x \+ (-?\d+)y = (-?\d+)\. What is ([xy])\?/);
+  if (system) {
+    const a1 = parseInt(system[1], 10), b1 = parseInt(system[2], 10), c1 = parseInt(system[3], 10);
+    const a2 = parseInt(system[4], 10), b2 = parseInt(system[5], 10), c2 = parseInt(system[6], 10);
+    const want = system[7];
+    const det = a1 * b2 - a2 * b1;
+    if (!det) return null;
+    const x = (c1 * b2 - c2 * b1) / det;
+    const y = (a1 * c2 - a2 * c1) / det;
+    const value = want === "x" ? x : y;
+    if (!qbExplainClose(value, qbExplainNumber(correct))) return null;
+    const steps = [
+      `The two equations are (1) ${a1}x + ${b1}y = ${c1} and (2) ${a2}x + ${b2}y = ${c2}.`,
+      `Multiply (1) by ${b2} and (2) by ${b1} so the y terms match: ${a1 * b2}x + ${b1 * b2}y = ${c1 * b2} and ${a2 * b1}x + ${b2 * b1}y = ${c2 * b1}.`,
+      `Subtract: ${a1 * b2}−${a2 * b1} = ${a1 * b2 - a2 * b1} on the x terms and ${c1 * b2}−${c2 * b1} = ${c1 * b2 - c2 * b1} on the right, so ${a1 * b2 - a2 * b1}x = ${c1 * b2 - c2 * b1}.`,
+      `Divide: x = ${qbExplainTidy(x)}. Then put x back into (2): ${a2}(${qbExplainTidy(x)}) + ${b2}y = ${c2}, so y = ${qbExplainTidy(y)}.`,
+    ];
+    steps.push(`The question asks for ${want}, so ${want} = ${qbExplainTidy(value)}.`);
+    return steps;
+  }
+
+  const m = raw.match(/^Solve(?: for x)?:?\s*([^=<>]+?)\s*(<=|>=|<|>|=)\s*([^=<>]+?)\s*$/i);
+  if (!m) return null;
+  const left = qbExplainLinearSide(m[1]);
+  const right = qbExplainLinearSide(m[3].replace(/\.$/, ""));
+  if (!left || !right) return null;
+  const dA = left.a - right.a;
+  const dB = right.b - left.b;
+  if (!dA) return null;
+  const x = dB / dA;
+  const steps = [];
+
+  if (left.distributed) {
+    steps.push(`Multiply out the bracket: ${m[1].trim()} = ${qbExplainTidy(left.a)}x ${qbExplainSignText(left.b)}.`);
+  }
+  if (left.a && right.a) {
+    steps.push(`Get the x terms on one side: ${qbExplainTidy(left.a)}x \u2212 ${qbExplainTidy(right.a)}x = ${qbExplainTidy(dA)}x.`);
+  }
+  steps.push(`Get the plain numbers on the other side: ${qbExplainTidy(right.b)} \u2212 ${qbExplainTidy(left.b)} = ${qbExplainTidy(dB)}.`);
+  if (dA === 1) {
+    steps.push(`So x = ${qbExplainTidy(x)}.`);
+  } else {
+    steps.push(`That leaves ${qbExplainTidy(dA)}x ${m[2]} ${qbExplainTidy(dB)}.`);
+    steps.push(`Divide both sides by ${qbExplainTidy(dA)}: ${qbExplainTidy(dB)} \u00f7 ${qbExplainTidy(dA)} = ${qbExplainTidy(x)}.`);
+  }
+
+  if (m[2] === "=") {
+    if (!qbExplainClose(x, qbExplainNumber(correct))) return null;
+    return steps;
+  }
+
+  const answer = String(correct).match(/^([xy])\s*(<=|>=|<|>)\s*(-?\d+(?:\.\d+)?)$/);
+  if (!answer) return null;
+  const flip = { "<": ">", ">": "<", "<=": ">=", ">=": "<=" };
+  const sign = dA < 0 ? flip[m[2]] : m[2];
+  if (answer[1] !== "x" || answer[2] !== sign || !qbExplainClose(parseFloat(answer[3]), x)) return null;
+  if (dA < 0) steps.push(`Dividing by a negative number flips the inequality, so change ${m[2]} to ${sign}.`);
+  steps.push(`So x ${sign} ${qbExplainTidy(x)}.`);
+  return steps;
+}
+
+// Arithmetic and geometric sequences and series.
+function qbExplainSequenceSteps(text, correct) {
+  const target = qbExplainNumber(correct);
+  const t = String(text);
+
+  const arithTerm = t.match(/arithmetic sequence starts at (-?\d+) with common difference (-?\d+)\. What is the (\d+)/i);
+  if (arithTerm) {
+    const a = parseInt(arithTerm[1], 10), d = parseInt(arithTerm[2], 10), n = parseInt(arithTerm[3], 10);
+    const term = a + (n - 1) * d;
+    if (!qbExplainClose(term, target)) return null;
+    return [
+      `Each term is the one before it plus the common difference, ${d}.`,
+      `From the first term to term ${n} there are ${n - 1} jumps of ${d}: ${a} + ${n - 1} \u00d7 ${d} = ${term}.`,
+    ];
+  }
+
+  const geoTerm = t.match(/geometric sequence starts at (-?\d+) with common ratio (-?\d+)\. What is the (\d+)/i);
+  if (geoTerm) {
+    const a = parseInt(geoTerm[1], 10), r = parseInt(geoTerm[2], 10), n = parseInt(geoTerm[3], 10);
+    const term = a * Math.pow(r, n - 1);
+    if (!qbExplainClose(term, target)) return null;
+    return [
+      `Each term multiplies by the common ratio, ${r}.`,
+      `From term 1 to term ${n} the ratio is used ${n - 1} times: ${a} \u00d7 ${r}^${n - 1} = ${term}.`,
+    ];
+  }
+
+  const arithSum = t.match(/sum of the first (\d+) terms of an arithmetic sequence with first term (-?\d+) and common difference (-?\d+)/i);
+  if (arithSum) {
+    const n = parseInt(arithSum[1], 10), a = parseInt(arithSum[2], 10), d = parseInt(arithSum[3], 10);
+    const last = a + (n - 1) * d;
+    const sum = (n * (a + last)) / 2;
+    if (!qbExplainClose(sum, target)) return null;
+    return [
+      `The last term is ${a} + ${n - 1} \u00d7 ${d} = ${last}.`,
+      `Sum = number of terms \u00d7 (first + last) \u00f7 2: ${n} \u00d7 (${a} + ${last}) \u00f7 2 = ${sum}.`,
+    ];
+  }
+
+  const geoSum = t.match(/sum of the first (\d+) terms of a geometric sequence with first term (-?\d+) and common ratio (-?\d+)/i);
+  if (geoSum) {
+    const n = parseInt(geoSum[1], 10), a = parseInt(geoSum[2], 10), r = parseInt(geoSum[3], 10);
+    const sum = r === 1 ? a * n : (a * (Math.pow(r, n) - 1)) / (r - 1);
+    if (!qbExplainClose(sum, target)) return null;
+    return [
+      `Use the sum formula \u00d7 (r^n \u2212 1) \u00f7 (r \u2212 1): ${a} \u00d7 (${r}^${n} \u2212 1) \u00f7 (${r} \u2212 1).`,
+      `${r}^${n} = ${Math.pow(r, n)}, so ${a} \u00d7 ${Math.pow(r, n) - 1} \u00f7 ${r - 1} = ${sum}.`,
+    ];
+  }
+
+  const infinite = t.match(/infinite geometric series ([\d.]+) \+ ([\d.]+) \+/i);
+  if (infinite) {
+    const a = parseFloat(infinite[1]);
+    const next = parseFloat(infinite[2]);
+    const r = next / a;
+    const sum = a / (1 - r);
+    if (!qbExplainClose(sum, target)) return null;
+    return [
+      `The common ratio is ${qbExplainTidy(next)} \u00f7 ${qbExplainTidy(a)} = ${qbExplainTidy(r)}.`,
+      `An infinite geometric series with |r| < 1 adds up to a \u00f7 (1 \u2212 r): ${qbExplainTidy(a)} \u00f7 (1 \u2212 ${qbExplainTidy(r)}) = ${qbExplainTidy(sum)}.`,
+    ];
+  }
+
+  return null;
+}
+
+// Mean, median, range and a missing value from a mean.
+function qbExplainStatsSteps(text, correct) {
+  const target = qbExplainNumber(correct);
+  const t = String(text);
+
+  const listed = t.match(/(mean|median|range)(?: \(average\))? of: ([^?]+)\?/i);
+  if (listed) {
+    const kind = listed[1].toLowerCase();
+    const nums = qbExplainNums(listed[2]);
+    if (nums.length < 2) return null;
+    if (kind === "mean") {
+      const sum = nums.reduce((s, v) => s + v, 0);
+      const mean = sum / nums.length;
+      if (!qbExplainClose(mean, target, 0.06)) return null;
+      return [
+        `Add them up: ${nums.join(" + ")} = ${qbExplainTidy(sum)}.`,
+        `Divide by how many there are: ${qbExplainTidy(sum)} \u00f7 ${nums.length} = ${qbExplainTidy(mean)}.`,
+      ];
+    }
+    if (kind === "range") {
+      const range = Math.max.apply(null, nums) - Math.min.apply(null, nums);
+      if (!qbExplainClose(range, target)) return null;
+      return [
+        `The largest is ${Math.max.apply(null, nums)} and the smallest is ${Math.min.apply(null, nums)}.`,
+        `Range = largest \u2212 smallest = ${Math.max.apply(null, nums)} \u2212 ${Math.min.apply(null, nums)} = ${range}.`,
+      ];
+    }
+    const sorted = nums.slice().sort((a, b) => a - b);
+    const middle = sorted.length % 2
+      ? sorted[(sorted.length - 1) / 2]
+      : (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2;
+    if (!qbExplainClose(middle, target)) return null;
+    return [
+      `Put them in order: ${sorted.join(", ")}.`,
+      sorted.length % 2
+        ? `There are ${sorted.length} numbers, so the middle one is the median: ${middle}.`
+        : `There are ${sorted.length} numbers, so average the two middle ones: (${sorted[sorted.length / 2 - 1]} + ${sorted[sorted.length / 2]}) \u00f7 2 = ${middle}.`,
+    ];
+  }
+
+  const missing = t.match(/mean of (\d+) numbers is (\d+(?:\.\d+)?)\. Four of them are ([\d, .-]+?)\. What is the/i);
+  if (missing) {
+    const count = parseInt(missing[1], 10);
+    const mean = parseFloat(missing[2]);
+    const known = qbExplainNums(missing[3]);
+    if (known.length < 4) return null;
+    const total = count * mean;
+    const sum = known.reduce((s, v) => s + v, 0);
+    const value = total - sum;
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `The mean tells you the total: ${count} \u00d7 ${qbExplainTidy(mean)} = ${qbExplainTidy(total)}.`,
+      `Add the four numbers you know: ${known.join(" + ")} = ${qbExplainTidy(sum)}.`,
+      `The missing number is what is left: ${qbExplainTidy(total)} \u2212 ${qbExplainTidy(sum)} = ${qbExplainTidy(value)}.`,
+    ];
+  }
+
+  return null;
+}
+
+// Ratios, rates and sharing word problems.
+function qbExplainRatioSteps(text, correct) {
+  const target = qbExplainNumber(correct);
+  const t = String(text);
+
+  const share = t.match(/\$([\d,.]+) is shared in the ratio (\d+):(\d+)\. What is the larger share/i);
+  if (share) {
+    const total = qbExplainValue(share[1]);
+    const a = parseInt(share[2], 10), b = parseInt(share[3], 10);
+    const parts = a + b;
+    const unit = total / parts;
+    const larger = Math.max(a, b) * unit;
+    if (!qbExplainClose(larger, target, 0.02)) return null;
+    return [
+      `Add the ratio parts: ${a} + ${b} = ${parts} parts in all.`,
+      `Each part is worth ${qbExplainMoney(total)} \u00f7 ${parts} = ${qbExplainMoney(unit)}.`,
+      `The larger share is ${Math.max(a, b)} parts: ${Math.max(a, b)} \u00d7 ${qbExplainMoney(unit)} = ${qbExplainMoney(larger)}.`,
+    ];
+  }
+
+  const equiv = t.match(/Which ratio is equivalent to (\d+):(\d+)/i);
+  if (equiv) {
+    const a = parseInt(equiv[1], 10), b = parseInt(equiv[2], 10);
+    const pair = String(correct).match(/(\d+)\s*:\s*(\d+)/);
+    if (!pair) return null;
+    const ca = parseInt(pair[1], 10), cb = parseInt(pair[2], 10);
+    if (!a || ca % a !== 0 || cb % b !== 0 || ca / a !== cb / b) return null;
+    const k = ca / a;
+    return [
+      `Multiply both sides of ${a}:${b} by the same number to keep the ratio equal.`,
+      `${a} \u00d7 ${k} = ${ca} and ${b} \u00d7 ${k} = ${cb}, so ${ca}:${cb} is equivalent.`,
+    ];
+  }
+
+  const boys = t.match(/ratio of boys to girls is (\d+):(\d+)\. If there are (\d+) boys, how many girls/i);
+  if (boys) {
+    const b = parseInt(boys[1], 10), g = parseInt(boys[2], 10), have = parseInt(boys[3], 10);
+    const girls = (have / b) * g;
+    if (!qbExplainClose(girls, target)) return null;
+    return [
+      `The ratio says ${b} boys for every ${g} girls.`,
+      `${have} boys is ${have} \u00f7 ${b} = ${qbExplainTidy(have / b)} groups of ${b}.`,
+      `Each group has ${g} girls, so ${qbExplainTidy(have / b)} \u00d7 ${g} = ${qbExplainTidy(girls)} girls.`,
+    ];
+  }
+
+  const notebooks = t.match(/If (\d+) notebooks cost \$([\d,.]+), how much do (\d+) notebooks cost/i);
+  if (notebooks) {
+    const base = parseInt(notebooks[1], 10), cost = qbExplainValue(notebooks[2]), want = parseInt(notebooks[3], 10);
+    const unit = cost / base;
+    const total = unit * want;
+    if (!qbExplainClose(total, target, 0.02)) return null;
+    return [
+      `Find the price of one: ${qbExplainMoney(cost)} \u00f7 ${base} = ${qbExplainMoney(unit)} each.`,
+      `Then multiply: ${want} \u00d7 ${qbExplainMoney(unit)} = ${qbExplainMoney(total)}.`,
+    ];
+  }
+
+  const single = t.match(/One notebook costs \$([\d,.]+)\. How much do (\d+) notebooks cost/i);
+  if (single) {
+    const unit = qbExplainValue(single[1]);
+    const count = parseInt(single[2], 10);
+    const total = unit * count;
+    if (!qbExplainClose(total, target, 0.02)) return null;
+    return [`Each notebook costs ${qbExplainMoney(unit)}.`, `${count} \u00d7 ${qbExplainMoney(unit)} = ${qbExplainMoney(total)}.`];
+  }
+
+  const speed = t.match(/travels ([\d.]+) miles in ([\d.]+) hours\. What is its speed/i);
+  if (speed) {
+    const miles = parseFloat(speed[1]);
+    const hours = parseFloat(speed[2]);
+    const rate = miles / hours;
+    if (!qbExplainClose(rate, target)) return null;
+    return [
+      "Speed is distance \u00f7 time.",
+      `${qbExplainTidy(miles)} \u00f7 ${qbExplainTidy(hours)} = ${qbExplainTidy(rate)} miles per hour.`,
+    ];
+  }
+
+  const stickers = t.match(/has (\d+) stickers\. She gets (\d+) more, then gives (\d+) away/i);
+  if (stickers) {
+    const start = parseInt(stickers[1], 10), gain = parseInt(stickers[2], 10), loss = parseInt(stickers[3], 10);
+    const left = start + gain - loss;
+    if (!qbExplainClose(left, target)) return null;
+    return [
+      `Start with ${start} and add the ${gain} she gets: ${start} + ${gain} = ${start + gain}.`,
+      `Then take away the ${loss} she gives away: ${start + gain} \u2212 ${loss} = ${left}.`,
+    ];
+  }
+
+  const more = t.match(/has (\d+) stickers\. Ana has (\d+) stickers\. How many more stickers does Ana have/i);
+  if (more) {
+    const first = parseInt(more[1], 10), second = parseInt(more[2], 10);
+    const diff = second - first;
+    if (!qbExplainClose(diff, target)) return null;
+    return [`Compare the two amounts: ${second} \u2212 ${first} = ${diff}.`, `Ana has ${diff} more stickers.`];
+  }
+
+  const shopping = t.match(/buy (\d+) notebooks at \$(\d+) each and a pen for \$(\d+)/i);
+  if (shopping) {
+    const count = parseInt(shopping[1], 10), each = parseInt(shopping[2], 10), pen = parseInt(shopping[3], 10);
+    const total = count * each + pen;
+    if (!qbExplainClose(total, target)) return null;
+    return [
+      `The notebooks cost ${count} \u00d7 $${each} = $${count * each}.`,
+      `Add the pen: $${count * each} + $${pen} = $${total}.`,
+      `So the total cost is $${total}.`,
+    ];
+  }
+
+  const boxes = t.match(/buys (\d+) boxes with (\d+) pencils in each box\. They give away (\d+)/i);
+  if (boxes) {
+    const count = parseInt(boxes[1], 10), each = parseInt(boxes[2], 10), away = parseInt(boxes[3], 10);
+    const left = count * each - away;
+    if (!qbExplainClose(left, target)) return null;
+    return [
+      `First find the pencils bought: ${count} \u00d7 ${each} = ${count * each}.`,
+      `Then subtract the ones given away: ${count * each} \u2212 ${away} = ${left}.`,
+    ];
+  }
+
+  const parentheses = t.match(/What is \((\d+) ([+-]) (\d+)\)\^2 ([+-]) (\d+) x (\d+)\?/i);
+  if (parentheses) {
+    const a = parseInt(parentheses[1], 10), innerOp = parentheses[2], b = parseInt(parentheses[3], 10);
+    const outerOp = parentheses[4], c = parseInt(parentheses[5], 10), d = parseInt(parentheses[6], 10);
+    const inner = innerOp === "+" ? a + b : a - b;
+    const squared = inner * inner;
+    const product = c * d;
+    const value = outerOp === "+" ? squared + product : squared - product;
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `Do the bracket first: ${a} ${innerOp} ${b} = ${inner}.`,
+      `Square it: ${inner}\u00b2 = ${squared}. Then the multiplication: ${c} \u00d7 ${d} = ${product}.`,
+      `Finish with ${squared} ${outerOp} ${product} = ${value}.`,
+    ];
+  }
+
+  const gcf = t.match(/greatest common factor \(GCF\) of (\d+) and (\d+)/i);
+  if (gcf) {
+    const a = parseInt(gcf[1], 10), b = parseInt(gcf[2], 10);
+    const value = qbExplainGcd(a, b);
+    if (!qbExplainClose(value, target)) return null;
+    const factors = (n) => {
+      const list = [];
+      for (let i = 1; i <= n; i++) if (n % i === 0) list.push(i);
+      return list;
+    };
+    const shared = factors(a).filter(v => b % v === 0);
+    return [
+      `Factors of ${a}: ${factors(a).join(", ")}. Factors of ${b}: ${factors(b).join(", ")}.`,
+      `The shared factors are ${shared.join(", ")}; the greatest is ${value}.`,
+    ];
+  }
+
+  const sumDiff = t.match(/sum of two numbers is (\d+) and their difference is (\d+)\. What is the larger number/i);
+  if (sumDiff) {
+    const sum = parseInt(sumDiff[1], 10), diff = parseInt(sumDiff[2], 10);
+    const larger = (sum + diff) / 2;
+    if (!qbExplainClose(larger, target)) return null;
+    return [
+      `Call the numbers a and b: a + b = ${sum} and a \u2212 b = ${diff}.`,
+      `Add the two equations to remove b: 2a = ${sum + diff}, so a = ${larger}.`,
+    ];
+  }
+
+  return null;
+}
+
+// Algebra: functions, quadratics, logs, interest, counting, matrices and limits.
+function qbExplainQuadraticParts(body) {
+  const m = String(body).match(/^(-?\d*)x\^2\s*([+-])\s*(\d+)x\s*([+-])\s*(\d+)$/);
+  if (!m) return null;
+  const lead = m[1];
+  const a = lead === "" || lead === "+" ? 1 : lead === "-" ? -1 : parseInt(lead, 10);
+  const b = (m[2] === "-" ? -1 : 1) * parseInt(m[3], 10);
+  const c = (m[4] === "-" ? -1 : 1) * parseInt(m[5], 10);
+  return { a: a, b: b, c: c };
+}
+
+function qbExplainAlgebraSteps(text, correct) {
+  const target = qbExplainNumber(correct);
+  const t = String(text);
+
+  const power = t.match(/Simplify: \((\d+)\^(\d+)\)\^(\d+) = \d+\^\?/);
+  if (power) {
+    const base = parseInt(power[1], 10), first = parseInt(power[2], 10), second = parseInt(power[3], 10);
+    const exponent = first * second;
+    if (!qbExplainClose(exponent, target)) return null;
+    return [
+      "A power raised to a power multiplies the exponents.",
+      `(${base}^${first})^${second} = ${base}^(${first} \u00d7 ${second}) = ${base}^${exponent}.`,
+      `So the missing exponent is ${exponent}.`,
+    ];
+  }
+
+  const sameBase = t.match(/Simplify: (\d+)\^(\d+) x (\d+)\^(\d+) = \d+\^\?/);
+  if (sameBase) {
+    const base = parseInt(sameBase[1], 10);
+    if (parseInt(sameBase[3], 10) !== base) return null;
+    const sum = parseInt(sameBase[2], 10) + parseInt(sameBase[4], 10);
+    if (!qbExplainClose(sum, target)) return null;
+    return [
+      "Multiplying powers of the same base adds the exponents.",
+      `${sameBase[1]}^${sameBase[2]} \u00d7 ${sameBase[3]}^${sameBase[4]} = ${sameBase[1]}^(${sameBase[2]} + ${sameBase[4]}) = ${sameBase[1]}^${sum}.`,
+    ];
+  }
+
+  const varPower = t.match(/Simplify: x\^(\d+) \* x\^(\d+) = x\^\?/);
+  if (varPower) {
+    const sum = parseInt(varPower[1], 10) + parseInt(varPower[2], 10);
+    if (!qbExplainClose(sum, target)) return null;
+    return [
+      "Multiplying powers of x adds the exponents.",
+      `x^${varPower[1]} \u00d7 x^${varPower[2]} = x^(${varPower[1]} + ${varPower[2]}) = x^${sum}.`,
+    ];
+  }
+
+  const sameBaseDiv = t.match(/Simplify: (\d+)\^(\d+) \/ (\d+)\^(\d+) = \d+\^\?/);
+  if (sameBaseDiv) {
+    const base = parseInt(sameBaseDiv[1], 10);
+    if (parseInt(sameBaseDiv[3], 10) !== base) return null;
+    const diff = parseInt(sameBaseDiv[2], 10) - parseInt(sameBaseDiv[4], 10);
+    if (diff < 0 || !qbExplainClose(diff, target)) return null;
+    return [
+      "Dividing powers of the same base subtracts the exponents.",
+      `${sameBaseDiv[1]}^${sameBaseDiv[2]} \u00f7 ${sameBaseDiv[3]}^${sameBaseDiv[4]} = ${sameBaseDiv[1]}^(${sameBaseDiv[2]} \u2212 ${sameBaseDiv[4]}) = ${sameBaseDiv[1]}^${diff}.`,
+    ];
+  }
+
+  const fn = t.match(/If f\(x\) = (-?\d*)x ([+-]) (\d+), what is f\((-?\d+)\)/);
+  if (fn) {
+    const rawCoef = fn[1];
+    const a = rawCoef === "" || rawCoef === "+" ? 1 : rawCoef === "-" ? -1 : parseFloat(rawCoef);
+    const b = (fn[2] === "-" ? -1 : 1) * parseFloat(fn[3]);
+    const input = parseFloat(fn[4]);
+    const value = a * input + b;
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `Put ${qbExplainTidy(input)} wherever x is: f(${qbExplainTidy(input)}) = ${qbExplainTidy(a)}(${qbExplainTidy(input)}) ${qbExplainSignText(b)}.`,
+      `Multiply first: ${qbExplainTidy(a)} \u00d7 ${qbExplainTidy(input)} = ${qbExplainTidy(a * input)}, then ${qbExplainTidy(a * input)} ${qbExplainSignText(b)} = ${qbExplainTidy(value)}.`,
+    ];
+  }
+
+  const inverse = t.match(/If f\(x\) = (-?\d*)x ([+-]) (\d+), what is the inverse function/);
+  if (inverse) {
+    const rawCoef = inverse[1];
+    const a = rawCoef === "" || rawCoef === "+" ? 1 : rawCoef === "-" ? -1 : parseFloat(rawCoef);
+    const b = (inverse[2] === "-" ? -1 : 1) * parseFloat(inverse[3]);
+    if (!a) return null;
+    const expected = `(x ${b >= 0 ? "-" : "+"} ${qbExplainTidy(Math.abs(b))}) / ${qbExplainTidy(a)}`;
+    if (String(correct).replace(/\s+/g, "") !== expected.replace(/\s+/g, "")) return null;
+    return [
+      `Start from y = ${qbExplainTidy(a)}x ${qbExplainSignText(b)} and swap x and y: x = ${qbExplainTidy(a)}y ${qbExplainSignText(b)}.`,
+      `Solve for y: x ${b >= 0 ? "\u2212" : "+"} ${qbExplainTidy(Math.abs(b))} = ${qbExplainTidy(a)}y, so y = (x ${b >= 0 ? "\u2212" : "+"} ${qbExplainTidy(Math.abs(b))}) \u00f7 ${qbExplainTidy(a)}.`,
+    ];
+  }
+
+  const disc = t.match(/For (-?\d*)x\^2 ([+-]) (\d+)x ([+-]) (\d+) = 0, what is the discriminant/i);
+  if (disc) {
+    const rawA = disc[1];
+    const a = rawA === "" || rawA === "+" ? 1 : rawA === "-" ? -1 : parseInt(rawA, 10);
+    const b = (disc[2] === "-" ? -1 : 1) * parseInt(disc[3], 10);
+    const c = (disc[4] === "-" ? -1 : 1) * parseInt(disc[5], 10);
+    const value = b * b - 4 * a * c;
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `Here a = ${a}, b = ${b} and c = ${c}.`,
+      `b\u00b2 \u2212 4ac = (${b})\u00b2 \u2212 4 \u00d7 ${a} \u00d7 ${c} = ${b * b} \u2212 ${4 * a * c} = ${value}.`,
+    ];
+  }
+
+  const quadratic = t.match(/(?:What are the roots of|Solve using the quadratic formula:|Solve:) (-?\d*)x\^2 ([+-]) (\d+)x ([+-]) (\d+) = 0/);
+  if (quadratic) {
+    const parts = qbExplainQuadraticParts(quadratic[1] + "x^2 " + quadratic[2] + " " + quadratic[3] + "x " + quadratic[4] + " " + quadratic[5]);
+    if (!parts) return null;
+    const { a, b, c } = parts;
+    const d = b * b - 4 * a * c;
+    if (d < 0) return null;
+    const root = Math.sqrt(d);
+    if (Math.abs(root - Math.round(root)) > 0.0001) return null;
+    const r1 = (-b + root) / (2 * a);
+    const r2 = (-b - root) / (2 * a);
+    const found = (String(correct).match(/-?\d+(?:\.\d+)?/g) || []).map(Number).sort((x, y) => x - y);
+    const want = [r1, r2].map(v => Math.round(v * 1000) / 1000).sort((x, y) => x - y);
+    if (found.length !== 2 || !qbExplainClose(found[0], want[0]) || !qbExplainClose(found[1], want[1])) return null;
+    return [
+      `Write it as ax\u00b2 + bx + c = 0: a = ${a}, b = ${b}, c = ${c}.`,
+      `The discriminant is b\u00b2 \u2212 4ac = ${b * b} \u2212 ${4 * a * c} = ${d}, so \u221ad = ${root}.`,
+      `x = (\u2212b \u00b1 \u221ad) \u00f7 2a = (${-b} \u00b1 ${root}) \u00f7 ${2 * a}, giving x = ${qbExplainTidy(r1)} and x = ${qbExplainTidy(r2)}.`,
+    ];
+  }
+
+  const logValue = t.match(/What is log base (\d+) of (\d+)\?/);
+  if (logValue) {
+    const base = parseInt(logValue[1], 10), value = parseInt(logValue[2], 10);
+    let power = 0;
+    let current = 1;
+    while (current < value && power < 40) { current *= base; power++; }
+    if (current !== value || !qbExplainClose(power, target)) return null;
+    return [
+      `A log asks: what power of ${base} gives ${value}?`,
+      `${base}^${power} = ${value}, so log base ${base} of ${value} = ${power}.`,
+    ];
+  }
+
+  const logSolve = t.match(/Solve for x: log base (\d+) of x = (\d+)\./);
+  if (logSolve) {
+    const base = parseInt(logSolve[1], 10), power = parseInt(logSolve[2], 10);
+    const value = Math.pow(base, power);
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `log base ${base} of x = ${power} means ${base}^${power} = x.`,
+      `${base}^${power} = ${value}, so x = ${value}.`,
+    ];
+  }
+
+  if (/log\(x\) \+ log\(y\)/.test(t)) {
+    if (String(correct) !== "log(xy)") return null;
+    return [
+      "Adding two logs of the same base multiplies what is inside them.",
+      "log(x) + log(y) = log(x \u00d7 y) = log(xy).",
+    ];
+  }
+
+  const growth = t.match(/starts with (\d+) bacteria and (doubles|triples) every hour\. How many bacteria are there after (\d+) hours/i);
+  if (growth) {
+    const start = parseInt(growth[1], 10);
+    const rate = growth[2].toLowerCase() === "doubles" ? 2 : 3;
+    const hours = parseInt(growth[3], 10);
+    const value = start * Math.pow(rate, hours);
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `The colony ${growth[2].toLowerCase()} each hour, so multiply by ${rate} every hour.`,
+      `After ${hours} hours the factor ${rate} is used ${hours} times: ${start} \u00d7 ${rate}^${hours} = ${start} \u00d7 ${Math.pow(rate, hours)} = ${value}.`,
+    ];
+  }
+
+  const growthEval = t.match(/growth factor (\d+), evaluate (\d+)\^(\d+)/i);
+  if (growthEval) {
+    const base = parseInt(growthEval[1], 10);
+    const same = parseInt(growthEval[2], 10);
+    const power = parseInt(growthEval[3], 10);
+    if (base !== same) return null;
+    const value = Math.pow(base, power);
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `The growth factor ${base} is multiplied in ${power} times.`,
+      `${base}^${power} = ${value}.`,
+    ];
+  }
+
+  const interest = t.match(/\$([\d,]+) is invested at ([\d.]+)% interest compounded annually for (\d+) years/i);
+  if (interest) {
+    const principal = parseFloat(interest[1].replace(/,/g, ""));
+    const rate = parseFloat(interest[2]) / 100;
+    const years = parseInt(interest[3], 10);
+    const balance = principal * Math.pow(1 + rate, years);
+    if (!qbExplainClose(Math.round(balance), target, 0.02)) return null;
+    return [
+      `Each year the balance is multiplied by 1 + ${qbExplainTidy(rate)} = ${(1 + rate).toFixed(2)}.`,
+      `${qbExplainMoney(principal)} \u00d7 ${(1 + rate).toFixed(2)}^${years} = ${qbExplainMoney(balance)}, which rounds to ${qbExplainMoney(target)}.`,
+    ];
+  }
+
+  const choose = t.match(/How many ways can you choose (\d+) students from a group of (\d+)/i);
+  if (choose) {
+    const pick = parseInt(choose[1], 10), from = parseInt(choose[2], 10);
+    const fact = (n) => { let r = 1; for (let i = 2; i <= n; i++) r *= i; return r; };
+    const value = fact(from) / (fact(pick) * fact(from - pick));
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `Order does not matter, so use combinations: ${from}C${pick} = ${from}! \u00f7 (${pick}! \u00d7 ${from - pick}!).`,
+      `${fact(from)} \u00f7 (${fact(pick)} \u00d7 ${fact(from - pick)}) = ${qbExplainTidy(value)}.`,
+    ];
+  }
+
+  const permute = t.match(/How many different ways can (\d+) of (\d+) students line up/i);
+  if (permute) {
+    const pick = parseInt(permute[1], 10), from = parseInt(permute[2], 10);
+    const value = from * (from - 1);
+    if (pick !== 2 || !qbExplainClose(value, target)) return null;
+    return [
+      "Order matters, so the first place has " + from + " choices and the second has " + (from - 1) + ".",
+      `${from} \u00d7 ${from - 1} = ${value} different line-ups.`,
+    ];
+  }
+
+  const determinant = t.match(/determinant of the matrix \[\[(-?\d+), (-?\d+)\], \[(-?\d+), (-?\d+)\]\]/);
+  if (determinant) {
+    const a = parseInt(determinant[1], 10), b = parseInt(determinant[2], 10);
+    const c = parseInt(determinant[3], 10), d = parseInt(determinant[4], 10);
+    const value = a * d - b * c;
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      "For [[a, b], [c, d]] the determinant is ad \u2212 bc.",
+      `(${a} \u00d7 ${d}) \u2212 (${b} \u00d7 ${c}) = ${a * d} \u2212 ${b * c} = ${value}.`,
+    ];
+  }
+
+  const vector = t.match(/magnitude of the vector \(x, y\) = \((-?\d+), (-?\d+)\)/);
+  if (vector) {
+    const x = parseInt(vector[1], 10), y = parseInt(vector[2], 10);
+    const value = Math.sqrt(x * x + y * y);
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      "Magnitude comes from the distance formula: \u221a(x\u00b2 + y\u00b2).",
+      `\u221a(${x}\u00b2 + ${y}\u00b2) = \u221a(${x * x} + ${y * y}) = \u221a${x * x + y * y} = ${qbExplainTidy(value)}.`,
+    ];
+  }
+
+  const limit = t.match(/limit as x approaches (-?\d+) of \(x\^2 - (\d+)\) \/ \(x - (-?\d+)\)/);
+  if (limit) {
+    const a = parseInt(limit[1], 10);
+    const square = parseInt(limit[2], 10);
+    if (square !== a * a || parseInt(limit[3], 10) !== a) return null;
+    const value = 2 * a;
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `Factor the top as a difference of squares: x\u00b2 \u2212 ${square} = (x \u2212 ${a})(x + ${a}).`,
+      `The (x \u2212 ${a}) cancels: (x \u2212 ${a})(x + ${a}) \u00f7 (x \u2212 ${a}) = x + ${a}.`,
+      `Now substitute x = ${a}: ${a} + ${a} = ${value}.`,
+    ];
+  }
+
+  const rationalOne = t.match(/Simplify: \((\d+)x\^2\) \/ \((\d+)x\), for x not equal to 0/i);
+  if (rationalOne) {
+    if (rationalOne[1] !== rationalOne[2] || String(correct) !== "x") return null;
+    return [
+      `Divide the numbers: ${rationalOne[1]} \u00f7 ${rationalOne[2]} = 1.`,
+      "Divide the powers of x: x\u00b2 \u00f7 x = x. So the simplified expression is x.",
+    ];
+  }
+
+  const rationalTwo = t.match(/Simplify: \((\d+)x\^2 \+ (\d+)x\) \/ \((\d+)x\)/i);
+  if (rationalTwo) {
+    const a = parseInt(rationalTwo[1], 10);
+    const b = parseInt(rationalTwo[2], 10);
+    const c = parseInt(rationalTwo[3], 10);
+    if (a !== c || b !== a * parseInt(String(correct).replace(/[^\d]/g, ""), 10) / a) return null;
+    const constant = b / c;
+    if (String(correct).replace(/\s+/g, "") !== `x+${constant}`) return null;
+    return [
+      `Split the fraction: (${a}x\u00b2 \u00f7 ${c}x) + (${b}x \u00f7 ${c}x).`,
+      `${a}x\u00b2 \u00f7 ${c}x = x and ${b}x \u00f7 ${c}x = ${constant}, so the answer is x + ${constant}.`,
+    ];
+  }
+
+  const complex = t.match(/Add the complex numbers: \((-?\d+) ([+-]) (\d+)i\) \+ \((-?\d+) ([+-]) (\d+)i\)/);
+  if (complex) {
+    const r1 = parseInt(complex[1], 10);
+    const i1 = (complex[2] === "-" ? -1 : 1) * parseInt(complex[3], 10);
+    const r2 = parseInt(complex[4], 10);
+    const i2 = (complex[5] === "-" ? -1 : 1) * parseInt(complex[6], 10);
+    const re = r1 + r2;
+    const im = i1 + i2;
+    const signed = (value) => (value < 0 ? `- ${Math.abs(value)}` : `+ ${value}`);
+    const expected = `${re} ${signed(im)}i`;
+    if (String(correct).replace(/\s+/g, "") !== expected.replace(/\s+/g, "")) return null;
+    return [
+      `Add the real parts: ${r1} + ${r2} = ${re}.`,
+      `Add the imaginary parts: ${i1} + ${i2} = ${im}, so the total is ${re} ${signed(im)}i.`,
+    ];
+  }
+
+  const sci = t.match(/Multiply and write in scientific notation: \((\d+) x 10\^(\d+)\) x \((\d+) x 10\^(\d+)\)/);
+  if (sci) {
+    const a = parseInt(sci[1], 10), e1 = parseInt(sci[2], 10);
+    const b = parseInt(sci[3], 10), e2 = parseInt(sci[4], 10);
+    const expected = `${a * b} x 10^${e1 + e2}`;
+    if (String(correct) !== expected) return null;
+    return [
+      `Multiply the front numbers: ${a} \u00d7 ${b} = ${a * b}.`,
+      `Add the exponents of 10: ${e1} + ${e2} = ${e1 + e2}.`,
+      `Answer: ${a * b} x 10^${e1 + e2}.`,
+    ];
+  }
+
+  if (/1 \+ tan\^2\(theta\)/.test(t)) {
+    if (String(correct) !== "sec^2(theta)") return null;
+    return [
+      "Use the identity 1 + tan\u00b2\u03b8 = sec\u00b2\u03b8, which comes from dividing sin\u00b2\u03b8 + cos\u00b2\u03b8 = 1 by cos\u00b2\u03b8.",
+      "So 1 + tan\u00b2(theta) = sec\u00b2(theta).",
+    ];
+  }
+
+  return null;
+}
+
+// Geometry: angles, solids, similar shapes, slopes, midpoints and trigonometry.
+function qbExplainGeometrySteps2(text, correct) {
+  const target = qbExplainNumber(correct);
+  const t = String(text);
+  const lower = t.toLowerCase();
+  const pi = 3.14;
+
+  const triangleAngles = t.match(/triangle has angles of (\d+) degrees and (\d+) degrees.*?third angle/i);
+  if (triangleAngles) {
+    const a = parseInt(triangleAngles[1], 10), b = parseInt(triangleAngles[2], 10);
+    const third = 180 - a - b;
+    if (!qbExplainClose(third, target)) return null;
+    return [
+      "The angles in a triangle add to 180 degrees.",
+      `${a} + ${b} = ${a + b}, so the third angle is 180 \u2212 ${a + b} = ${third} degrees.`,
+    ];
+  }
+
+  const supplementary = t.match(/supplementary.*?(\d+) degrees/i);
+  if (supplementary) {
+    const a = parseInt(supplementary[1], 10);
+    const other = 180 - a;
+    if (!qbExplainClose(other, target)) return null;
+    return [
+      "Supplementary angles add to 180 degrees.",
+      `180 \u2212 ${a} = ${other} degrees.`,
+    ];
+  }
+
+  const complementary = t.match(/complementary.*?(\d+) degrees(?:.*?another measures (\d+) degrees)?/i);
+  if (complementary) {
+    const a = parseInt(complementary[1], 10);
+    const b = complementary[2] ? parseInt(complementary[2], 10) : 0;
+    const third = 90 - a - b;
+    if (!qbExplainClose(third, target)) return null;
+    return [
+      "Complementary angles add to 90 degrees.",
+      `90 \u2212 ${a}${b ? ` \u2212 ${b}` : ""} = ${third} degrees.`,
+    ];
+  }
+
+  const interior = t.match(/each interior angle of a regular (\d+)-sided polygon/i);
+  if (interior) {
+    const n = parseInt(interior[1], 10);
+    const total = (n - 2) * 180;
+    const each = Math.round((total / n) * 10) / 10;
+    if (!qbExplainClose(each, target, 0.05)) return null;
+    return [
+      `The interior angles of any ${n}-sided polygon add to (${n} \u2212 2) \u00d7 180 = ${total} degrees.`,
+      `It is regular, so divide equally: ${total} \u00f7 ${n} = ${qbExplainTidy(total / n)}, which rounds to ${qbExplainTidy(each)}.`,
+    ];
+  }
+
+  const sphere = t.match(/volume of a sphere with radius (\d+(?:\.\d+)?)/i);
+  if (sphere) {
+    const r = parseFloat(sphere[1]);
+    const volume = (4 / 3) * Math.PI * r * r * r;
+    if (!qbExplainClose(volume, target, 0.6)) return null;
+    return [
+      "Volume of a sphere is (4/3) \u00d7 \u03c0 \u00d7 r\u00b3.",
+      `r\u00b3 = ${qbExplainTidy(r * r * r)}, so (4/3) \u00d7 \u03c0 \u00d7 ${qbExplainTidy(r * r * r)} = ${qbExplainTidy(volume)}, which rounds to ${qbExplainTidy(target)}.`,
+    ];
+  }
+
+  const cone = t.match(/volume of a cone with radius (\d+(?:\.\d+)?) and height (\d+(?:\.\d+)?)/i);
+  if (cone) {
+    const r = parseFloat(cone[1]), h = parseFloat(cone[2]);
+    const volume = (Math.PI * r * r * h) / 3;
+    if (!qbExplainClose(volume, target, 0.6)) return null;
+    return [
+      "Volume of a cone is one third of the matching cylinder: (1/3) \u00d7 \u03c0 \u00d7 r\u00b2 \u00d7 h.",
+      `\u03c0 \u00d7 ${qbExplainTidy(r)} \u00d7 ${qbExplainTidy(r)} = ${qbExplainTidy(Math.PI * r * r)}, then \u00d7 ${qbExplainTidy(h)} \u00f7 3 = ${qbExplainTidy(volume)}, which rounds to ${qbExplainTidy(target)}.`,
+    ];
+  }
+
+  const prism = t.match(/volume of a rectangular prism with length (\d+(?:\.\d+)?), width (\d+(?:\.\d+)?), and height (\d+(?:\.\d+)?)/i);
+  if (prism) {
+    const l = parseFloat(prism[1]), w = parseFloat(prism[2]), h = parseFloat(prism[3]);
+    const volume = l * w * h;
+    if (!qbExplainClose(volume, target)) return null;
+    return [
+      "Volume of a rectangular prism is length \u00d7 width \u00d7 height.",
+      `${qbExplainTidy(l)} \u00d7 ${qbExplainTidy(w)} = ${qbExplainTidy(l * w)}, then \u00d7 ${qbExplainTidy(h)} = ${qbExplainTidy(volume)}.`,
+    ];
+  }
+
+  const cutout = t.match(/rectangle is (\d+(?:\.\d+)?) by (\d+(?:\.\d+)?)\. A (\d+(?:\.\d+)?) by (\d+(?:\.\d+)?) rectangle is cut out/i);
+  if (cutout) {
+    const l = parseFloat(cutout[1]), w = parseFloat(cutout[2]);
+    const cl = parseFloat(cutout[3]), cw = parseFloat(cutout[4]);
+    const area = l * w - cl * cw;
+    if (!qbExplainClose(area, target)) return null;
+    return [
+      `Area of the whole rectangle: ${qbExplainTidy(l)} \u00d7 ${qbExplainTidy(w)} = ${qbExplainTidy(l * w)}.`,
+      `Area of the corner piece: ${qbExplainTidy(cl)} \u00d7 ${qbExplainTidy(cw)} = ${qbExplainTidy(cl * cw)}.`,
+      `Subtract the cut-out: ${qbExplainTidy(l * w)} \u2212 ${qbExplainTidy(cl * cw)} = ${qbExplainTidy(area)}.`,
+    ];
+  }
+
+  const rectangleArea = t.match(/rectangle is (\d+(?:\.\d+)?) units long and (\d+(?:\.\d+)?) units wide\. What is its area/i);
+  if (rectangleArea) {
+    const l = parseFloat(rectangleArea[1]), w = parseFloat(rectangleArea[2]);
+    const area = l * w;
+    if (!qbExplainClose(area, target)) return null;
+    return ["Area of a rectangle is length \u00d7 width.", `${qbExplainTidy(l)} \u00d7 ${qbExplainTidy(w)} = ${qbExplainTidy(area)}.`];
+  }
+
+  const polynomial = t.match(/Simplify: \(([^)]+)\) \+ \(([^)]+)\)/i);
+  if (polynomial) {
+    const left = qbExplainLinearSide(polynomial[1]);
+    const right = qbExplainLinearSide(polynomial[2]);
+    if (!left || !right) return null;
+    const a = left.a + right.a;
+    const b = left.b + right.b;
+    const formatted = `${a}x ${b < 0 ? "-" : "+"} ${Math.abs(b)}`;
+    if (String(correct).replace(/\s+/g, "") !== formatted.replace(/\s+/g, "")) return null;
+    return [
+      `Combine the x terms: ${qbExplainTidy(left.a)}x ${qbExplainSignText(right.a)}x = ${qbExplainTidy(a)}x.`,
+      `Combine the numbers: ${qbExplainTidy(left.b)} ${qbExplainSignText(right.b)} = ${qbExplainTidy(b)}.`,
+      `So the simplified expression is ${formatted}.`,
+    ];
+  }
+
+  const parallelogram = t.match(/area of a parallelogram with base (\d+(?:\.\d+)?) and height (\d+(?:\.\d+)?)/i);
+  if (parallelogram) {
+    const b = parseFloat(parallelogram[1]), h = parseFloat(parallelogram[2]);
+    const area = b * h;
+    if (!qbExplainClose(area, target)) return null;
+    return ["A parallelogram's area is base \u00d7 height.", `${qbExplainTidy(b)} \u00d7 ${qbExplainTidy(h)} = ${qbExplainTidy(area)}.`];
+  }
+
+  const triangleArea = t.match(/area of a triangle with base (\d+(?:\.\d+)?) and height (\d+(?:\.\d+)?)/i);
+  if (triangleArea) {
+    const b = parseFloat(triangleArea[1]), h = parseFloat(triangleArea[2]);
+    const area = (b * h) / 2;
+    if (!qbExplainClose(area, target)) return null;
+    return [
+      `Base \u00d7 height = ${qbExplainTidy(b)} \u00d7 ${qbExplainTidy(h)} = ${qbExplainTidy(b * h)}.`,
+      `A triangle is half of that: ${qbExplainTidy(b * h)} \u00f7 2 = ${qbExplainTidy(area)}.`,
+    ];
+  }
+
+  const leg = t.match(/hypotenuse of (\d+(?:\.\d+)?) and one leg of (\d+(?:\.\d+)?)/i);
+  if (leg && /other leg/i.test(lower)) {
+    const c = parseFloat(leg[1]), a = parseFloat(leg[2]);
+    const b = Math.sqrt(c * c - a * a);
+    if (!qbExplainClose(b, target)) return null;
+    return [
+      "Use a\u00b2 + b\u00b2 = c\u00b2 and rearrange for the missing leg: b\u00b2 = c\u00b2 \u2212 a\u00b2.",
+      `${qbExplainTidy(c)}\u00b2 \u2212 ${qbExplainTidy(a)}\u00b2 = ${qbExplainTidy(c * c)} \u2212 ${qbExplainTidy(a * a)} = ${qbExplainTidy(c * c - a * a)}.`,
+      `Take the square root: \u221a${qbExplainTidy(c * c - a * a)} = ${qbExplainTidy(b)}.`,
+    ];
+  }
+
+  const similarSide = t.match(/side of ([\d/.]+) in the small triangle corresponds to a side of ([\d/.]+) in the large triangle\. If another side of the small triangle is ([\d/.]+)/i);
+  if (similarSide) {
+    const small = qbExplainValue(similarSide[1]);
+    const large = qbExplainValue(similarSide[2]);
+    const other = qbExplainValue(similarSide[3]);
+    const want = qbExplainValue(correct);
+    const answer = other * (large / small);
+    if (!qbExplainClose(answer, want, 0.01)) return null;
+    return [
+      `Find the scale factor: ${qbExplainTidy(large)} \u00f7 ${qbExplainTidy(small)} = ${qbExplainTidy(large / small)}.`,
+      `Multiply the matching small side by it: ${qbExplainTidy(other)} \u00d7 ${qbExplainTidy(large / small)} = ${qbExplainTidy(answer)}.`,
+    ];
+  }
+
+  const similarArea = t.match(/similar triangles have side lengths in the ratio (\d+):(\d+)\. What is the ratio of their areas/i);
+  if (similarArea) {
+    const a = parseInt(similarArea[1], 10), b = parseInt(similarArea[2], 10);
+    if (String(correct).replace(/\s+/g, "") !== `${a * a}:${b * b}`) return null;
+    return [
+      "Areas scale by the square of the side ratio.",
+      `Square both sides of ${a}:${b}: ${a}\u00b2:${b}\u00b2 = ${a * a}:${b * b}.`,
+    ];
+  }
+
+  const trig = t.match(/opposite side (\d+(?:\.\d+)?), adjacent side (\d+(?:\.\d+)?), and hypotenuse (\d+(?:\.\d+)?)[^.]*?(sine|cosine|tangent)/i);
+  if (trig) {
+    const opp = parseFloat(trig[1]), adj = parseFloat(trig[2]), hyp = parseFloat(trig[3]);
+    const kind = trig[4].toLowerCase();
+    const num = kind === "sine" ? opp : kind === "cosine" ? adj : opp;
+    const den = kind === "tangent" ? adj : hyp;
+    const reduced = qbExplainReduced(num, den);
+    const answer = qbExplainFraction(correct);
+    if (!answer || answer.num !== reduced.num || answer.den !== reduced.den) return null;
+    const ratio = kind === "sine" ? "opposite \u00f7 hypotenuse" : kind === "cosine" ? "adjacent \u00f7 hypotenuse" : "opposite \u00f7 adjacent";
+    return [
+      `${kind.charAt(0).toUpperCase() + kind.slice(1)} is ${ratio}.`,
+      `${qbExplainTidy(num)} \u00f7 ${qbExplainTidy(den)} = ${reduced.num}/${reduced.den}.`,
+    ];
+  }
+
+  const unit = t.match(/(sine|cosine|tangent) of (\d+) degrees/i);
+  if (unit) {
+    const kind = unit[1].toLowerCase();
+    const angle = parseInt(unit[2], 10);
+    const table = {
+      0: { sine: "0", cosine: "1", tangent: "0" },
+      30: { sine: "1/2", cosine: "sqrt(3)/2", tangent: "sqrt(3)/3" },
+      45: { sine: "sqrt(2)/2", cosine: "sqrt(2)/2", tangent: "1" },
+      60: { sine: "sqrt(3)/2", cosine: "1/2", tangent: "sqrt(3)" },
+      90: { sine: "1", cosine: "0", tangent: "undefined" },
+    };
+    const row = table[angle];
+    if (!row) return null;
+    if (String(correct).replace(/\s+/g, "") !== row[kind].replace(/\s+/g, "")) return null;
+    return [
+      `${angle} degrees is a special angle on the unit circle.`,
+      `The ${kind} of ${angle} degrees is ${row[kind]}.`,
+    ];
+  }
+
+  const midpoint = t.match(/midpoint of the segment from \((-?\d+(?:\.\d+)?), (-?\d+(?:\.\d+)?)\) to \((-?\d+(?:\.\d+)?), (-?\d+(?:\.\d+)?)\)/i);
+  if (midpoint) {
+    const x1 = parseFloat(midpoint[1]), y1 = parseFloat(midpoint[2]);
+    const x2 = parseFloat(midpoint[3]), y2 = parseFloat(midpoint[4]);
+    const mx = (x1 + x2) / 2, my = (y1 + y2) / 2;
+    const pair = String(correct).match(/\(\s*(-?[\d.]+)\s*,\s*(-?[\d.]+)\s*\)/);
+    if (!pair || !qbExplainClose(mx, parseFloat(pair[1])) || !qbExplainClose(my, parseFloat(pair[2]))) return null;
+    return [
+      "A midpoint averages the two x-coordinates and the two y-coordinates.",
+      `x: (${qbExplainTidy(x1)} + ${qbExplainTidy(x2)}) \u00f7 2 = ${qbExplainTidy(mx)}.`,
+      `y: (${qbExplainTidy(y1)} + ${qbExplainTidy(y2)}) \u00f7 2 = ${qbExplainTidy(my)}.`,
+    ];
+  }
+
+  const distance = t.match(/distance between the points \((-?\d+), (-?\d+)\) and \((-?\d+), (-?\d+)\)/i);
+  if (distance) {
+    const x1 = parseInt(distance[1], 10), y1 = parseInt(distance[2], 10);
+    const x2 = parseInt(distance[3], 10), y2 = parseInt(distance[4], 10);
+    const dx = x2 - x1, dy = y2 - y1;
+    const value = Math.sqrt(dx * dx + dy * dy);
+    if (!qbExplainClose(value, target)) return null;
+    return [
+      `Find the gaps: x changes by ${dx} and y changes by ${dy}.`,
+      `Use the distance formula: \u221a(${dx}\u00b2 + ${dy}\u00b2) = \u221a(${dx * dx} + ${dy * dy}) = \u221a${dx * dx + dy * dy} = ${qbExplainTidy(value)}.`,
+    ];
+  }
+
+  const slopePoints = t.match(/slope of the line through \((-?\d+), (-?\d+)\) and \((-?\d+), (-?\d+)\)/i);
+  if (slopePoints) {
+    const x1 = parseInt(slopePoints[1], 10), y1 = parseInt(slopePoints[2], 10);
+    const x2 = parseInt(slopePoints[3], 10), y2 = parseInt(slopePoints[4], 10);
+    if (x2 === x1) return null;
+    const rise = y2 - y1, run = x2 - x1;
+    const slope = rise / run;
+    const want = qbExplainValue(correct);
+    if (!qbExplainClose(slope, want)) return null;
+    return [
+      "Slope is rise over run: (y\u2082 \u2212 y\u2081) \u00f7 (x\u2082 \u2212 x\u2081).",
+      `Rise: ${y2} \u2212 ${y1} = ${rise}. Run: ${x2} \u2212 ${x1} = ${run}.`,
+      `Slope = ${rise} \u00f7 ${run} = ${qbExplainTidy(slope)}.`,
+    ];
+  }
+
+  const slopeStandard = t.match(/slope of the line (-?\d*)x \+ (\d*)y = (\d+)/i);
+  if (slopeStandard) {
+    const a = slopeStandard[1] === "" ? 1 : parseInt(slopeStandard[1], 10);
+    const b = slopeStandard[2] === "" ? 1 : parseInt(slopeStandard[2], 10);
+    if (!b) return null;
+    const slope = -a / b;
+    if (!qbExplainClose(slope, qbExplainValue(correct))) return null;
+    return [
+      "Solve for y to read the slope: move the x term over and divide by the y coefficient.",
+      `${b}y = ${slopeStandard[3]} \u2212 ${a}x, so y = ${slopeStandard[3]}/${b} \u2212 ${a}/${b} x.`,
+      `The slope is \u2212${a}/${b}${Number.isInteger(slope) ? ` = ${slope}` : ""}.`,
+    ];
+  }
+
+  const slopeIntercept = t.match(/In the equation y = (-?\d*)x ([+-]) (\d+), what is the slope/i);
+  if (slopeIntercept) {
+    const a = slopeIntercept[1] === "" ? 1 : parseInt(slopeIntercept[1], 10);
+    if (!qbExplainClose(a, target)) return null;
+    return [
+      "In y = mx + b, the number multiplying x is the slope.",
+      `In this equation that number is ${a}, so the slope is ${a}.`,
+    ];
+  }
+
+  const lawCos = t.match(/triangle has sides ([\d.]+) and ([\d.]+) with a ([\d.]+) degree angle between them\. What is the length of the third side/i);
+  if (lawCos) {
+    const a = parseFloat(lawCos[1]), b = parseFloat(lawCos[2]), angle = parseFloat(lawCos[3]);
+    const rad = (angle * Math.PI) / 180;
+    const c = Math.sqrt(a * a + b * b - 2 * a * b * Math.cos(rad));
+    if (!qbExplainClose(c, target, 0.06)) return null;
+    return [
+      "Use the law of cosines: c\u00b2 = a\u00b2 + b\u00b2 \u2212 2ab\u00b7cos C.",
+      `${a}\u00b2 + ${b}\u00b2 = ${a * a + b * b}, and 2 \u00d7 ${a} \u00d7 ${b} \u00d7 cos ${angle}\u00b0 = ${qbExplainTidy(2 * a * b * Math.cos(rad))}.`,
+      `c\u00b2 = ${qbExplainTidy(a * a + b * b - 2 * a * b * Math.cos(rad))}, so c = ${qbExplainTidy(c)}, which rounds to ${qbExplainTidy(target)}.`,
+    ];
+  }
+
+  const special = t.match(/30-60-90 triangle the (hypotenuse|shorter leg) is (\d+(?:\.\d+)?) cm/);
+  if (special) {
+    const given = special[1];
+    const value = parseFloat(special[2]);
+    if (given === "hypotenuse") {
+      const short = value / 2;
+      if (!qbExplainClose(short, target)) return null;
+      return [
+        "In a 30-60-90 triangle the shorter leg is half the hypotenuse.",
+        `${qbExplainTidy(value)} \u00f7 2 = ${qbExplainTidy(short)} cm.`,
+      ];
+    }
+    const longer = Math.round(value * Math.sqrt(3) * 10) / 10;
+    if (!qbExplainClose(longer, target, 0.06)) return null;
+    return [
+      "In a 30-60-90 triangle the longer leg is the shorter leg \u00d7 \u221a3.",
+      `${qbExplainTidy(value)} \u00d7 1.732... = ${qbExplainTidy(longer)}, which rounds to ${qbExplainTidy(target)} cm.`,
+    ];
+  }
+
+  return null;
+}
+
+const QB_EXPLAIN_TIPS = {
+  Math: "Write down the numbers and what the question asks for: put together means add, take away means subtract, equal groups mean multiply, sharing out means divide. Work one step at a time and check by working backwards.",
+  Reading: "Reread the sentence the question points to, then try each choice inside it. Only one will fit the meaning and the grammar.",
+  Science: "Name the one idea the question is testing, rule out the choices that describe something else, then compare the last two on their exact words.",
+  "Social Studies": "Picture the place and time the question is about, then rule out the choices that belong to another place, another era, or another group of people.",
+};
+
+function qbExplainQuestion(question, subject) {
+  const text = String((question && question.question) || "");
+  const correct = String((question && question.correct_text) || "");
+  const target = qbExplainNumber(correct);
+  let steps = null;
+
+  steps = qbExplainFractionSteps(text, correct)
+    || qbExplainProbabilitySteps(text, correct)
+    || qbExplainPercentStorySteps(text, correct)
+    || qbExplainEquationSteps(text, correct)
+    || qbExplainSequenceSteps(text, correct)
+    || qbExplainStatsSteps(text, correct)
+    || qbExplainRatioSteps(text, correct)
+    || qbExplainAlgebraSteps(text, correct)
+    || qbExplainGeometrySteps2(text, correct)
+    || qbExplainShapeSteps(text, target, correct)
+    || qbExplainClockSteps(text, correct)
+    || qbExplainElapsedSteps(text, correct)
+    || qbExplainAngleSteps(text, correct)
+    || qbExplainShadedSteps(text, correct)
+    || qbExplainFractionCompareSteps(text, correct)
+    || qbExplainBetterBuySteps(text, correct);
+
+  if (!steps && isFinite(target)) {
+    steps = qbExplainPercentSteps(text, target)
+      || qbExplainCoinSteps(text, target)
+      || qbExplainChangeSteps(text, target)
+      || qbExplainExpressionSteps(text, target)
+      || qbExplainSum(text, target)
+      || qbExplainRemainderSteps(text, target)
+      || qbExplainRoundingSteps(text, target)
+      || qbExplainSciSteps(text, target)
+      || qbExplainGeometrySteps(text, target)
+      || qbExplainCoordSteps(text, target)
+      || qbExplainTensSteps(text, target)
+      || qbExplainAfterSteps(text, target)
+      || qbExplainCountSteps(text, target)
+      || qbExplainFactorSteps(text, target)
+      || qbExplainLcmSteps(text, target)
+      || qbExplainCompareSteps(text, target, correct)
+      || qbExplainPattern(text, target)
+      || (subject === "Math" ? qbExplainHunt(text, target) : null);
+  }
+
+  return {
+    steps: steps || [],
+    tip: steps && steps.length
+      ? "Do the same steps in your head next time before you choose."
+      : (QB_EXPLAIN_TIPS[subject] || QB_EXPLAIN_TIPS.Math),
+  };
+}
+
+function qbExplainBodyHtml(question, subject) {
+  const info = qbExplainQuestion(question, subject);
+  const steps = info.steps.map(step => `<li>${escapeHtml(step)}</li>`).join("");
+  return (steps ? `<ol class="fb-steps">${steps}</ol>` : "") + `<p class="fb-tip">${escapeHtml(info.tip)}</p>`;
+}
+
+function qbExplainBlockHtml(question, subject) {
+  return `<div class="fb-explain"><div class="fb-explain-head">How to solve it</div>${qbExplainBodyHtml(question, subject)}</div>`;
+}
+
+function selectOption(button) {
+  if (state.answerLocked || !button) return;
+  state.pendingAnswer = button.dataset.value;
+  document.querySelectorAll(".option-btn").forEach(el => {
+    const isChosen = el === button;
+    el.classList.toggle("is-selected", isChosen);
+    el.setAttribute("aria-pressed", isChosen ? "true" : "false");
+  });
+  const submitBtn = document.getElementById("submitAnswerBtn");
+  if (submitBtn) submitBtn.disabled = false;
+}
+
+function submitPendingAnswer() {
+  if (state.answerLocked || state.pendingAnswer == null) return;
+  checkAnswer(state.pendingAnswer);
+}
+
+function paintAnswer(q, selected, review) {
   const correct = q.correct_text;
   const isRight = selected === correct;
-  const buttons = document.querySelectorAll(".option-btn");
 
-  buttons.forEach(btn => {
+  document.querySelectorAll(".option-btn").forEach(btn => {
+    btn.classList.remove("is-selected", "is-correct", "is-wrong", "is-dim");
     btn.disabled = true;
     if (btn.dataset.value === correct) {
       btn.classList.add("is-correct");
@@ -3895,6 +7121,76 @@ function checkAnswer(selected) {
       btn.classList.add("is-dim");
     }
   });
+
+  const feedback = document.getElementById("feedback");
+  feedback.className = "feedback " + (isRight ? "good" : "bad");
+  feedback.innerHTML = isRight
+    ? `<span class="fb-icon">${ICONS.check}</span><span>Correct${!review && state.streak > 2 ? ` \u00b7 ${state.streak} in a row!` : "!"}</span>`
+    : `<span class="fb-icon">${ICONS.cross}</span><span>Not quite \u2014 the answer is <strong>${escapeHtml(correct)}</strong></span>${qbExplainBlockHtml(q, state.subject)}`;
+
+  const isLast = state.currentIndex === state.questions.length - 1;
+  const kbdHint = document.getElementById("kbdHint");
+  if (kbdHint) {
+    kbdHint.innerHTML = isLast
+      ? "Press <kbd>Enter</kbd> to see your results"
+      : "Press <kbd>Enter</kbd> for the next question";
+  }
+  return isRight;
+}
+
+function renderQuestionNav(answered) {
+  const container = document.getElementById("nextBtnContainer");
+  if (!container) return;
+  container.innerHTML = "";
+  container.classList.toggle("has-back", state.currentIndex > 0);
+
+  if (state.currentIndex > 0) {
+    const backBtn = document.createElement("button");
+    backBtn.type = "button";
+    backBtn.id = "prevBtn";
+    backBtn.className = "btn-ghost prev-btn";
+    backBtn.setAttribute("aria-label", "Go back to the previous question");
+    backBtn.innerHTML = `${ICONS.arrow}<span>Previous</span>`;
+    backBtn.addEventListener("click", previousQuestion);
+    container.appendChild(backBtn);
+  }
+
+  if (answered) {
+    const isLast = state.currentIndex === state.questions.length - 1;
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "btn-primary";
+    nextBtn.innerHTML = isLast ? `See results ${ICONS.arrow}` : `Next ${ICONS.arrow}`;
+    nextBtn.addEventListener("click", nextQuestion);
+    container.appendChild(nextBtn);
+    return;
+  }
+
+  const submitBtn = document.createElement("button");
+  submitBtn.type = "button";
+  submitBtn.id = "submitAnswerBtn";
+  submitBtn.className = "btn-primary";
+  submitBtn.disabled = state.pendingAnswer == null;
+  submitBtn.innerHTML = `Submit ${ICONS.check}`;
+  submitBtn.addEventListener("click", submitPendingAnswer);
+  container.appendChild(submitBtn);
+}
+
+function previousQuestion() {
+  if (state.currentIndex <= 0) return;
+  state.currentIndex--;
+  showQuestionScreen();
+}
+
+function checkAnswer(selected) {
+  if (state.answerLocked) return;
+  state.answerLocked = true;
+
+  const q = state.questions[state.currentIndex];
+  const correct = q.correct_text;
+  const isRight = selected === correct;
+  state.pendingAnswer = selected;
+  state.answers[state.currentIndex] = { selected: selected, correct: isRight };
 
   if (isRight) {
     state.score++;
@@ -3911,27 +7207,18 @@ function checkAnswer(selected) {
     state.missed.push({ question: q.question, correct: correct, chosen: selected });
   }
 
-  const feedback = document.getElementById("feedback");
-  feedback.className = "feedback " + (isRight ? "good" : "bad");
-  feedback.innerHTML = isRight
-    ? `<span class="fb-icon">${ICONS.check}</span><span>Correct${state.streak > 2 ? ` \u00b7 ${state.streak} in a row!` : "!"}</span>`
-    : `<span class="fb-icon">${ICONS.cross}</span><span>Not quite \u2014 the answer is <strong>${escapeHtml(correct)}</strong></span>`;
+  noteAnswer(isRight);
+
+  paintAnswer(q, selected, false);
 
   const progressFill = document.getElementById("progressFill");
   if (progressFill) progressFill.style.width = `${((state.currentIndex + 1) / state.questions.length) * 100}%`;
 
   saveCurrentQuiz(state.currentIndex + 1);
+  renderQuestionNav(true);
 
-  const isLast = state.currentIndex === state.questions.length - 1;
-  const nextContainer = document.getElementById("nextBtnContainer");
-  nextContainer.innerHTML = "";
-  const nextBtn = document.createElement("button");
-  nextBtn.type = "button";
-  nextBtn.className = "btn-primary";
-  nextBtn.innerHTML = isLast ? `See results ${ICONS.arrow}` : `Next ${ICONS.arrow}`;
-  nextBtn.addEventListener("click", nextQuestion);
-  nextContainer.appendChild(nextBtn);
-  nextBtn.focus({ preventScroll: true });
+  const nextBtn = document.getElementById("nextBtnContainer").querySelector(".btn-primary");
+  if (nextBtn) nextBtn.focus({ preventScroll: true });
 }
 
 function nextQuestion() {
@@ -3966,8 +7253,55 @@ function launchConfetti() {
 
 // ---- Results screen ---------------------------------------------------------
 
+function showLevelUpDialog(grade, atEnd) {
+  if (document.querySelector(".modal-backdrop")) return;
+
+  const label = GRADE_LABELS[grade] || `Grade ${grade}`;
+  const message = atEnd
+    ? `Your questions climbed to <strong>${escapeHtml(label)}</strong> level. Keep going and see how far you can reach!`
+    : `Your questions just moved up to <strong>${escapeHtml(label)}</strong> level. Keep going!`;
+  const backdrop = document.createElement("div");
+  backdrop.className = "modal-backdrop level-up";
+  backdrop.innerHTML = `
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="levelUpTitle">
+      <div class="modal-emoji">\ud83d\ude80</div>
+      <h2 class="modal-title" id="levelUpTitle">You leveled up!</h2>
+      <p class="modal-text">${message}</p>
+      <div class="modal-actions">
+        <button class="btn-primary" id="levelUpBtn" type="button">Thanks!</button>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(backdrop);
+
+  const close = () => {
+    document.removeEventListener("keydown", onKey);
+    backdrop.remove();
+  };
+  const onKey = (event) => {
+    if (event.key === "Escape" || event.key === "Enter") {
+      event.preventDefault();
+      close();
+    }
+  };
+
+  document.getElementById("levelUpBtn").addEventListener("click", close);
+  backdrop.addEventListener("click", (event) => {
+    if (event.target === backdrop) close();
+  });
+  document.addEventListener("keydown", onKey);
+  document.getElementById("levelUpBtn").focus({ preventScroll: true });
+}
+
+function maybeShowLevelUpDialog() {
+  if (state.promotedTo == null || state.startGrade == null) return;
+  if (state.promotedTo <= state.startGrade) return;
+  showLevelUpDialog(state.promotedTo, true);
+}
+
 function showResultsScreen() {
   clearApp();
+  setDoodleAvailable(false);
   stopTimer();
   closeSavedDrawer();
   setSavedUiVisible(false);
@@ -3993,6 +7327,10 @@ function showResultsScreen() {
             Your answer: <span class="bad">${escapeHtml(item.chosen)}</span> &nbsp;&middot;&nbsp;
             Correct: <span class="good">${escapeHtml(item.correct)}</span>
           </div>
+          <details class="review-why">
+            <summary>How to solve it</summary>
+            ${qbExplainBodyHtml({ question: item.question, correct_text: item.correct }, state.subject)}
+          </details>
         </div>`).join("")
     : "";
 
@@ -4045,14 +7383,23 @@ function showResultsScreen() {
   });
 
   if (percentage >= 50 && gradeTheme(state.grade) !== "senior") launchConfetti();
+  // A popup from the last question should not hide the end-of-quiz one.
+  document.querySelectorAll(".modal-backdrop.level-up").forEach(el => el.remove());
+  setTimeout(maybeShowLevelUpDialog, 320);
 
   document.getElementById("playAgainBtn").addEventListener("click", () => {
-    state.questions = generateQuiz(state.subject, state.grade, state.count);
+    state.startGrade = state.grade;
+    state.level = state.grade;
+    state.answerLog = [];
+    state.promotedTo = null;
+    state.lastShiftAt = 0;
+    state.questions = freshQuestions(state.subject, state.grade, state.count);
     state.currentIndex = 0;
     state.score = 0;
     state.streak = 0;
     state.bestStreak = 0;
     state.missed = [];
+    state.answers = [];
     state.startedAt = Date.now();
     state.timerId = null;
     state.quizId = newQuizId();
@@ -4071,6 +7418,9 @@ const VISIT_ENDPOINT = "https://abacus.jasoncameron.dev";
 const VISIT_NAMESPACE = "quizbookcentral";
 const VISIT_KEY = "home";
 const WEATHER_TIMEOUT_MS = 9000;
+const WEATHER_CACHE_MS = 10 * 60 * 1000;
+const WEATHER_ENDPOINT = "https://api.open-meteo.com/v1/forecast";
+const PLACE_ENDPOINT = "https://api-bdc.io/data/reverse-geocode-client";
 
 let weatherCache = null;
 
@@ -4079,16 +7429,61 @@ function estimatePopulation() {
   return Math.round(POPULATION_BASE + seconds * POPULATION_PER_SECOND);
 }
 
-function weatherIcon(description) {
-  const text = String(description || "").toLowerCase();
-  if (/thunder|storm/.test(text)) return "\u26c8\ufe0f";
-  if (/snow|sleet|blizzard|ice/.test(text)) return "\ud83c\udf28\ufe0f";
-  if (/rain|drizzle|shower/.test(text)) return "\ud83c\udf27\ufe0f";
-  if (/fog|mist|haze/.test(text)) return "\ud83c\udf2b\ufe0f";
-  if (/cloud|overcast/.test(text)) return "\u2601\ufe0f";
-  if (/partly/.test(text)) return "\ud83c\udf24\ufe0f";
-  if (/sun|clear/.test(text)) return "\u2600\ufe0f";
-  return "\ud83c\udf21\ufe0f";
+// WMO weather codes used by Open-Meteo.
+const WEATHER_CODES = {
+  0: ["Clear sky", "\u2600\ufe0f"],
+  1: ["Mainly clear", "\ud83c\udf24\ufe0f"],
+  2: ["Partly cloudy", "\u26c5"],
+  3: ["Overcast", "\u2601\ufe0f"],
+  45: ["Fog", "\ud83c\udf2b\ufe0f"],
+  48: ["Freezing fog", "\ud83c\udf2b\ufe0f"],
+  51: ["Light drizzle", "\ud83c\udf26\ufe0f"],
+  53: ["Drizzle", "\ud83c\udf26\ufe0f"],
+  55: ["Heavy drizzle", "\ud83c\udf26\ufe0f"],
+  56: ["Freezing drizzle", "\ud83c\udf27\ufe0f"],
+  57: ["Freezing drizzle", "\ud83c\udf27\ufe0f"],
+  61: ["Light rain", "\ud83c\udf27\ufe0f"],
+  63: ["Rain", "\ud83c\udf27\ufe0f"],
+  65: ["Heavy rain", "\ud83c\udf27\ufe0f"],
+  66: ["Freezing rain", "\ud83c\udf27\ufe0f"],
+  67: ["Freezing rain", "\ud83c\udf27\ufe0f"],
+  71: ["Light snow", "\ud83c\udf28\ufe0f"],
+  73: ["Snow", "\ud83c\udf28\ufe0f"],
+  75: ["Heavy snow", "\ud83c\udf28\ufe0f"],
+  77: ["Snow grains", "\ud83c\udf28\ufe0f"],
+  80: ["Light showers", "\ud83c\udf26\ufe0f"],
+  81: ["Showers", "\ud83c\udf26\ufe0f"],
+  82: ["Heavy showers", "\ud83c\udf27\ufe0f"],
+  85: ["Snow showers", "\ud83c\udf28\ufe0f"],
+  86: ["Heavy snow showers", "\ud83c\udf28\ufe0f"],
+  95: ["Thunderstorm", "\u26c8\ufe0f"],
+  96: ["Thunderstorm with hail", "\u26c8\ufe0f"],
+  99: ["Thunderstorm with hail", "\u26c8\ufe0f"],
+};
+
+function weatherFromCode(code) {
+  const entry = WEATHER_CODES[code];
+  return entry ? { desc: entry[0], icon: entry[1] } : { desc: "Current weather", icon: "\ud83c\udf21\ufe0f" };
+}
+
+// Turn the coordinates into a town and country name for the tile's label.
+async function fetchPlaceName(latitude, longitude, signal) {
+  try {
+    const query = new URLSearchParams({
+      latitude: String(latitude),
+      longitude: String(longitude),
+      localityLanguage: "en",
+    });
+    const response = await fetch(`${PLACE_ENDPOINT}?${query}`, signal ? { signal: signal, cache: "no-store" } : { cache: "no-store" });
+    if (!response.ok) return "Your area";
+    const data = await response.json();
+    const city = data.city || data.locality || data.principalSubdivision;
+    const country = data.countryName;
+    if (!city) return "Your area";
+    return country ? `${city}, ${country}` : city;
+  } catch (err) {
+    return "Your area";
+  }
 }
 
 function stopLiveTicker() {
@@ -4148,7 +7543,7 @@ function requestWeather() {
   const labelEl = document.getElementById("weatherLabel");
   if (!tile) return;
 
-  if (weatherCache) { renderWeather(weatherCache); return; }
+  if (weatherCache && Date.now() - weatherCache.at < WEATHER_CACHE_MS) { renderWeather(weatherCache); return; }
   if (!window.navigator.geolocation || typeof fetch !== "function") {
     if (valueEl) valueEl.textContent = "\u2014";
     if (labelEl) labelEl.textContent = "No weather here";
@@ -4175,22 +7570,29 @@ async function onWeatherPosition(position) {
   const controller = typeof AbortController === "function" ? new AbortController() : null;
   const timer = setTimeout(() => { if (controller) controller.abort(); }, WEATHER_TIMEOUT_MS);
   try {
-    const response = await fetch(`https://wttr.in/${latitude.toFixed(2)},${longitude.toFixed(2)}?format=j1`,
-      controller ? { signal: controller.signal } : undefined);
+    const query = new URLSearchParams({
+      latitude: latitude.toFixed(4),
+      longitude: longitude.toFixed(4),
+      current: "temperature_2m,apparent_temperature,weather_code",
+      timezone: "auto",
+    });
+    const response = await fetch(`${WEATHER_ENDPOINT}?${query}`,
+      controller ? { signal: controller.signal, cache: "no-store" } : { cache: "no-store" });
     if (!response.ok) throw new Error("weather request failed");
     const data = await response.json();
-    const current = data && data.current_condition && data.current_condition[0];
-    if (!current) throw new Error("weather data missing");
-    const description = ((current.weatherDesc && current.weatherDesc[0] && current.weatherDesc[0].value) || "").trim() || "Current weather";
-    const area = data.nearest_area && data.nearest_area[0];
-    const city = area && area.areaName && area.areaName[0] && area.areaName[0].value;
-    const country = area && area.country && area.country[0] && area.country[0].value;
+    const current = data && data.current;
+    const tempC = Number(current && current.temperature_2m);
+    if (!isFinite(tempC)) throw new Error("weather data missing");
+    const code = Number(current.weather_code);
+    const info = weatherFromCode(isFinite(code) ? code : -1);
+    const place = await fetchPlaceName(latitude, longitude, controller ? controller.signal : null);
     weatherCache = {
-      tempC: Math.round(Number(current.temp_C)),
-      tempF: Math.round(Number(current.temp_F)),
-      desc: description,
-      icon: weatherIcon(description),
-      place: city ? (country ? `${city}, ${country}` : city) : "Your area",
+      tempC: Math.round(tempC),
+      tempF: Math.round((tempC * 9) / 5 + 32),
+      desc: info.desc,
+      icon: info.icon,
+      place: place,
+      at: Date.now(),
     };
     renderWeather(weatherCache);
   } catch (err) {
@@ -4259,6 +7661,18 @@ function writeSavedQuizzes(list) {
 }
 
 // Returns saved quizzes newer than 30 days, dropping anything stale or finished.
+// Storage is user-writable, so every restored question is checked before it can
+// reach the DOM; anything malformed is dropped rather than trusted.
+function isSafeQuestion(q) {
+  return !!q
+    && typeof q.question === "string" && q.question.length > 0 && q.question.length <= 600
+    && typeof q.correct_text === "string" && q.correct_text.length > 0 && q.correct_text.length <= 300
+    && Array.isArray(q.options)
+    && q.options.length >= 2 && q.options.length <= 6
+    && q.options.every(o => typeof o === "string" && o.length <= 300)
+    && q.options.indexOf(q.correct_text) !== -1;
+}
+
 function loadSavedQuizzes() {
   const now = Date.now();
   const raw = readSavedQuizzes();
@@ -4266,7 +7680,9 @@ function loadSavedQuizzes() {
     && typeof item.savedAt === "number"
     && now - item.savedAt < SAVED_TTL_MS
     && Array.isArray(item.questions)
-    && item.questions.length
+    && item.questions.length > 0
+    && item.questions.length <= 100
+    && item.questions.every(isSafeQuestion)
     && Number(item.currentIndex) > 0
     && Number(item.currentIndex) < item.questions.length);
   if (fresh.length !== raw.length) writeSavedQuizzes(fresh);
@@ -4299,6 +7715,12 @@ function saveCurrentQuiz(upToIndex) {
     streak: state.streak,
     bestStreak: state.bestStreak,
     missed: state.missed,
+    startGrade: state.startGrade,
+    level: state.level,
+    answerLog: state.answerLog.slice(-20),
+    answers: Array.isArray(state.answers) ? state.answers.map(a => a ? { selected: a.selected, correct: !!a.correct } : null) : [],
+    promotedTo: state.promotedTo,
+    lastShiftAt: state.lastShiftAt,
     elapsedMs: state.startedAt ? Date.now() - state.startedAt : 0,
     savedAt: Date.now(),
   };
@@ -4464,6 +7886,12 @@ function resumeSavedQuiz(id) {
   state.grade = entry.grade;
   state.questions = entry.questions;
   state.count = entry.questions.length;
+  state.startGrade = typeof entry.startGrade === "number" ? entry.startGrade : entry.grade;
+  state.level = typeof entry.level === "number" ? entry.level : entry.grade;
+  state.answerLog = Array.isArray(entry.answerLog) ? entry.answerLog.map(Boolean).slice(-20) : [];
+  state.answers = Array.isArray(entry.answers) ? entry.answers.map(a => a && typeof a.selected === "string" ? { selected: a.selected, correct: !!a.correct } : null).slice(0, entry.questions.length) : [];
+  state.promotedTo = typeof entry.promotedTo === "number" ? entry.promotedTo : null;
+  state.lastShiftAt = typeof entry.lastShiftAt === "number" ? entry.lastShiftAt : 0;
   state.currentIndex = entry.currentIndex;
   state.score = entry.score || 0;
   state.streak = entry.streak || 0;
@@ -4473,6 +7901,159 @@ function resumeSavedQuiz(id) {
   state.answerLocked = false;
   state.timerId = null;
   showQuestionScreen();
+}
+
+// ---- Drawing board (scratch pad for working out) ---------------------------
+
+const doodle = { fab: null, panel: null, canvas: null, ctx: null, drawing: false, last: null, open: false, rect: null, pending: [], frame: 0 };
+
+function buildDoodleBoard() {
+  if (doodle.fab) return;
+
+  const fab = document.createElement("button");
+  fab.type = "button";
+  fab.className = "draw-fab";
+  fab.id = "drawFab";
+  fab.hidden = true;
+  fab.setAttribute("aria-expanded", "false");
+  fab.setAttribute("aria-controls", "drawPanel");
+  fab.innerHTML = `${ICONS.pencil}<span class="draw-fab-label">Draw</span>`;
+
+  const panel = document.createElement("section");
+  panel.className = "draw-panel";
+  panel.id = "drawPanel";
+  panel.hidden = true;
+  panel.setAttribute("aria-label", "Drawing board");
+  panel.innerHTML = `
+    <div class="draw-head">
+      <span class="draw-title">${ICONS.pencil} Drawing board</span>
+      <div class="draw-actions">
+        <button type="button" class="draw-btn" id="drawClear">Clear</button>
+        <button type="button" class="draw-btn draw-close" id="drawClose" aria-label="Close the drawing board">${ICONS.cross}</button>
+      </div>
+    </div>
+    <canvas class="draw-canvas" id="drawCanvas" aria-label="Scratch pad for working out"></canvas>
+  `;
+
+  document.body.appendChild(panel);
+  document.body.appendChild(fab);
+
+  doodle.fab = fab;
+  doodle.panel = panel;
+  doodle.canvas = panel.querySelector("#drawCanvas");
+
+  fab.addEventListener("click", () => toggleDoodle(!doodle.open));
+  panel.querySelector("#drawClear").addEventListener("click", clearDoodle);
+  panel.querySelector("#drawClose").addEventListener("click", () => toggleDoodle(false));
+
+  const canvas = doodle.canvas;
+  const pointAt = (event) => {
+    const rect = doodle.rect || canvas.getBoundingClientRect();
+    return { x: event.clientX - rect.left, y: event.clientY - rect.top };
+  };
+
+  // Draw once per frame from all the points the pointer reported, instead of
+  // stroking every raw pointermove. This keeps high-rate touch screens smooth.
+  const flushStroke = () => {
+    doodle.frame = 0;
+    const ctx = doodle.ctx;
+    const points = doodle.pending;
+    doodle.pending = [];
+    if (!ctx || !points.length || !doodle.last) return;
+    ctx.beginPath();
+    ctx.moveTo(doodle.last.x, doodle.last.y);
+    for (let i = 0; i < points.length; i++) ctx.lineTo(points[i].x, points[i].y);
+    ctx.stroke();
+    doodle.last = points[points.length - 1];
+  };
+
+  canvas.addEventListener("pointerdown", (event) => {
+    if (!doodle.ctx) return;
+    event.preventDefault();
+    doodle.rect = canvas.getBoundingClientRect();
+    doodle.drawing = true;
+    doodle.pending = [];
+    doodle.last = pointAt(event);
+    if (canvas.setPointerCapture) canvas.setPointerCapture(event.pointerId);
+    const ctx = doodle.ctx;
+    ctx.fillStyle = ctx.strokeStyle;
+    ctx.beginPath();
+    ctx.arc(doodle.last.x, doodle.last.y, ctx.lineWidth / 2, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  canvas.addEventListener("pointermove", (event) => {
+    if (!doodle.drawing || !doodle.ctx) return;
+    event.preventDefault();
+    const raw = event.getCoalescedEvents ? event.getCoalescedEvents() : null;
+    const events = raw && raw.length ? raw : [event];
+    for (let i = 0; i < events.length; i++) doodle.pending.push(pointAt(events[i]));
+    if (!doodle.frame) doodle.frame = requestAnimationFrame(flushStroke);
+  });
+
+  const endStroke = (event) => {
+    if (!doodle.drawing) return;
+    doodle.drawing = false;
+    flushStroke();
+    doodle.last = null;
+    doodle.rect = null;
+    if (canvas.releasePointerCapture && canvas.hasPointerCapture && canvas.hasPointerCapture(event.pointerId)) {
+      canvas.releasePointerCapture(event.pointerId);
+    }
+  };
+  canvas.addEventListener("pointerup", endStroke);
+  canvas.addEventListener("pointercancel", endStroke);
+  canvas.addEventListener("pointerleave", endStroke);
+}
+
+function sizeDoodleCanvas() {
+  const canvas = doodle.canvas;
+  if (!canvas) return;
+  const rect = canvas.getBoundingClientRect();
+  if (!rect.width || !rect.height) return;
+  const dpr = window.devicePixelRatio || 1;
+  const width = Math.round(rect.width * dpr);
+  const height = Math.round(rect.height * dpr);
+  if (canvas.width === width && canvas.height === height && doodle.ctx) return;
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.lineWidth = 3.2;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = "#1c2b4f";
+  doodle.ctx = ctx;
+}
+
+function clearDoodle() {
+  if (!doodle.ctx) return;
+  const ctx = doodle.ctx;
+  ctx.save();
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.clearRect(0, 0, doodle.canvas.width, doodle.canvas.height);
+  ctx.restore();
+}
+
+function toggleDoodle(open) {
+  buildDoodleBoard();
+  doodle.open = !!open;
+  doodle.drawing = false;
+  doodle.last = null;
+  doodle.panel.hidden = !doodle.open;
+  doodle.fab.classList.toggle("is-open", doodle.open);
+  doodle.fab.setAttribute("aria-expanded", String(doodle.open));
+  doodle.rect = null;
+  doodle.pending = [];
+  document.body.classList.toggle("doodle-open", doodle.open);
+  if (doodle.open) requestAnimationFrame(sizeDoodleCanvas);
+}
+
+function setDoodleAvailable(available) {
+  buildDoodleBoard();
+  doodle.fab.hidden = !available;
+  if (!available && doodle.open) toggleDoodle(false);
 }
 
 // ---- Utility ---------------------------------------------------------------
