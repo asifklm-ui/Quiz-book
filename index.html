@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://abacus.jasoncameron.dev https://api.open-meteo.com https://api-bdc.io; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://accounts.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.googleusercontent.com; font-src 'self' data:; connect-src 'self' https://abacus.jasoncameron.dev https://api.open-meteo.com https://api-bdc.io https://accounts.google.com https://www.googleapis.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src https://accounts.google.com; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>The Quiz Book &ndash; Free K-12 Quizzes for Kindergarten to Grade 12</title>
-<meta name="description" content="The Quiz Book is a free K-12 quiz book with practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Questions get harder or easier as you play. No ads, no accounts, no cookies.">
+<meta name="description" content="The Quiz Book is a free K-12 quiz book with practice quizzes for kindergarten through grade 12 in math, reading, science and social studies. Questions get harder or easier as you play. No ads, no tracking, and no account needed.">
 <meta name="keywords" content="quiz book, quiz book K-12, quiz book kindergarten to grade 12, quizbook, The Quiz Book, free quiz book, online quiz book, K-12 quiz book, quiz book for kids, kindergarten quiz, K-12 practice quizzes, math practice, reading comprehension quiz, science quiz, social studies quiz, classroom quiz, educational website">
 <meta name="author" content="The Quiz Book">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="googlebot" content="index, follow">
 <meta name="rating" content="general">
 <meta name="theme-color" content="#2f6ad6">
+<meta name="google-signin-client_id" content="">
 <meta name="application-name" content="The Quiz Book">
 <meta name="apple-mobile-web-app-title" content="The Quiz Book">
 <link rel="canonical" href="https://quizbookcentral.com/">
@@ -26,7 +27,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="The Quiz Book">
 <meta property="og:title" content="The Quiz Book - Free K-12 Practice Quizzes for Kindergarten to Grade 12">
-<meta property="og:description" content="Free K-12 practice quizzes for kindergarten through grade 12 in math, reading, science and social studies, with questions that get harder or easier as you play. No ads, no accounts, no cookies.">
+<meta property="og:description" content="Free K-12 practice quizzes for kindergarten through grade 12 in math, reading, science and social studies, with questions that get harder or easier as you play. No ads, no tracking, and no account needed.">
 <meta property="og:url" content="https://quizbookcentral.com/">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://quizbookcentral.com/logo-512.png">
@@ -36,7 +37,7 @@
 <meta property="og:image:alt" content="The Quiz Book logo: an open book with a lightning bolt">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The Quiz Book - Free K-12 Practice Quizzes for Kindergarten to Grade 12">
-<meta name="twitter:description" content="Free K-12 practice quizzes for kindergarten through grade 12, with questions that get harder or easier as you play. No ads, no accounts, no cookies.">
+<meta name="twitter:description" content="Free K-12 practice quizzes for kindergarten through grade 12, with questions that get harder or easier as you play. No ads, no tracking, and no account needed.">
 <meta name="twitter:image" content="https://quizbookcentral.com/logo-512.png">
 <meta name="twitter:image:alt" content="The Quiz Book logo: an open book with a lightning bolt">
 <script type="application/ld+json">
@@ -610,7 +611,10 @@ body::after {
 
 .setup-footer {
   display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: center;
+  gap: 12px;
 }
 
 .site-foot {
@@ -2059,6 +2063,366 @@ html[data-grade-theme="senior"] .feedback.good { color: #0a7a48; }
   }
 }
 
+/* ---- Progress book ------------------------------------------------------- */
+.screen.progress { gap: 16px; }
+.progress-top { display: flex; align-items: flex-start; gap: 14px; }
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: none;
+  padding: 10px 16px;
+  font-size: 13px;
+  border-radius: 14px;
+  box-shadow: 0 3px 0 #c9d9f2;
+}
+.back-btn svg { width: 15px; height: 15px; transform: rotate(180deg); }
+.progress-heading { min-width: 0; }
+.progress-title {
+  margin: 0;
+  font-size: clamp(25px, 4.4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--head-ink);
+  text-shadow: 0 3px 0 #ffffff;
+}
+.progress-sub {
+  margin: 6px 0 0;
+  max-width: 560px;
+  font-size: clamp(12.5px, 1.8vw, 14.5px);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--muted);
+}
+.progress-subjects { display: flex; flex-wrap: wrap; gap: 8px; }
+.tier-tab {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 12.5px;
+  font-weight: 800;
+  box-shadow: 0 3px 0 #d9e5f6;
+  transition: transform 0.14s var(--pop), box-shadow 0.14s ease;
+}
+.tier-tab:hover { transform: translateY(-1px); }
+.tier-tab.active {
+  background: linear-gradient(160deg, var(--btn-a), var(--btn-b));
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 3px 0 var(--btn-edge);
+}
+.tier-tab:focus-visible,
+.topic-go:focus-visible,
+.progress-grade select:focus-visible {
+  outline: 3px solid rgba(24, 68, 176, 0.9);
+  outline-offset: 3px;
+}
+.progress-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; }
+.progress-grade {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted-2);
+}
+.progress-grade select {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--ink);
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 8px 10px;
+  box-shadow: inset 0 2px 4px rgba(70, 106, 175, 0.08);
+}
+.progress-grade-note { font-size: 12.5px; font-weight: 700; color: var(--muted-2); }
+.progress-summary { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; font-weight: 700; color: var(--muted-2); }
+.progress-summary strong { color: var(--head-ink); font-size: 13px; }
+.progress-pocket:empty,
+.setup-pocket:empty { display: none; }
+.progress-note {
+  margin: 4px 0 0;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--muted-2);
+}
+.pocket-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: 2px solid #f2d79a;
+  background: linear-gradient(160deg, #fff9e8, #fff3cf);
+  border-radius: 18px;
+  padding: 12px 14px;
+  text-align: left;
+  box-shadow: 0 4px 0 #f0dca9;
+}
+.pocket-star { display: inline-flex; flex: none; color: var(--gold); }
+.pocket-star svg { width: 20px; height: 20px; }
+.pocket-body { flex: 1; min-width: 0; }
+.pocket-title {
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 800;
+  color: #8a5a12;
+}
+.pocket-text { margin-top: 2px; font-size: 13px; font-weight: 700; color: #4a3a1c; }
+.pocket-btn { flex: none; padding: 9px 16px; font-size: 12.5px; border-radius: 14px; background: #fffdf7; box-shadow: 0 3px 0 #e7c98c; }
+.setup-plan {
+  width: 100%;
+  border: 2px solid #d9e4f8;
+  background: linear-gradient(160deg, #f8fbff, #edf3ff);
+  border-radius: 20px;
+  padding: 14px 16px;
+  text-align: left;
+  box-shadow: 0 5px 0 #d3dff4;
+}
+.setup-plan:empty { display: none; }
+.plan-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.plan-kicker { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; color: #4b5c85; }
+.plan-title { margin-top: 3px; font-size: 15px; font-weight: 800; letter-spacing: -0.01em; color: var(--head-ink); }
+.plan-streak {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 800;
+  color: #8a5a12;
+  background: #fff6dd;
+  border: 2px solid #f4dfae;
+  border-radius: 999px;
+  padding: 4px 9px;
+}
+.plan-streak svg { width: 12px; height: 12px; color: var(--gold); }
+.plan-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.plan-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #e2eaf8;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 8px 10px;
+}
+.plan-num {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #eef3ff;
+  color: #3d5a94;
+  font-size: 11px;
+  font-weight: 800;
+}
+.plan-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.plan-name { font-size: 12.5px; font-weight: 800; color: var(--head-ink); }
+.plan-reason { font-size: 11px; font-weight: 700; color: var(--muted-2); }
+.plan-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; }
+.plan-note { font-size: 11.5px; font-weight: 700; color: var(--muted-2); }
+.plan-start { padding: 10px 18px; font-size: 13px; }
+.topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 10px; }
+.topic-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid #dbe7f8;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 14px;
+  box-shadow: 0 4px 0 #c9d9f2;
+}
+.topic-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.topic-name { font-size: 13.5px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.3; color: var(--head-ink); }
+.tier-chip {
+  flex: none;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+}
+.tier-new { background: #eef3fb; color: #566180; border-color: #dbe5f4; }
+.tier-wobbly { background: #fff5dd; color: #8a5a12; border-color: #f4dfae; }
+.tier-steady { background: #e7f8ef; color: #0a7a48; border-color: #c7edd9; }
+.tier-locked { background: #f0eaff; color: #5b3ec4; border-color: #ddcffa; }
+.topic-bar {
+  height: 9px;
+  border-radius: 999px;
+  background: #e6eefb;
+  overflow: hidden;
+  box-shadow: inset 0 1px 2px rgba(70, 106, 175, 0.12);
+}
+.topic-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #8b6cf6, #4f8cff);
+  transition: width 0.4s var(--pop);
+}
+.topic-card.is-locked .topic-bar span { background: linear-gradient(90deg, #ffb020, #8b6cf6); }
+.topic-meta { font-size: 11px; font-weight: 700; color: var(--muted-2); }
+.topic-go {
+  align-self: flex-start;
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  margin-top: 2px;
+  border: 2px solid var(--stroke);
+  background: #f7fbff;
+  color: var(--ink);
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 11.5px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 3px 0 #d9e5f6;
+  transition: transform 0.14s var(--pop), box-shadow 0.14s ease, background 0.14s ease;
+}
+.topic-go svg { width: 13px; height: 13px; }
+.topic-go:hover { background: #eef6ff; transform: translateY(-1px); }
+.topic-go:active { transform: translateY(2px); box-shadow: none; }
+.next-stop {
+  width: 100%;
+  max-width: 520px;
+  text-align: center;
+  border: 2px solid #dcd2fb;
+  background: linear-gradient(160deg, #f7f3ff, #eef4ff);
+  border-radius: 20px;
+  padding: 16px 18px;
+  box-shadow: 0 5px 0 #d9d1f2;
+}
+.next-stop-kicker { font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 800; color: #6a5aad; }
+.next-stop-name { margin-top: 5px; font-size: clamp(16px, 2.6vw, 20px); font-weight: 800; letter-spacing: -0.02em; color: #241c45; }
+.next-stop-text { margin: 6px auto 12px; max-width: 400px; font-size: 12.5px; font-weight: 600; line-height: 1.5; color: var(--muted); }
+.next-stop .btn-primary { padding: 12px 22px; font-size: 14px; }
+.all-locked { margin: 0; display: flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 800; color: #0a7a48; }
+.all-locked svg { width: 16px; height: 16px; color: var(--gold); }
+.pocket-note { margin: 0; text-align: center; font-size: 12px; font-weight: 700; color: var(--muted-2); }
+
+@media (max-width: 560px) {
+  .progress-top { flex-direction: column; gap: 10px; }
+  .back-btn { align-self: flex-start; }
+  .topic-grid { grid-template-columns: 1fr; }
+  .pocket-card { flex-wrap: wrap; }
+  .pocket-btn { width: 100%; }
+  .plan-head { flex-wrap: wrap; }
+  .plan-row { align-items: flex-start; }
+  .plan-foot .plan-start { width: 100%; }
+}
+
+/* ---- Optional Google sign-in --------------------------------------------- */
+.account-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+.account-bar[hidden] { display: none; }
+.account-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 100%;
+  padding: 6px 8px 6px 6px;
+  border: 2px solid #dbe7f8;
+  background: #ffffff;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 #c9d9f2;
+}
+.account-avatar {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.account-initial {
+  display: grid;
+  place-items: center;
+  background: linear-gradient(160deg, var(--btn-a), var(--btn-b));
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+}
+.account-id { display: flex; flex-direction: column; min-width: 0; line-height: 1.15; }
+.account-name {
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--head-ink);
+}
+.account-email {
+  max-width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--muted-2);
+}
+.account-out {
+  appearance: none;
+  cursor: pointer;
+  flex: none;
+  font-family: inherit;
+  border: 2px solid var(--stroke);
+  background: #f7fbff;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.account-out:hover { background: #eef6ff; }
+.account-out:focus-visible {
+  outline: 3px solid rgba(24, 68, 176, 0.9);
+  outline-offset: 3px;
+}
+.account-signin {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+.account-note {
+  max-width: 230px;
+  text-align: right;
+  font-size: 10.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--muted-2);
+}
+.google-button { display: flex; min-height: 40px; }
+
+@media (max-width: 560px) {
+  .account-bar { justify-content: center; }
+  .account-signin { justify-content: center; }
+  .account-note { max-width: 270px; text-align: center; }
+  .account-name, .account-email { max-width: 150px; }
+}
 </style>
 </head>
 <body>
@@ -2910,6 +3274,199 @@ const GRADE_GENERATORS = {
   7: GRADE7, 8: GRADE8, 9: GRADE9, 10: GRADE10, 11: GRADE11, 12: GRADE12,
 };
 
+// Readable names for the practice topics, one per generator. The keys are the
+// generator names; anything missing falls back to a tidied-up version of the
+// name, so a new generator still shows up with a sensible label.
+const TOPIC_LABELS = {
+  k_count_items: "Counting objects",
+  k_next_number: "What comes next",
+  k_missing_number: "Missing numbers in order",
+  k_bigger_number: "Comparing two numbers",
+  k_add_small: "Small addition",
+  k_subtract_small: "Small subtraction",
+  k_shape_sides: "Counting sides",
+  k_shape_round: "Round shapes",
+  k_shape_equal_sides: "Equal sides",
+  g1_addition: "Addition within 20",
+  g1_subtraction: "Subtraction within 20",
+  g1_skip_counting: "Skip counting by 10s",
+  g1_compare_numbers: "Comparing numbers",
+  g1_shapes: "Naming shapes",
+  g1_place_value: "Tens and ones",
+  g2_addition_2digit: "Two-digit addition",
+  g2_subtraction_2digit: "Two-digit subtraction",
+  g2_skip_counting: "Skip counting by 2s, 5s and 10s",
+  g2_compare_3digit: "Comparing three-digit numbers",
+  g2_time: "Telling time",
+  g2_money: "Counting coins",
+  g3_multiplication: "Multiplication facts",
+  g3_division: "Division facts",
+  g3_basic_fraction: "Fractions of a shape",
+  g3_area_perimeter: "Area and perimeter",
+  g3_rounding: "Rounding to tens and hundreds",
+  g3_money_word_problem: "Money word problems",
+  g4_multi_digit_multiplication: "Multi-digit multiplication",
+  g4_division_remainder: "Division with remainders",
+  g4_rounding: "Rounding large numbers",
+  g4_equivalent_fraction: "Equivalent fractions",
+  g4_add_fractions_common_denom: "Adding fractions with like denominators",
+  g4_angle_type: "Types of angles",
+  g4_factors: "Factors",
+  g5_add_fractions_unlike: "Adding fractions with unlike denominators",
+  g5_multiply_fractions: "Multiplying fractions",
+  g5_decimal_ops: "Decimal operations",
+  g5_order_of_operations: "Order of operations",
+  g5_volume: "Volume of prisms",
+  g5_gcf_lcm: "Greatest common factor",
+  g5_percent: "Percent of a number",
+  g5_coordinate_plane: "Coordinates",
+  g6_ratio: "Equivalent ratios",
+  g6_unit_rate: "Unit rates",
+  g6_divide_fractions: "Dividing fractions",
+  g6_negative_numbers: "Negative numbers",
+  g6_area_shapes: "Area of parallelograms",
+  g6_mean_median: "Median and mode",
+  g6_one_step_equation: "One-step equations",
+  g6_percent: "Percent of a number",
+  g7_integer_ops: "Integer operations",
+  g7_two_step_equation: "Two-step equations",
+  g7_percent_application: "Discounts and sale price",
+  g7_probability: "Probability",
+  g7_circle_circumference: "Circumference",
+  g7_circle_area: "Area of a circle",
+  g7_surface_area: "Surface area",
+  g8_linear_equation: "Solving linear equations",
+  g8_slope: "Slope from two points",
+  g8_exponent_rules: "Exponent rules",
+  g8_scientific_notation: "Scientific notation",
+  g8_pythagorean: "Pythagorean theorem: missing leg",
+  g8_volume_cylinder: "Volume of a cylinder",
+  g8_function_evaluation: "Function notation",
+  g9_linear_equation_both_sides: "Variables on both sides",
+  g9_linear_inequality: "Solving inequalities",
+  g9_factor_quadratic: "Factoring quadratics",
+  g9_simplify_exponents: "Multiplying powers",
+  g9_slope_intercept: "Slope-intercept form",
+  g9_system_of_equations: "Systems of equations",
+  g9_polynomial_add: "Adding polynomials",
+  g10_pythagorean: "Pythagorean theorem: hypotenuse",
+  g10_triangle_angle_sum: "Triangle angle sum",
+  g10_circle_area_circumference: "Circle area and circumference",
+  g10_similar_triangles: "Similar triangles",
+  g10_volume_solids: "Volume of solids",
+  g10_angle_relationships: "Complementary and supplementary angles",
+  g10_trig_ratio: "Trigonometric ratios",
+  g11_quadratic_formula: "The quadratic formula",
+  g11_exponential_growth: "Exponential growth",
+  g11_logarithm: "Evaluating logarithms",
+  g11_arithmetic_sequence: "Arithmetic sequences",
+  g11_geometric_sequence: "Geometric sequences",
+  g11_rational_expression: "Simplifying rational expressions",
+  g11_complex_numbers: "Adding complex numbers",
+  g12_unit_circle: "The unit circle",
+  g12_statistics: "Mean of a data set",
+  g12_probability_dice: "Dice probability",
+  g12_log_properties: "Log properties",
+  g12_arithmetic_series: "Arithmetic series",
+  g12_geometric_series: "Geometric series",
+  g12_vector_magnitude: "Vector magnitude",
+  h1_missing_addend: "Missing addends",
+  h1_two_step_story: "Two-step stories",
+  h1_number_pattern: "Number patterns",
+  h2_multi_step_money: "Money multi-step problems",
+  h2_missing_number: "Missing numbers",
+  h2_compare_word: "Comparing with word problems",
+  h3_two_digit_times_one: "Two-digit by one-digit multiplication",
+  h3_elapsed_time: "Elapsed time",
+  h3_multi_step_shopping: "Shopping totals",
+  h3_largest_fraction: "Comparing fractions",
+  h4_two_step_word: "Two-step word problems",
+  h4_two_by_two: "Two-digit by two-digit multiplication",
+  h4_remainder: "Remainders",
+  h4_area_cutout: "Area with a cut-out",
+  h4_decimal_money: "Money with decimals",
+  h5_discount_then_tax: "Discount, then tax",
+  h5_fraction_of_number: "Fraction of a number",
+  h5_mean_missing_value: "Missing value in a mean",
+  h5_expression_puzzle: "Order of operations puzzles",
+  h6_ratio_share: "Sharing in a ratio",
+  h6_percent_change: "Percent change",
+  h6_better_buy: "Better buy",
+  h6_two_step_equation: "Two-step equations",
+  h6_ratio_table: "Ratio tables",
+  h7_proportion_word: "Proportions",
+  h7_stacked_discount: "Stacked discounts",
+  h7_inequality_flip: "Inequalities with negatives",
+  h7_area_from_diameter: "Area from a diameter",
+  h7_independent_events: "Independent events",
+  h8_sum_difference: "Sum and difference puzzles",
+  h8_scientific_notation_multiply: "Multiplying in scientific notation",
+  h8_distribute_equation: "Equations with distribution",
+  h8_distance_points: "Distance between points",
+  h8_percent_change_reverse: "Finding the original price",
+  h9_nonmonic_quadratic: "Factoring ax^2 + bx + c",
+  h9_solve_for_y: "Solving for y",
+  h9_slope_standard_form: "Slope from standard form",
+  h9_exponential_colony: "Exponential growth stories",
+  h10_special_right_triangle: "30-60-90 triangles",
+  h10_midpoint: "Midpoint",
+  h10_interior_angle: "Polygon interior angles",
+  h10_similar_area_ratio: "Similar figures and area",
+  h10_complement_equation: "Angle equations",
+  h11_discriminant: "The discriminant",
+  h11_log_equation: "Log equations",
+  h11_combinations: "Combinations",
+  h11_compound_interest: "Compound interest",
+  h11_permutation: "Permutations",
+  h11_rational_simplify: "Rational expressions",
+  h12_inverse_function: "Inverse functions",
+  h12_limit_removable: "Limits with holes",
+  h12_infinite_geometric: "Infinite geometric series",
+  h12_determinant: "Determinants",
+  h12_trig_identity: "Trig identities",
+  h12_combination_probability: "Combination probability",
+  h12_law_of_cosines: "Law of cosines",
+};
+
+function tidyTopicName(name) {
+  return String(name || "Topic")
+    .replace(/^[ghk]\d*_/, "")
+    .replace(/_/g, " ")
+    .replace(/\b\w/g, c => c.toUpperCase());
+}
+
+function topicKeyOfGenerator(fn) {
+  if (!fn) return "";
+  if (fn.topicKey) return fn.topicKey;
+  return fn.name ? "math:" + fn.name : "";
+}
+
+function topicLabelOfGenerator(fn) {
+  const name = topicKeyOfGenerator(fn).replace(/^math:/, "");
+  return TOPIC_LABELS[name] || tidyTopicName(name);
+}
+
+function topicLabelFromId(topicId) {
+  const name = String(topicId || "").replace(/^math:/, "");
+  return TOPIC_LABELS[name] || tidyTopicName(name);
+}
+
+// Focused practice keeps pulling from the chosen topic even when the adaptive
+// level moves; mixed practice stays on the whole grade.
+function mathGeneratorPool(grade, focus) {
+  const base = GRADE_GENERATORS[grade] || [];
+  const wanted = String(focus || "");
+  if (wanted.indexOf("math:") !== 0) return base;
+  const local = base.filter(fn => topicKeyOfGenerator(fn) === wanted);
+  if (local.length) return local;
+  const grades = Object.keys(GRADE_GENERATORS);
+  for (let i = 0; i < grades.length; i++) {
+    const hit = GRADE_GENERATORS[grades[i]].filter(fn => topicKeyOfGenerator(fn) === wanted);
+    if (hit.length) return hit;
+  }
+  return base;
+}
+
 function numericVariants(text) {
   const match = String(text).match(/-?\d+(?:\.\d+)?/);
   if (!match) return null;
@@ -2923,26 +3480,31 @@ function numericVariants(text) {
   return [fmtV(value + 1), fmtV(value - 1), fmtV(value + 2), fmtV(value - 2)];
 }
 
-function generateMathQuiz(grade, count) {
-  const generators = GRADE_GENERATORS[grade];
+function generateMathQuiz(grade, count, focus) {
+  const generators = mathGeneratorPool(grade, focus);
   const questions = [];
+  if (!generators.length) return questions;
   for (let i = 0; i < count; i++) {
     let built = null;
     // Regenerate instead of padding: every question keeps four plausible options.
     for (let attempt = 0; attempt < 120 && !built; attempt++) {
-      const [qText, correctRaw, wrongsRaw] = choice(generators)();
+      const generator = choice(generators);
+      const [qText, correctRaw, wrongsRaw] = generator();
       const correct = String(correctRaw);
       const wrongs = Array.from(new Set(wrongsRaw.map(String))).filter(w => w !== correct);
       if (wrongs.length < 3) continue;
       const options = wrongs.slice(0, 3).concat([correct]);
       for (let j = options.length - 1; j > 0; j--) { const k = randInt(0, j); [options[j], options[k]] = [options[k], options[j]]; }
-      built = { question: qText, options: options, correct_text: correct };
+      built = { question: qText, options: options, correct_text: correct,
+        topic: topicKeyOfGenerator(generator), topicLabel: topicLabelOfGenerator(generator) };
     }
     if (!built) {
-      const [qText, correctRaw] = generators[0]();
+      const fallback = generators[0];
+      const [qText, correctRaw] = fallback();
       const correct = String(correctRaw);
       const variants = numericVariants(correct) || ["None of these", "Not enough information", "Cannot be determined"];
-      built = { question: qText, options: variants.slice(0, 3).concat([correct]), correct_text: correct };
+      built = { question: qText, options: variants.slice(0, 3).concat([correct]), correct_text: correct,
+        topic: topicKeyOfGenerator(fallback), topicLabel: topicLabelOfGenerator(fallback) };
     }
     questions.push(built);
   }
@@ -3515,7 +4077,7 @@ function h12_law_of_cosines() {
 
 // Guarantee three distinct, non-answer distractors by redrawing when options collide.
 function hSafe(fn) {
-  return function saferGenerator() {
+  const safer = function saferGenerator() {
     for (let attempt = 0; attempt < 60; attempt++) {
       const [qText, correctRaw, wrongsRaw] = fn();
       const correct = String(correctRaw);
@@ -3528,6 +4090,8 @@ function hSafe(fn) {
     const wrongs = numeric.length >= 3 ? numeric : ["None of these", "Not enough information", "Cannot be determined"];
     return [qText, correct, wrongs.slice(0, 3)];
   };
+  safer.topicKey = fn && fn.name ? "math:" + fn.name : "";
+  return safer;
 }
 
 const HARDER_BY_GRADE = {
@@ -3567,6 +4131,17 @@ function gradeBand(grade) {
   return "D";
 }
 
+const BANK_BAND_LABELS = { A: "Grades K\u20132", B: "Grades 3\u20135", C: "Grades 6\u20138", D: "Grades 9\u201312" };
+const BANK_BAND_GRADES = { A: 1, B: 4, C: 7, D: 10 };
+
+function bankTopicId(subject, band) {
+  return "bank:" + subject + ":" + band;
+}
+
+function bankTopicLabel(subject, band) {
+  return subject + " \u00b7 " + BANK_BAND_LABELS[band];
+}
+
 function shuffleArray(arr) {
   const a = arr.slice();
   for (let i = a.length - 1; i > 0; i--) {
@@ -3580,32 +4155,940 @@ function sampleWithoutReplacement(arr, count) {
   return shuffleArray(arr).slice(0, count);
 }
 
-function generateBankQuiz(subject, grade, count) {
-  const band = gradeBand(grade);
-  const bank = BANK_DATA[subject][band];
+function generateBankQuiz(subject, grade, count, focus) {
+  let band = gradeBand(grade);
+  let slug = "";
+  const parsed = parseBankTopicId(focus);
+  if (parsed && parsed.subject === subject) {
+    if (BANK_BAND_LABELS[parsed.band]) band = parsed.band;
+    slug = parsed.slug;
+  }
+  const entries = bankEntriesFor(subject, band, slug);
+  if (!entries.length) return [];
+  // One skill never asks the same question twice: a focused quiz is as long as
+  // the skill's pool instead. Mixed quizzes cycle through the whole band.
+  if (slug && count > entries.length) count = entries.length;
   let chosen;
-  if (count <= bank.length) {
-    chosen = sampleWithoutReplacement(bank, count);
+  if (count <= entries.length) {
+    chosen = sampleWithoutReplacement(entries, count);
   } else {
     chosen = [];
     while (chosen.length < count) {
       const remaining = count - chosen.length;
-      let cycle = shuffleArray(bank);
-      if (chosen.length && cycle[0][0] === chosen[chosen.length - 1][0] && cycle.length > 1) {
+      let cycle = shuffleArray(entries);
+      const last = chosen.length ? chosen[chosen.length - 1] : null;
+      if (last && cycle[0] && cycle[0].row[0] === last.row[0] && cycle.length > 1) {
         [cycle[0], cycle[1]] = [cycle[1], cycle[0]];
       }
       chosen = chosen.concat(cycle.slice(0, remaining));
     }
   }
-  return chosen.map(([qText, correct, wrongs]) => {
+  return chosen.map(entry => {
+    const qText = entry.row[0];
+    const correct = entry.row[1];
+    const wrongs = entry.row[2];
     const options = shuffleArray(wrongs.slice(0, 3).concat([correct]));
-    return { question: qText, options: options, correct_text: correct };
+    return { question: qText, options: options, correct_text: correct,
+      topic: topicBankId(subject, band, entry.slug), topicLabel: bankTopicLabelFor(subject, band, entry.slug) };
   });
 }
 
-function generateQuiz(subject, grade, count) {
-  if (subject === "Math") return generateMathQuiz(grade, count);
-  return generateBankQuiz(subject, grade, count);
+function generateQuiz(subject, grade, count, focus) {
+  // A bank topic id (e.g. bank:Math:vocab:B) always comes from a topic bank,
+  // even for math, whose mixed practice is generated instead.
+  if (String(focus || "").indexOf("bank:") === 0) return generateBankQuiz(subject, grade, count, focus);
+  if (subject === "Math") return generateMathQuiz(grade, count, focus);
+  return generateBankQuiz(subject, grade, count, focus);
+}
+
+// ---- Skill topic banks -----------------------------------------------------
+// Named skills inside each subject, each with its own K-12 content. A mixed
+// quiz draws from all of them, the progress screen tracks them one by one, and
+// a quiz can stay on a single skill. Topic ids look like
+// bank:<Subject>:<band> for the subject's general mix and
+// bank:<Subject>:<skill>:<band> for a named skill.
+const TOPIC_BANKS = { Reading: [], Science: [], "Social Studies": [], Math: [] };
+
+function addTopicBanks(subject, topics) {
+  if (!TOPIC_BANKS[subject]) TOPIC_BANKS[subject] = [];
+  topics.forEach(topic => TOPIC_BANKS[subject].push(topic));
+}
+
+// ---- Topic bank content begins ---------------------------------------------
+
+addTopicBanks("Reading", [
+  {
+    id: "vocab",
+    label: "Vocabulary",
+    blurb: "Word meanings, roots and context clues",
+    bands: {
+      A: [
+        ["Which word means the same as 'glad'?", "happy", ["sad", "fast", "cold"]],
+        ["Which word is the opposite of 'open'?", "closed", ["wide", "soft", "loud"]],
+        ["'The puppy was tiny.' Which word means about the same as tiny?", "small", ["loud", "fast", "old"]],
+        ["Which word means the same as 'speak'?", "talk", ["walk", "look", "jump"]],
+        ["Which word is the opposite of 'early'?", "late", ["quick", "warm", "first"]],
+        ["Which word means the same as 'gift'?", "present", ["box", "card", "party"]],
+        ["Which word is the opposite of 'noisy'?", "quiet", ["loud", "busy", "happy"]],
+        ["Which word means the same as 'road'?", "street", ["house", "tree", "car"]],
+      ],
+      B: [
+        ["What does 'enormous' mean?", "very large", ["very small", "very fast", "very quiet"]],
+        ["What does 'fragile' mean?", "easily broken", ["very heavy", "very old", "very cold"]],
+        ["Which word means the opposite of 'reluctant'?", "eager", ["unwilling", "careful", "angry"]],
+        ["'The trail was steep and rocky.' What does steep mean?", "sharply sloped", ["very wide", "newly built", "quite short"]],
+        ["Which word means about the same as 'observe'?", "watch", ["ignore", "build", "hide"]],
+        ["What does 'rare' mean?", "not common", ["very loud", "very easy", "very old"]],
+        ["Which word best completes: 'She was ___ that her friend moved away.'", "disappointed", ["delighted", "curious", "patient"]],
+        ["What does 'predict' mean?", "say what will happen", ["look again", "ask a question", "write a list"]],
+      ],
+      C: [
+        ["What does 'vivid' mean?", "clear and strong", ["very short", "hard to see", "full of noise"]],
+        ["Which word means the opposite of 'generous'?", "stingy", ["kind", "wealthy", "helpful"]],
+        ["The prefix 'bene-' means:", "good", ["bad", "before", "again"]],
+        ["Which word means about the same as 'conclude'?", "infer", ["repeat", "ignore", "announce"]],
+        ["What does 'reluctant' mean?", "unwilling", ["excited", "ready", "careless"]],
+        ["'The evidence was ambiguous.' What does ambiguous mean?", "open to more than one meaning", ["clearly false", "easy to read", "very detailed"]],
+        ["The root 'dict' as in 'dictate' means:", "speak", ["write", "see", "carry"]],
+        ["Which word has a more negative connotation?", "cheap", ["affordable", "economical", "budget"]],
+      ],
+      D: [
+        ["What does 'ambivalent' mean?", "having mixed feelings", ["completely certain", "deeply angry", "extremely happy"]],
+        ["'Pragmatic' most nearly means:", "practical", ["idealistic", "dramatic", "careless"]],
+        ["The prefix 'mal-' means:", "bad", ["many", "after", "good"]],
+        ["What does 'ubiquitous' mean?", "found everywhere", ["very rare", "newly invented", "carefully hidden"]],
+        ["Which word means about the same as 'delineate'?", "describe precisely", ["decorate", "delay", "divide equally"]],
+        ["The root 'cred' as in 'credible' means:", "believe", ["know", "speak", "write"]],
+        ["What does 'concede' mean?", "admit as true", ["refuse to speak", "repeat a claim", "celebrate a win"]],
+        ["Which word would best describe a subtle insult?", "slight", ["compliment", "shout", "gift"]],
+      ],
+    },
+  },
+  {
+    id: "comprehension",
+    label: "Reading comprehension",
+    blurb: "Short passages, main ideas and inference",
+    bands: {
+      A: [
+        ["'Ben fed his fish. Then he washed his hands.' What did Ben do first?", "fed his fish", ["washed his hands", "went to bed", "read a book"]],
+        ["'The sun was hot. Ana put on her hat.' Why did Ana put on her hat?", "to stay out of the sun", ["to go swimming", "to eat lunch", "to catch a ball"]],
+        ["'Max looked at the dark clouds. He went inside.' Why did Max go inside?", "it looked like rain", ["he was hungry", "he lost his ball", "he wanted a nap"]],
+        ["'The cat sat on the mat. The dog sat by the door.' Where is the cat?", "on the mat", ["by the door", "in the yard", "on the bed"]],
+        ["'Kim has a red ball. She rolls it to Sam.' What does Kim roll?", "a ball", ["a kite", "a book", "a box"]],
+        ["'It was Mia's birthday. She blew out the candles.' What was Mia celebrating?", "her birthday", ["a new puppy", "the first day of school", "a soccer game"]],
+        ["'The soup is hot. Wait before you eat.' What should you do?", "wait", ["eat now", "add ice", "throw it out"]],
+        ["'Leo lost his shoe. He looked under the bed.' What did Leo lose?", "his shoe", ["his hat", "his book", "his ball"]],
+      ],
+      B: [
+        ["'The science fair was Friday. Maya finished her poster on Thursday night, then checked it twice.' What does this show about Maya?", "she was careful", ["she was careless", "she was angry", "she was bored"]],
+        ["'The library closes at six. Dan arrived at 5:55 and hurried to the shelf.' Why did Dan hurry?", "he was short on time", ["he was lost", "he was early", "he was angry"]],
+        ["'Sofia packed a raincoat, boots, and an umbrella.' What weather did she expect?", "rainy", ["snowy", "sunny", "windy"]],
+        ["'The puppy chewed a slipper, knocked over the trash, and jumped on the couch. Dad sighed.' What does the sigh show?", "Dad is frustrated", ["Dad is proud", "Dad is asleep", "Dad is confused"]],
+        ["'The recipe says to stir for two minutes, then bake for twenty.' Which happens last?", "baking", ["stirring", "shopping", "cooling"]],
+        ["'The sign read Closed for repairs. The gym door was locked.' Why was the gym locked?", "it was being repaired", ["it was a holiday", "the team was away", "it was too early"]],
+        ["'Jonas practiced every day and still lost the race. He shook the winner's hand.' What does this show?", "good sportsmanship", ["poor manners", "great speed", "a broken leg"]],
+        ["'The article explains how bees help plants make seeds.' What is the article mostly about?", "the work bees do for plants", ["why bees sting", "where honey is sold", "how flowers smell"]],
+      ],
+      C: [
+        ["'Although the town had little money, volunteers rebuilt the park.' What does this show?", "determination", ["wealth", "confusion", "luck"]],
+        ["'The narrator describes an old house with cracked windows and a sagging porch.' What mood does this create?", "gloomy", ["cheerful", "silly", "peaceful"]],
+        ["'The author argues that school should start later, citing sleep research.' What is the author's purpose?", "to persuade", ["to entertain", "to describe a place", "to tell a story"]],
+        ["'The team lost the first half but scored twice after halftime.' What is the turning point?", "the second half", ["the bus ride", "the first goal against", "the final whistle"]],
+        ["'The bridge was a ribbon of steel across the river.' What does the phrase emphasize?", "how the bridge spans the river", ["how old the bridge is", "how noisy the river is", "how tall the banks are"]],
+        ["'A character says one thing but means the opposite, and the reader knows it.' What device is this?", "verbal irony", ["foreshadowing", "hyperbole", "flashback"]],
+        ["'The article presents two studies, then says both had small samples.' What is the author's point?", "the evidence is limited", ["the studies prove the claim", "the topic is boring", "the samples were huge"]],
+        ["'The story shifts from the present to a memory of the narrator's childhood.' What is this called?", "flashback", ["foreshadowing", "cliffhanger", "dialogue"]],
+      ],
+      D: [
+        ["'The writer calls the policy a bandage on a broken bone.' What does the comparison suggest?", "the fix is too small for the problem", ["the fix is perfect", "the problem is minor", "the policy is cheap"]],
+        ["'The passage presents data, acknowledges a counterargument, then rebuts it.' What is this structure?", "argument and counterargument", ["chronological order", "cause and effect only", "a list of examples"]],
+        ["'The tone shifts from respectful to mocking in the final paragraph.' What change occurs?", "the tone becomes sarcastic", ["the tone becomes warmer", "the setting changes", "the narrator disappears"]],
+        ["'The author uses we throughout the essay.' What is this meant to do?", "include the reader", ["cite a source", "hide the topic", "signal a quote"]],
+        ["'A claim is supported by two independent studies.' How does that affect the claim?", "it makes it stronger", ["it makes it weaker", "it makes it irrelevant", "it makes it biased"]],
+        ["'The passage notes the source is a company selling the product.' Why does that matter?", "the source may be biased", ["it must be false", "it is peer reviewed", "it is anonymous"]],
+        ["'The silence was deafening.' What device is this?", "oxymoron", ["simile", "alliteration", "pun"]],
+        ["'The narrator admits uncertainty about the memory.' What effect does that create?", "it makes the account seem honest", ["it proves the memory is false", "it changes the setting", "it adds humor"]],
+      ],
+    },
+  },
+  {
+    id: "writing",
+    label: "Writing & grammar",
+    blurb: "Sentences, punctuation, paragraphs and revision",
+    bands: {
+      A: [
+        ["Which sentence begins with a capital letter?", "The dog ran.", ["the dog ran.", "The dog ran", "the Dog ran."]],
+        ["Which mark goes at the end of a question?", "?", [".", "!", ","]],
+        ["Which word should be capitalized in 'i like cats.'?", "I", ["like", "cats", "the period"]],
+        ["What is the plural of 'cat'?", "cats", ["catss", "cates", "cat"]],
+        ["Which is a complete sentence?", "We play outside.", ["Playing outside.", "Outside the door.", "The big red ball."]],
+        ["Which word is a naming word?", "table", ["run", "happy", "quickly"]],
+        ["Which sentence uses 'and' correctly?", "I like apples and pears.", ["I like and apples pears.", "I and like apples.", "I like apples and."]],
+        ["What goes between the day and the year in a date?", "a comma", ["a period", "a question mark", "a colon"]],
+      ],
+      B: [
+        ["Choose the correct verb: 'The dogs ___ loudly.'", "bark", ["barks", "barking", "barked is"]],
+        ["Which sentence uses commas correctly?", "We bought apples, bread, and milk.", ["We bought apples bread and milk.", "We bought, apples bread, and milk.", "We bought apples, bread and, milk."]],
+        ["Which word is an adverb?", "quickly", ["quick", "quickness", "quicken"]],
+        ["Choose the correct word: '___ going to the park.'", "They're", ["Their", "There", "Theyre"]],
+        ["Which sentence is in the past tense?", "She walked home.", ["She walks home.", "She will walk home.", "She is walking home."]],
+        ["What punctuation shows that someone is speaking?", "quotation marks", ["parentheses", "a hyphen", "a semicolon"]],
+        ["Which is the best topic sentence for a paragraph about recycling?", "Recycling helps our town in three ways.", ["I like recycling.", "Recycling.", "My mom recycles."]],
+        ["Which word correctly completes 'He did ___ on the test.'?", "well", ["good", "goodly", "bestest"]],
+      ],
+      C: [
+        ["Which sentence is in the active voice?", "The chef cooked the meal.", ["The meal was cooked by the chef.", "The meal had been cooked.", "The meal is being cooked."]],
+        ["A semicolon is best used to:", "join two related complete sentences", ["end a question", "list a single item", "show possession"]],
+        ["Which sentence has a dangling modifier?", "Walking to school, the rain began.", ["Walking to school, I got wet.", "The rain began as I walked.", "I walked to school in the rain."]],
+        ["Which transition word shows contrast?", "however", ["therefore", "also", "finally"]],
+        ["Which sentence is punctuated correctly?", "It's raining, so we'll stay inside.", ["Its raining, so we'll stay inside.", "It's raining so we'll stay inside.", "Its' raining, so well stay inside."]],
+        ["Choose the correct pronoun: 'Between you and ___, this is hard.'", "me", ["I", "myself", "we"]],
+        ["Which is the strongest revision of 'very big enormous'?", "enormous", ["very enormous", "big enormous", "very very big"]],
+        ["Which sentence uses parallel structure?", "She likes hiking, swimming, and biking.", ["She likes hiking, to swim, and biking.", "She likes to hike, swimming, and bike.", "She likes hike, swim, and biking."]],
+      ],
+      D: [
+        ["Which sentence avoids a comma splice?", "The results were clear; the team celebrated.", ["The results were clear, the team celebrated.", "The results were clear the team celebrated.", "The results were clear and, the team celebrated."]],
+        ["A thesis statement should:", "state the main claim", ["list every source", "ask the reader a question", "summarize the conclusion only"]],
+        ["Which choice is the most formal?", "The study indicates that...", ["The study says stuff...", "The study is like...", "The study shows a ton..."]],
+        ["Which sentence uses a colon correctly?", "She packed three things: a map, water, and a compass.", ["She packed: a map, water, and a compass.", "She packed three things, a map: water and a compass.", "She: packed three things."]],
+        ["What is wrong with the word 'irregardless'?", "it is nonstandard", ["it is too formal", "it is a verb", "it needs a hyphen"]],
+        ["Which approach best avoids plagiarism?", "a direct quote with a source", ["a close paraphrase with no source", "a rewritten idea with no source", "a summary from memory"]],
+        ["Which sentence is clearest?", "The committee approved the budget after debate.", ["The budget was approved by the committee after debate was had.", "After debate, the budget's approval was made by the committee.", "The budget after debate by the committee was approved."]],
+        ["Which sentence uses a dash correctly?", "He brought everything\u2014tent, food, and maps.", ["He brought\u2014everything tent food and maps.", "He brought everything, tent\u2014food and maps.", "He brought everything tent food\u2014and maps."]],
+      ],
+    },
+  },
+]);
+
+addTopicBanks("Science", [
+  {
+    id: "vocab",
+    label: "Science vocabulary",
+    blurb: "Living things, matter, energy and Earth",
+    bands: {
+      A: [
+        ["What do we call a place where an animal lives?", "habitat", ["cage", "zoo", "farm"]],
+        ["What do plants need to grow?", "water and light", ["rocks and sand", "dark and cold", "salt and sugar"]],
+        ["What do we call animals that eat only plants?", "herbivores", ["carnivores", "omnivores", "predators"]],
+        ["What is the study of living things called?", "biology", ["geology", "astronomy", "chemistry"]],
+        ["What do we call water falling from clouds?", "rain", ["wind", "steam", "ice"]],
+        ["Which body part pumps blood?", "heart", ["lungs", "brain", "stomach"]],
+        ["What do we call a young plant?", "seedling", ["branch", "root hair", "sapling bark"]],
+        ["Which sense do your ears help with?", "hearing", ["sight", "smell", "taste"]],
+      ],
+      B: [
+        ["What is it called when water turns into vapor?", "evaporation", ["condensation", "precipitation", "freezing"]],
+        ["What is a predator?", "an animal that hunts other animals", ["an animal that eats only plants", "a plant that traps insects", "an animal that is hunted"]],
+        ["What do we call the stages a frog passes through?", "a life cycle", ["a food chain", "a rock cycle", "a water cycle"]],
+        ["What is the force that pulls objects toward Earth?", "gravity", ["friction", "magnetism", "electricity"]],
+        ["What is an ecosystem?", "living things and their environment", ["a single animal", "a type of rock", "a weather pattern"]],
+        ["What do we call animals with a backbone?", "vertebrates", ["invertebrates", "mammals only", "reptiles only"]],
+        ["What is the passing of traits from parents to offspring called?", "heredity", ["migration", "adaptation", "hibernation"]],
+        ["What is a mixture?", "two or more things combined without a chemical change", ["a new chemical compound", "a single element", "a type of energy"]],
+      ],
+      C: [
+        ["What is photosynthesis?", "plants using light to make food", ["animals digesting food", "water freezing", "rocks breaking down"]],
+        ["What is density?", "mass per unit volume", ["weight in air", "speed of an object", "temperature of a liquid"]],
+        ["Which is a renewable resource?", "sunlight", ["coal", "oil", "natural gas"]],
+        ["What is kinetic energy?", "the energy of motion", ["stored energy", "heat from the sun only", "energy in food only"]],
+        ["What is the role of decomposers?", "break down dead matter", ["produce sunlight", "eat living animals", "make oxygen only"]],
+        ["What is a chemical change?", "a new substance forms", ["a change of shape only", "a change of state only", "a change in size"]],
+        ["What is an adaptation?", "a trait that helps an organism survive", ["a learned fact", "a type of habitat", "a food source"]],
+        ["What is the main job of red blood cells?", "carry oxygen", ["fight disease", "clot blood", "digest food"]],
+      ],
+      D: [
+        ["What is homeostasis?", "keeping a stable internal state", ["making energy", "growing taller", "reproducing"]],
+        ["What is a catalyst?", "a substance that speeds a reaction without being used up", ["a substance that stops a reaction", "a product of a reaction", "a type of element"]],
+        ["What is mitosis?", "cell division that makes identical cells", ["sperm and egg formation", "protein synthesis", "DNA replication only"]],
+        ["What is entropy?", "a measure of disorder", ["a measure of mass", "a type of bond", "a unit of force"]],
+        ["What is an allele?", "a version of a gene", ["a type of chromosome", "a protein", "a cell organelle"]],
+        ["What is the job of mitochondria?", "release energy from food", ["store water", "make proteins", "copy DNA"]],
+        ["What is natural selection?", "organisms with helpful traits reproduce more", ["organisms change by choice", "all traits are inherited equally", "mutations always help"]],
+        ["What is a solvent?", "a substance that dissolves another", ["a substance that is dissolved", "a solid that forms", "a gas only"]],
+      ],
+    },
+  },
+  {
+    id: "elements",
+    label: "Elements & symbols",
+    blurb: "Element names, chemical symbols and atomic numbers",
+    bands: {
+      A: [
+        ["Which element has the symbol O?", "oxygen", ["gold", "iron", "carbon"]],
+        ["Which element has the symbol H?", "hydrogen", ["helium", "mercury", "magnesium"]],
+        ["Which element has the symbol C?", "carbon", ["calcium", "chlorine", "copper"]],
+        ["Which element has the symbol N?", "nitrogen", ["neon", "nickel", "sodium"]],
+        ["What is the symbol for gold?", "Au", ["Ag", "Gd", "Go"]],
+        ["What is the symbol for iron?", "Fe", ["Ir", "In", "Fr"]],
+        ["What is the symbol for oxygen?", "O", ["Ox", "Og", "Om"]],
+        ["What is the symbol for helium?", "He", ["H", "Hl", "Hm"]],
+      ],
+      B: [
+        ["What is the symbol for silver?", "Ag", ["Si", "S", "Au"]],
+        ["What is the symbol for lead?", "Pb", ["Le", "Ld", "Pt"]],
+        ["What is the symbol for potassium?", "K", ["P", "Po", "Kt"]],
+        ["What is the symbol for sodium?", "Na", ["So", "S", "N"]],
+        ["What is the symbol for magnesium?", "Mg", ["Mn", "Ma", "M"]],
+        ["What is the symbol for chlorine?", "Cl", ["Ch", "C", "Cr"]],
+        ["What is the symbol for zinc?", "Zn", ["Zi", "Z", "Zc"]],
+        ["Which element has the symbol Ne?", "neon", ["nickel", "neodymium", "nitrogen"]],
+      ],
+      C: [
+        ["What does an element's atomic number tell you?", "the number of protons", ["the number of neutrons", "the number of electron shells only", "the element's mass"]],
+        ["Which element has atomic number 6?", "carbon", ["oxygen", "nitrogen", "calcium"]],
+        ["What is the symbol for copper?", "Cu", ["Co", "Cp", "Cr"]],
+        ["What is the symbol for tin?", "Sn", ["Ti", "Tn", "St"]],
+        ["What is the symbol for mercury?", "Hg", ["Me", "Mg", "Hy"]],
+        ["What is the symbol for silicon?", "Si", ["Sl", "S", "Sn"]],
+        ["What is the symbol for aluminum?", "Al", ["Am", "An", "Au"]],
+        ["Which element has the symbol S?", "sulfur", ["sodium", "silicon", "silver"]],
+      ],
+      D: [
+        ["Which element has the symbol W?", "tungsten", ["titanium", "tin", "tantalum"]],
+        ["What is the symbol for platinum?", "Pt", ["Pl", "Pa", "Pb"]],
+        ["What is the symbol for uranium?", "U", ["Ur", "Un", "Ut"]],
+        ["What is the symbol for manganese?", "Mn", ["Mg", "Ma", "Mo"]],
+        ["What is the symbol for chromium?", "Cr", ["Ch", "Cm", "Co"]],
+        ["What is the symbol for bromine?", "Br", ["B", "Be", "Bn"]],
+        ["The symbol K comes from which older name for potassium?", "kalium", ["krypton", "kobalt", "kalzium"]],
+        ["Which element has the symbol Ni?", "nickel", ["niobium", "nitrogen", "neptunium"]],
+      ],
+    },
+  },
+]);
+
+addTopicBanks("Social Studies", [
+  {
+    id: "vocab",
+    label: "Social studies vocabulary",
+    blurb: "Government, geography, economics and citizenship",
+    bands: {
+      A: [
+        ["What is a rule?", "something you must or must not do", ["a place to live", "a type of map", "a kind of money"]],
+        ["What is a leader?", "a person who guides a group", ["a person who follows", "a building", "a holiday"]],
+        ["What is a community?", "a group of people living in the same area", ["a single family", "a type of weather", "a large boat"]],
+        ["What is a map?", "a drawing of an area", ["a story about the past", "a kind of law", "a group of people"]],
+        ["What is history?", "the study of the past", ["the study of plants", "the study of numbers", "the study of weather"]],
+        ["What is a citizen?", "a person who belongs to a country", ["a visitor from another country", "a building where people vote", "a symbol on a flag"]],
+        ["What is an election?", "when people vote to choose leaders", ["a type of holiday", "a kind of map", "a law-making building"]],
+        ["What is a service?", "work that is done to help someone", ["a good that is grown", "a kind of weather", "a group of islands"]],
+      ],
+      B: [
+        ["What is a democracy?", "a government run by the people", ["a government run by one king", "a government run by the army", "a government run by one company"]],
+        ["What is an amendment?", "a change made to a document", ["a new state", "a type of tax", "a court decision"]],
+        ["What is a tariff?", "a tax on imported goods", ["a type of vote", "a border wall", "a trade agreement"]],
+        ["What is a primary source?", "a record made by someone who was there", ["a textbook summary", "an encyclopedia article", "a later movie"]],
+        ["What is urbanization?", "the growth of cities", ["the clearing of forests", "the building of dams", "the decline of farming"]],
+        ["What is scarcity?", "when there is not enough of something", ["when prices are low", "when trade stops", "when a law passes"]],
+        ["What is a compromise?", "an agreement where each side gives something up", ["a vote that ties", "a law that is vetoed", "a tax on exports"]],
+        ["What is federalism?", "sharing power between national and state governments", ["rule by one person", "a single national law", "a type of election"]],
+      ],
+      C: [
+        ["What is judicial review?", "courts deciding whether laws follow the Constitution", ["the president vetoing a bill", "Congress writing a bill", "states making treaties"]],
+        ["What is gerrymandering?", "drawing district lines to favor a group", ["counting every vote twice", "a type of filibuster", "a presidential pardon"]],
+        ["What is propaganda?", "information used to persuade, often unfairly", ["a neutral news report", "a court ruling", "a census count"]],
+        ["What is a referendum?", "a vote by the people on a law", ["a vote by judges", "a type of amendment", "a presidential order"]],
+        ["What is a bureaucracy?", "the agencies that carry out government work", ["the voters in a district", "the leaders of parties", "a type of tax"]],
+        ["What is sovereignty?", "a government's authority over its territory", ["a shared border", "a trade route", "a type of election"]],
+        ["What is a monopoly?", "one company controlling a market", ["many companies competing", "a government subsidy", "a type of tariff"]],
+        ["What is a census?", "an official count of people", ["a type of map", "a court case", "a tax return"]],
+      ],
+      D: [
+        ["What is laissez-faire?", "little government control of the economy", ["strong government control", "a type of tariff", "a voting method"]],
+        ["What is imperialism?", "a country extending power over other lands", ["a country holding an election", "a trade agreement", "a type of tax"]],
+        ["What is hegemony?", "dominance of one power over others", ["equal power sharing", "a legal appeal", "a census"]],
+        ["What is a mandate?", "authority given by voters to act", ["a type of veto", "a court order", "a filibuster"]],
+        ["What is a coalition?", "groups joining for a shared goal", ["single-party rule", "a court jury", "a tax bracket"]],
+        ["What is an incumbent?", "the current officeholder", ["a new candidate", "a voter", "a judge"]],
+        ["What is isolationism?", "avoiding involvement in other countries' affairs", ["expanding trade worldwide", "joining alliances", "a type of election"]],
+        ["What is a filibuster?", "a long speech used to delay a vote", ["a quick vote", "a type of treaty", "a court appeal"]],
+      ],
+    },
+  },
+  {
+    id: "people",
+    label: "Great people in history",
+    blurb: "Leaders, inventors, writers and scientists",
+    bands: {
+      A: [
+        ["Who was the first President of the United States?", "George Washington", ["Abraham Lincoln", "Thomas Jefferson", "John Adams"]],
+        ["Who was President during the Civil War?", "Abraham Lincoln", ["George Washington", "Theodore Roosevelt", "John F. Kennedy"]],
+        ["Who gave the 'I Have a Dream' speech?", "Martin Luther King Jr.", ["George Washington", "Thomas Edison", "Neil Armstrong"]],
+        ["Who refused to give up her bus seat in Montgomery?", "Rosa Parks", ["Harriet Tubman", "Amelia Earhart", "Helen Keller"]],
+        ["Who helped enslaved people escape on the Underground Railroad?", "Harriet Tubman", ["Rosa Parks", "Marie Curie", "Sacagawea"]],
+        ["Who was the first person to walk on the Moon?", "Neil Armstrong", ["Thomas Edison", "the Wright brothers", "Christopher Columbus"]],
+        ["Who is famous for improving the electric light bulb?", "Thomas Edison", ["Alexander Graham Bell", "Neil Armstrong", "Benjamin Franklin"]],
+        ["Who sailed west from Spain in 1492?", "Christopher Columbus", ["Ferdinand Magellan", "Vasco da Gama", "James Cook"]],
+      ],
+      B: [
+        ["Who was the main author of the Declaration of Independence?", "Thomas Jefferson", ["George Washington", "Benjamin Franklin", "John Adams"]],
+        ["Who is known for the kite experiment with lightning?", "Benjamin Franklin", ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla"]],
+        ["Who fought for women's right to vote in the United States?", "Susan B. Anthony", ["Rosa Parks", "Harriet Tubman", "Clara Barton"]],
+        ["Who was a leading abolitionist and wrote about his own life in slavery?", "Frederick Douglass", ["Booker T. Washington", "W.E.B. Du Bois", "Malcolm X"]],
+        ["Who was the first woman to fly solo across the Atlantic?", "Amelia Earhart", ["Bessie Coleman", "Sally Ride", "Harriet Quimby"]],
+        ["Who developed the theory of relativity?", "Albert Einstein", ["Isaac Newton", "Galileo Galilei", "Nikola Tesla"]],
+        ["Who was the first American woman in space?", "Sally Ride", ["Amelia Earhart", "Katherine Johnson", "Mae Jemison"]],
+        ["Who founded the American Red Cross?", "Clara Barton", ["Florence Nightingale", "Susan B. Anthony", "Dorothea Dix"]],
+      ],
+      C: [
+        ["Who was the first woman to win a Nobel Prize?", "Marie Curie", ["Rosalind Franklin", "Ada Lovelace", "Rachel Carson"]],
+        ["Who led India's nonviolent independence movement?", "Mahatma Gandhi", ["Nelson Mandela", "Jawaharlal Nehru", "the Dalai Lama"]],
+        ["Who was the first Black president of South Africa?", "Nelson Mandela", ["Desmond Tutu", "Thabo Mbeki", "Kwame Nkrumah"]],
+        ["Who discovered penicillin?", "Alexander Fleming", ["Louis Pasteur", "Marie Curie", "Joseph Lister"]],
+        ["Who wrote 'Romeo and Juliet'?", "William Shakespeare", ["Charles Dickens", "Jane Austen", "Mark Twain"]],
+        ["Who is often called the first computer programmer?", "Ada Lovelace", ["Grace Hopper", "Alan Turing", "Charles Babbage"]],
+        ["Who broke the color barrier in Major League Baseball?", "Jackie Robinson", ["Satchel Paige", "Hank Aaron", "Willie Mays"]],
+        ["Who wrote 'Silent Spring' about pesticides?", "Rachel Carson", ["Jane Goodall", "Aldo Leopold", "John Muir"]],
+      ],
+      D: [
+        ["Who proposed that Earth orbits the Sun?", "Nicolaus Copernicus", ["Claudius Ptolemy", "Isaac Newton", "Tycho Brahe"]],
+        ["Who wrote 'The Wealth of Nations'?", "Adam Smith", ["John Maynard Keynes", "Karl Marx", "David Ricardo"]],
+        ["Whose calculations helped early spaceflights and was featured in 'Hidden Figures'?", "Katherine Johnson", ["Dorothy Vaughan", "Mary Jackson", "Sally Ride"]],
+        ["Who led the effort to crack the Enigma code in World War II?", "Alan Turing", ["John von Neumann", "Grace Hopper", "Claude Shannon"]],
+        ["Who was a leading journalist who investigated lynching?", "Ida B. Wells", ["Eleanor Roosevelt", "Sojourner Truth", "Fannie Lou Hamer"]],
+        ["Who co-founded the NAACP and wrote 'The Souls of Black Folk'?", "W.E.B. Du Bois", ["Booker T. Washington", "Marcus Garvey", "Langston Hughes"]],
+        ["Who painted the Mona Lisa?", "Leonardo da Vinci", ["Michelangelo", "Raphael", "Vincent van Gogh"]],
+        ["Who was the nurse known as 'the Lady with the Lamp'?", "Florence Nightingale", ["Clara Barton", "Mary Seacole", "Edith Cavell"]],
+      ],
+    },
+  },
+  {
+    id: "events",
+    label: "Historical events",
+    blurb: "Turning points in American and world history",
+    bands: {
+      A: [
+        ["What did the Pilgrims sail on in 1620?", "the Mayflower", ["the Santa Maria", "the Titanic", "the Constitution"]],
+        ["What document was adopted in 1776?", "the Declaration of Independence", ["the Constitution", "the Bill of Rights", "the Gettysburg Address"]],
+        ["Which war was fought between the northern and southern states?", "the Civil War", ["the Revolutionary War", "World War I", "the War of 1812"]],
+        ["What happened in 1969 when Apollo 11 landed?", "people walked on the Moon", ["the first airplane flew", "the Berlin Wall fell", "the internet began"]],
+        ["What do we celebrate on July 4?", "Independence Day", ["Thanksgiving", "Memorial Day", "New Year's Day"]],
+        ["Which holiday honors people who served in the military?", "Veterans Day", ["Labor Day", "Earth Day", "Flag Day"]],
+        ["Which holiday remembers soldiers who died in war?", "Memorial Day", ["Veterans Day", "Presidents' Day", "Columbus Day"]],
+        ["Which U.S. holiday gives thanks for the harvest?", "Thanksgiving", ["Halloween", "Easter", "Independence Day"]],
+      ],
+      B: [
+        ["Where were the first shots of the American Revolution fired?", "Lexington and Concord", ["Yorktown", "Philadelphia", "Boston Harbor"]],
+        ["What did the Louisiana Purchase do in 1803?", "doubled the size of the United States", ["ended the Civil War", "created the Bill of Rights", "started the War of 1812"]],
+        ["What was the Underground Railroad?", "a network that helped enslaved people escape", ["a train line in the South", "a road built by railroads", "a trade route to Canada"]],
+        ["What did the Emancipation Proclamation do?", "declared enslaved people in Confederate states free", ["ended all taxes", "gave women the vote", "created public schools"]],
+        ["Which event began on December 7, 1941?", "the attack on Pearl Harbor", ["the D-Day invasion", "the Boston Tea Party", "the Moon landing"]],
+        ["What was the Montgomery bus boycott about?", "ending segregated seating on buses", ["building new highways", "ending a war", "starting a new city"]],
+        ["What did the 19th Amendment do?", "gave women the right to vote", ["ended slavery", "created the income tax", "lowered the voting age"]],
+        ["What was the Boston Tea Party a protest against?", "taxes on tea", ["a ban on tea", "high bread prices", "the French Revolution"]],
+      ],
+      C: [
+        ["Which event started World War I?", "the assassination of Archduke Franz Ferdinand", ["the invasion of Poland", "the attack on Pearl Harbor", "the sinking of the Titanic"]],
+        ["What was the Treaty of Versailles?", "the peace treaty that ended World War I", ["the alliance that started World War II", "a trade deal with Japan", "the plan to rebuild Europe"]],
+        ["What was the New Deal?", "programs to help the U.S. recover from the Great Depression", ["a plan to win World War II", "a treaty with the Soviet Union", "a civil rights law"]],
+        ["What was the Berlin Airlift?", "supplies flown into West Berlin during a blockade", ["a military invasion", "a naval battle", "a trade agreement"]],
+        ["Which Supreme Court case ended racial segregation in public schools?", "Brown v. Board of Education", ["Plessy v. Ferguson", "Marbury v. Madison", "Roe v. Wade"]],
+        ["What did the Civil Rights Act of 1964 do?", "banned discrimination based on race, color, religion, sex, or national origin", ["gave women the vote", "ended Prohibition", "created Social Security"]],
+        ["What was the Marshall Plan?", "U.S. aid to rebuild Western Europe after World War II", ["a plan to invade Cuba", "a treaty with Japan", "a space program"]],
+        ["What was the Cuban Missile Crisis?", "a standoff over Soviet missiles in Cuba", ["a war in Vietnam", "a treaty to limit nuclear tests", "an invasion of Cuba"]],
+      ],
+      D: [
+        ["What did the Peace of Westphalia in 1648 help establish?", "the modern idea of state sovereignty", ["the United Nations", "the European Union", "the League of Nations"]],
+        ["What was the main goal of the Congress of Vienna in 1815?", "restore the balance of power in Europe", ["end the Cold War", "create the United Nations", "divide Africa"]],
+        ["What was the Open Door Policy about?", "equal trade access to China", ["closing Chinese ports", "ending the opium trade", "building the Panama Canal"]],
+        ["What did the 14th Amendment guarantee?", "equal protection under the law", ["the vote for all citizens", "freedom of speech", "the abolition of slavery"]],
+        ["What did the Suez Crisis of 1956 show?", "the declining influence of Britain and France", ["the end of World War II", "the creation of Israel", "the start of the Cold War"]],
+        ["What was d\u00e9tente?", "an easing of Cold War tensions", ["a nuclear war", "a trade embargo", "a military alliance"]],
+        ["What did the Gulf of Tonkin Resolution allow?", "expanded U.S. military action in Vietnam", ["a declaration of war on China", "an invasion of Korea", "a treaty with France"]],
+        ["What was the purpose of the Nuremberg Trials?", "to prosecute Nazi leaders for war crimes", ["to write the German constitution", "to divide Germany", "to create the United Nations"]],
+      ],
+    },
+  },
+]);
+
+addTopicBanks("Math", [
+  {
+    id: "vocab",
+    label: "Math vocabulary",
+    blurb: "The words and symbols math uses",
+    bands: {
+      A: [
+        ["What is the answer to an addition problem called?", "the sum", ["the difference", "the product", "the quotient"]],
+        ["What is the answer to a subtraction problem called?", "the difference", ["the sum", "the product", "the quotient"]],
+        ["Which symbol means 'is equal to'?", "=", ["+", "-", "x"]],
+        ["What do we call a shape with three sides?", "a triangle", ["a square", "a circle", "a rectangle"]],
+        ["What does 'how many more' ask you to find?", "the difference", ["the sum", "the product", "the shape"]],
+        ["What do we call the numbers 0, 1, 2, 3 and so on?", "whole numbers", ["fractions", "shapes", "angles"]],
+        ["Which tool measures length?", "a ruler", ["a clock", "a scale", "a thermometer"]],
+        ["What is one half of 10?", "5", ["2", "10", "20"]],
+      ],
+      B: [
+        ["What is the answer to a multiplication problem called?", "the product", ["the sum", "the difference", "the quotient"]],
+        ["What is the answer to a division problem called?", "the quotient", ["the product", "the sum", "the remainder"]],
+        ["In 3/4, what is the 4 called?", "the denominator", ["the numerator", "the quotient", "the factor"]],
+        ["What is a factor?", "a number that divides another evenly", ["the answer to addition", "a type of angle", "a unit of length"]],
+        ["What is the distance around a shape called?", "the perimeter", ["the area", "the volume", "the angle"]],
+        ["What is the amount of space inside a flat shape called?", "the area", ["the perimeter", "the diameter", "the angle"]],
+        ["What is a right angle?", "an angle of 90 degrees", ["an angle of 45 degrees", "an angle of 180 degrees", "any small angle"]],
+        ["Which number is a multiple of 4?", "12", ["9", "14", "18"]],
+      ],
+      C: [
+        ["What is a coefficient?", "the number multiplying a variable", ["a letter that stands for a number", "the answer to an equation", "a type of fraction"]],
+        ["In 5 squared, what is the 2 called?", "the exponent", ["the base", "the coefficient", "the factor"]],
+        ["What is a ratio?", "a comparison of two quantities", ["the sum of two numbers", "a type of angle", "the average of a set"]],
+        ["What is the mean of a data set?", "the average", ["the middle value", "the most common value", "the largest value"]],
+        ["What is the median?", "the middle value when the data is ordered", ["the average", "the most common value", "the range"]],
+        ["What is an integer?", "a positive or negative whole number", ["any fraction", "a decimal only", "a shape"]],
+        ["What is a reciprocal?", "the number you multiply by to get 1", ["the opposite of a number", "the square of a number", "the absolute value"]],
+        ["What is a proportion?", "an equation stating that two ratios are equal", ["a single ratio", "a type of graph", "a unit of measure"]],
+      ],
+      D: [
+        ["What is a function?", "a rule that gives each input exactly one output", ["any equation with an x", "a type of angle", "a list of numbers"]],
+        ["What is the domain of a function?", "the set of possible inputs", ["the set of outputs", "the slope", "the y-intercept"]],
+        ["What is a logarithm?", "the exponent needed to produce a given number", ["a type of fraction", "the inverse of a square", "a unit of angle"]],
+        ["What is a vector?", "a quantity with size and direction", ["a quantity with size only", "a type of matrix", "a unit of slope"]],
+        ["What is a polynomial?", "a sum of terms with whole-number exponents", ["a single fraction", "an equation with no variables", "a type of angle"]],
+        ["What is an irrational number?", "a number that cannot be written as a fraction of integers", ["a negative number", "a decimal that ends", "a number less than zero"]],
+        ["What does congruent mean?", "the same shape and size", ["the same shape only", "the same area only", "the same angle only"]],
+        ["What is a permutation?", "an arrangement in which order matters", ["a selection in which order does not matter", "a type of average", "a kind of graph"]],
+      ],
+    },
+  },
+]);
+
+addTopicBanks("Reading", [
+  {
+    id: "poetry",
+    label: "Poetry & figurative language",
+    blurb: "Poems, sound devices and figures of speech",
+    bands: {
+      A: [
+        ["Which two words rhyme?", "cat, hat", ["cat, dog", "sun, moon", "tree, leaf"]],
+        ["A poem is made of lines grouped into:", "stanzas", ["chapters", "paragraphs", "captions"]],
+        ["'The bee buzzed.' Which word sounds like the noise?", "buzzed", ["bee", "the", "flew"]],
+        ["Which sentence is a simile?", "Her smile was like sunshine.", ["Her smile was sunshine.", "She smiled all day.", "Her smile was a light."]],
+        ["A word that imitates the sound it describes is called:", "onomatopoeia", ["a synonym", "a rhyme", "a stanza"]],
+        ["Which two words rhyme?", "moon, soon", ["moon, sun", "moon, star", "moon, night"]],
+        ["'The wind sang.' What is the wind doing in this poem?", "acting like a person", ["really singing", "making music", "stopping"]],
+        ["What do we call the pattern of beats in a poem?", "rhythm", ["rhyme", "a stanza", "a title"]],
+      ],
+      B: [
+        ["'The classroom was a zoo.' What device is this?", "metaphor", ["simile", "alliteration", "hyperbole"]],
+        ["'The leaves danced in the wind.' What device is this?", "personification", ["simile", "metaphor", "alliteration"]],
+        ["'Peter picked pickled peppers.' What device is this?", "alliteration", ["assonance", "onomatopoeia", "hyperbole"]],
+        ["'I have told you a million times.' What device is this?", "hyperbole", ["metaphor", "irony", "personification"]],
+        ["'It is raining cats and dogs.' What is this?", "an idiom", ["a simile", "a metaphor", "a rhyme"]],
+        ["Which one is a simile?", "as quiet as a mouse", ["the mouse was quiet", "quiet mouse", "the quietest mouse"]],
+        ["Words that end with the same sound create:", "rhyme", ["rhythm", "imagery", "tone"]],
+        ["What do we call language that appeals to the five senses?", "imagery", ["rhyme", "a stanza", "meter"]],
+      ],
+      C: [
+        ["'The fog comes on little cat feet.' What device is this?", "metaphor", ["simile", "hyperbole", "onomatopoeia"]],
+        ["A poem with no fixed rhyme scheme or meter is called:", "free verse", ["blank verse", "a sonnet", "a ballad"]],
+        ["What is a sonnet?", "a 14-line poem", ["a 4-line poem", "a song", "a long story"]],
+        ["The repetition of vowel sounds is called:", "assonance", ["alliteration", "consonance", "rhyme"]],
+        ["The attitude a poem's speaker takes toward the subject is its:", "tone", ["mood", "theme", "meter"]],
+        ["What is meter?", "the pattern of stressed and unstressed beats", ["the rhyme scheme", "the number of stanzas", "the poem's topic"]],
+        ["'The moon was a ghostly galleon.' What device is this?", "metaphor", ["simile", "alliteration", "irony"]],
+        ["What is a stanza?", "a group of lines in a poem", ["a repeated line", "a type of rhyme", "the poem's title"]],
+      ],
+      D: [
+        ["What is enjambment?", "a sentence running past the end of a line", ["a repeated refrain", "a rhyme inside a line", "a two-line stanza"]],
+        ["Blank verse is:", "unrhymed iambic pentameter", ["rhymed couplets", "free verse with no meter", "a 14-line poem"]],
+        ["What is an oxymoron?", "two contradictory words placed together", ["a false statement", "a repeated sound", "an indirect comparison"]],
+        ["What is an allusion?", "a reference to a well-known person, place, or work", ["a direct comparison", "a repeated line", "a type of rhyme"]],
+        ["What is the volta in a sonnet?", "a turn in thought or argument", ["the final rhyme", "the title", "the first line"]],
+        ["'The pen is mightier than the sword.' What device is this?", "metonymy", ["simile", "alliteration", "hyperbole"]],
+        ["What is iambic pentameter?", "five feet of unstressed-then-stressed beats", ["ten rhyming lines", "five stanzas", "a 14-line poem"]],
+        ["What is understatement?", "saying less than the truth for effect", ["exaggerating for effect", "repeating a sound", "comparing two things"]],
+      ],
+    },
+  },
+  {
+    id: "research",
+    label: "Research & reference",
+    blurb: "Finding, judging and citing information",
+    bands: {
+      A: [
+        ["Where do you look to find what a book is about?", "the title and cover", ["the last page", "the barcode", "the author's address"]],
+        ["What does a table of contents show?", "the chapters and their pages", ["the definitions", "the index", "the pictures"]],
+        ["What is a dictionary used for?", "finding word meanings", ["finding phone numbers", "drawing maps", "telling time"]],
+        ["Where do you usually find the page number?", "at the top or bottom of the page", ["on the cover", "in the title", "on the spine only"]],
+        ["What do we call the person who writes a book?", "the author", ["the reader", "the printer", "the illustrator only"]],
+        ["What does a picture caption tell you?", "what the picture shows", ["who wrote the book", "the page number", "the price"]],
+        ["Which text feature names what a section is about?", "a heading", ["a caption", "a glossary", "an index"]],
+        ["How are words arranged in a dictionary?", "in alphabetical order", ["by page length", "by topic", "by author"]],
+      ],
+      B: [
+        ["What is a glossary?", "a list of word meanings at the back of a book", ["a list of chapters", "a list of pictures", "a list of authors"]],
+        ["What does an index list?", "topics and the pages where they appear", ["chapter titles only", "definitions", "maps"]],
+        ["What is a heading for?", "naming a section's topic", ["decorating the page", "listing sources", "numbering pages"]],
+        ["What does a diagram do?", "shows how something works or is built", ["tells a story", "lists definitions", "gives an opinion"]],
+        ["Which is the best source for today's weather?", "a weather website", ["an atlas", "a dictionary", "a history book"]],
+        ["What is a caption?", "words that explain a picture", ["a chapter title", "a page number", "a source list"]],
+        ["What does a bibliography list?", "the sources used", ["the chapters", "the pictures", "the definitions"]],
+        ["What is a fact?", "something that can be proven true", ["something someone believes", "a guess", "an opinion"]],
+      ],
+      C: [
+        ["What is a primary source?", "a firsthand record from the time of the event", ["a textbook", "an encyclopedia", "a later summary"]],
+        ["What is a secondary source?", "a source that analyzes or summarizes events", ["a diary", "a photograph from the event", "an original letter"]],
+        ["What does it mean to paraphrase?", "restate an idea in your own words", ["copy the exact words", "ignore the source", "shorten a title"]],
+        ["Why do you cite a source?", "to show where the information came from", ["to make the paper longer", "to avoid reading", "to decorate the page"]],
+        ["What is bias?", "a leaning toward one side", ["a neutral summary", "a primary source", "a works-cited list"]],
+        ["Which is the most reliable source for a science report?", "a peer-reviewed article", ["a blog comment", "an advertisement", "a fan page"]],
+        ["What is a database?", "an organized collection of information you can search", ["a type of book cover", "a list of authors", "a kind of citation"]],
+        ["What is a summary?", "a short retelling of the main points", ["a direct quote", "a personal opinion", "a list of sources"]],
+      ],
+      D: [
+        ["What does peer review mean?", "experts check a study before publication", ["students grade each other", "the author edits alone", "a publisher sells a book"]],
+        ["What is a works cited page?", "a list of every source used", ["a list of chapters", "an index of topics", "a glossary"]],
+        ["What is the difference between quoting and paraphrasing?", "quoting uses exact words; paraphrasing restates them", ["they are the same", "paraphrasing uses exact words", "quoting needs no source"]],
+        ["What makes a source credible?", "a knowledgeable author and evidence", ["any website", "many ads", "it agrees with you"]],
+        ["What is a literature review?", "a survey of existing research on a topic", ["a book report", "a poem about research", "a list of definitions"]],
+        ["What does it mean to synthesize sources?", "combine ideas from several sources", ["copy one source", "ignore conflicting evidence", "list sources in order"]],
+        ["What is a research question?", "a focused question the research answers", ["the title of the paper", "a list of sources", "the conclusion"]],
+        ["What is the best way to avoid plagiarism?", "cite sources and write in your own words", ["change one word", "use only quotes", "skip the bibliography"]],
+      ],
+    },
+  },
+]);
+
+addTopicBanks("Science", [
+  {
+    id: "earth",
+    label: "Earth & space",
+    blurb: "Our planet, the solar system and the universe",
+    bands: {
+      A: [
+        ["What is the star at the center of our solar system?", "the Sun", ["the Moon", "Earth", "Mars"]],
+        ["What is the natural satellite that orbits Earth?", "the Moon", ["the Sun", "Venus", "a comet"]],
+        ["How many planets are in our solar system?", "8", ["7", "9", "12"]],
+        ["Which planet do we live on?", "Earth", ["Mars", "Jupiter", "the Moon"]],
+        ["What causes day and night?", "Earth spinning on its axis", ["the Moon moving", "the Sun turning off", "clouds covering the Sun"]],
+        ["What is a huge ball of hot glowing gas called?", "a star", ["a planet", "a moon", "a rock"]],
+        ["What is water falling as rain or snow called?", "precipitation", ["evaporation", "condensation", "collection"]],
+        ["Which season comes right after winter?", "spring", ["summer", "fall", "winter again"]],
+      ],
+      B: [
+        ["What holds the planets in orbit around the Sun?", "gravity", ["magnetism", "friction", "wind"]],
+        ["What is the order of the first four planets from the Sun?", "Mercury, Venus, Earth, Mars", ["Earth, Mars, Jupiter, Saturn", "Mars, Earth, Venus, Mercury", "Venus, Earth, Mars, Jupiter"]],
+        ["What causes the seasons?", "Earth's tilted axis as it orbits the Sun", ["Earth moving closer and farther from the Sun", "the Moon's phases", "changes in the Sun's size"]],
+        ["What is the water cycle?", "water moving between Earth's surface and the air", ["water staying in the oceans", "only rain falling", "water freezing once"]],
+        ["What is a rock made of?", "minerals", ["only sand", "water", "air"]],
+        ["What is erosion?", "the movement of weathered rock and soil", ["the forming of mountains", "the freezing of water", "the melting of rock"]],
+        ["What is a fossil?", "the remains or trace of a living thing preserved in rock", ["a type of mineral", "a kind of soil", "a star"]],
+        ["What causes tides?", "the Moon's gravity pulling on Earth's water", ["Earth's spin only", "the wind", "the seasons"]],
+      ],
+      C: [
+        ["What is the main driver of plate tectonics?", "heat moving material inside Earth", ["the Moon's gravity", "ocean currents", "the wind"]],
+        ["What happens at a divergent plate boundary?", "the plates move apart", ["the plates collide", "the plates slide past each other", "the plates stop moving"]],
+        ["What is the greenhouse effect?", "gases trapping heat in the atmosphere", ["a hole in the ozone layer", "Earth's magnetic field", "solar flares"]],
+        ["What is the difference between weather and climate?", "weather is short-term; climate is long-term", ["they are the same", "climate is daily", "weather is yearly"]],
+        ["What causes a solar eclipse?", "the Moon passing between Earth and the Sun", ["Earth passing between the Moon and the Sun", "the Sun passing behind Earth", "a comet blocking the Sun"]],
+        ["What is a light-year?", "the distance light travels in a year", ["the time light takes to reach Earth", "a year on another planet", "the brightness of a star"]],
+        ["What are the outer planets made mostly of?", "gas and ice", ["rock and metal", "water only", "dust only"]],
+        ["What is the Milky Way?", "the galaxy that contains our solar system", ["a star", "a planet", "a moon"]],
+      ],
+      D: [
+        ["What is the Big Bang theory?", "the universe expanded from a hot, dense state", ["stars formed from nothing", "Earth was hit by a comet", "the Sun exploded"]],
+        ["What is a star's main sequence stage?", "the long period when it fuses hydrogen into helium", ["the final explosion", "the cooling into a planet", "the forming of a moon"]],
+        ["What can a very massive star collapse into?", "a black hole", ["a planet", "a moon", "a comet"]],
+        ["What is geologic time measured in?", "millions and billions of years", ["days and weeks", "seasons", "decades"]],
+        ["What is the Coriolis effect?", "the apparent curving of moving air and water due to Earth's rotation", ["the pull of the Moon", "the tilt of Earth's axis", "the heating of the atmosphere"]],
+        ["What is an astronomical unit?", "the average distance from Earth to the Sun", ["the distance to the nearest star", "the size of the Sun", "the length of a year"]],
+        ["What is the habitable zone?", "the range of orbits where liquid water can exist", ["the center of a galaxy", "the edge of a solar system", "the inside of a star"]],
+        ["What drives the movement of Earth's tectonic plates?", "convection in the mantle", ["the Moon's pull", "ocean tides", "solar wind"]],
+      ],
+    },
+  },
+  {
+    id: "body",
+    label: "Human body",
+    blurb: "Organs, systems and how the body works",
+    bands: {
+      A: [
+        ["Which organ pumps blood?", "the heart", ["the lungs", "the stomach", "the brain"]],
+        ["Which organs help you breathe?", "the lungs", ["the kidneys", "the liver", "the heart"]],
+        ["What do your eyes help you do?", "see", ["hear", "taste", "smell"]],
+        ["What do bones do?", "support your body", ["pump blood", "digest food", "carry air"]],
+        ["Which body part controls thinking?", "the brain", ["the heart", "the stomach", "the hand"]],
+        ["What is the outer covering of your body called?", "skin", ["bone", "muscle", "blood"]],
+        ["What do teeth help you do?", "chew food", ["breathe", "see", "hear"]],
+        ["How many senses do people usually have?", "5", ["3", "7", "10"]],
+      ],
+      B: [
+        ["What is the job of the stomach?", "break down food", ["pump blood", "carry oxygen", "send signals"]],
+        ["What do red blood cells carry?", "oxygen", ["food", "water", "sound"]],
+        ["What connects muscles to bones?", "tendons", ["nerves", "arteries", "cartilage"]],
+        ["What is the job of the kidneys?", "filter waste from blood", ["digest food", "pump blood", "store air"]],
+        ["Which system includes the heart and blood vessels?", "the circulatory system", ["the digestive system", "the nervous system", "the skeletal system"]],
+        ["What is the spine made of?", "vertebrae", ["muscles", "tendons", "cartilage only"]],
+        ["What are the tiny air sacs in the lungs called?", "alveoli", ["neurons", "platelets", "capillaries"]],
+        ["What does the small intestine do?", "absorbs nutrients from food", ["pumps blood", "filters air", "stores urine"]],
+      ],
+      C: [
+        ["What is the main job of the nervous system?", "send and process signals", ["digest food", "carry oxygen", "support the body"]],
+        ["What is a neuron?", "a nerve cell that carries signals", ["a blood cell", "a muscle", "a bone"]],
+        ["What does the diaphragm do?", "helps you breathe by moving down and up", ["digests food", "pumps blood", "filters waste"]],
+        ["What do white blood cells do?", "fight infection", ["carry oxygen", "clot blood", "digest food"]],
+        ["What is the largest organ of the human body?", "the skin", ["the liver", "the brain", "the heart"]],
+        ["Where does most nutrient absorption happen?", "in the small intestine", ["in the stomach", "in the large intestine", "in the esophagus"]],
+        ["What is the job of the pancreas?", "make digestive enzymes and insulin", ["filter blood", "pump blood", "store bile"]],
+        ["What connects bones to other bones?", "ligaments", ["tendons", "nerves", "muscles"]],
+      ],
+      D: [
+        ["What is homeostasis?", "keeping internal conditions stable", ["growing new cells", "making hormones only", "fighting disease only"]],
+        ["What is the endocrine system?", "glands that release hormones", ["nerves that carry signals", "bones that support the body", "cells that fight infection"]],
+        ["What is an immune response?", "the body's defense against pathogens", ["the body's growth spurt", "the digestion of food", "the clotting of blood"]],
+        ["What is the role of the cerebrum?", "thinking, memory and voluntary movement", ["balancing the body", "controlling breathing only", "digesting food"]],
+        ["What is cellular respiration?", "cells using oxygen and glucose to release energy", ["plants making glucose", "blood clotting", "muscles tearing"]],
+        ["What are villi?", "finger-like folds in the small intestine that increase absorption", ["air sacs in the lungs", "cells in the blood", "glands in the skin"]],
+        ["What does the medulla oblongata control?", "breathing and heart rate", ["vision", "balance", "speech"]],
+        ["What is an antibody?", "a protein that helps target a specific pathogen", ["a type of white blood cell", "a hormone", "an enzyme that digests food"]],
+      ],
+    },
+  },
+]);
+
+addTopicBanks("Social Studies", [
+  {
+    id: "geography",
+    label: "Geography",
+    blurb: "Maps, places, landforms and people on the move",
+    bands: {
+      A: [
+        ["What is a map?", "a drawing of an area from above", ["a story about a place", "a kind of law", "a type of weather"]],
+        ["What is a globe?", "a round model of Earth", ["a flat map", "a kind of compass", "a star chart"]],
+        ["How many continents are there?", "7", ["5", "9", "12"]],
+        ["Which ocean is the largest?", "the Pacific", ["the Atlantic", "the Indian", "the Arctic"]],
+        ["What does a compass rose show?", "directions", ["distances", "population", "weather"]],
+        ["What is a country?", "a land with its own government", ["a city", "a continent", "a state only"]],
+        ["What is a river?", "a large stream of flowing water", ["a type of mountain", "a body of salt water", "a kind of forest"]],
+        ["What is a desert?", "a dry area that gets little rain", ["a cold forest", "a large lake", "a tall mountain"]],
+      ],
+      B: [
+        ["What is the equator?", "the imaginary line halfway between the poles", ["a line of longitude", "a mountain range", "a border"]],
+        ["What is a hemisphere?", "half of Earth", ["a continent", "a country", "a type of map"]],
+        ["What is a landform?", "a natural feature of Earth's surface", ["a type of government", "a kind of map", "a climate zone"]],
+        ["What is a peninsula?", "land surrounded by water on three sides", ["an island", "a lake", "a bay"]],
+        ["What is population density?", "the number of people per unit of area", ["the total number of people", "the size of a country", "the number of cities"]],
+        ["What is climate?", "the usual weather of a place over time", ["today's weather", "a type of storm", "the season"]],
+        ["What is a region?", "an area with shared features", ["a type of map key", "a border wall", "a single city"]],
+        ["What do we call moving from one place to another?", "migration", ["trade", "an election", "erosion"]],
+      ],
+      C: [
+        ["What are push and pull factors?", "reasons for leaving a place and reasons for choosing one", ["types of maps", "kinds of climate", "forms of government"]],
+        ["What is urbanization?", "the growth of cities", ["the decline of cities", "the spread of farms", "the building of roads"]],
+        ["What is a climate zone?", "an area with a similar climate", ["a type of government", "a language group", "a trade route"]],
+        ["What is the Ring of Fire?", "a zone of frequent earthquakes and volcanoes around the Pacific", ["a desert", "a mountain in Africa", "a river delta"]],
+        ["What is a delta?", "land formed where a river deposits sediment", ["a mountain peak", "a type of glacier", "a deep ocean trench"]],
+        ["What is a monsoon?", "a seasonal wind that brings heavy rain", ["a type of earthquake", "a cold ocean current", "a desert storm"]],
+        ["What is carrying capacity?", "the largest population an area can support", ["the number of cities in a country", "the size of a continent", "the average rainfall"]],
+        ["What is a megacity?", "a city with more than 10 million people", ["a city with 1 million people", "a capital city", "a city with a port"]],
+      ],
+      D: [
+        ["What is globalization?", "the growing connection of economies and cultures worldwide", ["the closing of borders", "the decline of trade", "a type of map"]],
+        ["What is the demographic transition?", "the shift from high to low birth and death rates", ["the movement of people to cities", "the growth of deserts", "the building of dams"]],
+        ["What is a supranational organization?", "a group of countries working together, like the European Union", ["a single country's government", "a city council", "a local court"]],
+        ["What does GDP per capita measure?", "a country's economic output per person", ["total population", "land area", "average rainfall"]],
+        ["What is sustainable development?", "meeting needs without harming future generations", ["using all resources now", "stopping all growth", "building more roads"]],
+        ["What is a cartogram?", "a map that sizes regions by data such as population", ["a map of mountains", "a climate graph", "a satellite photo"]],
+        ["What is the informal sector?", "work that is not officially recorded or taxed", ["government jobs", "large factories", "international trade"]],
+        ["What is a free trade zone?", "an area where goods move with fewer taxes and rules", ["a closed border", "a military base", "a national park"]],
+      ],
+    },
+  },
+  {
+    id: "economics",
+    label: "Economics",
+    blurb: "Money, markets, trade and personal finance",
+    bands: {
+      A: [
+        ["What is a need?", "something you must have to live", ["something you want but do not need", "a type of money", "a kind of job"]],
+        ["What is a want?", "something you would like but do not need", ["something you must have", "a kind of coin", "a law"]],
+        ["What do we call things people buy, like food and toys?", "goods", ["services", "taxes", "savings"]],
+        ["What do we call work that helps someone, like a haircut?", "a service", ["a good", "a tax", "a coin"]],
+        ["What do we use to buy things?", "money", ["votes", "time", "weather"]],
+        ["What is saving?", "keeping money to use later", ["spending all your money", "borrowing money", "losing money"]],
+        ["What is a job?", "work someone does for pay", ["a type of coin", "a kind of tax", "a holiday"]],
+        ["What is change?", "money returned after paying more than the price", ["a discount", "a tax", "a loan"]],
+      ],
+      B: [
+        ["What is supply?", "how much of something is available", ["how much people want it", "the price of it", "the tax on it"]],
+        ["What is demand?", "how much people want to buy something", ["how much is available", "the cost of making it", "the number of sellers"]],
+        ["What usually happens to price when demand rises and supply stays the same?", "it rises", ["it falls", "it stays the same", "it disappears"]],
+        ["What is a budget?", "a plan for spending and saving money", ["a type of loan", "a tax form", "a bank"]],
+        ["What is profit?", "money left after costs are paid", ["the total price", "a type of tax", "a loan payment"]],
+        ["What is a producer?", "someone who makes or grows goods", ["someone who buys goods", "someone who taxes goods", "someone who saves money"]],
+        ["What is a consumer?", "someone who buys and uses goods or services", ["someone who makes goods", "someone who lends money", "someone who taxes goods"]],
+        ["What is interest?", "money paid for borrowing money", ["a discount on a price", "a kind of tax", "a type of saving only"]],
+      ],
+      C: [
+        ["What is opportunity cost?", "the value of what you give up when you choose", ["the money you spend", "the price of a good", "the tax on a purchase"]],
+        ["What is inflation?", "a general rise in prices over time", ["a drop in prices", "a rise in wages only", "a type of tax"]],
+        ["What is a market economy?", "prices and choices are set by buyers and sellers", ["the government sets all prices", "there is no trade", "only one company sells"]],
+        ["What is a monopoly?", "one seller controls a market", ["many sellers compete", "the government owns all business", "buyers set all prices"]],
+        ["What is scarcity?", "limited resources compared with unlimited wants", ["unlimited resources", "a type of tax", "a trade agreement"]],
+        ["What is productivity?", "output per unit of work or time", ["the total price", "the number of workers only", "the tax rate"]],
+        ["What is a tariff?", "a tax on imported goods", ["a subsidy for farmers", "a type of savings", "a price ceiling"]],
+        ["What is a subsidy?", "government money that lowers a producer's costs", ["a tax on imports", "a loan to consumers", "a price increase"]],
+      ],
+      D: [
+        ["What is GDP?", "the total value of goods and services a country produces", ["the total tax collected", "the amount of money saved", "the number of workers"]],
+        ["What is fiscal policy?", "government decisions about spending and taxes", ["central bank decisions about money supply", "a company's budget", "a trade agreement"]],
+        ["What is monetary policy?", "central bank decisions about money supply and interest rates", ["government spending and taxes", "a company's hiring plan", "a tariff"]],
+        ["What is a trade deficit?", "a country imports more than it exports", ["a country exports more than it imports", "a country has no trade", "trade is exactly balanced"]],
+        ["What is comparative advantage?", "producing a good at a lower opportunity cost than others", ["producing everything yourself", "having the most money", "charging the highest price"]],
+        ["What is elasticity of demand?", "how much demand changes when price changes", ["how much supply costs", "the total demand", "the tax on a good"]],
+        ["What is a progressive tax?", "a tax that takes a larger share from higher incomes", ["a tax that is the same for everyone", "a tax only on imports", "a tax on property only"]],
+        ["What is a recession?", "a period of shrinking economic activity", ["a period of rapid growth", "a rise in prices only", "a type of trade deal"]],
+      ],
+    },
+  },
+]);
+
+addTopicBanks("Math", [
+  {
+    id: "money",
+    label: "Money & finance",
+    blurb: "Coins, prices, interest and budgets",
+    bands: {
+      A: [
+        ["How much is a penny worth?", "1 cent", ["5 cents", "10 cents", "25 cents"]],
+        ["How much is a nickel worth?", "5 cents", ["1 cent", "10 cents", "25 cents"]],
+        ["How much is a dime worth?", "10 cents", ["5 cents", "25 cents", "50 cents"]],
+        ["How much is a quarter worth?", "25 cents", ["10 cents", "50 cents", "1 dollar"]],
+        ["How many cents are in a dollar?", "100", ["10", "50", "1000"]],
+        ["A toy costs 50 cents. You pay with a dollar. How much change?", "50 cents", ["25 cents", "1 dollar", "10 cents"]],
+        ["Which coin is worth the most?", "a quarter", ["a penny", "a nickel", "a dime"]],
+        ["You have 2 dimes. How much money is that?", "20 cents", ["10 cents", "12 cents", "2 cents"]],
+      ],
+      B: [
+        ["What is 10% of $50?", "$5", ["$10", "$50", "$1"]],
+        ["A $20 shirt is 25% off. How much is the discount?", "$5", ["$4", "$10", "$15"]],
+        ["What is sales tax?", "money added to a price by the government", ["a discount", "a tip", "a refund"]],
+        ["If you save $5 a week, how much do you save in 4 weeks?", "$20", ["$9", "$25", "$45"]],
+        ["What is a unit price?", "the cost for one item", ["the total cost", "the tax", "the discount"]],
+        ["Which is the better buy: 4 apples for $2 or 6 apples for $3?", "they cost the same per apple", ["4 apples for $2", "6 apples for $3", "neither can be compared"]],
+        ["What is a discount?", "money taken off a price", ["money added to a price", "a type of tax", "a loan"]],
+        ["You earn $8 an hour and work 3 hours. How much do you earn?", "$24", ["$11", "$18", "$32"]],
+      ],
+      C: [
+        ["What is simple interest?", "interest paid only on the original amount", ["interest on interest", "a type of tax", "a fee for a service"]],
+        ["What is compound interest?", "interest earned on the original amount and past interest", ["interest on the original amount only", "a one-time fee", "a discount"]],
+        ["You borrow $100 at 5% simple interest for 2 years. How much interest?", "$10", ["$5", "$20", "$105"]],
+        ["What is a budget surplus?", "spending less than you earn", ["spending more than you earn", "spending exactly what you earn", "borrowing money"]],
+        ["What is net pay?", "pay after taxes and deductions", ["pay before taxes", "the hourly rate", "a bonus"]],
+        ["A $40 item is 15% off. What is the sale price?", "$34", ["$25", "$36", "$30"]],
+        ["What is a fixed expense?", "a cost that stays the same each month", ["a cost that changes", "a one-time purchase", "a tax refund"]],
+        ["Which is the better deal: $12 for 3 items or $20 for 5 items?", "$12 for 3", ["$20 for 5", "they are equal", "neither"]],
+      ],
+      D: [
+        ["What does APR stand for?", "annual percentage rate", ["average price ratio", "annual payment record", "applied percentage return"]],
+        ["What is a credit score?", "a number estimating how reliably someone repays debt", ["a bank account balance", "the amount of money saved", "a type of loan"]],
+        ["What is diversification in investing?", "spreading money across different assets", ["putting all money in one stock", "keeping money in cash only", "borrowing to invest"]],
+        ["What is a 401(k)?", "a retirement savings account, often with employer matching", ["a type of credit card", "a student loan", "a mortgage"]],
+        ["What does inflation do to savings?", "money buys less over time", ["money buys more over time", "savings always grow faster", "prices never change"]],
+        ["What is a mortgage?", "a loan used to buy a home", ["a type of savings account", "a tax on homes", "a credit card"]],
+        ["An investment grows 10% one year and falls 10% the next. What happens?", "it ends below the starting value", ["it ends above the starting value", "it stays exactly the same", "it doubles"]],
+        ["What is ROI?", "return on investment", ["rate of inflation", "ratio of income", "refinanced loan"]],
+      ],
+    },
+  },
+  {
+    id: "measurement",
+    label: "Measurement & data",
+    blurb: "Units, conversions, graphs and statistics",
+    bands: {
+      A: [
+        ["Which is longer: a foot or an inch?", "a foot", ["an inch", "they are equal", "a centimeter"]],
+        ["How many inches are in a foot?", "12", ["10", "24", "100"]],
+        ["Which tool measures temperature?", "a thermometer", ["a ruler", "a scale", "a clock"]],
+        ["Which is heavier: a pound or an ounce?", "a pound", ["an ounce", "they are equal", "a gram"]],
+        ["How many minutes are in an hour?", "60", ["30", "100", "24"]],
+        ["What do we call the amount a container can hold?", "capacity", ["length", "weight", "temperature"]],
+        ["Which unit measures time?", "seconds", ["meters", "liters", "grams"]],
+        ["What does a clock measure?", "time", ["length", "mass", "temperature"]],
+      ],
+      B: [
+        ["How many centimeters are in a meter?", "100", ["10", "1000", "12"]],
+        ["How many meters are in a kilometer?", "1,000", ["100", "10,000", "100,000"]],
+        ["What is perimeter?", "the distance around a shape", ["the space inside a shape", "the weight of a shape", "the height of a shape"]],
+        ["Which unit would you use for the mass of an apple?", "grams", ["kilometers", "liters", "hours"]],
+        ["How many milliliters are in a liter?", "1,000", ["100", "10", "10,000"]],
+        ["What does a bar graph show?", "data compared with bars", ["change over time with a line", "parts of a whole with slices", "a map"]],
+        ["How many seconds are in 2 minutes?", "120", ["60", "100", "200"]],
+        ["Which is a reasonable length for a pencil?", "about 18 cm", ["about 18 m", "about 18 km", "about 18 L"]],
+      ],
+      C: [
+        ["How many centimeters are in 2.5 meters?", "250", ["25", "2,500", "25,000"]],
+        ["What is the mean of 4, 6, 8, and 10?", "7", ["6", "8", "28"]],
+        ["What is the median of 3, 7, 9, 12, 15?", "9", ["7", "12", "9.2"]],
+        ["How many grams are in 1.5 kilograms?", "1,500", ["150", "15,000", "1,500,000"]],
+        ["What is a unit rate?", "a rate for one unit", ["a rate for many units", "a type of graph", "a unit of mass"]],
+        ["Which is a reasonable speed for a car?", "60 km/h", ["60 m/s", "60 km/s", "60 cm/h"]],
+        ["What does a line graph best show?", "change over time", ["parts of a whole", "categories compared", "locations"]],
+        ["What is the range of 2, 5, 5, 9, 12?", "10", ["12", "5", "7.4"]],
+      ],
+      D: [
+        ["What is standard deviation?", "a measure of how spread out data is", ["the middle value", "the most common value", "the largest value"]],
+        ["What is dimensional analysis?", "converting units by multiplying by conversion factors", ["guessing units", "measuring with a ruler", "rounding numbers"]],
+        ["How many square feet are in a square yard?", "9", ["3", "6", "12"]],
+        ["What is a z-score?", "how many standard deviations a value is from the mean", ["the average of a data set", "the middle of a data set", "the range of a data set"]],
+        ["Which measure is most affected by an outlier?", "the mean", ["the median", "the mode", "the interquartile range"]],
+        ["How many cubic centimeters are in a liter?", "1,000", ["100", "10,000", "1,000,000"]],
+        ["What does a correlation coefficient near -1 mean?", "a strong negative relationship", ["a strong positive relationship", "no relationship", "proof of cause"]],
+        ["What is a random sample?", "a sample in which every member has an equal chance of being chosen", ["a sample taken from one group", "a sample chosen by preference", "a complete count"]],
+      ],
+    },
+  },
+]);
+
+// ---- Topic bank content ends here ------------------------------------------
+
+function topicBankList(subject) {
+  return TOPIC_BANKS[subject] || [];
+}
+
+function topicBankOf(subject, slug) {
+  return topicBankList(subject).find(topic => topic.id === slug) || null;
+}
+
+function topicBankId(subject, band, slug) {
+  return "bank:" + subject + ":" + (slug ? slug + ":" : "") + band;
+}
+
+function parseBankTopicId(topicId) {
+  const parts = String(topicId || "").split(":");
+  if (parts[0] !== "bank" || parts.length < 3) return null;
+  if (parts.length === 3) return { subject: parts[1], slug: "", band: parts[2] };
+  if (parts.length === 4) return { subject: parts[1], slug: parts[2], band: parts[3] };
+  return null;
+}
+
+function bankTopicLabelFor(subject, band, slug) {
+  const topic = slug ? topicBankOf(subject, slug) : null;
+  return topic ? topic.label : bankTopicLabel(subject, band);
+}
+
+function bankPoolsFor(subject, band, slug) {
+  if (slug) {
+    const topic = topicBankOf(subject, slug);
+    return [{ slug: slug, rows: (topic && topic.bands && topic.bands[band]) || [] }];
+  }
+  const pools = [{ slug: "", rows: ((BANK_DATA[subject] || {})[band]) || [] }];
+  topicBankList(subject).forEach(topic => {
+    pools.push({ slug: topic.id, rows: (topic.bands && topic.bands[band]) || [] });
+  });
+  return pools.filter(pool => pool.rows.length);
+}
+
+function bankEntriesFor(subject, band, slug) {
+  const entries = [];
+  const seen = {};
+  bankPoolsFor(subject, band, slug).forEach(pool => {
+    pool.rows.forEach(row => {
+      if (!row || !row[0] || seen[row[0]]) return;
+      seen[row[0]] = true;
+      entries.push({ row: row, slug: pool.slug });
+    });
+  });
+  return entries;
 }
 
 </script>
@@ -3663,6 +5146,9 @@ const state = {
   answerLog: [],
   promotedTo: null,
   lastShiftAt: 0,
+  focusTopic: null,
+  reviewMode: false,
+  planMode: false,
 };
 
 const app = document.getElementById("app");
@@ -3694,6 +5180,810 @@ function gradeTheme(grade) {
 
 function applyGradeTheme(grade) {
   document.documentElement.setAttribute("data-grade-theme", gradeTheme(grade));
+}
+
+// ---- Topic progress --------------------------------------------------------
+// Every question carries the topic it came from. Each correct answer adds one
+// mark to that topic's bookmark, so a hundred correct answers fill it; a miss
+// never takes marks away. Everything is kept in this browser.
+const TOPIC_STORE_KEY = "qb_topic_progress_v1";
+const REVIEW_STORE_KEY = "qb_review_pocket_v1";
+const REVIEW_DAY = 24 * 60 * 60 * 1000;
+const TOPIC_TIERS = [
+  { min: 100, label: "Locked in", className: "tier-locked" },
+  { min: 50, label: "Steady", className: "tier-steady" },
+  { min: 1, label: "Wobbly", className: "tier-wobbly" },
+  { min: 0, label: "New", className: "tier-new" },
+];
+
+function readStore(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    return parsed && typeof parsed === "object" ? parsed : fallback;
+  } catch (err) {
+    return fallback;
+  }
+}
+
+function writeStore(key, value) {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch (err) {
+    // Private mode or a full quota: practice still works, it just won't be kept.
+  }
+}
+
+// ---- Google sign-in ---------------------------------------------------------
+// Optional and browser-only: Google returns a signed profile, we keep a small
+// account record, and practice for that account lives under its own key in
+// this browser. Nothing is sent to a server of ours because there isn't one.
+// Add a Google OAuth client ID to the meta tag above to switch this on.
+const GOOGLE_CLIENT_ID = (() => {
+  const meta = document.querySelector('meta[name="google-signin-client_id"]');
+  return meta && typeof meta.content === "string" ? meta.content.trim() : "";
+})();
+const ACCOUNT_KEY = "qb_google_account_v1";
+const googleIdentity = { loading: null, ready: false, prompted: false };
+
+function loadGoogleAccount() {
+  const account = readStore(ACCOUNT_KEY, null);
+  return account && !Array.isArray(account) && typeof account.sub === "string" ? account : null;
+}
+
+function saveGoogleAccount(account) {
+  writeStore(ACCOUNT_KEY, account);
+}
+
+function accountKey(key) {
+  const account = loadGoogleAccount();
+  return account ? "acct:" + account.sub + ":" + key : key;
+}
+
+// Practice done before signing in comes along on the first sign-in, so nobody
+// loses the work they already did.
+function adoptGuestPractice(account) {
+  [TOPIC_STORE_KEY, REVIEW_STORE_KEY, SAVED_KEY].forEach(key => {
+    try {
+      const guest = localStorage.getItem(key);
+      const target = "acct:" + account.sub + ":" + key;
+      if (guest && !localStorage.getItem(target)) localStorage.setItem(target, guest);
+    } catch (err) {
+      // Storage blocked: signing in still works, it just starts empty.
+    }
+  });
+}
+
+function decodeGoogleCredential(token) {
+  const parts = String(token || "").split(".");
+  if (parts.length < 2) return null;
+  try {
+    const b64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    const padded = b64 + "===".slice((b64.length + 3) % 4);
+    const binary = atob(padded);
+    const percent = Array.prototype.map.call(binary, ch =>
+      "%" + ("00" + ch.charCodeAt(0).toString(16)).slice(-2)
+    ).join("");
+    const payload = JSON.parse(decodeURIComponent(percent));
+    if (!payload || typeof payload.sub !== "string") return null;
+    if (GOOGLE_CLIENT_ID && payload.aud !== GOOGLE_CLIENT_ID) return null;
+    if (payload.iss !== "accounts.google.com" && payload.iss !== "https://accounts.google.com") return null;
+    if (payload.exp && payload.exp * 1000 <= Date.now()) return null;
+    return payload;
+  } catch (err) {
+    return null;
+  }
+}
+
+function handleGoogleCredential(response) {
+  const payload = decodeGoogleCredential(response && response.credential);
+  if (!payload) return;
+  const picture = typeof payload.picture === "string" && /^https:\/\/[a-z0-9.-]+\.googleusercontent\.com\//i.test(payload.picture)
+    ? payload.picture
+    : "";
+  const account = {
+    sub: payload.sub,
+    name: typeof payload.name === "string" ? payload.name : "",
+    email: typeof payload.email === "string" ? payload.email : "",
+    picture: picture,
+    signedInAt: Date.now(),
+  };
+  adoptGuestPractice(account);
+  saveGoogleAccount(account);
+  refreshSavedBadge();
+  mountAccountBar();
+}
+
+function loadGoogleIdentity() {
+  if (window.google && window.google.accounts && window.google.accounts.id) {
+    return Promise.resolve(window.google.accounts.id);
+  }
+  if (googleIdentity.loading) return googleIdentity.loading;
+  googleIdentity.loading = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = "https://accounts.google.com/gsi/client";
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (window.google && window.google.accounts && window.google.accounts.id) {
+        resolve(window.google.accounts.id);
+      } else {
+        reject(new Error("Google sign-in did not start"));
+      }
+    };
+    script.onerror = () => reject(new Error("Google sign-in could not load"));
+    document.head.appendChild(script);
+  });
+  return googleIdentity.loading;
+}
+
+function startGoogleSignIn() {
+  if (!GOOGLE_CLIENT_ID) return;
+  const host = document.getElementById("googleButton");
+  if (!host) return;
+  loadGoogleIdentity().then(gis => {
+    if (!document.body.contains(host)) return;
+    if (!googleIdentity.ready) {
+      gis.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        auto_select: true,
+        cancel_on_tap_outside: true,
+        callback: handleGoogleCredential,
+      });
+      googleIdentity.ready = true;
+    }
+    gis.renderButton(host, {
+      type: "standard",
+      theme: "outline",
+      size: "large",
+      text: "signin_with",
+      shape: "pill",
+      logo_alignment: "left",
+      width: 240,
+    });
+    if (!googleIdentity.prompted) {
+      googleIdentity.prompted = true;
+      try { gis.prompt(); } catch (err) { /* Browsers may skip the one-tap prompt. */ }
+    }
+  }).catch(() => {
+    googleIdentity.loading = null;
+    const note = document.getElementById("accountNote");
+    if (note) note.textContent = "Google sign-in could not load. Check your connection and reload.";
+  });
+}
+
+function mountAccountBar() {
+  const host = document.getElementById("accountBar");
+  if (!host) return;
+  const account = loadGoogleAccount();
+  host.innerHTML = "";
+
+  if (account) {
+    host.hidden = false;
+    const name = account.name || account.email || "Google account";
+    const initial = name.trim().charAt(0).toUpperCase() || "G";
+    const chip = document.createElement("div");
+    chip.className = "account-chip";
+    chip.innerHTML = `
+      ${account.picture
+        ? `<img class="account-avatar" src="${escapeHtml(account.picture)}" alt="" referrerpolicy="no-referrer" width="34" height="34">`
+        : `<span class="account-avatar account-initial" aria-hidden="true">${escapeHtml(initial)}</span>`}
+      <span class="account-id">
+        <span class="account-name">${escapeHtml(name)}</span>
+        <span class="account-email">${account.email ? escapeHtml(account.email) : "Signed in with Google"}</span>
+      </span>
+      <button class="account-out" id="accountOut" type="button">Sign out</button>
+    `;
+    host.appendChild(chip);
+    document.getElementById("accountOut").addEventListener("click", signOutGoogle);
+    return;
+  }
+
+  if (!GOOGLE_CLIENT_ID) {
+    host.hidden = true;
+    return;
+  }
+
+  host.hidden = false;
+  host.innerHTML = `
+    <div class="account-signin">
+      <div id="googleButton" class="google-button"></div>
+      <span class="account-note" id="accountNote">Optional. Your practice stays in this browser and is kept under the Google account you sign in with.</span>
+    </div>
+  `;
+  startGoogleSignIn();
+}
+
+function signOutGoogle() {
+  const gis = window.google && window.google.accounts && window.google.accounts.id;
+  if (gis) {
+    try { gis.disableAutoSelect(); } catch (err) { /* Older browsers. */ }
+  }
+  try { localStorage.removeItem(ACCOUNT_KEY); } catch (err) { /* Storage blocked. */ }
+  googleIdentity.prompted = true;
+  showSetupScreen();
+}
+
+function loadTopicProgress() {
+  const map = readStore(accountKey(TOPIC_STORE_KEY), {});
+  return map && !Array.isArray(map) ? map : {};
+}
+
+// One point per correct answer, capped at a hundred: only a hundred corrects
+// fills a topic's bar, and wrong answers never pull it back down.
+function topicStrength(record) {
+  return record ? Math.max(0, Math.min(100, Math.round(record.correct || 0))) : 0;
+}
+
+function topicTierOf(strength) {
+  for (let i = 0; i < TOPIC_TIERS.length; i++) {
+    if (strength >= TOPIC_TIERS[i].min) return TOPIC_TIERS[i];
+  }
+  return TOPIC_TIERS[TOPIC_TIERS.length - 1];
+}
+
+// "New" means untouched. Once a skill has been tried it reads Wobbly until the
+// bookmark clears the first tier, so one rough answer never looks like no work.
+function topicTierFor(record) {
+  const tier = topicTierOf(topicStrength(record));
+  if (record && (record.attempts || 0) > 0 && tier.className === "tier-new") {
+    return TOPIC_TIERS.find(item => item.className === "tier-wobbly") || tier;
+  }
+  return tier;
+}
+
+function recordTopicAnswer(question, isRight) {
+  if (!question || !question.topic) return;
+  recordPracticeDay();
+  const map = loadTopicProgress();
+  const record = map[question.topic] || {
+    label: question.topicLabel || topicLabelFromId(question.topic),
+    subject: state.subject,
+    grade: state.grade,
+    attempts: 0,
+    correct: 0,
+    strength: 0,
+  };
+  record.label = question.topicLabel || record.label;
+  record.subject = record.subject || state.subject;
+  if (record.grade == null) record.grade = state.grade;
+  record.attempts = (record.attempts || 0) + 1;
+  if (isRight) record.correct = (record.correct || 0) + 1;
+  record.strength = Math.min(100, Math.max(0, record.correct || 0));
+  record.lastAt = Date.now();
+  map[question.topic] = record;
+  writeStore(accountKey(TOPIC_STORE_KEY), map);
+}
+
+// ---- Review pocket ---------------------------------------------------------
+// Missed questions are tucked away and come back a day later, then further
+// apart each time they are answered correctly. Three clean answers retires one.
+function loadReviewPocket() {
+  const items = readStore(accountKey(REVIEW_STORE_KEY), []);
+  return Array.isArray(items) ? items.filter(item => item && item.question) : [];
+}
+
+function saveReviewPocket(items) {
+  writeStore(accountKey(REVIEW_STORE_KEY), items.slice(0, 80));
+}
+
+function addToReviewPocket(question) {
+  if (!question || !question.question) return;
+  const items = loadReviewPocket();
+  const existing = items.find(item => item.question.question === question.question);
+  const due = Date.now() + REVIEW_DAY;
+  const saved = {
+    question: question.question,
+    options: question.options,
+    correct_text: question.correct_text,
+    topic: question.topic,
+    topicLabel: question.topicLabel,
+  };
+  if (existing) {
+    existing.question = saved;
+    existing.box = 0;
+    existing.due = due;
+    existing.subject = state.subject;
+    existing.grade = state.grade;
+  } else {
+    items.push({ question: saved, subject: state.subject, grade: state.grade, box: 0, due: due, addedAt: Date.now() });
+  }
+  saveReviewPocket(items);
+}
+
+function reviewPocketFor(subject) {
+  return loadReviewPocket().filter(item => (item.subject || state.subject) === subject);
+}
+
+function dueReviewFor(subject) {
+  const now = Date.now();
+  return reviewPocketFor(subject).filter(item => (item.due || 0) <= now);
+}
+
+function markReviewResult(question, isRight) {
+  const text = question && question.question;
+  if (!text) return;
+  const items = loadReviewPocket();
+  const index = items.findIndex(item => item.question.question === text);
+  if (index < 0) return;
+  if (isRight) {
+    const box = (items[index].box || 0) + 1;
+    if (box >= 3) {
+      items.splice(index, 1);
+    } else {
+      items[index].box = box;
+      items[index].due = Date.now() + REVIEW_DAY * (box === 1 ? 3 : 7);
+    }
+  } else {
+    items[index].box = 0;
+    items[index].due = Date.now() + REVIEW_DAY;
+  }
+  saveReviewPocket(items);
+}
+
+function reviewPocketCard(subject) {
+  const items = reviewPocketFor(subject);
+  if (!items.length) return null;
+  const due = dueReviewFor(subject);
+  const card = document.createElement("div");
+  card.className = "pocket-card";
+  const text = due.length
+    ? `${due.length} question${due.length === 1 ? "" : "s"} ready for a rematch.`
+    : `${items.length} question${items.length === 1 ? "" : "s"} waiting \u2014 come back tomorrow.`;
+  card.innerHTML = `
+    <span class="pocket-star" aria-hidden="true">${ICONS.star}</span>
+    <div class="pocket-body">
+      <div class="pocket-title">Review pocket</div>
+      <div class="pocket-text">${text}</div>
+    </div>
+  `;
+  if (due.length) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "btn-ghost pocket-btn";
+    btn.textContent = "Review now";
+    btn.addEventListener("click", () => startReviewQuiz(subject));
+    card.appendChild(btn);
+  }
+  return card;
+}
+
+// ---- Today's plan & practice streak ----------------------------------------
+// The plan looks at the skills for the chosen grade and puts the ones that need
+// work first: a wobbly skill comes before one never tried, and one never tried
+// comes before a locked-in refresh. A day counts for the streak once any
+// question has been answered.
+const PRACTICE_DAYS_KEY = "qb_practice_days_v1";
+const PLAN_SIZE = 3;
+
+function dayStamp(date) {
+  const d = date || new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+function loadPracticeDays() {
+  const days = readStore(accountKey(PRACTICE_DAYS_KEY), []);
+  return Array.isArray(days) ? days.filter(day => typeof day === "string") : [];
+}
+
+function recordPracticeDay() {
+  const today = dayStamp();
+  const days = loadPracticeDays();
+  if (days.indexOf(today) >= 0) return;
+  days.push(today);
+  writeStore(accountKey(PRACTICE_DAYS_KEY), days.slice(-120));
+}
+
+function practiceStreak() {
+  const days = loadPracticeDays();
+  const seen = {};
+  days.forEach(day => { seen[day] = true; });
+  const today = new Date();
+  const practicedToday = !!seen[dayStamp(today)];
+  const cursor = new Date(today);
+  if (!practicedToday) {
+    // Yesterday still counts: the streak only breaks once a whole day is missed.
+    cursor.setDate(cursor.getDate() - 1);
+    if (!seen[dayStamp(cursor)]) return { days: 0, practicedToday: false };
+  }
+  let count = 0;
+  while (count < 400 && seen[dayStamp(cursor)]) {
+    count += 1;
+    cursor.setDate(cursor.getDate() - 1);
+  }
+  return { days: count, practicedToday: practicedToday };
+}
+
+function suggestedPlan(subject, grade) {
+  const progress = loadTopicProgress();
+  const allTopics = topicsFor(subject, grade);
+  // A named skill is a sharper plan than the subject's general mix, so use the
+  // named skills when the subject has them. Math keeps its generated topics.
+  let topics = allTopics;
+  if (subject !== "Math") {
+    const named = allTopics.filter(topic => {
+      const parts = parseBankTopicId(topic.id);
+      return !!(parts && parts.slug);
+    });
+    if (named.length) topics = named;
+  }
+  const rows = topics.map((topic, index) => {
+    const record = progress[topic.id];
+    const strength = topicStrength(record);
+    const attempts = record ? record.attempts || 0 : 0;
+    const tier = topicTierFor(record);
+    let rank;
+    let reason;
+    if (!attempts) {
+      rank = 1;
+      reason = "Not tried yet";
+    } else if (strength >= 100) {
+      rank = 3;
+      reason = "Locked in \u2014 a quick refresh";
+    } else {
+      rank = 0;
+      reason = `${tier.label} \u00b7 ${record.correct || 0} of ${attempts} right`;
+    }
+    return {
+      topic: topic,
+      strength: strength,
+      tier: tier,
+      attempts: attempts,
+      rank: rank,
+      reason: reason,
+      lastAt: record && record.lastAt ? record.lastAt : 0,
+      index: index,
+    };
+  });
+  rows.sort((a, b) => a.rank - b.rank || a.strength - b.strength || a.lastAt - b.lastAt || a.index - b.index);
+  return rows.slice(0, PLAN_SIZE);
+}
+
+// A plan quiz visits each skill in turn, so a session never drifts onto one
+// topic and adaptive refills stay out of the way while it runs.
+function questionsForPlan(subject, grade, plan, count) {
+  const topics = plan.length ? plan.map(row => row.topic) : topicsFor(subject, grade);
+  if (!topics.length) return [];
+  const out = [];
+  const seen = {};
+  let guard = 0;
+  while (out.length < count && guard < count * 40) {
+    guard += 1;
+    const topic = topics[out.length % topics.length];
+    const batch = generateQuiz(subject, topic.grade != null ? topic.grade : grade, 1, topic.id);
+    const item = batch && batch[0];
+    if (!item || seen[item.question]) continue;
+    seen[item.question] = true;
+    out.push(item);
+  }
+  return out;
+}
+
+function startPlanQuiz(subject, grade, plan) {
+  const rows = plan && plan.length ? plan : suggestedPlan(subject, grade);
+  const questions = questionsForPlan(subject, grade, rows, state.count || 10);
+  if (!questions.length) return false;
+  return startQuizSession({ subject: subject, grade: grade, plan: true, questions: questions });
+}
+
+function planCard(subject, grade) {
+  if (grade == null) return null;
+  const plan = suggestedPlan(subject, grade);
+  if (!plan.length) return null;
+  const due = dueReviewFor(subject).length;
+  const count = Math.max(1, state.count || 10);
+  const streak = practiceStreak();
+  const where = subject === "Math" ? GRADE_LABELS[grade] : subject;
+  const card = document.createElement("div");
+  card.className = "setup-plan";
+  card.innerHTML = `
+    <div class="plan-head">
+      <div>
+        <div class="plan-kicker">Today&rsquo;s plan</div>
+        <div class="plan-title">${plan.length} skill${plan.length === 1 ? "" : "s"} picked for ${escapeHtml(where)}</div>
+      </div>
+      ${streak.days ? `<span class="plan-streak" title="Days practiced in a row">${ICONS.star}${streak.days}-day streak</span>` : ""}
+    </div>
+    <ul class="plan-list">
+      ${plan.map((row, i) => `
+        <li class="plan-row">
+          <span class="plan-num" aria-hidden="true">${i + 1}</span>
+          <span class="plan-body">
+            <span class="plan-name">${escapeHtml(row.topic.label)}</span>
+            <span class="plan-reason">${escapeHtml(row.reason)}</span>
+          </span>
+          <span class="tier-chip ${row.tier.className}">${row.tier.label}</span>
+        </li>`).join("")}
+    </ul>
+    <div class="plan-foot">
+      <span class="plan-note">${due ? `${due} question${due === 1 ? "" : "s"} waiting in review.` : `${count} question${count === 1 ? "" : "s"}, mixing these skills.`}</span>
+      <button class="btn-primary plan-start" type="button">Start my plan ${ICONS.arrow}</button>
+    </div>
+  `;
+  card.querySelector(".plan-start").addEventListener("click", () => startPlanQuiz(subject, grade, plan));
+  return card;
+}
+
+// ---- Starting a quiz -------------------------------------------------------
+function startQuizSession(options) {
+  const opts = options || {};
+  if (opts.subject) state.subject = opts.subject;
+  if (opts.grade != null) state.grade = opts.grade;
+  if (state.grade == null) return false;
+  state.focusTopic = opts.focusTopic || null;
+  state.reviewMode = !!opts.review;
+  state.planMode = !!opts.plan;
+  if (opts.count) state.count = Math.max(1, Math.min(100, opts.count));
+
+  state.startGrade = state.grade;
+  state.level = state.grade;
+  state.answerLog = [];
+  state.promotedTo = null;
+  state.lastShiftAt = 0;
+  state.questions = opts.reviewItems && opts.reviewItems.length
+    ? opts.reviewItems.slice(0, 100)
+    : (opts.questions && opts.questions.length
+      ? opts.questions.slice(0, 100)
+      : freshQuestions(state.subject, state.grade, state.count));
+  state.count = state.questions.length;
+  state.currentIndex = 0;
+  state.score = 0;
+  state.streak = 0;
+  state.bestStreak = 0;
+  state.missed = [];
+  state.answers = [];
+  state.startedAt = Date.now();
+  state.quizId = newQuizId();
+  closeSavedDrawer();
+  showQuestionScreen();
+  return true;
+}
+
+function startReviewQuiz(subject) {
+  const id = subject || state.subject;
+  const items = dueReviewFor(id);
+  if (!items.length) return;
+  const grade = items[0].grade != null ? items[0].grade : (state.grade != null ? state.grade : 1);
+  startQuizSession({
+    subject: id,
+    grade: grade,
+    review: true,
+    reviewItems: items.map(item => item.question),
+  });
+}
+
+function topicInfo(topicId) {
+  const id = String(topicId || "");
+  const bank = parseBankTopicId(id);
+  if (bank) {
+    const topic = bank.slug ? topicBankOf(bank.subject, bank.slug) : null;
+    return {
+      subject: bank.subject,
+      grade: BANK_BAND_GRADES[bank.band] || 1,
+      label: topic ? topic.label : bankTopicLabel(bank.subject, bank.band),
+    };
+  }
+  const grades = Object.keys(GRADE_GENERATORS);
+  for (let i = 0; i < grades.length; i++) {
+    const fn = GRADE_GENERATORS[grades[i]].find(item => topicKeyOfGenerator(item) === id);
+    if (fn) return { subject: "Math", grade: Number(grades[i]), label: topicLabelOfGenerator(fn) };
+  }
+  return { subject: state.subject, grade: state.grade != null ? state.grade : 1, label: topicLabelFromId(id) };
+}
+
+function practiceTopic(topicId) {
+  const info = topicInfo(topicId);
+  // Keep the grade the learner picked when it sits in the same band.
+  const sameBand = info.subject === state.subject && state.grade != null && gradeBand(state.grade) === gradeBand(info.grade);
+  startQuizSession({
+    subject: info.subject,
+    grade: sameBand ? state.grade : info.grade,
+    focusTopic: topicId,
+    count: state.count || 10,
+  });
+}
+
+// ---- Progress screen -------------------------------------------------------
+let progressView = { subject: null, grade: null };
+
+function mathTopicsForGrade(grade) {
+  const seen = {};
+  const topics = [];
+  (GRADE_GENERATORS[grade] || []).forEach(fn => {
+    const id = topicKeyOfGenerator(fn);
+    if (!id || seen[id]) return;
+    seen[id] = true;
+    topics.push({ id: id, label: topicLabelOfGenerator(fn), subject: "Math", grade: grade });
+  });
+  return topics;
+}
+
+// The band follows the chosen grade, and each band holds the subject's general
+// mix plus one card for every named skill.
+function bankTopicsForSubject(subject, grade) {
+  const band = gradeBand(grade == null ? 1 : grade);
+  const topics = [{
+    id: topicBankId(subject, band),
+    label: bankTopicLabel(subject, band),
+    subject: subject,
+    grade: BANK_BAND_GRADES[band],
+    band: band,
+  }];
+  topicBankList(subject).forEach(topic => {
+    topics.push({
+      id: topicBankId(subject, band, topic.id),
+      label: topic.label,
+      subject: subject,
+      grade: BANK_BAND_GRADES[band],
+      band: band,
+    });
+  });
+  return topics;
+}
+
+function topicsFor(subject, grade) {
+  if (subject !== "Math") return bankTopicsForSubject(subject, grade);
+  const band = gradeBand(grade == null ? 1 : grade);
+  return mathTopicsForGrade(grade).concat([{
+    id: topicBankId("Math", band, "vocab"),
+    label: "Math vocabulary",
+    subject: "Math",
+    grade: grade,
+    band: band,
+  }]);
+}
+
+function topicCard(topic) {
+  const record = loadTopicProgress()[topic.id];
+  const strength = topicStrength(record);
+  const tier = topicTierFor(record);
+  const card = document.createElement("div");
+  card.className = "topic-card" + (tier.className === "tier-locked" ? " is-locked" : "");
+  const right = record ? record.correct || 0 : 0;
+  const meta = record
+    ? (right >= 100
+      ? `${right} right \u00b7 ${record.attempts || 0} practiced`
+      : `${right} of 100 right \u00b7 ${record.attempts || 0} practiced`)
+    : "Not tried yet \u00b7 100 right fills it";
+  card.innerHTML = `
+    <div class="topic-head">
+      <span class="topic-name">${escapeHtml(topic.label)}</span>
+      <span class="tier-chip ${tier.className}">${tier.label}</span>
+    </div>
+    <div class="topic-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${strength}" aria-label="${escapeHtml(topic.label)} bookmark">
+      <span style="width:${strength}%"></span>
+    </div>
+    <div class="topic-meta">${meta}</div>
+    <button class="topic-go" type="button">Practice this ${ICONS.arrow}</button>
+  `;
+  card.querySelector(".topic-go").addEventListener("click", () => practiceTopic(topic.id));
+  return card;
+}
+
+function showProgressScreen() {
+  clearApp();
+  setDoodleAvailable(false);
+  stopTimer();
+  closeSavedDrawer();
+  setSavedUiVisible(false);
+
+  const subject = SUBJECTS.some(item => item.id === progressView.subject) ? progressView.subject : state.subject;
+  const grade = progressView.grade != null ? progressView.grade : (state.grade != null ? state.grade : 1);
+  progressView = { subject: subject, grade: grade };
+  applyGradeTheme(grade);
+
+  const col = document.createElement("div");
+  col.className = "screen progress";
+  col.innerHTML = `
+    <div class="progress-top">
+      <button class="btn-ghost back-btn" id="progressBack" type="button" aria-label="Go back to the home screen">${ICONS.arrow}<span>Home</span></button>
+      <div class="progress-heading">
+        <h1 class="progress-title">Your progress</h1>
+        <p class="progress-sub">Every correct answer adds a mark to its topic's bookmark. Fill all one hundred marks to lock a topic in \u2014 a miss never takes one away.</p>
+      </div>
+    </div>
+    <div class="progress-subjects" id="progressSubjects"></div>
+    <div class="progress-toolbar">
+      <label class="progress-grade">Grade <select id="progressGrade">${[0,1,2,3,4,5,6,7,8,9,10,11,12].map(g => `<option value="${g}"${g === grade ? " selected" : ""}>${g === 0 ? "K" : g}</option>`).join("")}</select></label>
+      ${subject === "Math" ? "" : `<span class="progress-grade-note">Band ${gradeBand(grade)} \u00b7 ${BANK_BAND_LABELS[gradeBand(grade)]}</span>`}
+      <div class="progress-summary" id="progressSummary"></div>
+    </div>
+    <div class="progress-pocket" id="progressPocket"></div>
+    <div class="topic-grid" id="topicGrid"></div>
+    <p class="progress-note">Saved in this browser \u2014 Google sign-in is optional.</p>
+  `;
+  app.appendChild(col);
+
+  const subjectHost = document.getElementById("progressSubjects");
+  SUBJECTS.forEach(item => {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "tier-tab" + (item.id === subject ? " active" : "");
+    chip.textContent = item.name;
+    chip.addEventListener("click", () => {
+      progressView.subject = item.id;
+      showProgressScreen();
+    });
+    subjectHost.appendChild(chip);
+  });
+
+  const gradeSelect = document.getElementById("progressGrade");
+  if (gradeSelect) {
+    gradeSelect.addEventListener("change", () => {
+      progressView.grade = Number(gradeSelect.value);
+      showProgressScreen();
+    });
+  }
+
+  document.getElementById("progressBack").addEventListener("click", () => {
+    state.subject = progressView.subject;
+    showSetupScreen();
+  });
+
+  const progress = loadTopicProgress();
+  let attempts = 0, correct = 0, locked = 0, started = 0;
+  Object.keys(progress).forEach(id => {
+    const record = progress[id];
+    if (!record || record.subject !== subject) return;
+    attempts += record.attempts || 0;
+    correct += record.correct || 0;
+    if ((record.attempts || 0) > 0) started += 1;
+    if (topicStrength(record) >= 100) locked += 1;
+  });
+  document.getElementById("progressSummary").innerHTML = attempts
+    ? `<span><strong>${started}</strong> started</span><span><strong>${locked}</strong> locked in</span><span><strong>${correct}/${attempts}</strong> right</span>`
+    : `<span>Nothing practiced here yet \u2014 pick a topic below.</span>`;
+
+  const pocket = reviewPocketCard(subject);
+  if (pocket) document.getElementById("progressPocket").appendChild(pocket);
+
+  const streak = practiceStreak();
+  if (streak.days) {
+    document.getElementById("progressSummary").insertAdjacentHTML("beforeend",
+      `<span><strong>${streak.days}</strong> day streak</span>`);
+  }
+
+  const grid = document.getElementById("topicGrid");
+  topicsFor(subject, grade).forEach(topic => grid.appendChild(topicCard(topic)));
+}
+
+// ---- Results helpers -------------------------------------------------------
+function sessionTopicStats() {
+  const map = {};
+  state.questions.forEach((question, index) => {
+    if (!question || !question.topic) return;
+    const item = map[question.topic] || {
+      id: question.topic,
+      label: question.topicLabel || topicLabelFromId(question.topic),
+      total: 0,
+      right: 0,
+    };
+    item.total += 1;
+    const answer = state.answers[index];
+    if (answer && answer.correct) item.right += 1;
+    map[question.topic] = item;
+  });
+  return Object.keys(map).map(id => map[id]);
+}
+
+function pickNextStop(stats) {
+  const progress = loadTopicProgress();
+  let best = null;
+  stats.forEach(item => {
+    const entry = {
+      id: item.id,
+      label: item.label,
+      right: item.right,
+      total: item.total,
+      ratio: item.total ? item.right / item.total : 0,
+      strength: topicStrength(progress[item.id]),
+    };
+    if (!best || entry.ratio < best.ratio || (entry.ratio === best.ratio && entry.strength < best.strength)) {
+      best = entry;
+    }
+  });
+  return best;
 }
 
 // ---- Question illustrations -------------------------------------------------
@@ -4528,6 +6818,16 @@ function figSequenceLine(stepRaw, tail) {
 const LEVEL_STEP = 1 / 3;
 const MAX_LEVEL = 12;
 
+// How many right answers in a row it takes to move up one step. Short quizzes
+// climb faster so a ten-question run still changes level, while long quizzes
+// space the steps out so a fifty-question run has to earn each one.
+function levelUpStreak(total) {
+  const count = Number.isFinite(total) && total > 0 ? total : 10;
+  if (count <= 12) return 1;
+  if (count <= 35) return 2;
+  return 3;
+}
+
 function roundLevel(value) {
   return Math.round(value * 3) / 3;
 }
@@ -4542,7 +6842,7 @@ function adaptiveFloor(grade) {
 }
 
 function takeQuestions(subject, grade, count) {
-  const items = generateQuiz(subject, grade, count);
+  const items = generateQuiz(subject, grade, count, state.focusTopic);
   return Array.isArray(items) ? items.slice(0, count) : [];
 }
 
@@ -4552,7 +6852,7 @@ function questionSource(subject, grade, batch) {
   let cursor = 0;
   return function nextQuestion() {
     if (cursor >= pool.length) {
-      const more = generateQuiz(subject, grade, batch);
+      const more = generateQuiz(subject, grade, batch, state.focusTopic);
       if (!Array.isArray(more) || !more.length) return null;
       pool = pool.concat(more);
     }
@@ -4596,6 +6896,7 @@ function freshQuestions(subject, level, count) {
 
 // Replace the unanswered stretch so the rest of the quiz matches the current pace.
 function scheduleAdaptiveRemainder() {
+  if (state.reviewMode || state.planMode) return;
   const remaining = state.questions.length - state.currentIndex - 1;
   if (remaining <= 0) return;
   const tail = freshQuestions(state.subject, state.level, remaining);
@@ -4607,15 +6908,16 @@ function scheduleAdaptiveRemainder() {
 function noteAnswer(isRight) {
   state.answerLog.push(!!isRight);
   const log = state.answerLog;
-  const lastTwo = log.slice(-2);
+  const upStreak = levelUpStreak(state.questions.length || state.count);
+  const downStreak = Math.max(2, upStreak);
   const sinceShift = log.length - state.lastShiftAt;
   let level = state.level;
   let movedUp = false;
 
-  if (lastTwo.length === 2 && sinceShift >= 2 && lastTwo.every(Boolean) && level < MAX_LEVEL) {
+  if (log.length >= upStreak && sinceShift >= upStreak && log.slice(-upStreak).every(Boolean) && level < MAX_LEVEL) {
     level = roundLevel(level + LEVEL_STEP);
     movedUp = true;
-  } else if (lastTwo.length === 2 && sinceShift >= 2 && lastTwo.every(v => !v) && level > adaptiveFloor(state.startGrade)) {
+  } else if (log.length >= downStreak && sinceShift >= downStreak && log.slice(-downStreak).every(v => !v) && level > adaptiveFloor(state.startGrade)) {
     level = Math.max(adaptiveFloor(state.startGrade), roundLevel(level - LEVEL_STEP));
   }
 
@@ -4705,6 +7007,8 @@ function showSetupScreen() {
   const col = document.createElement("div");
   col.className = "screen setup";
   col.innerHTML = `
+    <div class="account-bar" id="accountBar" aria-live="polite" hidden></div>
+
     <section class="live-strip" aria-label="Live information">
       <div class="live-tile">
         <span class="live-emoji" aria-hidden="true">\ud83d\udd52</span>
@@ -4768,18 +7072,24 @@ function showSetupScreen() {
       </div>
     </div>
 
+    <div id="setupPlan" class="setup-plan"></div>
+
+    <div id="setupPocket" class="setup-pocket"></div>
+
     <div class="setup-footer">
       <button class="btn-primary wide" id="startBtn">Start quiz ${ICONS.arrow}</button>
+      <button class="btn-ghost" id="progressBtn" type="button">My progress</button>
     </div>
 
 
     <footer class="site-foot">
       <h2 class="site-foot-title">The Quiz Book K-12</h2>
-      <p class="site-foot-text">The Quiz Book is a free online quiz book for kindergarten through grade 12, with practice quizzes in math, reading, science and social studies. No ads, no accounts, no cookies.</p>
+      <p class="site-foot-text">The Quiz Book is a free online quiz book for kindergarten through grade 12, with practice quizzes in math, reading, science and social studies, including vocabulary, reading comprehension, writing, science vocabulary, element symbols, social studies vocabulary, great people in history and historical events. No ads, no tracking, and no account needed. Signing in with Google is optional and only saves practice in this browser.</p>
       <span class="site-url">quizbookcentral.com</span>
     </footer>
   `;
   app.appendChild(col);
+  mountAccountBar();
 
   const subjectGrid = document.getElementById("subjectGrid");
   const gradeGrid = document.getElementById("gradeGrid");
@@ -4799,6 +7109,7 @@ function showSetupScreen() {
         c.classList.toggle("active", c.dataset.subject === state.subject);
       });
       refreshHints();
+      renderSetupPocket();
     });
     subjectGrid.appendChild(card);
   });
@@ -4866,10 +7177,37 @@ function showSetupScreen() {
       : `${bandHint(state.grade)} \u00b7 ${GRADE_LABELS[state.grade]}`;
     const startBtn = document.getElementById("startBtn");
     if (startBtn) startBtn.disabled = state.grade == null;
+    renderSetupPlan();
   }
   refreshHints();
 
   document.getElementById("startBtn").addEventListener("click", startQuiz);
+
+  const progressBtn = document.getElementById("progressBtn");
+  if (progressBtn) {
+    progressBtn.addEventListener("click", () => {
+      progressView = { subject: state.subject, grade: state.grade != null ? state.grade : 1 };
+      showProgressScreen();
+    });
+  }
+
+  const setupPocket = document.getElementById("setupPocket");
+  function renderSetupPocket() {
+    if (!setupPocket) return;
+    setupPocket.innerHTML = "";
+    const card = reviewPocketCard(state.subject);
+    if (card) setupPocket.appendChild(card);
+  }
+  renderSetupPocket();
+
+  function renderSetupPlan() {
+    const host = document.getElementById("setupPlan");
+    if (!host) return;
+    host.innerHTML = "";
+    const card = planCard(state.subject, state.grade);
+    if (card) host.appendChild(card);
+  }
+  renderSetupPlan();
 
   function startQuiz() {
     if (state.grade == null) {
@@ -4879,22 +7217,7 @@ function showSetupScreen() {
     let count = parseInt(countInput.value, 10);
     if (isNaN(count)) count = 10;
     state.count = Math.max(1, Math.min(100, count));
-
-    state.startGrade = state.grade;
-    state.level = state.grade;
-    state.answerLog = [];
-    state.promotedTo = null;
-    state.lastShiftAt = 0;
-    state.questions = freshQuestions(state.subject, state.grade, state.count);
-    state.currentIndex = 0;
-    state.score = 0;
-    state.streak = 0;
-    state.bestStreak = 0;
-    state.missed = [];
-    state.answers = [];
-    state.startedAt = Date.now();
-    state.quizId = newQuizId();
-    showQuestionScreen();
+    startQuizSession({ count: state.count });
   }
 
   startSetupLiveWidgets();
@@ -7208,6 +9531,12 @@ function checkAnswer(selected) {
   }
 
   noteAnswer(isRight);
+  recordTopicAnswer(q, isRight);
+  if (state.reviewMode) {
+    markReviewResult(q, isRight);
+  } else if (!isRight) {
+    addToReviewPocket(q);
+  }
 
   paintAnswer(q, selected, false);
 
@@ -7294,6 +9623,7 @@ function showLevelUpDialog(grade, atEnd) {
 }
 
 function maybeShowLevelUpDialog() {
+  if (!document.querySelector(".screen.results")) return;
   if (state.promotedTo == null || state.startGrade == null) return;
   if (state.promotedTo <= state.startGrade) return;
   showLevelUpDialog(state.promotedTo, true);
@@ -7334,6 +9664,25 @@ function showResultsScreen() {
         </div>`).join("")
     : "";
 
+  const topicStats = sessionTopicStats();
+  const nextStop = pickNextStop(topicStats);
+  const nextStopText = nextStop
+    ? (nextStop.ratio === 1
+      ? "Every answer on this topic was right. One more round makes it stick."
+      : `You got ${nextStop.right} of ${nextStop.total} right on this topic. A short focused round will make it stick.`)
+    : "";
+  const nextStopHtml = nextStop && (nextStop.ratio < 1 || nextStop.strength < 100)
+    ? `<div class="next-stop">
+        <div class="next-stop-kicker">Next stop</div>
+        <div class="next-stop-name">${escapeHtml(nextStop.label)}</div>
+        <p class="next-stop-text">${nextStopText}</p>
+        <button class="btn-primary" id="nextStopBtn" type="button">Practice this topic</button>
+      </div>`
+    : (topicStats.length ? `<p class="all-locked">${ICONS.star} Every topic in this quiz is locked in.</p>` : "");
+  const pocketNote = !state.reviewMode && state.missed.length
+    ? `<p class="pocket-note">${state.missed.length} missed question${state.missed.length === 1 ? "" : "s"} tucked into your review pocket for tomorrow.</p>`
+    : "";
+
   const col = document.createElement("div");
   col.className = "screen results";
   col.innerHTML = `
@@ -7367,10 +9716,15 @@ function showResultsScreen() {
       <div class="stat"><div class="stat-value">${formatTime(elapsed)}</div><div class="stat-label">Time</div></div>
     </div>
 
+    ${nextStopHtml}
+
     ${reviewHtml ? `<div class="review">${reviewHtml}</div>` : ""}
+
+    ${pocketNote}
 
     <div class="btn-row">
       <button class="btn-primary" id="playAgainBtn">Play again ${ICONS.arrow}</button>
+      <button class="btn-ghost" id="resultsProgressBtn">My progress</button>
       <button class="btn-ghost" id="settingsBtn">Change settings</button>
     </div>
   `;
@@ -7387,12 +9741,26 @@ function showResultsScreen() {
   document.querySelectorAll(".modal-backdrop.level-up").forEach(el => el.remove());
   setTimeout(maybeShowLevelUpDialog, 320);
 
+  const nextStopBtn = document.getElementById("nextStopBtn");
+  if (nextStopBtn && nextStop) {
+    nextStopBtn.addEventListener("click", () => practiceTopic(nextStop.id));
+  }
+
+  const resultsProgressBtn = document.getElementById("resultsProgressBtn");
+  if (resultsProgressBtn) {
+    resultsProgressBtn.addEventListener("click", () => {
+      progressView = { subject: state.subject, grade: state.grade != null ? state.grade : 1 };
+      showProgressScreen();
+    });
+  }
+
   document.getElementById("playAgainBtn").addEventListener("click", () => {
     state.startGrade = state.grade;
     state.level = state.grade;
     state.answerLog = [];
     state.promotedTo = null;
     state.lastShiftAt = 0;
+    state.reviewMode = false;
     state.questions = freshQuestions(state.subject, state.grade, state.count);
     state.currentIndex = 0;
     state.score = 0;
@@ -7647,7 +10015,7 @@ let savedUiVisible = false;
 
 function readSavedQuizzes() {
   try {
-    const raw = window.localStorage.getItem(SAVED_KEY);
+    const raw = window.localStorage.getItem(accountKey(SAVED_KEY));
     if (!raw) return [];
     const parsed = JSON.parse(raw);
     return Array.isArray(parsed) ? parsed : [];
@@ -7657,7 +10025,7 @@ function readSavedQuizzes() {
 }
 
 function writeSavedQuizzes(list) {
-  try { window.localStorage.setItem(SAVED_KEY, JSON.stringify(list)); } catch (err) { /* storage full or blocked */ }
+  try { window.localStorage.setItem(accountKey(SAVED_KEY), JSON.stringify(list)); } catch (err) { /* storage full or blocked */ }
 }
 
 // Returns saved quizzes newer than 30 days, dropping anything stale or finished.
@@ -7721,6 +10089,9 @@ function saveCurrentQuiz(upToIndex) {
     answers: Array.isArray(state.answers) ? state.answers.map(a => a ? { selected: a.selected, correct: !!a.correct } : null) : [],
     promotedTo: state.promotedTo,
     lastShiftAt: state.lastShiftAt,
+    focusTopic: state.focusTopic,
+    reviewMode: state.reviewMode,
+    planMode: state.planMode,
     elapsedMs: state.startedAt ? Date.now() - state.startedAt : 0,
     savedAt: Date.now(),
   };
@@ -7892,6 +10263,9 @@ function resumeSavedQuiz(id) {
   state.answers = Array.isArray(entry.answers) ? entry.answers.map(a => a && typeof a.selected === "string" ? { selected: a.selected, correct: !!a.correct } : null).slice(0, entry.questions.length) : [];
   state.promotedTo = typeof entry.promotedTo === "number" ? entry.promotedTo : null;
   state.lastShiftAt = typeof entry.lastShiftAt === "number" ? entry.lastShiftAt : 0;
+  state.focusTopic = typeof entry.focusTopic === "string" ? entry.focusTopic : null;
+  state.reviewMode = !!entry.reviewMode;
+  state.planMode = !!entry.planMode;
   state.currentIndex = entry.currentIndex;
   state.score = entry.score || 0;
   state.streak = entry.streak || 0;
