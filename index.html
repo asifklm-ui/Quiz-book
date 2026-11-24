@@ -5241,17 +5241,58 @@ function accountKey(key) {
   return account ? "acct:" + account.sub + ":" + key : key;
 }
 
-// Practice done before signing in comes along on the first sign-in, so nobody
-// loses the work they already did.
+// Practice done before signing in comes along on sign-in, including work done
+// while signed out after an earlier sign-in. Topic marks merge by the higher
+// count, so signing in again can only ever raise a number, never double it.
 function adoptGuestPractice(account) {
-  [TOPIC_STORE_KEY, REVIEW_STORE_KEY, SAVED_KEY].forEach(key => {
+  const prefix = "acct:" + account.sub + ":";
+  const readLocal = key => {
     try {
-      const guest = localStorage.getItem(key);
-      const target = "acct:" + account.sub + ":" + key;
-      if (guest && !localStorage.getItem(target)) localStorage.setItem(target, guest);
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : null;
+    } catch (err) {
+      return null;
+    }
+  };
+  const writeLocal = (key, value) => {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
     } catch (err) {
       // Storage blocked: signing in still works, it just starts empty.
     }
+  };
+
+  const guestTopics = readLocal(TOPIC_STORE_KEY);
+  if (guestTopics && typeof guestTopics === "object" && !Array.isArray(guestTopics)) {
+    const target = prefix + TOPIC_STORE_KEY;
+    const owned = readLocal(target);
+    const merged = owned && typeof owned === "object" && !Array.isArray(owned) ? Object.assign({}, owned) : {};
+    Object.keys(guestTopics).forEach(id => {
+      const guest = guestTopics[id];
+      if (!guest || typeof guest !== "object") return;
+      const mine = merged[id];
+      if (!mine) {
+        merged[id] = guest;
+        return;
+      }
+      const correct = Math.max(mine.correct || 0, guest.correct || 0);
+      const attempts = Math.max(mine.attempts || 0, guest.attempts || 0);
+      if (correct === (mine.correct || 0) && attempts === (mine.attempts || 0)) return;
+      merged[id] = Object.assign({}, mine, {
+        correct: correct,
+        attempts: attempts,
+        strength: Math.min(100, correct),
+        lastAt: Math.max(mine.lastAt || 0, guest.lastAt || 0),
+      });
+    });
+    writeLocal(target, merged);
+  }
+
+  [REVIEW_STORE_KEY, SAVED_KEY].forEach(key => {
+    const guest = readLocal(key);
+    const owned = readLocal(prefix + key);
+    const empty = !owned || (Array.isArray(owned) ? owned.length === 0 : Object.keys(owned).length === 0);
+    if (guest && empty) writeLocal(prefix + key, guest);
   });
 }
 
@@ -5891,9 +5932,19 @@ function showProgressScreen() {
     </div>
     <div class="progress-pocket" id="progressPocket"></div>
     <div class="topic-grid" id="topicGrid"></div>
-    <p class="progress-note">Saved in this browser \u2014 Google sign-in is optional.</p>
+    <p class="progress-note" id="progressNote"></p>
   `;
   app.appendChild(col);
+
+  // Say which store this page is showing, so a signed-in learner is not told
+  // that sign-in is optional while looking at their account's practice.
+  const account = loadGoogleAccount();
+  const progressNote = document.getElementById("progressNote");
+  if (progressNote) {
+    progressNote.textContent = account
+      ? `Signed in as ${account.name || account.email || "your Google account"} \u2014 this practice is saved in this browser for that account.`
+      : "Saved in this browser \u2014 Google sign-in is optional.";
+  }
 
   const subjectHost = document.getElementById("progressSubjects");
   SUBJECTS.forEach(item => {
