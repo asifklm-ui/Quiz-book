@@ -5386,9 +5386,11 @@ function handleGoogleCredential(response) {
   saveGoogleAccount(account);
   refreshSavedBadge();
   mountAccountBar();
-  // Try a silent pull so a device that has already allowed syncing fills in by
-  // itself. Without a previous grant Google simply declines and nothing happens.
-  setTimeout(() => { syncProgressNow({ interactive: false }); }, 250);
+  // Pull straight away, while the click that started sign-in still counts as a
+  // recent gesture: Google only issues a Drive token shortly after one, so this
+  // is the best moment for a device to pick its own practice back up. Without a
+  // previous grant Google simply declines and nothing happens.
+  syncProgressNow({ interactive: false });
 }
 
 function loadGoogleIdentity() {
@@ -5510,6 +5512,7 @@ function signOutGoogle() {
   if (syncRuntime.timer) { clearTimeout(syncRuntime.timer); syncRuntime.timer = 0; }
   syncRuntime.token = "";
   syncRuntime.expiresAt = 0;
+  clearCachedSyncToken();
   syncRuntime.booted = false;
   syncRuntime.state = "idle";
   syncRuntime.message = "";
@@ -5531,6 +5534,10 @@ const SYNC_FILE_NAME = "quizbook-progress.json";
 const SYNC_META_KEY = "qb_sync_v1";
 const SYNC_PUSH_DELAY = 3000;
 const SYNC_MSG_MS = 6000;
+// A Drive token lasts about an hour and Google will not renew one without a
+// recent gesture, so the tab holds on to the last one until it expires. Session
+// scope keeps it out of long-term storage, and signing out drops it at once.
+const SYNC_TOKEN_KEY = "qb_drive_token_v1";
 const syncRuntime = {
   token: "",
   expiresAt: 0,
@@ -5552,6 +5559,44 @@ function loadSyncMeta() {
 
 function saveSyncMeta(meta) {
   writeStore(accountKey(SYNC_META_KEY), meta);
+}
+
+// The cached token is only reused while it is still good for a minute and was
+// issued for the account signed in now, so switching accounts cannot leak one.
+function readCachedSyncToken() {
+  try {
+    const raw = sessionStorage.getItem(SYNC_TOKEN_KEY);
+    if (!raw) return null;
+    const cached = JSON.parse(raw);
+    if (!cached || typeof cached.token !== "string" || !cached.token) return null;
+    if (!(Number(cached.expiresAt) > Date.now() + 60000)) return null;
+    const account = loadGoogleAccount();
+    if (cached.sub && account && cached.sub !== account.sub) return null;
+    return cached;
+  } catch (err) {
+    return null;
+  }
+}
+
+function cacheSyncToken(token, expiresAt) {
+  const account = loadGoogleAccount();
+  try {
+    sessionStorage.setItem(SYNC_TOKEN_KEY, JSON.stringify({
+      token: token,
+      expiresAt: expiresAt,
+      sub: account ? account.sub : "",
+    }));
+  } catch (err) {
+    // Private mode or a full quota: sync still works for this page view.
+  }
+}
+
+function clearCachedSyncToken() {
+  try {
+    sessionStorage.removeItem(SYNC_TOKEN_KEY);
+  } catch (err) {
+    // Storage blocked: there is nothing cached to clear.
+  }
 }
 
 function syncGranted() {
@@ -5683,6 +5728,8 @@ async function driveFetch(url, options) {
   const response = await fetch(url, init);
   if (response.status === 401) {
     syncRuntime.token = "";
+    syncRuntime.expiresAt = 0;
+    clearCachedSyncToken();
     throw new Error("unauthorized");
   }
   if (!response.ok) throw new Error("drive_" + response.status);
@@ -5753,6 +5800,7 @@ function syncTokenClient() {
           const seconds = Number(response.expires_in);
           syncRuntime.token = response.access_token;
           syncRuntime.expiresAt = Date.now() + (seconds > 0 ? seconds : 3600) * 1000;
+          cacheSyncToken(syncRuntime.token, syncRuntime.expiresAt);
           if (pending) pending.resolve(response.access_token);
         } else if (pending) {
           pending.reject(new Error((response && response.error) || "no_token"));
@@ -5772,6 +5820,13 @@ function requestSyncToken(interactive) {
   return loadGoogleIdentity().then(() => new Promise((resolve, reject) => {
     if (syncRuntime.token && Date.now() < syncRuntime.expiresAt - 60000) {
       resolve(syncRuntime.token);
+      return;
+    }
+    const cached = readCachedSyncToken();
+    if (cached) {
+      syncRuntime.token = cached.token;
+      syncRuntime.expiresAt = Number(cached.expiresAt);
+      resolve(cached.token);
       return;
     }
     const client = syncTokenClient();
