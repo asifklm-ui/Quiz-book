@@ -5902,6 +5902,16 @@ function scheduleSync() {
   }, SYNC_PUSH_DELAY);
 }
 
+// Coming back to the tab is a natural moment to catch up, and the token may
+// well have expired while the tab sat in the background. This stays silent:
+// browsers that refuse a token without a click leave the chip as it is, and
+// nothing is lost because the next successful sync merges both copies.
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState !== "visible") return;
+  if (!syncGranted() || syncRuntime.busy) return;
+  syncProgressNow({ interactive: false });
+});
+
 // Only ever from a click, so the Google consent window is allowed to open.
 function turnOnSync() {
   if (!loadGoogleAccount()) return;
