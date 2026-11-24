@@ -2416,6 +2416,29 @@ html[data-grade-theme="senior"] .feedback.good { color: #0a7a48; }
   color: var(--muted-2);
 }
 .google-button { display: flex; min-height: 40px; }
+.account-sync-line { display: flex; align-items: center; gap: 6px; margin-top: 3px; flex-wrap: wrap; }
+.account-sync {
+  appearance: none;
+  cursor: pointer;
+  font-family: inherit;
+  border: 0;
+  background: none;
+  padding: 0;
+  font-size: 10.5px;
+  font-weight: 800;
+  color: var(--btn-a);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.account-sync.is-off { color: var(--muted-2); }
+.account-sync:hover { color: var(--head-ink); }
+.account-sync[disabled] { cursor: default; text-decoration: none; opacity: 0.8; }
+.account-sync:focus-visible {
+  outline: 3px solid rgba(24, 68, 176, 0.9);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.account-sync-status { font-size: 10px; font-weight: 600; color: var(--muted-2); }
 
 @media (max-width: 560px) {
   .account-bar { justify-content: center; }
@@ -5334,6 +5357,9 @@ function handleGoogleCredential(response) {
   saveGoogleAccount(account);
   refreshSavedBadge();
   mountAccountBar();
+  // Try a silent pull so a device that has already allowed syncing fills in by
+  // itself. Without a previous grant Google simply declines and nothing happens.
+  setTimeout(() => { syncProgressNow({ interactive: false }); }, 250);
 }
 
 function loadGoogleIdentity() {
@@ -5413,11 +5439,21 @@ function mountAccountBar() {
       <span class="account-id">
         <span class="account-name">${escapeHtml(name)}</span>
         <span class="account-email">${account.email ? escapeHtml(account.email) : "Signed in with Google"}</span>
+        <span class="account-sync-line">
+          <button class="account-sync" id="syncButton" type="button"></button>
+          <span class="account-sync-status" id="syncStatus" hidden></span>
+        </span>
       </span>
       <button class="account-out" id="accountOut" type="button">Sign out</button>
     `;
     host.appendChild(chip);
     document.getElementById("accountOut").addEventListener("click", signOutGoogle);
+    document.getElementById("syncButton").addEventListener("click", turnOnSync);
+    renderSyncState();
+    if (!syncRuntime.booted) {
+      syncRuntime.booted = true;
+      setTimeout(() => { syncProgressNow({ interactive: false }); }, 400);
+    }
     return;
   }
 
@@ -5442,8 +5478,405 @@ function signOutGoogle() {
     try { gis.disableAutoSelect(); } catch (err) { /* Older browsers. */ }
   }
   try { localStorage.removeItem(ACCOUNT_KEY); } catch (err) { /* Storage blocked. */ }
+  if (syncRuntime.timer) { clearTimeout(syncRuntime.timer); syncRuntime.timer = 0; }
+  syncRuntime.token = "";
+  syncRuntime.expiresAt = 0;
+  syncRuntime.booted = false;
+  syncRuntime.state = "idle";
+  syncRuntime.message = "";
   googleIdentity.prompted = true;
   showSetupScreen();
+}
+
+// ---- Cross-device sync ------------------------------------------------------
+// Google sign-in on its own only names the learner: the practice itself lives in
+// this browser. To carry it between devices the app keeps one small JSON file in
+// the learner's own Drive app folder (private to this app and hidden in Drive).
+// Whenever two copies meet they are merged by taking the higher count per topic,
+// the union of practice days, and the union of saved quizzes and review cards, so
+// a new device gains everything and a busy device never loses a mark to an older
+// copy. Sync starts switched off, is only ever switched on by the learner, and
+// practice keeps working without it.
+const SYNC_SCOPE = "https://www.googleapis.com/auth/drive.appdata";
+const SYNC_FILE_NAME = "quizbook-progress.json";
+const SYNC_META_KEY = "qb_sync_v1";
+const SYNC_PUSH_DELAY = 3000;
+const SYNC_MSG_MS = 6000;
+const syncRuntime = {
+  token: "",
+  expiresAt: 0,
+  client: null,
+  pending: null,
+  timer: 0,
+  messageTimer: 0,
+  busy: false,
+  applying: false,
+  booted: false,
+  state: "idle",
+  message: "",
+};
+
+function loadSyncMeta() {
+  const meta = readStore(accountKey(SYNC_META_KEY), null);
+  return meta && typeof meta === "object" && !Array.isArray(meta) ? meta : {};
+}
+
+function saveSyncMeta(meta) {
+  writeStore(accountKey(SYNC_META_KEY), meta);
+}
+
+function syncGranted() {
+  return !!loadGoogleAccount() && !!loadSyncMeta().grantedAt;
+}
+
+function syncSnapshot() {
+  const topics = readStore(accountKey(TOPIC_STORE_KEY), {});
+  const review = readStore(accountKey(REVIEW_STORE_KEY), []);
+  const days = readStore(accountKey(PRACTICE_DAYS_KEY), []);
+  const saved = readSavedQuizzes();
+  return {
+    app: "quiz-book",
+    version: 1,
+    updatedAt: Date.now(),
+    topics: topics && typeof topics === "object" && !Array.isArray(topics) ? topics : {},
+    review: Array.isArray(review) ? review : [],
+    days: Array.isArray(days) ? days.filter(day => typeof day === "string") : [],
+    saved: Array.isArray(saved) ? saved : [],
+  };
+}
+
+// Counts only ever go up, so merging is order-independent and repeating it can
+// never inflate a number. Anything that fails a shape check is dropped.
+function mergeSyncPayloads(local, remote) {
+  const left = local && typeof local === "object" ? local : {};
+  const right = remote && typeof remote === "object" ? remote : {};
+
+  const topics = {};
+  [left.topics, right.topics].forEach(source => {
+    if (!source || typeof source !== "object" || Array.isArray(source)) return;
+    Object.keys(source).forEach(id => {
+      const item = source[id];
+      if (!item || typeof item !== "object" || Array.isArray(item)) return;
+      const mine = topics[id];
+      if (!mine) {
+        topics[id] = Object.assign({}, item);
+        return;
+      }
+      const correct = Math.max(mine.correct || 0, item.correct || 0);
+      const attempts = Math.max(mine.attempts || 0, item.attempts || 0);
+      topics[id] = Object.assign({}, mine, item, {
+        correct: correct,
+        attempts: attempts,
+        strength: Math.min(100, correct),
+        lastAt: Math.max(mine.lastAt || 0, item.lastAt || 0),
+      });
+    });
+  });
+
+  const days = [];
+  [left.days, right.days].forEach(source => {
+    (Array.isArray(source) ? source : []).forEach(day => {
+      if (typeof day === "string" && day && days.indexOf(day) === -1) days.push(day);
+    });
+  });
+  days.sort();
+
+  const saved = [];
+  const savedById = {};
+  [left.saved, right.saved].forEach(source => {
+    (Array.isArray(source) ? source : []).forEach(item => {
+      if (!item || typeof item.id !== "string" || !item.id) return;
+      if (!Array.isArray(item.questions) || !item.questions.length) return;
+      if (!item.questions.every(isSafeQuestion)) return;
+      const seen = savedById[item.id];
+      if (!seen) {
+        savedById[item.id] = item;
+        saved.push(item);
+        return;
+      }
+      if ((item.savedAt || 0) > (seen.savedAt || 0)) {
+        saved[saved.indexOf(seen)] = item;
+        savedById[item.id] = item;
+      }
+    });
+  });
+  saved.sort((a, b) => (b.savedAt || 0) - (a.savedAt || 0));
+
+  const review = [];
+  const reviewByText = {};
+  [left.review, right.review].forEach(source => {
+    (Array.isArray(source) ? source : []).forEach(item => {
+      const stored = item && item.question;
+      const text = stored && (typeof stored === "string" ? stored : stored.question);
+      if (typeof text !== "string" || !text) return;
+      const seen = reviewByText[text];
+      if (!seen) {
+        reviewByText[text] = item;
+        review.push(item);
+        return;
+      }
+      if ((item.box || 0) > (seen.box || 0)) {
+        review[review.indexOf(seen)] = item;
+        reviewByText[text] = item;
+      }
+    });
+  });
+
+  return {
+    app: "quiz-book",
+    version: 1,
+    updatedAt: Math.max(left.updatedAt || 0, right.updatedAt || 0, Date.now()),
+    topics: topics,
+    days: days.slice(-120),
+    review: review.slice(0, 80),
+    saved: saved.slice(0, SAVED_LIMIT),
+  };
+}
+
+function applySyncPayload(payload) {
+  if (!payload || typeof payload !== "object") return;
+  syncRuntime.applying = true;
+  try {
+    writeStore(accountKey(TOPIC_STORE_KEY), payload.topics || {});
+    writeStore(accountKey(PRACTICE_DAYS_KEY), (payload.days || []).slice(-120));
+    writeStore(accountKey(REVIEW_STORE_KEY), (payload.review || []).slice(0, 80));
+    writeSavedQuizzes((payload.saved || []).slice(0, SAVED_LIMIT));
+  } finally {
+    syncRuntime.applying = false;
+  }
+}
+
+async function driveFetch(url, options) {
+  const token = options.token;
+  const init = Object.assign({}, options);
+  delete init.token;
+  init.headers = Object.assign({ Authorization: "Bearer " + token }, options.headers || {});
+  const response = await fetch(url, init);
+  if (response.status === 401) {
+    syncRuntime.token = "";
+    throw new Error("unauthorized");
+  }
+  if (!response.ok) throw new Error("drive_" + response.status);
+  return response;
+}
+
+async function findSyncFile(token) {
+  const fields = encodeURIComponent("files(id,name,modifiedTime)");
+  const query = encodeURIComponent("name='" + SYNC_FILE_NAME + "' and trashed=false");
+  const response = await driveFetch(
+    "https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&fields=" + fields + "&q=" + query,
+    { token: token }
+  );
+  const data = await response.json();
+  const files = data && Array.isArray(data.files) ? data.files : [];
+  return files[0] || null;
+}
+
+async function downloadSyncFile(token, fileId) {
+  const response = await driveFetch(
+    "https://www.googleapis.com/drive/v3/files/" + encodeURIComponent(fileId) + "?alt=media",
+    { token: token }
+  );
+  const text = await response.text();
+  if (!text) return null;
+  try {
+    const parsed = JSON.parse(text);
+    return parsed && typeof parsed === "object" && !Array.isArray(parsed) ? parsed : null;
+  } catch (err) {
+    return null;
+  }
+}
+
+async function uploadSyncFile(token, payload, fileId) {
+  const body = JSON.stringify(payload);
+  if (fileId) {
+    await driveFetch(
+      "https://www.googleapis.com/upload/drive/v3/files/" + encodeURIComponent(fileId) + "?uploadType=media",
+      { token: token, method: "PATCH", headers: { "Content-Type": "application/json" }, body: body }
+    );
+    return fileId;
+  }
+  const form = new FormData();
+  form.append("metadata", new Blob(
+    [JSON.stringify({ name: SYNC_FILE_NAME, parents: ["appDataFolder"] })],
+    { type: "application/json" }
+  ));
+  form.append("file", new Blob([body], { type: "application/json" }));
+  const response = await driveFetch(
+    "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id",
+    { token: token, method: "POST", body: form }
+  );
+  const data = await response.json();
+  return data && data.id ? data.id : "";
+}
+
+function syncTokenClient() {
+  const oauth = window.google && window.google.accounts && window.google.accounts.oauth2;
+  if (!oauth) return null;
+  if (!syncRuntime.client) {
+    syncRuntime.client = oauth.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: SYNC_SCOPE,
+      callback: response => {
+        const pending = syncRuntime.pending;
+        syncRuntime.pending = null;
+        if (response && response.access_token) {
+          const seconds = Number(response.expires_in);
+          syncRuntime.token = response.access_token;
+          syncRuntime.expiresAt = Date.now() + (seconds > 0 ? seconds : 3600) * 1000;
+          if (pending) pending.resolve(response.access_token);
+        } else if (pending) {
+          pending.reject(new Error((response && response.error) || "no_token"));
+        }
+      },
+      error_callback: error => {
+        const pending = syncRuntime.pending;
+        syncRuntime.pending = null;
+        if (pending) pending.reject(new Error((error && (error.type || error.message)) || "token_failed"));
+      },
+    });
+  }
+  return syncRuntime.client;
+}
+
+function requestSyncToken(interactive) {
+  return loadGoogleIdentity().then(() => new Promise((resolve, reject) => {
+    if (syncRuntime.token && Date.now() < syncRuntime.expiresAt - 60000) {
+      resolve(syncRuntime.token);
+      return;
+    }
+    const client = syncTokenClient();
+    if (!client) {
+      reject(new Error("no_oauth"));
+      return;
+    }
+    syncRuntime.pending = { resolve: resolve, reject: reject };
+    try {
+      client.requestAccessToken({ prompt: interactive && !syncGranted() ? "consent" : "" });
+    } catch (err) {
+      syncRuntime.pending = null;
+      reject(err);
+    }
+  }));
+}
+
+async function syncProgressNow(options) {
+  if (!loadGoogleAccount()) return false;
+  if (syncRuntime.busy) return false;
+  const interactive = !!(options && options.interactive);
+  if (syncRuntime.timer) {
+    clearTimeout(syncRuntime.timer);
+    syncRuntime.timer = 0;
+  }
+  syncRuntime.busy = true;
+  setSyncState("working", "Saving to your Google Drive...");
+  try {
+    const token = await requestSyncToken(interactive);
+    const meta = loadSyncMeta();
+    const file = meta.fileId ? { id: meta.fileId } : await findSyncFile(token);
+    let remote = null;
+    if (file && file.id) {
+      try {
+        remote = await downloadSyncFile(token, file.id);
+      } catch (err) {
+        remote = null;
+      }
+    }
+    const merged = mergeSyncPayloads(syncSnapshot(), remote);
+    applySyncPayload(merged);
+    const fileId = await uploadSyncFile(token, merged, file && file.id ? file.id : "");
+    saveSyncMeta({
+      fileId: fileId || (file && file.id) || "",
+      grantedAt: meta.grantedAt || Date.now(),
+      lastSyncAt: Date.now(),
+    });
+    setSyncState("on", "In sync with your Google Drive");
+    refreshSyncViews();
+    return true;
+  } catch (err) {
+    const code = err && err.message ? err.message : "";
+    if (code === "unauthorized" || /^drive_/.test(code)) {
+      setSyncState("error", "Could not reach Google Drive. Practice is still saved here.");
+    } else if (interactive) {
+      setSyncState("error", "Sync was not turned on. Practice is still saved here.");
+    } else if (!syncGranted()) {
+      // No previous grant: nothing to report, the offer to turn sync on stands.
+      setSyncState("idle", "");
+    } else {
+      setSyncState("paused", "Sync paused. Practice is still saved here.");
+    }
+    return false;
+  } finally {
+    syncRuntime.busy = false;
+    renderSyncState();
+  }
+}
+
+function setSyncState(state, message) {
+  syncRuntime.state = state || "idle";
+  syncRuntime.message = message || "";
+  if (syncRuntime.messageTimer) {
+    clearTimeout(syncRuntime.messageTimer);
+    syncRuntime.messageTimer = 0;
+  }
+  if (syncRuntime.message) {
+    syncRuntime.messageTimer = setTimeout(() => {
+      syncRuntime.messageTimer = 0;
+      if (syncRuntime.state !== "working") {
+        syncRuntime.message = "";
+        renderSyncState();
+      }
+    }, SYNC_MSG_MS);
+  }
+  renderSyncState();
+}
+
+function renderSyncState() {
+  const button = document.getElementById("syncButton");
+  const status = document.getElementById("syncStatus");
+  const granted = syncGranted();
+  if (button) {
+    button.textContent = syncRuntime.state === "working"
+      ? "Syncing..."
+      : !granted ? "Turn on sync"
+        : syncRuntime.state === "error" ? "Retry sync"
+          : syncRuntime.state === "paused" ? "Sync paused"
+            : "Synced";
+    button.classList.toggle("is-off", !granted);
+    button.disabled = syncRuntime.state === "working";
+    button.title = granted
+      ? "Your practice is copied to your Google Drive app folder. Click to sync now."
+      : "Keep this practice on every device where you sign in with this Google account.";
+  }
+  if (status) {
+    status.textContent = syncRuntime.message;
+    status.hidden = !syncRuntime.message;
+  }
+}
+
+// Pulled practice should be visible straight away, not on the next screen change.
+function refreshSyncViews() {
+  refreshSavedBadge();
+  if (document.getElementById("topicGrid")) {
+    showProgressScreen();
+    return;
+  }
+  if (document.getElementById("setupPlan")) showSetupScreen();
+}
+
+function scheduleSync() {
+  if (!syncGranted() || syncRuntime.applying || syncRuntime.busy) return;
+  if (syncRuntime.timer) clearTimeout(syncRuntime.timer);
+  syncRuntime.timer = setTimeout(() => {
+    syncRuntime.timer = 0;
+    syncProgressNow({ interactive: false });
+  }, SYNC_PUSH_DELAY);
+}
+
+// Only ever from a click, so the Google consent window is allowed to open.
+function turnOnSync() {
+  if (!loadGoogleAccount()) return;
+  return syncProgressNow({ interactive: true });
 }
 
 function loadTopicProgress() {
@@ -5495,6 +5928,7 @@ function recordTopicAnswer(question, isRight) {
   record.lastAt = Date.now();
   map[question.topic] = record;
   writeStore(accountKey(TOPIC_STORE_KEY), map);
+  scheduleSync();
 }
 
 // ---- Review pocket ---------------------------------------------------------
@@ -5507,6 +5941,7 @@ function loadReviewPocket() {
 
 function saveReviewPocket(items) {
   writeStore(accountKey(REVIEW_STORE_KEY), items.slice(0, 80));
+  scheduleSync();
 }
 
 function addToReviewPocket(question) {
@@ -5614,6 +6049,7 @@ function recordPracticeDay() {
   if (days.indexOf(today) >= 0) return;
   days.push(today);
   writeStore(accountKey(PRACTICE_DAYS_KEY), days.slice(-120));
+  scheduleSync();
 }
 
 function practiceStreak() {
@@ -5942,7 +6378,9 @@ function showProgressScreen() {
   const progressNote = document.getElementById("progressNote");
   if (progressNote) {
     progressNote.textContent = account
-      ? `Signed in as ${account.name || account.email || "your Google account"} \u2014 this practice is saved in this browser for that account.`
+      ? `Signed in as ${account.name || account.email || "your Google account"} \u2014 ${syncGranted()
+        ? "this practice follows your Google account to your other devices."
+        : "this practice is saved in this browser for that account."}`
       : "Saved in this browser \u2014 Google sign-in is optional.";
   }
 
@@ -7135,7 +7573,7 @@ function showSetupScreen() {
 
     <footer class="site-foot">
       <h2 class="site-foot-title">The Quiz Book K-12</h2>
-      <p class="site-foot-text">The Quiz Book is a free online quiz book for kindergarten through grade 12, with practice quizzes in math, reading, science and social studies, including vocabulary, reading comprehension, writing, science vocabulary, element symbols, social studies vocabulary, great people in history and historical events. No ads, no tracking, and no account needed. Signing in with Google is optional and only saves practice in this browser.</p>
+      <p class="site-foot-text">The Quiz Book is a free online quiz book for kindergarten through grade 12, with practice quizzes in math, reading, science and social studies, including vocabulary, reading comprehension, writing, science vocabulary, element symbols, social studies vocabulary, great people in history and historical events. No ads, no tracking, and no account needed. Signing in with Google is optional, and practice stays in this browser unless you turn on syncing your account across devices.</p>
       <span class="site-url">quizbookcentral.com</span>
     </footer>
   `;
@@ -10077,6 +10515,7 @@ function readSavedQuizzes() {
 
 function writeSavedQuizzes(list) {
   try { window.localStorage.setItem(accountKey(SAVED_KEY), JSON.stringify(list)); } catch (err) { /* storage full or blocked */ }
+  scheduleSync();
 }
 
 // Returns saved quizzes newer than 30 days, dropping anything stale or finished.
