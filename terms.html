@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'none'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Terms of Service &ndash; The Quiz Book</title>
+<meta name="description" content="The terms for using The Quiz Book: free practice quizzes for personal and classroom use, provided as-is, with no account on our side and no warranty of curriculum alignment.">
+<meta name="author" content="The Quiz Book">
+<meta name="robots" content="index, follow">
+<meta name="rating" content="general">
+<meta name="theme-color" content="#2f6ad6">
+<meta name="application-name" content="The Quiz Book">
+<link rel="canonical" href="https://quizbookcentral.com/terms.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="logo.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Quiz Book">
+<meta property="og:title" content="Terms of Service - The Quiz Book">
+<meta property="og:description" content="Free practice quizzes for personal and classroom use, provided as-is, with no account on our side.">
+<meta property="og:url" content="https://quizbookcentral.com/terms.html">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Terms of Service - The Quiz Book">
+<meta name="twitter:description" content="Free practice quizzes for personal and classroom use, provided as-is, with no account on our side.">
+<style>
+:root {
+  --bg: #eff7ff;
+  --ink: #151d33;
+  --muted: #3c4763;
+  --muted-2: #566180;
+  --card: #ffffff;
+  --stroke: #c6d5ec;
+  --stroke-strong: #9db4d8;
+  --accent: #4f8cff;
+  --accent-2: #8b6cf6;
+  --accent-3: #0c8f95;
+  --correct: #0e9355;
+  --radius: 22px;
+  --shadow-sm: 0 14px 30px -20px rgba(46, 78, 145, 0.6);
+  --page-bg: radial-gradient(120% 80% at 50% 0%, #f4fbff 0%, #eef6ff 45%, #fff7ef 100%);
+  --blob-a: rgba(255, 209, 102, 0.55);
+  --blob-b: rgba(139, 227, 198, 0.55);
+  --blob-c: rgba(201, 182, 255, 0.6);
+  --blob-d: rgba(255, 181, 158, 0.5);
+  --dots: radial-gradient(rgba(88, 126, 190, 0.34) 1.6px, transparent 1.6px);
+  --font-ui: ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Trebuchet MS", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: #eff7ff;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+body {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: var(--page-bg);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background:
+    radial-gradient(closest-side at 16% 14%, var(--blob-a), transparent 72%),
+    radial-gradient(closest-side at 84% 10%, var(--blob-b), transparent 72%),
+    radial-gradient(closest-side at 78% 86%, var(--blob-c), transparent 74%),
+    radial-gradient(closest-side at 14% 82%, var(--blob-d), transparent 74%);
+  filter: blur(34px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: var(--dots);
+  background-size: 28px 28px;
+  mask-image: radial-gradient(closest-side at 50% 30%, #000 20%, transparent 80%);
+  -webkit-mask-image: radial-gradient(closest-side at 50% 30%, #000 20%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 46px) clamp(16px, 4vw, 36px) clamp(28px, 6vw, 56px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(14px, 2.4vw, 20px);
+}
+
+.page-head {
+  text-align: center;
+  padding: clamp(6px, 2vw, 18px) 0 clamp(2px, 1vw, 8px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: clamp(15px, 1.8vw, 18px);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.brand:hover { color: var(--accent-3); }
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  border-radius: 16px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(155deg, #ffe9a8 0%, #ffd071 40%, #ffab84 100%);
+  color: #5a2f00;
+  box-shadow:
+    0 6px 0 #d98a2b,
+    0 12px 20px -10px rgba(150, 90, 20, 0.55),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7),
+    inset 0 -4px 8px rgba(160, 80, 10, 0.22);
+  flex: 0 0 auto;
+}
+
+.brand-mark svg { width: 24px; height: 24px; }
+
+.headline {
+  margin: clamp(14px, 3vw, 22px) 0 0;
+  font-size: clamp(28px, 5.4vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #18213a;
+  text-shadow: 0 3px 0 #ffffff;
+}
+
+.lede {
+  margin: 12px auto 0;
+  max-width: 600px;
+  color: var(--muted);
+  font-size: clamp(13.5px, 1.9vw, 16px);
+  line-height: 1.6;
+  font-weight: 600;
+}
+
+.stamp {
+  display: inline-block;
+  margin: 16px auto 0;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--muted-2);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.card {
+  border: 2px solid #d5e3f5;
+  background: var(--card);
+  border-radius: calc(var(--radius) + 6px);
+  padding: clamp(18px, 3vw, 28px);
+  box-shadow: 0 8px 0 #c9d9f2, 0 30px 54px -30px rgba(46, 78, 145, 0.5);
+}
+
+.card h2 {
+  margin: 0 0 10px;
+  font-size: clamp(17px, 2.4vw, 21px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #18213a;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.card h2 .dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: linear-gradient(150deg, var(--accent), var(--accent-2));
+  flex: 0 0 auto;
+}
+
+.card p {
+  margin: 0 0 11px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.72;
+  font-weight: 600;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+.card strong { color: var(--ink); font-weight: 800; }
+
+.card a { color: #1f5fd0; font-weight: 800; }
+
+.card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.card li {
+  position: relative;
+  padding-left: 26px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+  font-weight: 600;
+}
+
+.card li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--correct);
+  opacity: 0.85;
+}
+
+.card li strong { color: var(--ink); }
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.col {
+  border: 2px solid var(--stroke);
+  border-radius: 16px;
+  padding: 12px 14px;
+  background: #fbfdff;
+}
+
+.col.bad { border-color: #f3c6d0; background: #fff7f9; }
+
+.col b {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.col.ok b { color: var(--correct); }
+.col.bad b { color: #c22a48; }
+
+.col ul { gap: 6px; }
+
+.col li { padding-left: 20px; font-size: 13.5px; }
+
+.col li::before { top: 7px; width: 7px; height: 7px; }
+
+.col.bad li::before { background: #e83b5b; }
+
+.site-foot {
+  margin: clamp(8px, 2vw, 16px) auto 0;
+  max-width: 640px;
+  text-align: center;
+}
+
+.site-foot-title {
+  margin: 0 0 6px;
+  font-size: clamp(13px, 1.8vw, 15px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--muted);
+}
+
+.site-foot-text {
+  margin: 0 0 9px;
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.7;
+  color: var(--muted-2);
+}
+
+.site-foot-links {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.site-foot .site-url,
+.site-foot-link {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  border: 2px solid var(--stroke);
+  background: #ffffff;
+  color: var(--muted);
+  font-size: 11.5px;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.site-foot-link { transition: border-color 0.18s ease, color 0.18s ease, transform 0.18s ease; }
+
+.site-foot-link:hover,
+.site-foot-link:focus-visible {
+  border-color: var(--stroke-strong);
+  color: var(--ink);
+  transform: translateY(-1px);
+}
+
+.site-foot-link[aria-current="page"] {
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-foot-link { transition: none; }
+  .site-foot-link:hover, .site-foot-link:focus-visible { transform: none; }
+}
+</style>
+</head>
+<body>
+<main class="page">
+
+  <header class="page-head">
+    <a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><defs><radialGradient id="qbGround" cx="0.5" cy="0.5" r="0.5"><stop offset="0%" stop-color="#5a2f00" stop-opacity="0.38"/><stop offset="100%" stop-color="#5a2f00" stop-opacity="0"/></radialGradient><linearGradient id="qbPageL" x1="0" y1="0" x2="0.85" y2="1"><stop offset="0%" stop-color="#fffef9"/><stop offset="55%" stop-color="#f8eed9"/><stop offset="100%" stop-color="#e6d0a8"/></linearGradient><linearGradient id="qbPageR" x1="1" y1="0" x2="0.15" y2="1"><stop offset="0%" stop-color="#fffef9"/><stop offset="55%" stop-color="#f4e6cd"/><stop offset="100%" stop-color="#dfc59b"/></linearGradient><linearGradient id="qbGutter" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5a2f00" stop-opacity="0"/><stop offset="50%" stop-color="#5a2f00" stop-opacity="0.32"/><stop offset="100%" stop-color="#5a2f00" stop-opacity="0"/></linearGradient><linearGradient id="qbBolt" x1="0.1" y1="0" x2="0.9" y2="1"><stop offset="0%" stop-color="#fff7b8"/><stop offset="45%" stop-color="#ffd166"/><stop offset="100%" stop-color="#f08c00"/></linearGradient></defs><ellipse cx="24" cy="38.8" rx="16.2" ry="3.1" fill="url(#qbGround)"/><g transform="translate(0 1.7)"><path d="M6.6 14.6c4.8-2.8 10-2.5 17.4 1v22.3c-7.4-3.5-12.6-3.8-17.4-1z" fill="#b06c1a"/><path d="M41.4 14.6c-4.8-2.8-10-2.5-17.4 1v22.3c7.4-3.5 12.6-3.8 17.4-1z" fill="#93540f"/></g><path d="M6.6 14.6c4.8-2.8 10-2.5 17.4 1v22.3c-7.4-3.5-12.6-3.8-17.4-1z" fill="url(#qbPageL)" stroke="#7a4200" stroke-width="1.5" stroke-linejoin="round"/><path d="M41.4 14.6c-4.8-2.8-10-2.5-17.4 1v22.3c7.4-3.5 12.6-3.8 17.4-1z" fill="url(#qbPageR)" stroke="#7a4200" stroke-width="1.5" stroke-linejoin="round"/><rect x="21.9" y="15.4" width="4.2" height="22.3" fill="url(#qbGutter)"/><path d="M24 16.2v21.2" stroke="#5a2f00" stroke-width="1.1" stroke-linecap="round" opacity="0.5"/><path d="M27.6 10.2h-7.5l-3.8 11.5h5.4l-2.2 10.5 11.2-12.3h-5.7z" fill="#5a2f00" opacity="0.2" transform="translate(0.7 0.9)"/><path d="M26.5 8.5h-7.5l-3.8 11.5h5.4l-2.2 10.5 11.2-12.3h-5.7z" fill="url(#qbBolt)" stroke="#8a4b00" stroke-width="1.4" stroke-linejoin="round"/></svg></span> The Quiz Book</a>
+    <h1 class="headline">Terms of service</h1>
+    <p class="lede">The rules for using The Quiz Book, in plain words. It is free, it is for practice, and there is no account on our side to hold you to anything.</p>
+    <p class="stamp">Last updated 24 November 2026</p>
+  </header>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>The short version</h2>
+    <ul>
+      <li><strong>Free to use</strong> for students, families, teachers and classrooms, with no account and no payment.</li>
+      <li><strong>This is practice, not a curriculum.</strong> Questions are written and checked with care, but they can contain mistakes and are not a substitute for a teacher or a textbook.</li>
+      <li><strong>Everything is provided as-is</strong>, with no guarantee that it matches any particular standard, exam or syllabus.</li>
+      <li><strong>Please use it fairly:</strong> study on it, teach with it, share the link &mdash; don&rsquo;t scrape it, resell it or pass the questions off as your own.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>What The Quiz Book is</h2>
+    <p>The Quiz Book is a free website of practice quizzes for kindergarten through grade 12, covering math, reading, science and social studies. You choose a subject and a grade, the quiz adjusts as you go, and you can save questions to a review pocket for later.</p>
+    <p>It is run as a free educational site. There are no adverts, nothing to buy, and no account that belongs to us. The whole site is a set of static pages served from a web host.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Using the site</h2>
+    <p>You may use The Quiz Book for your own learning, for homework help, and in a classroom or at home with your family. Teachers may set quizzes from it and point students at it. You do not need to pay, register or credit us.</p>
+    <p>Please do not do these things:</p>
+    <div class="split">
+      <div class="col ok">
+        <b>Fine by us</b>
+        <ul>
+          <li>Practising as much as you like</li>
+          <li>Using it in class or at home</li>
+          <li>Sharing the link with others</li>
+          <li>Screenshotting a question to ask a teacher about it</li>
+        </ul>
+      </div>
+      <div class="col bad">
+        <b>Not okay</b>
+        <ul>
+          <li>Copying the questions in bulk to build your own site or app</li>
+          <li>Reselling access, or putting the site behind a paywall</li>
+          <li>Presenting the site, name or logo as your own</li>
+          <li>Automated hammering, scraping or anything that degrades the site for others</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Questions, answers and accuracy</h2>
+    <p>The questions are written and edited for this site. Even so, a bank of thousands of questions will contain the occasional error, an answer key that could be read two ways, or a question whose difficulty sits a grade higher or lower than the label suggests.</p>
+    <ul>
+      <li><strong>Always treat the site as practice.</strong> It is not an assessment, a grade, or a substitute for instruction.</li>
+      <li><strong>No curriculum guarantee.</strong> The grades and topics are our own labels. They are not aligned to, endorsed by, or a substitute for any standard, exam board or syllabus.</li>
+      <li><strong>If something looks wrong</strong>, mention it to a grown-up or teacher rather than accepting it. We would rather you trust your maths than our answer key.</li>
+      <li><strong>Progress is encouragement, not evidence.</strong> The bars and streaks show how much you have practised, not how well you will do on a test.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Your practice and your privacy</h2>
+    <p>Your practice is saved in your own browser. If you choose to turn on syncing, it is saved in a hidden folder in your own Google Drive. We do not receive a copy of either. The details &mdash; including what is stored, how syncing works, and how to delete it &mdash; are in the <a href="privacy.html">privacy policy</a>, which is part of these terms.</p>
+    <p>Because practice lives on your device, we cannot recover it for you. Clearing your browser&rsquo;s site data, using a private window, or losing the device can mean losing the record. Syncing to your own Drive is the way to keep it across devices.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Signing in with Google</h2>
+    <p>Signing in is optional. If you use it, your Google account is governed by Google&rsquo;s own terms and privacy policy, not by these terms. The Quiz Book uses the sign-in only to label your progress and to keep separate accounts apart on a shared device, and the site never sees your Google password.</p>
+    <p>If you are a child who is not old enough to hold a Google account, use the site without signing in. Every quiz works that way.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Ownership</h2>
+    <p>The Quiz Book, its name, its logo, its design and the questions written for it belong to The Quiz Book. Using the site does not transfer any of that to you.</p>
+    <p>You are welcome to use the site for learning and teaching. You may not republish the questions or the site as your own product, sell access to them, or use the name and logo in a way that suggests we endorse or run something we do not.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Provided as-is</h2>
+    <p>The site is offered free of charge, as it is and as available. To the fullest extent the law allows, it comes with no warranties of any kind &mdash; no promise that it will be uninterrupted or free of errors, that the questions are accurate or suit a particular purpose, or that any result will follow from using it.</p>
+    <p>To the same extent, we are not liable for any loss arising from your use of the site, including lost practice records, a lost streak, time spent, or a decision made on the strength of a score. Nothing in these terms limits any right you have that cannot lawfully be limited, and nothing here excludes liability for fraud or for death or personal injury caused by negligence.</p>
+    <p>If any part of these terms is found to be unenforceable, the rest stays in force.</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Changes to these terms</h2>
+    <p>These terms may change as the site changes. The date at the top of this page changes with them, and the current version is always the one published here. If a change is significant, it will be described plainly rather than slipped in. Continuing to use the site after a change means you accept the updated terms.</p>
+  </section>
+
+  <!-- Replace the contact wording below with a monitored address (e.g. support@quizbookcentral.com) once one exists. -->
+  <section class="card">
+    <h2><span class="dot" aria-hidden="true"></span>Questions</h2>
+    <p>Questions about these terms can go to the support address shown on The Quiz Book&rsquo;s Google sign-in screen.</p>
+  </section>
+
+  <footer class="site-foot">
+    <h2 class="site-foot-title">The Quiz Book K-12</h2>
+    <p class="site-foot-text">Free practice quizzes for kindergarten through grade 12. No ads, no tracking, and no account needed. Practice stays in your browser unless you choose to sync it across devices.</p>
+    <span class="site-foot-links">
+      <a class="site-foot-link" href="/">Home</a>
+      <a class="site-foot-link" href="privacy.html">Privacy</a>
+      <a class="site-foot-link" href="terms.html" aria-current="page">Terms</a>
+      <span class="site-url">quizbookcentral.com</span>
+    </span>
+  </footer>
+
+</main>
+</body>
+</html>
