@@ -5831,8 +5831,8 @@ async function syncProgressNow(options) {
     } else if (!syncGranted()) {
       // No previous grant: nothing to report, the offer to turn sync on stands.
       setSyncState("idle", "");
-    } else {
-      setSyncState("paused", "Sync paused. Practice is still saved here.");
+    } else if (syncRuntime.state !== "paused") {
+      setSyncState("paused", "Sync is waiting for a tap. Practice is still saved here.");
     }
     return false;
   } finally {
@@ -5869,13 +5869,15 @@ function renderSyncState() {
       ? "Syncing..."
       : !granted ? "Turn on sync"
         : syncRuntime.state === "error" ? "Retry sync"
-          : syncRuntime.state === "paused" ? "Sync paused"
+          : syncRuntime.state === "paused" ? "Tap to sync"
             : "Synced";
     button.classList.toggle("is-off", !granted);
     button.disabled = syncRuntime.state === "working";
-    button.title = granted
-      ? "Your practice is copied to your Google Drive app folder. Click to sync now."
-      : "Keep this practice on every device where you sign in with this Google account.";
+    button.title = !granted
+      ? "Keep this practice on every device where you sign in with this Google account."
+      : syncRuntime.state === "paused" || syncRuntime.state === "error"
+        ? "Sync needs one tap in this browser session. Practice is still saved here."
+        : "Your practice is copied to your Google Drive app folder. Click to sync now.";
   }
   if (status) {
     status.textContent = syncRuntime.message;
@@ -5911,6 +5913,28 @@ document.addEventListener("visibilitychange", () => {
   if (!syncGranted() || syncRuntime.busy) return;
   syncProgressNow({ interactive: false });
 });
+
+// Browsers only hand out a token shortly after a real gesture, so the first tap
+// anywhere in the page is the earliest a waiting session can pick sync back up
+// without being aimed at the chip. Taps are throttled, and the listener takes
+// itself off once a sync gets through.
+const gestureSync = { lastTry: 0 };
+function gestureSyncAttempt(event) {
+  // A tap on the chip itself is handled by its own click handler; trying to
+  // sync here too would only make that click wait for this attempt to finish.
+  if (event && event.target && event.target.closest && event.target.closest("#syncButton")) return;
+  if (!syncGranted() || syncRuntime.busy) return;
+  if (syncRuntime.token && Date.now() < syncRuntime.expiresAt - 60000) {
+    document.removeEventListener("pointerdown", gestureSyncAttempt, true);
+    return;
+  }
+  if (Date.now() - gestureSync.lastTry < 15000) return;
+  gestureSync.lastTry = Date.now();
+  syncProgressNow({ interactive: false }).then(ok => {
+    if (ok) document.removeEventListener("pointerdown", gestureSyncAttempt, true);
+  });
+}
+document.addEventListener("pointerdown", gestureSyncAttempt, true);
 
 // Only ever from a click, so the Google consent window is allowed to open.
 function turnOnSync() {
