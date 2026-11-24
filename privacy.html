@@ -368,7 +368,7 @@ body::after {
 
   <section class="card">
     <h2><span class="dot" aria-hidden="true"></span>Syncing through your own Google Drive</h2>
-    <p>Sync is <strong>off until you turn it on</strong>. When you turn it on, you give The Quiz Book permission to use one hidden folder in your Google Drive called the <em>app data folder</em>. Inside it, the site creates a single file: <strong>quizbook-progress.json</strong>.</p>
+    <p>Sync is <strong>off until you turn it on</strong>. Signing in asks Google for permission to use one hidden folder in your Google Drive called the <em>app data folder</em>, but that permission is not used until you turn sync on: <strong>nothing is read from or written to your Drive before then</strong>. Once it is on, the site creates a single file there: <strong>quizbook-progress.json</strong>.</p>
     <ul>
       <li>The app data folder is private to this app. The Quiz Book can only see <strong>its own file</strong> &mdash; it cannot see, read or change any other file in your Drive.</li>
       <li>The file holds your practice record: topic counts, the questions you saved for review, and the days you practised. It does <strong>not</strong> contain your name, email address or photo.</li>
